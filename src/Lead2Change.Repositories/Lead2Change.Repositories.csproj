@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lead2Change.Data\Lead2Change.Data.csproj" />
+    <ProjectReference Include="..\Lead2Change.Domain\Lead2Change.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

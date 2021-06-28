@@ -1,0 +1,20 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/src/Lead2Change.Data/bin/Debug/netcoreapp3.1
+/src/.vs/Lead2Change
+/src/Lead2Change.Data/obj
+/src/Lead2Change.Domain/bin/Debug/netcoreapp3.1
+/src/Lead2Change.Domain/Extensions
+/src/Lead2Change.Domain/obj
+/src/Lead2Change.Repositories/bin/Debug/netcoreapp3.1
+/src/Lead2Change.Repositories/obj
+/src/Lead2Change.Services/bin/Debug/netcoreapp3.1
+/src/Lead2Change.Services/obj
+/src/Lead2Change.Web.Ui/bin/Debug/netcoreapp3.1
+/src/Lead2Change.Web.Ui/obj
+/src/Lead2Change.Web.Ui/Properties
+/src/Lead2Change.Web.Ui/ScaffoldingReadMe.txt
+/src/Lead2Change.Web.Ui/Lead2Change.Web.Ui.csproj.user
