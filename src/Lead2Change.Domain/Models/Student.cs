@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 
 namespace Lead2Change.Domain.Models
@@ -40,16 +41,18 @@ namespace Lead2Change.Domain.Models
 
         public string PlanAfterHighSchool { get; set; }
         public bool CollegeApplicationStatus { get; set; }
-        public List<string> CollegesList { get; set; }
+        public string CollegesList { get; set; } // List
         public bool CollegeEssayStatus { get; set; }
         public bool CollegeEssayHelp { get; set; }
-        public Array RankedColleges { get; set; }
+        public string FirstChoiceCollege { get; set; } // Used to be CollegeChoice List
+        public string SecondChoiceCollege { get; set; } // Used to be CollegeChoice List
+        public string ThirdChoiceCollege { get; set; } // Used to be CollegeChoice List
         public bool TradeSchoolStatus { get; set; }
-        public List<string> TradeSchoolsList { get; set; }
+        public string TradeSchoolsList { get; set; } // List
         public bool ArmedForcesStatus { get; set; }
-        public List<string> ArmedForcesBranch { get; set; }
+        public string ArmedForcesBranch { get; set; } // List
         public bool WorkStatus { get; set; }
-        public List<string> CareerPathList { get; set; }
+        public string CareerPathList { get; set; } // List
         public string OtherPlans { get; set; }
 
         public DateTime PACTTestDate { get; set; }
@@ -71,6 +74,6 @@ namespace Lead2Change.Domain.Models
         public DateTime ParentSignatureDate { get; set; }
 
         public Guid CareerDeclarationId { get; set; }
-        public List<Guid> GoalIds { get; set; }
+        public ICollection<Goal> Goals { get; set; }
     }
 }

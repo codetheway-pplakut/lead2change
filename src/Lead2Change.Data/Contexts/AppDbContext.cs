@@ -32,6 +32,8 @@ namespace Lead2Change.Data.Contexts
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<CareerDeclaration> CareerDeclarations { get; set; }
+        public virtual DbSet<Goal> Goals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

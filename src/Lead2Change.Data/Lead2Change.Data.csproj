@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210629193719_Models.cs" />
+    <Compile Remove="Migrations\20210629193719_Models.Designer.cs" />
+    <Compile Remove="Migrations\20210629193818_Models.cs" />
+    <Compile Remove="Migrations\20210629193818_Models.Designer.cs" />
+    <Compile Remove="Migrations\20210629193934_Models.cs" />
+    <Compile Remove="Migrations\20210629193934_Models.Designer.cs" />
+    <Compile Remove="Migrations\20210629194205_ModelsNew.cs" />
+    <Compile Remove="Migrations\20210629194205_ModelsNew.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.15" />

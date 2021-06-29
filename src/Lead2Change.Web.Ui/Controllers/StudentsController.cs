@@ -17,29 +17,5 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             _studentService = studentService;
         }
-
-        public async Task<IActionResult> Index()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Register()
-        {
-            var model = new RegistrationViewModel();
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Register(RegistrationViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var student = await _studentService.Register(model);
-                return RedirectToAction("Thank-You"); //NOTE: Not implemented
-            }
-
-            return View(model);
-        }
     }
 }

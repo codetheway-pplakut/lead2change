@@ -9,7 +9,6 @@ namespace Lead2Change.Services.Students
 {
     public interface IStudentService
     {
-        public Task<RegistrationViewModel> Register(RegistrationViewModel model);
-        public Task<List<Student>> GetStudents(int take, int skip);
+
     }
 }

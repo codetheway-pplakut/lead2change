@@ -4,9 +4,13 @@ using System.Text;
 
 namespace Lead2Change.Domain.Models
 {
-    class CareerDeclaration
+    public class CareerDeclaration
     {
         public Guid Id { get; set; }
         public Guid StudentId { get; set; }
+        public bool CollegeBound { get; set; }
+        public int CareerCluster { get; set; }
+        public string SpecificCareer { get; set; }
+        public bool TechnicalCollegeBound { get; set; }
     }
 }
