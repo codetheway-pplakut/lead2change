@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Databases\" />
+    <Folder Include="Databases\" />
   </ItemGroup>
 
   <ItemGroup>
