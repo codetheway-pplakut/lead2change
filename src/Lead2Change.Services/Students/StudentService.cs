@@ -19,5 +19,19 @@ namespace Lead2Change.Services.Students
         {
             _studentRepo = new StudentsRepository(dbContext);
         }
+
+        public async Task<List<Student>> GetStudents()
+        {
+            return await _studentRepo.GetStudents();
+        }
+
+        public async Task<Student> GetStudent(Guid id)
+        {
+            return await this._studentRepo.GetStudent(id);
+        }
+        public async Task<Student> Delete(Student student)
+        {
+            return await _studentRepo.Delete(student);
+        }
     }
 }

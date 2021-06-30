@@ -17,5 +17,17 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             _studentService = studentService;
         }
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await _studentService.GetStudents());
+        }
+
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var student = await _studentService.GetStudent(id);
+            await _studentService.Delete(student);
+            return RedirectToAction("Index");
+        }
     }
 }
