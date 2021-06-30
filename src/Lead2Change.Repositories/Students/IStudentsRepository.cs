@@ -9,5 +9,8 @@ namespace Lead2Change.Repositories.Students
     public interface IStudentsRepository
     {
 
+        public Task<List<Student>> GetStudents();
+        public Task<Student> GetStudent(Guid id);
+        public Task<Student> Delete(Student model);
     }
 }
