@@ -58,6 +58,10 @@
                             <div>
                                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                             </div>
+
+                            <div>
+                                @Html.ActionLink("Add Career", "Create", "CareerDeclaration", new { studentId = item.Id })
+                            </div>
                         </div>
                     </td>
                 </tr>

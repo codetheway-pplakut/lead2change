@@ -24,9 +24,13 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(await _service.GetCareerDeclarations());
         }
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(Guid studentId)
         {
-            return View(new CareerDeclarationViewModel());
+            CareerDeclarationViewModel careerDeclarationViewModel = new CareerDeclarationViewModel()
+            {
+                StudentId = studentId,
+            };
+            return View(careerDeclarationViewModel);
         }
         [HttpPost]
         public async Task<IActionResult> Register(CareerDeclarationViewModel model)
