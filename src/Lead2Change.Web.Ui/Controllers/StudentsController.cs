@@ -80,7 +80,7 @@ namespace Lead2Change.Web.Ui.Controllers
                  return RedirectToAction("Index");
              }
              return View(model);
-         } */
+         } 
         public async Task<IActionResult> Edit(Guid id)
         {
             var student = await _studentService.GetStudent(id);
