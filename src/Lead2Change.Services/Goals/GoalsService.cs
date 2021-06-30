@@ -23,17 +23,14 @@ namespace Lead2Change.Services.Goals
 
             public GoalsService(AppDbContext dbContext)
         {
-            this.GoalRepo = new GoalsRepository(dbContext);
+            this.GoalsRepository = new GoalsRepository(dbContext);
         }
 
         public async Task<Goal> Create(Goal goal)
         {
-            return await this.GoalRepo.Create(goal);
+            return await this.GoalsRepository.Create(goal);
         }
-        public GoalsService(AppDbContext dbContext)
-        {
-            this.GoalsRepository = new GoalsRepository(dbContext);
-        }
+     
         public async Task<List<Goal>> GetGoals()
         {
             return await this.GoalsRepository.GetGoals();

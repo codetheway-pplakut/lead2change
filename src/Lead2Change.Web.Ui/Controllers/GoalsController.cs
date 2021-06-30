@@ -34,9 +34,10 @@ namespace Lead2Change.Web.Ui.Controllers
                     {
                         if (model.WasItAccomplished.Length > 0)
                         {
-                            if(model.Explanation.Length > 0)
+                            if (model.Explanation.Length > 0)
                             {
-                                
+                                if (model.DateGoalSet.CompareTo(model.GoalReviewDate) > 0)
+                                {
                                     Goal goal = new Goal()
                                     {
                                         GoalSet = model.Goal,
@@ -47,12 +48,13 @@ namespace Lead2Change.Web.Ui.Controllers
                                         GoalReviewDate = model.GoalReviewDate,
                                         WasItAccomplished = model.WasItAccomplished,
                                         Explanation = model.Explanation,
-                                       
+
                                     };
                                     var result = await GoalsService.Create(goal);
                                     return RedirectToAction("Index");
                                 }
                             }
+                        }
                     }
                 }
 
