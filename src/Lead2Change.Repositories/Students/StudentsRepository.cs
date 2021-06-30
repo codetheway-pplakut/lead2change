@@ -24,6 +24,26 @@ namespace Lead2Change.Repositories.Students
         {
             return await AppDbContext.Students.FirstOrDefaultAsync(i => i.Id == id);
         }
+
+        public async Task<Student> Read(Guid id)
+        {
+            return await _appDbContext.Students.FirstOrDefaultAsync(i => i.Id == id);
+        }
+
+        public async Task<DbResponse<Student>> Update(Student model)
+        {
+            try
+            {
+                var student = _appDbContext.Students.Update(model);
+                await Save();
+
+                return Success<Student>(student.Entity, StringConstants.SUCCESS);
+            }
+            catch (Exception ex)
+            {
+                return Error<Student>(model, ex.StackTrace);
+            }
+        }
         public async Task<Student> Delete(Student model)
         {
             AppDbContext.Students.Remove(model);
