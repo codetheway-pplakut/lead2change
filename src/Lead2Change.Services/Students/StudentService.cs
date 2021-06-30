@@ -20,8 +20,6 @@ namespace Lead2Change.Services.Students
             _studentRepo = new StudentsRepository(dbContext);
         }
 
-       
-
         public async Task<Student> GetStudent(Guid id)
         {
             return await this._studentRepo.GetStudent(id);
@@ -31,9 +29,9 @@ namespace Lead2Change.Services.Students
             return await _studentRepo.Delete(student);
         }
 
-        public Task<List<Student>> GetStudents()
+        public async Task<List<Student>> GetStudents()
         {
-            throw new NotImplementedException();
+            return await this._studentRepo.GetStudents();
         }
         public async Task<Student> Update(Student student)
         {

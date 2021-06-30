@@ -13,8 +13,10 @@ namespace Lead2Change.Repositories.Students
     public class StudentsRepository : _BaseRepository, IStudentsRepository
     {
         private AppDbContext AppDbContext;
-        public StudentsRepository(AppDbContext appDbContext) : base(appDbContext) { }
-
+        public StudentsRepository(AppDbContext dbContext) : base(dbContext)
+        {
+            this.AppDbContext = dbContext;
+        }
 
         public async Task<List<Student>> GetStudents()
         {
