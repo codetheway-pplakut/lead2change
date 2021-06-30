@@ -65,7 +65,13 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Create()
         {
-            return View(new GoalViewModel());
+            GoalViewModel startView = new GoalViewModel()
+            {
+                DateGoalSet = DateTime.Today,
+                GoalReviewDate = DateTime.Today,
+            };
+
+            return View(startView);
         }
         [HttpPost]
         public async Task<IActionResult> Register(GoalViewModel model)
