@@ -8,10 +8,10 @@ using Lead2Change.Data.Contexts;
 
 namespace Lead2Change.Repositories.CareerDeclarationRepository
 {
-    class CareerDeclarationRepository : ICareerDeclarationRepository
+    public class CareerDeclarationRepository : _BaseRepository, ICareerDeclarationRepository
     {
         private AppDbContext AppDbContext;
-        public CareerDeclarationRepository(AppDbContext dbContext)
+        public CareerDeclarationRepository(AppDbContext dbContext) : base(dbContext)
         {
             this.AppDbContext = dbContext;
         }

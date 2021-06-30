@@ -6,7 +6,7 @@ using Lead2Change.Domain.Models;
 
 namespace Lead2Change.Repositories.CareerDeclarationRepository
 {
-    interface ICareerDeclarationRepository
+    public interface ICareerDeclarationRepository
     {
         public Task<CareerDeclaration> Create(CareerDeclaration careerDeclaration);
         public Task<List<CareerDeclaration>> GetCareerDeclarations();
