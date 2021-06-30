@@ -9,7 +9,7 @@ using Lead2Change.Data.Contexts;
 
 namespace Lead2Change.Repositories.Goals
 {
-    public class GoalsRepository : IGoalsRepository
+    public class GoalsRepository : _BaseRepository, IGoalsRepository
     {
         private AppDbContext AppDbContext;
 
@@ -30,5 +30,12 @@ namespace Lead2Change.Repositories.Goals
             await AppDbContext.SaveChangesAsync();
             return result.Entity;
         }
+        public async Task<Goal> Create(Goal goal)
+        {
+            var result = await this.AppDbContext.AddAsync(goal);
+            await this.AppDbContext.SaveChangesAsync();
+            return result.Entity;
+
+        }
     }
-}
+

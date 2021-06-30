@@ -1,5 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿@model Lead2Change.Domain.ViewModels.GoalViewModel
+@* ViewData["Title"] = "Create";
 *@
-@{
-}
+
+<div class="PaddingForAdam">
+    <h1>Create Goals</h1>
+    <form asp-action="Register">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Goal" class="control-label"></label>
+            <input asp-for="Goal" class="form-control" />
+            <span asp-validation-for="Goal" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DateGoalSet" class="control-label"></label>
+            <input asp-for="DateGoalSet" class="form-control" />
+            <span asp-validation-for="DateGoalSet" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SEL" class="control-label"></label>
+            <input asp-for="SEL" class="form-control" />
+            <span asp-validation-for="SEL" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="GoalReviewDate" class="control-label"></label>
+            <input asp-for="GoalReviewDate" class="form-control" />
+            <span asp-validation-for="GoalReviewDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="WasItAccomplished" class="control-label"></label>
+            <input asp-for="WasItAccomplished" class="form-control" />
+            <span asp-validation-for="WasItAccomplished" class="text-danger"></span>
+        </div>
+        <div class="form-group, shipping">
+            <label asp-for="Explanation" class="control-label"></label>
+            <input asp-for="Explanation" class="form-control" />
+            <span asp-validation-for="Explanation" class="text-danger"></span>
+        </div>
+    </form>
+    <div align="center">
+        <button class="btn btn-back"><a asp-action="Index">Back to List of Goals</a></button>
+    </div>
+</div>
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
