@@ -20,24 +20,26 @@ namespace Lead2Change.Services.Students
             _studentRepo = new StudentsRepository(dbContext);
         }
 
-
-        public async Task<List<Student>> GetStudents(int take, int skip)
+        public async Task<Student> GetStudent(Guid id)
         {
-            return await _studentRepo.GetStudents(take, skip);
+            return await this._studentRepo.GetStudent(id);
+        }
+        public async Task<Student> Delete(Student student)
+        {
+            return await _studentRepo.Delete(student);
         }
 
-        /// <summary>
-        /// EXAMPLE: THIS IS NOT A REAL METHOD
-        /// </summary>
-        /// <param name="take"></param>
-        /// <param name="skip"></param>
-        /// <returns></returns>
-        public async Task<List<Student>> GetSomeStudents(int take, int skip)
+        public async Task<List<Student>> GetStudents()
         {
-            //If we have 1000 Students in our DB, this query will allow us to take 100 of those Students. In this instance, it will take Students 50-150.
-            //The first parameter "100" specifies how many records we want to take.
-            //The second parameter "50" defines the number of records to skip. 
-            return await _studentRepo.GetStudents(100, 50);
+            return await this._studentRepo.GetStudents();
+        }
+        public async Task<Student> Update(Student student)
+        {
+            return await this._studentRepo.Update(student);
+        }
+        public async Task<Student> Create(Student student)
+        {
+            return await this._studentRepo.Create(student);
         }
     }
 }
