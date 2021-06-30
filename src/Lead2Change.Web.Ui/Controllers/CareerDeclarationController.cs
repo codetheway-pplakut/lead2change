@@ -14,10 +14,12 @@ namespace Lead2Change.Web.Ui.Controllers
     public class CareerDeclarationController : _BaseController
     {
         private ICareerDeclarationService _service;
+        private IStudentService _studentService;
 
-        public CareerDeclarationController(IIdentityService identityService, ICareerDeclarationService careerDeclarationService) : base(identityService)
+        public CareerDeclarationController(IIdentityService identityService, ICareerDeclarationService careerDeclarationService, IStudentService studentService) : base(identityService)
         {
             _service = careerDeclarationService;
+            _studentService = studentService;
         }
         public async Task<IActionResult> Index()
         {
@@ -35,7 +37,8 @@ namespace Lead2Change.Web.Ui.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(CareerDeclarationViewModel model)
         {
-            if (ModelState.IsValid)
+            var student = await _studentService.GetStudent(model.StudentId);
+            if (ModelState.IsValid && student.CareerDeclarationId == Guid.Empty)
             {
                 CareerDeclaration careerDeclaration = new CareerDeclaration()
                 {
@@ -46,10 +49,12 @@ namespace Lead2Change.Web.Ui.Controllers
                     SpecificCareer = model.SpecificCareer,
                     TechnicalCollegeBound = model.TechnicalCollegeBound,
                 };
-                await _service.Create(careerDeclaration);
-                return RedirectToAction("Index");
+                careerDeclaration = await _service.Create(careerDeclaration);
+                student.CareerDeclarationId = careerDeclaration.Id;
+                await _studentService.Update(student);
             }
-            return View(model);
+            return RedirectToAction("Index");
+            // return View(model);
         }
 
         public async Task<IActionResult> Edit(Guid id)

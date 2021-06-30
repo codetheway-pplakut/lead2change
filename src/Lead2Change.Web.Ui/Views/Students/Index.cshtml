@@ -60,6 +60,10 @@
                             </div>
 
                             <div>
+                                @Html.ActionLink("View Career", "Details", "CareerDeclaration", new { id = item.CareerDeclarationId })
+                            </div>
+
+                            <div>
                                 @Html.ActionLink("Add Career", "Create", "CareerDeclaration", new { studentId = item.Id })
                             </div>
                         </div>
