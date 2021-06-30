@@ -80,7 +80,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         {
                             if (model.Explanation.Length > 0)
                             {
-                                if (model.DateGoalSet.CompareTo(model.GoalReviewDate) > 0)
+                                if (model.DateGoalSet.CompareTo(model.GoalReviewDate) < 0)
                                 {
                                     Goal goal = new Goal()
                                     {
