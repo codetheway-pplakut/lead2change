@@ -1,0 +1,42 @@
+﻿
+@model Lead2Change.Domain.ViewModels.CareerDeclarationViewModel
+@*
+    ViewData["Title"] = "Create";
+*@
+
+<h1>Create</h1>
+<form asp-action="Register">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="CollegeBound" class="control-label"></label>
+        <input asp-for="CollegeBound" class="form-control" />
+        <span asp-validation-for="CollegeBound" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CareerCluster" class="control-label"></label>
+        <input asp-for="CareerCluster" class="form-control" />
+        <span asp-validation-for="CareerCluster" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SpecificCareer" class="control-label"></label>
+        <input asp-for="SpecificCareer" class="form-control" />
+        <span asp-validation-for="SpecificCareer" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TechnicalCollegeBound" class="control-label"></label>
+        <input asp-for="TechnicalCollegeBound" class="form-control" />
+        <span asp-validation-for="TechnicalCollegeBound" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index" asp-controller="CareerDeclaration">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
