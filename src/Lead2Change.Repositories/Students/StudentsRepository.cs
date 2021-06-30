@@ -49,11 +49,6 @@ namespace Lead2Change.Repositories.Students
             return await _appDbContext.Students.Take(take + skip).Skip(skip).ToListAsync();
         }
 
-        public async Task<List<Student>> GetEnrolledStudents(int take = 10, int skip = 0)
-        {
-            return await _appDbContext.Students.Where(i => i.Enrolled).Take(take + skip).Skip(skip).ToListAsync();
-        }
-
         public async Task<Student> Read(Guid id)
         {
             return await _appDbContext.Students.FirstOrDefaultAsync(i => i.Id == id);
