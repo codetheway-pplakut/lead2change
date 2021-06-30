@@ -15,7 +15,6 @@ namespace Lead2Change.Domain.ViewModels
         public string StudentAddress { get; set; }
         public string StudentApartmentNumber { get; set; }
         public string StudentCity { get; set; }
-        //public string StudentState { get; set; }
         public string StudentZipCode { get; set; }
         public string StudentHomePhone { get; set; }
         public string StudentCellPhone { get; set; }
