@@ -26,14 +26,23 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Create()
         {
-            return View(new CareerDeclaration());
+            return View(new CareerDeclarationViewModel());
         }
         [HttpPost]
-        public async Task<IActionResult> Register(CareerDeclaration model)
+        public async Task<IActionResult> Register(CareerDeclarationViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var careerDeclaration = await _service.Create(model);
+                CareerDeclaration careerDeclaration = new CareerDeclaration()
+                {
+                    Id = model.Id,
+                    StudentId = model.StudentId,
+                    CollegeBound = model.CollegeBound,
+                    CareerCluster = model.CareerCluster,
+                    SpecificCareer = model.SpecificCareer,
+                    TechnicalCollegeBound = model.TechnicalCollegeBound,
+                };
+                await _service.Create(careerDeclaration);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -42,14 +51,32 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var careerDeclaration = await _service.GetCareerDeclaration(id);
-            return View(careerDeclaration);
+            CareerDeclarationViewModel careerDeclarationViewModel = new CareerDeclarationViewModel()
+            {
+                Id = careerDeclaration.Id,
+                StudentId = careerDeclaration.StudentId,
+                CollegeBound = careerDeclaration.CollegeBound,
+                CareerCluster = careerDeclaration.CareerCluster,
+                SpecificCareer = careerDeclaration.SpecificCareer,
+                TechnicalCollegeBound = careerDeclaration.TechnicalCollegeBound,
+            };
+            return View(careerDeclarationViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> UpDate(CareerDeclaration model)
+        public async Task<IActionResult> Update(CareerDeclarationViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var careerDeclaration = await _service.Update(model);
+                CareerDeclaration careerDeclaration = new CareerDeclaration()
+                {
+                    Id = model.Id,
+                    StudentId = model.StudentId,
+                    CollegeBound = model.CollegeBound,
+                    CareerCluster = model.CareerCluster,
+                    SpecificCareer = model.SpecificCareer,
+                    TechnicalCollegeBound = model.TechnicalCollegeBound,
+                };
+                await _service.Update(careerDeclaration);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -58,7 +85,16 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             var careerDeclaration = await _service.GetCareerDeclaration(id);
-            return View(careerDeclaration);
+            CareerDeclarationViewModel careerDeclarationViewModel = new CareerDeclarationViewModel()
+            {
+                Id = careerDeclaration.Id,
+                StudentId = careerDeclaration.StudentId,
+                CollegeBound = careerDeclaration.CollegeBound,
+                CareerCluster = careerDeclaration.CareerCluster,
+                SpecificCareer = careerDeclaration.SpecificCareer,
+                TechnicalCollegeBound = careerDeclaration.TechnicalCollegeBound,
+            };
+            return View(careerDeclarationViewModel);
         }
 
         public async Task<IActionResult> Delete(Guid id)
