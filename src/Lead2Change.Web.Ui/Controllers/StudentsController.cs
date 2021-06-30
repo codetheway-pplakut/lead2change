@@ -31,7 +31,7 @@ namespace Lead2Change.Web.Ui.Controllers
             await _studentService.Delete(student);
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Register()
         {
             return View(new RegistrationViewModel());
         }
