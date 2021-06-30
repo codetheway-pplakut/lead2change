@@ -9,6 +9,7 @@ namespace Lead2Change.Services.Goals
     public interface IGoalsService
     {
         public Task<List<Goal>> GetGoals();
-        public Task<Goal> GetGoals(Guid id);
+        public Task<Goal> GetGoal(Guid id);
+        public Task<Goal> Update(Goal model);
     }
 }

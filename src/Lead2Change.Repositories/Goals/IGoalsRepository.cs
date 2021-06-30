@@ -4,12 +4,14 @@ using System.Text;
 using Lead2Change.Domain.Models;
 using System.Threading.Tasks;
 using System.Linq;
+using Lead2Change.Data.Contexts;
 
 namespace Lead2Change.Repositories.Goals
 {
     public interface IGoalsRepository
     {
         public Task<List<Goal>> GetGoals();
-        public Task<Goal> GetGoals(Guid id);
+        public Task<Goal> GetGoal(Guid id);
+        public Task<Goal> Update(Goal model);
     }
 }

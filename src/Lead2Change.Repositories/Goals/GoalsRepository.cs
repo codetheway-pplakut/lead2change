@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Lead2Change.Domain.Models;
-using System.Threading.Tasks;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using Lead2Change.Data.Contexts;
 
 namespace Lead2Change.Repositories.Goals
@@ -20,9 +21,14 @@ namespace Lead2Change.Repositories.Goals
         {
             return await this.AppDbContext.Goals.ToListAsync();
         }
-        public async Task<Goal> GetGoals(Guid id)
+        public async Task<Goal> GetGoal(Guid id) {
+            return await this.AppDbContext.Goals.FirstOrDefaultAsync(i => i.Id == id);
+        }
+        public async Task<Goal> Update(Goal model)
         {
-            return await AppDbContext.Goals.FirstOrDefaultAsync(i => i.Id == id);
+            var result = AppDbContext.Goals.Update(model);
+            await AppDbContext.SaveChangesAsync();
+            return result.Entity;
         }
     }
 }
