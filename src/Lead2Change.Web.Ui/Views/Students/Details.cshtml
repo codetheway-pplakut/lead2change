@@ -1,0 +1,37 @@
+﻿@model Lead2Change.Domain.ViewModels.RegistrationViewModel
+@*
+    ViewData["Title"] = "Details";
+*@
+<h1>Details</h1>
+
+<h3>Student Info</h3>
+<p>First Name:  @Model.StudentFirstName</p>
+<p>Last Name: @Model.StudentLastName</p>
+<p>Date of Birth: @Model.StudentDateOfBirth</p>
+<p>Address: @Model.StudentAddress</p>
+<p>Apartment Number: @Model.StudentApartmentNumber</p>
+<p>City: @Model.StudentCity</p>
+<p>Zip Code: @Model.StudentZipCode</p>
+<p>Home Phone: @Model.StudentHomePhone</p>
+<p>Cell Phone: @Model.StudentCellPhone</p>
+<p>Email: @Model.StudentEmail</p>
+<p>Career Path: @Model.StudentCareerPath</p>
+<p>Career Interest: @Model.StudentCareerInterest</p>
+
+<h3>Parent Info</h3>
+<p>First Name:  @Model.ParentFirstName</p>
+<p>Last Name: @Model.ParentLastName</p>
+<p>Address: @Model.Address</p>
+<p>City: @Model.ParentCity</p>
+<p>Zip Code: @Model.ParentZipCode</p>
+<p>Home Phone: @Model.ParentHomePhone</p>
+<p>Cell Phone: @Model.ParentCellPhone</p>
+<p>Email: @Model.ParentEmail</p>
+
+<h3>Guidance Counselor Info</h3>
+<p> @Model.</p>
+
+@*<p> @Model.</p>*@
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

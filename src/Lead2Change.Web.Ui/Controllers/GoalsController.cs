@@ -72,21 +72,12 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.GoalSet.Length > 0)
-                {
-                    if (model.SEL.Length > 0)
-                    {
-                        if (model.WasItAccomplished.Length > 0)
-                        {
-                            if (model.Explanation.Length > 0)
-                            {
-                                if (model.DateGoalSet.CompareTo(model.GoalReviewDate) > 0)
-                                {
+               
                                     Goal goal = new Goal()
                                     {
                                         GoalSet = model.GoalSet,
                                         Id = model.Id,
-                                        StudentId = model.StudentId,
+                                        StudentId = Guid.Parse("443c3f37-1801-4955-b144-93b10a1e3bb4"),
                                         DateGoalSet = model.DateGoalSet,
                                         SEL = model.SEL,
                                         GoalReviewDate = model.GoalReviewDate,
@@ -96,11 +87,7 @@ namespace Lead2Change.Web.Ui.Controllers
                                     };
                                     var result = await GoalsService.Create(goal);
                                     return RedirectToAction("Index");
-                                }
-                            }
-                        }
-                    }
-                }
+                                
 
             }
             return View("Create", model);
