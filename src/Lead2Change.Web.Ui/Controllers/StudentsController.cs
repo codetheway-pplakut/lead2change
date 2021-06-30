@@ -35,6 +35,46 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             return View(new RegistrationViewModel());
         }
+
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var studentscontainer = await _studentService.GetStudent(id);
+            RegistrationViewModel a = new RegistrationViewModel()
+            {
+                Id = studentscontainer.Id,
+                StudentFirstName = studentscontainer.StudentFirstName,
+                StudentLastName = studentscontainer.StudentLastName,
+                StudentDateOfBirth = studentscontainer.StudentDateOfBirth,
+                StudentAddress = studentscontainer.StudentAddress,
+                StudentApartmentNumber = studentscontainer.StudentApartmentNumber,
+                StudentCity = studentscontainer.StudentCity,
+                StudentZipCode = studentscontainer.StudentZipCode,
+                StudentHomePhone = studentscontainer.StudentHomePhone,
+                StudentCellPhone = studentscontainer.StudentCellPhone,
+                StudentEmail = studentscontainer.StudentEmail,
+                StudentCareerPath = studentscontainer.StudentCareerPath,
+                StudentCareerInterest = studentscontainer.StudentCareerInterest,
+
+                ParentFirstName = studentscontainer.ParentFirstName,
+                ParentLastName = studentscontainer.ParentLastName,
+                ParentCity = studentscontainer.ParentCity,
+                ParentState = studentscontainer.ParentState,
+                ParentZipCode = studentscontainer.ParentZipCode,
+                ParentHomePhone = studentscontainer.ParentHomePhone,
+                ParentCellPhone = studentscontainer.ParentCellPhone,
+                ParentEmail = studentscontainer.ParentEmail,
+
+                KnowGuidanceCounselor = studentscontainer.KnowGuidanceCounselor,
+                GuidanceCounselorName = studentscontainer.GuidanceCounselorName,
+                MeetWithGuidanceCounselor = studentscontainer.MeetWithGuidanceCounselor,
+                HowOftenMeetWithGuidanceCounselor = studentscontainer.HowOftenMeetWithGuidanceCounselor,
+                DiscussWithGuidanceCounselor = studentscontainer.DiscussWithGuidanceCounselor
+            };
+            return View(a);
+        }
+        }
+    }
+        
         /* [HttpPost]
         public async Task<IActionResult> Register(RegistrationViewModel model)
          {
@@ -81,5 +121,5 @@ namespace Lead2Change.Web.Ui.Controllers
              }
              return View(model);
          } */
-    }
-}
+    
+

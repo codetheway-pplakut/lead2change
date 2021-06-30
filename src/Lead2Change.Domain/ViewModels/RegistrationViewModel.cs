@@ -15,9 +15,10 @@ namespace Lead2Change.Domain.ViewModels
         public string StudentAddress { get; set; }
         public string StudentApartmentNumber { get; set; }
         public string StudentCity { get; set; }
-        public int StudentZipCode { get; set; }
-        public int StudentHomePhone { get; set; }
-        public int StudentCellPhone { get; set; }
+        //public string StudentState { get; set; }
+        public string StudentZipCode { get; set; }
+        public string StudentHomePhone { get; set; }
+        public string StudentCellPhone { get; set; }
         public string StudentEmail { get; set; }
         public string StudentCareerPath { get; set; }
         public string StudentCareerInterest { get; set; }
@@ -26,9 +27,9 @@ namespace Lead2Change.Domain.ViewModels
         public string Address { get; set; }
         public string ParentCity { get; set; }
         public string ParentState { get; set; }
-        public int ParentZipCode { get; set; }
-        public int ParentHomePhone { get; set; }
-        public int ParentCellPhone { get; set; }
+        public string ParentZipCode { get; set; }
+        public string ParentHomePhone { get; set; }
+        public string ParentCellPhone { get; set; }
         public string ParentEmail { get; set; }
         public bool KnowGuidanceCounselor { get; set; }
         public string GuidanceCounselorName { get; set; }
