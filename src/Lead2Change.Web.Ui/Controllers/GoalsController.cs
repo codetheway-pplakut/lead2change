@@ -24,7 +24,7 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var result = await GoalsService.GetGoal(id);
-            GoalViewModel barrel = new GoalViewModel()
+            GoalViewModel goal = new GoalViewModel()
             {
                 Id = id,
                 StudentId = result.StudentId,
@@ -35,14 +35,14 @@ namespace Lead2Change.Web.Ui.Controllers
                 WasItAccomplished = result.WasItAccomplished,
                 Explanation = result.Explanation,             
             };
-            return View(barrel);
+            return View(goal);
         }
 
         public async Task<IActionResult> Update(Goal model)
         {
             if (ModelState.IsValid)
             {
-                var Barrel = await GoalsService.Update(model);
+                var Goal = await GoalsService.Update(model);
                 return RedirectToAction("Index");
             }
             return View(model);
