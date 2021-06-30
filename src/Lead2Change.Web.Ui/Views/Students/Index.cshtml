@@ -1,5 +1,7 @@
-﻿@model List<Lead2Change.Domain.ViewModels.RegistrationViewModel>
-
+﻿@model List<Lead2Change.Domain.Models.Student>
+@*
+    ViewData["Title"] = "Index";
+*@
 
 <div>
 
@@ -64,6 +66,6 @@
         </tbody>
     </table>
     <div>
-        <a asp-action="Create"><b>Add new student.</b></a>
+        <a asp-action="Register"><b>Add new student.</b></a>
     </div>
 </div>
