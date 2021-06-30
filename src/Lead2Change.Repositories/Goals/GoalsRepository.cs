@@ -13,7 +13,7 @@ namespace Lead2Change.Repositories.Goals
     {
         private AppDbContext AppDbContext;
 
-        public GoalsRepository(AppDbContext dbContext)
+        public GoalsRepository(AppDbContext dbContext) :base(dbContext)
         {
             this.AppDbContext = dbContext;
         }
@@ -21,7 +21,8 @@ namespace Lead2Change.Repositories.Goals
         {
             return await this.AppDbContext.Goals.ToListAsync();
         }
-        public async Task<Goal> GetGoal(Guid id) {
+        public async Task<Goal> GetGoal(Guid id)
+        {
             return await this.AppDbContext.Goals.FirstOrDefaultAsync(i => i.Id == id);
         }
         public async Task<Goal> Update(Goal model)
@@ -38,4 +39,5 @@ namespace Lead2Change.Repositories.Goals
 
         }
     }
+}
 

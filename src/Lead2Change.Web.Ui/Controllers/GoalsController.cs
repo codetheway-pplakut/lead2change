@@ -49,7 +49,7 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Details(Guid id)
         {
-            var result = await GoalsService.GetGoals(id);
+            var result = await GoalsService.GetGoal(id);
             GoalViewModel goal = new GoalViewModel()
             {
                 Id = id,
@@ -72,7 +72,7 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.Goal.Length > 0)
+                if (model.GoalSet.Length > 0)
                 {
                     if (model.SEL.Length > 0)
                     {
@@ -84,7 +84,7 @@ namespace Lead2Change.Web.Ui.Controllers
                                 {
                                     Goal goal = new Goal()
                                     {
-                                        GoalSet = model.Goal,
+                                        GoalSet = model.GoalSet,
                                         Id = model.Id,
                                         StudentId = model.StudentId,
                                         DateGoalSet = model.DateGoalSet,
