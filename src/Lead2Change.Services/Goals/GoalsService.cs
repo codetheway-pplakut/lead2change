@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Lead2Change.Domain.Models;
 using Lead2Change.Repositories.Goals;
-using Lead2Change.Data.Contexts;
-using Lead2Change.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Lead2Change.Data.Contexts;
 
 namespace Lead2Change.Services.Goals
 {
@@ -25,5 +25,9 @@ namespace Lead2Change.Services.Goals
             return await this.GoalsRepository.Update(model);
         }
 
+        public async Task<List<Goal>> GetGoals()
+        {
+            return await this.GoalsRepo.GetGoals();
+        }
     }
 }

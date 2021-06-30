@@ -17,6 +17,10 @@ namespace Lead2Change.Repositories.Goals
         {
             this.AppDbContext = dbContext;
         }
+        public async Task<List<Goal>> GetGoals()
+        {
+            return await this.AppDbContext.Goals.ToListAsync();
+        }
         public async Task<Goal> GetGoal(Guid id) {
             return await this.AppDbContext.Goals.FirstOrDefaultAsync(i => i.Id == id);
         }

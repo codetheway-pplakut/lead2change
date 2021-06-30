@@ -48,5 +48,21 @@ namespace Lead2Change.Web.Ui.Controllers
             }
             return View(model);
         }
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var result = await GoalsService.GetGoals(id);
+            GoalViewModel goal = new GoalViewModel()
+            {
+                Id = id,
+                StudentId = result.StudentId,
+                DateGoalSet = result.DateGoalSet,
+                GoalSet = result.GoalSet,
+                SEL = result.SEL,
+                GoalReviewDate = result.GoalReviewDate,
+                WasItAccomplished = result.WasItAccomplished,
+                Explanation = result.Explanation
+            };
+            return View(goal);
+        }
     }
 }
