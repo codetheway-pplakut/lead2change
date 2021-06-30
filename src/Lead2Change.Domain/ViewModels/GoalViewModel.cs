@@ -8,8 +8,7 @@ namespace Lead2Change.Domain.ViewModels
 {
     public class GoalViewModel
     {
-        [Required]
-        public string Goal { get; set; }
+    
         public Guid Id { get; set; }
         public Guid StudentId { get; set; }
         public string GoalSet { get; set; }
