@@ -30,7 +30,7 @@ namespace Lead2Change.Repositories.Students
             return await _appDbContext.Students.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task<DbResponse<Student>> Update(Student model)
+        /*public async Task<DbResponse<Student>> Update(Student model)
         {
             try
             {
@@ -43,12 +43,18 @@ namespace Lead2Change.Repositories.Students
             {
                 return Error<Student>(model, ex.StackTrace);
             }
-        }
+        } */
         public async Task<Student> Delete(Student model)
         {
             AppDbContext.Students.Remove(model);
             await AppDbContext.SaveChangesAsync();
             return model;
+        }
+        public async Task<Student> Update(Student model)
+        {
+            var result = _appDbContext.Students.Update(model);
+            await _appDbContext.SaveChangesAsync();
+            return result.Entity;
         }
     }
 }

@@ -13,5 +13,6 @@ namespace Lead2Change.Services.Students
         public Task<List<Student>> GetStudents();
         public Task<Student> GetStudent(Guid id);
         public Task<Student> Delete(Student student);
+        public Task<Student> Update(Student student);
     }
 }

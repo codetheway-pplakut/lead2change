@@ -35,5 +35,9 @@ namespace Lead2Change.Services.Students
         {
             throw new NotImplementedException();
         }
+        public async Task<Student> Update(Student student)
+        {
+            return await this._studentRepo.Update(student);
+        }
     }
 }
