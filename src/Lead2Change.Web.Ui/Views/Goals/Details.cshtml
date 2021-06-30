@@ -1,5 +1,16 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿@model Lead2Change.Domain.ViewModels.GoalViewModel
+@*
+    ViewData["Title"] = "Details";
 *@
-@{
-}
+<h1>Details</h1>
+<p>StudentId: @Model.StudentId</p>
+<p>Goal: @Model.GoalSet</p>
+<p>Goal Set Date: @Model.DateGoalSet</p>
+<p>SEL: @Model.SEL</p>
+<p>Goal Review Date: @Model.GoalSetDate</p>
+<p>Accomplishment State: @Model.WasItAccomplished</p>
+<p>Explanation: @Model.Explanation</p>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

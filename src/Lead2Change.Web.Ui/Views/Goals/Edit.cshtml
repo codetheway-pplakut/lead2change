@@ -1,5 +1,62 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿@model Lead2Change.Domain.ViewModels.GoalViewModel;
+@*
+    ViewData["Title"] = "Edit";
 *@
-@{
+<h1>Edit</h1>
+<form asp-action="Update">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div id="hidden" class="form-group" display="none">
+        <label asp-for="Id" class="control-label"></label>
+        <input asp-for="Id" class="form-control" value=@Model.Id />
+    </div>
+    <div id="hidden" class="form-group" display="none">
+        <label asp-for="StudentId" class="control-label"></label>
+        <input asp-for="StudentId" class="form-control" value=@Model.StudentId />
+    </div>
+    <div class="form-group">
+        <label asp-for="GoalSet" class="control-label">Goal:</label>
+        <input asp-for="GoalSet" class="form-control" value=@Model.GoalSet />
+        <span asp-validation-for="GoalSet" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateGoalSet" class="control-label">Date Goal Set:</label>
+        <input asp-for="DateGoalSet" class="form-control" value=@Model.DateGoalSet />
+        <span asp-validation-for="DateGoalSet" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SEL" class="control-label">Social Emotional Learning (SEL):</label>
+        <input asp-for="SEL" class="form-control" value=@Model.SEL />
+        <span asp-validation-for="SEL" class="text-danger"></span>
+    </div>
+    <div class="form-check">
+        <input asp-for="SEL" class="form-check-input" type="checkbox" value="@Model.SEL" id="defaultCheck1">
+        <label asp-for="SEL" class="form-check-label" for="defaultCheck1">
+            Self-Awarness
+        </label>
+        <span asp-validation-for="SEL" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="GoalReviewDate" class="control-label">GOAL Review Date:</label>
+        <input asp-for="GoalReviewDate" class="form-control" value=@Model.GoalReviewDate />
+        <span asp-validation-for="GoalReviewDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WasItAccomplished" class="control-label">Was It Accomplished?</label>
+        <input asp-for="WasItAccomplished" class="form-control" value=@Model.WasItAccomplished />
+        <span asp-validation-for="WasItAccomplished" class="text-danger"></span>
+    </div>
+    <div class="form-group, shipping">
+        <label asp-for="Explanation" class="control-label">Explaination:</label>
+        <input asp-for="Explanation" class="form-control" value=@Model.Explanation />
+        <span asp-validation-for="Explanation" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" />
+    </div>
+</form>
+<div align="center">
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
