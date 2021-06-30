@@ -8,6 +8,7 @@ namespace Lead2Change.Repositories.Students
 {
     public interface IStudentsRepository
     {
-
+        Task<List<Student>> GetStudents(int take, int skip);
+        Task Create(Student student);
     }
 }

@@ -68,5 +68,10 @@ namespace Lead2Change.Repositories.Students
                 return Error<Student>(model, ex.StackTrace);
             }
         }
+
+        Task IStudentsRepository.Create(Student student)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
