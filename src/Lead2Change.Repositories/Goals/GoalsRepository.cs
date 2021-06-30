@@ -12,19 +12,20 @@ namespace Lead2Change.Repositories.Goals
     {
         public GoalsRepository(AppDbContext appDbContext) : base(appDbContext) { }
         private AppDbContext AppDbContext;
-        public GoalsRepository(AppDbContext dbContext)
-        {
-            this.AppDbContext = dbContext;
-        }
+
         public async Task<Goal> Create(Goal goal)
         {
             var result = await this.AppDbContext.AddAsync(goal);
             await this.AppDbContext.SaveChangesAsync();
+            return result.Entity;
 
-        public async Task<List<Goal>> GetGoals(int take = 10, int skip = 0)
-        {
-            return await _appDbContext.Goals.Take(take + skip).Skip(skip).ToListAsync();
         }
 
+        public async Task<List<Goal>> GetGoals(int take = 10, int skip = 0)
+            {
+                return await _appDbContext.Goals.Take(take + skip).Skip(skip).ToListAsync();
+            }
+
+        }
     }
-}
+

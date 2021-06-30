@@ -7,8 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Lead2Change.Domain.Models;
-using Lead2Change.Web.Ui.Models;
-using Lead2Change.Services.Goals;
+
 
 namespace Lead2Change.Web.Ui.Controllers
 {
@@ -61,7 +60,25 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View(await GoalsService.GetGoals());
+            List<GoalViewModel> result = new List<GoalViewModel>();
+            List<Goal> goals = await GoalsService.GetGoals();
+            foreach (Goal goal in goals)
+            {
+                result.Add(new GoalViewModel()
+                {
+                    GoalSet = goal.GoalSet,
+                    Id = goal.Id,
+                    StudentId = goal.StudentId,
+                    DateGoalSet = goal.DateGoalSet,
+                    SEL = goal.SEL,
+                    GoalReviewDate = goal.GoalReviewDate,
+                    WasItAccomplished = goal.WasItAccomplished,
+                    Explanation = goal.Explanation
+
+                });
+            }
+
+            return View(result);
         
         }
 
