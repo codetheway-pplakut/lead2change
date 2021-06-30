@@ -72,15 +72,14 @@ namespace Lead2Change.Web.Ui.Controllers
             };
             return View(a);
         }
-        }
-    }
-        
-        /* [HttpPost]
+
+
+
         [HttpPost]
         public async Task<IActionResult> Register(RegistrationViewModel model)
-         {
-             if (ModelState.IsValid)
-             {
+        {
+            if (ModelState.IsValid)
+            {
                 if (model.StudentFirstName.Length > 0)
                 {
                     Student student = new Student()
@@ -118,12 +117,12 @@ namespace Lead2Change.Web.Ui.Controllers
                     };
                     var abc = await _studentService.Create(student);
                 }
-                 return RedirectToAction("Index");
-             }
-             return View(model);
-         } */
-    
-         } 
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+
         public async Task<IActionResult> Edit(Guid id)
         {
             var student = await _studentService.GetStudent(id);
@@ -168,7 +167,7 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(model.StudentFirstName.Length > 0)
+                if (model.StudentFirstName.Length > 0)
                 {
                     Student list = new Student()
                     {
@@ -210,7 +209,4 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(model);
         }
     }
-
-   
 }
-
