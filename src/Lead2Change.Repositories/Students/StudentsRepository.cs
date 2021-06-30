@@ -50,5 +50,12 @@ namespace Lead2Change.Repositories.Students
             await AppDbContext.SaveChangesAsync();
             return model;
         }
+        public async Task<Student> Create(Student student)
+        {
+            var result = await this.AppDbContext.AddAsync(student);
+            await this.AppDbContext.SaveChangesAsync();
+
+            return result.Entity;
+        }
     }
 }

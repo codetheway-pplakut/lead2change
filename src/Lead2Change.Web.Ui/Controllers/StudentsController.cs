@@ -35,51 +35,51 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             return View(new RegistrationViewModel());
         }
-        /* [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> Register(RegistrationViewModel model)
          {
              if (ModelState.IsValid)
              {
-
-                     Student student = new Student()
-                     {
-                         public Guid Id { get; set; }
-         public string StudentFirstName { get; set; }
-         public string StudentLastName { get; set; }
-         public DateTime StudentDateOfBirth { get; set; }
-         public string StudentAddress { get; set; }
-         public string StudentApartmentNumber { get; set; }
-         public string StudentCity { get; set; }
-         public int StudentZipCode { get; set; }
-         public int StudentHomePhone { get; set; }
-         public int StudentCellPhone { get; set; }
-         public string StudentEmail { get; set; }
-         public string StudentCareerPath { get; set; }
-         public string StudentCareerInterest { get; set; }
-
-
-         public string ParentFirstName { get; set; }
-         public string ParentLastName { get; set; }
-         public string Address { get; set; }
-
-         public string ParentCity { get; set; }
-         public string ParentState { get; set; }
-         public int ParentZipCode { get; set; }
-         public int ParentHomePhone { get; set; }
-         public int ParentCellPhone { get; set; }
-         public string ParentEmail { get; set; }
-
-         public bool KnowGuidanceCounselor { get; set; }
-         public string GuidanceCounselorName { get; set; }
-         public bool MeetWithGuidanceCounselor { get; set; }
-         public string HowOftenMeetWithGuidanceCounselor { get; set; }
-         public string DiscussWithGuidanceCounselor { get; set; }
-
-     };
-                     var abc = await StudentService.Create(student);
+                if (model.StudentFirstName.Length > 0)
+                {
+                    Student student = new Student()
+                    {
+                        Id = model.Id,
+                        StudentFirstName = model.StudentFirstName,
+                        StudentLastName = model.StudentLastName,
+                        StudentDateOfBirth = model.StudentDateOfBirth,
+                        StudentAddress = model.StudentAddress,
+                        StudentApartmentNumber = model.StudentApartmentNumber,
+                        StudentCity = model.StudentCity,
+                        StudentZipCode = model.StudentZipCode,
+                        StudentHomePhone = model.StudentHomePhone,
+                        StudentCellPhone = model.StudentCellPhone,
+                        StudentEmail = model.StudentEmail,
+                        StudentCareerPath = model.StudentCareerPath,
+                        StudentCareerInterest = model.StudentCareerInterest,
+                        ParentFirstName = model.ParentFirstName,
+                        Address = model.Address,
+                        //ParentAdress^
+                        /*ParentAdress = model.ParentAddress,
+                         * ParentApartmentNumber = model.ParentApartmentApartmentNumber,
+                         */
+                        ParentCity = model.ParentCity,
+                        ParentState = model.ParentState,
+                        ParentZipCode = model.ParentZipCode,
+                        ParentHomePhone = model.ParentHomePhone,
+                        ParentCellPhone = model.ParentCellPhone,
+                        ParentEmail = model.ParentEmail,
+                        KnowGuidanceCounselor = model.KnowGuidanceCounselor,
+                        GuidanceCounselorName = model.GuidanceCounselorName,
+                        MeetWithGuidanceCounselor = model.MeetWithGuidanceCounselor,
+                        HowOftenMeetWithGuidanceCounselor = model.HowOftenMeetWithGuidanceCounselor,
+                        DiscussWithGuidanceCounselor = model.DiscussWithGuidanceCounselor
+                    };
+                    var abc = await _studentService.Create(student);
+                }
                  return RedirectToAction("Index");
              }
              return View(model);
-         } */
+         } 
     }
 }
