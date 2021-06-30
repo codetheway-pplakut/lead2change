@@ -1,30 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using Lead2Change.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Lead2Change.Data.Contexts;
-using Lead2Change.Domain.Models;
 
 namespace Lead2Change.Repositories.Goals
 {
     public class GoalsRepository : _BaseRepository, IGoalsRepository
     {
-        public GoalsRepository(AppDbContext appDbContext) : base(appDbContext) { }
         private AppDbContext AppDbContext;
 
+        public GoalsRepository(AppDbContext dbContext)
+        {
+            this.AppDbContext = dbContext;
+        }
+        public async Task<List<Goal>> GetGoals()
+        {
+            return await this.AppDbContext.Goals.ToListAsync();
+        }
+        public async Task<Goal> GetGoal(Guid id) {
+            return await this.AppDbContext.Goals.FirstOrDefaultAsync(i => i.Id == id);
+        }
+        public async Task<Goal> Update(Goal model)
+        {
+            var result = AppDbContext.Goals.Update(model);
+            await AppDbContext.SaveChangesAsync();
+            return result.Entity;
+        }
         public async Task<Goal> Create(Goal goal)
         {
             var result = await this.AppDbContext.AddAsync(goal);
             await this.AppDbContext.SaveChangesAsync();
             return result.Entity;
-
-        }
-
-        public async Task<List<Goal>> GetGoals(int take = 10, int skip = 0)
-            {
-                return await _appDbContext.Goals.Take(take + skip).Skip(skip).ToListAsync();
-            }
 
         }
     }

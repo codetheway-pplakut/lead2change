@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lead2Change.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace Lead2Change.Services.Goals
 {
     public interface IGoalsService
     {
-        public Task<Goal> Create(Goal goal);
         public Task<List<Goal>> GetGoals();
+        public Task<Goal> GetGoal(Guid id);
+        public Task<Goal> Update(Goal model);
+        public Task<Goal> Create(Goal goal);
     }
 }
