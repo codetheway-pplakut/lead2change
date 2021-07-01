@@ -58,7 +58,7 @@
         </div>
     </form>
     <div align="center">
-        <button class="btn btn-back"><a asp-action="Index">Back to List of Goals</a></button>
+        <a asp-action="Index" asp-route-studentID=@Model.StudentId>Back to List of Goals</a>
     </div>
 </div>
 
