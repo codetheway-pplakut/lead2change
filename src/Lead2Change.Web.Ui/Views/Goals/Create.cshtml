@@ -24,8 +24,14 @@
         </div>
         <div class="form-group">
             <label asp-for="SEL" class="control-label"></label>
-            <input asp-for="SEL" class="form-control" />
-            <span asp-validation-for="SEL" class="text-danger"></span>
+            <select asp-for="SEL" class="form-control">
+                <option selected>Select A Choice</option>
+                <option value="Self-Awareness">Self-Awareness</option>
+                <option value="Self-Management">Self-Management</option>
+                <option value="Social-Awareness">Social-Awareness</option>
+                <option value="Relationship Skills">Relationship Skills</option>
+                <option value="Responsible Decision-Making">Responsible Decision-Making</option>
+            </select>
         </div>
         <div class="form-group">
             <label asp-for="GoalReviewDate" class="control-label"></label>
@@ -36,9 +42,9 @@
             <label asp-for="WasItAccomplished" class="control-label"></label>
             <select asp-for="WasItAccomplished" class="form-control">
                 <option selected>Select A Choice</option>
-                <option value="HR">No</option>
-                <option value="Sales">In Progress</option>
-                <option value="Other">Yes!</option>
+                <option value="No">No</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Yes!">Yes!</option>
             </select>
         </div>
         <div class="form-group, shipping">
