@@ -43,7 +43,7 @@ namespace Lead2Change.Web.Ui.Controllers
             if (ModelState.IsValid)
             {
                 var Barrel = await GoalsService.Update(model);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { studentID = model.StudentId });
             }
             return View(model);
         }
@@ -63,9 +63,12 @@ namespace Lead2Change.Web.Ui.Controllers
             };
             return View(goal);
         }
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(Guid studentID)
         {
-            return View(new GoalViewModel());
+            return View(new GoalViewModel()
+            {
+                StudentId = studentID
+            }) ;
         }
         [HttpPost]
         public async Task<IActionResult> Register(GoalViewModel model)
@@ -76,8 +79,8 @@ namespace Lead2Change.Web.Ui.Controllers
                                     Goal goal = new Goal()
                                     {
                                         GoalSet = model.GoalSet,
+                                        StudentId = model.StudentId,
                                         Id = model.Id,
-                                        StudentId = Guid.Parse("443c3f37-1801-4955-b144-93b10a1e3bb4"),
                                         DateGoalSet = model.DateGoalSet,
                                         SEL = model.SEL,
                                         GoalReviewDate = model.GoalReviewDate,
@@ -86,16 +89,16 @@ namespace Lead2Change.Web.Ui.Controllers
 
                                     };
                                     var result = await GoalsService.Create(goal);
-                                    return RedirectToAction("Index");
+                                    return RedirectToAction("Index", new { studentID = goal.StudentId });
                                 
 
             }
             return View("Create", model);
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Guid studentID)
         {
             List<GoalViewModel> result = new List<GoalViewModel>();
-            List<Goal> goals = await GoalsService.GetGoals();
+            List<Goal> goals = await GoalsService.GetGoals(studentID);
             foreach (Goal goal in goals)
             {
                 result.Add(new GoalViewModel()
@@ -112,7 +115,10 @@ namespace Lead2Change.Web.Ui.Controllers
                 });
             }
 
-            return View(result);
+            return View(new GoalsAndIDViewModel(studentID)
+            {
+                GoalModels = result
+            }) ;
         
         }
 
