@@ -8,6 +8,7 @@ namespace Lead2Change.Domain.Models
     public class Student
     {
         public Guid Id { get; set; }
+        public Guid CareerDeclarationId { get; set; }
         public bool Accepted { get; set; }
         public bool Declined { get; set; }
         public string StudentFirstName { get; set; }

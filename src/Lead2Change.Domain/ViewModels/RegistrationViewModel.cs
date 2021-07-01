@@ -9,6 +9,7 @@ namespace Lead2Change.Domain.ViewModels
     public class RegistrationViewModel
     {
         public Guid Id { get; set; }
+        public Guid CareerDeclarationId { get; set; }
         public string StudentFirstName { get; set; }
         public string StudentLastName { get; set; }
         public DateTime StudentDateOfBirth { get; set; }

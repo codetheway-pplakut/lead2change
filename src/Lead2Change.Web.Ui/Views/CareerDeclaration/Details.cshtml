@@ -1,0 +1,15 @@
+﻿@model Lead2Change.Domain.ViewModels.CareerDeclarationViewModel
+@*
+    ViewData["Title"] = "Details";
+*@
+<h1>Details</h1>
+<p>CollegeBound:  @Model.CollegeBound</p>
+<p>CareerCluster:  @Model.CareerCluster</p>
+<p>SpecificCareer:  @Model.SpecificCareer</p>
+<p>TechnicalCollegeBound:  @Model.TechnicalCollegeBound</p>
+<div>
+    @Html.ActionLink("Edit Career", "Edit", "CareerDeclaration", new { id = Model.Id })
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Students">Back to List</a>
+</div>
