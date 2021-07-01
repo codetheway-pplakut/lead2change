@@ -1,8 +1,9 @@
-﻿@model List<Lead2Change.Domain.ViewModels.GoalViewModel>
+﻿@model Lead2Change.Domain.ViewModels.GoalsAndIDViewModel
 @*
     ViewData["Title"] = "Index";
 *@
 <div class="container-fluid">
+
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
@@ -20,8 +21,8 @@
                 </th>
             </tr>
         </thead>
-       
-        @foreach (var item in Model)
+
+        @foreach (var item in Model.GoalModels)
         {
             <tr>
                 <td>
@@ -43,15 +44,15 @@
                         @Html.ActionLink("Details", "Details", new { id = item.Id })
                     </div>
                     <div>
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id, studentID = item.StudentId })
                     </div>
                 </td>
             </tr>
         }
-        
+
     </table>
 
     <div>
-        <a asp-action="Create">Add a goal</a>
+        @Html.ActionLink("Create", "Create", new { studentID = Model.StudentID })
     </div>
 </div>

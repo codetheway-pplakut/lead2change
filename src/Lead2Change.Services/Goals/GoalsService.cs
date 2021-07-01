@@ -40,5 +40,26 @@ namespace Lead2Change.Services.Goals
             return await this.GoalsRepository.GetGoals();
 
         }
+        public async Task<List<Goal>> GetGoals(Guid studentID)
+        {
+            var allGoals = await this.GoalsRepository.GetGoals();
+            var result = new List<Goal>();
+            foreach(Goal goal in allGoals)
+            {
+
+                if (goal.StudentId.Equals(studentID))
+                {
+                    result.Add(goal);
+
+                }
+            }
+            return result;
+
+        }
+
+        public async Task<Goal> Delete(Goal goal)
+        {
+            return await GoalsRepository.Delete(goal);
+        }
     }
 }

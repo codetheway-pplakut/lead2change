@@ -6,10 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Lead2Change.Web.Ui.Models;
-using Lead2Change.Services.Goals;
+
 using Lead2Change.Domain.Models;
-using Lead2Change.Domain.ViewModels;
 
 
 namespace Lead2Change.Web.Ui.Controllers
@@ -24,7 +22,7 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var result = await GoalsService.GetGoal(id);
-            GoalViewModel barrel = new GoalViewModel()
+            GoalViewModel goal = new GoalViewModel()
             {
                 Id = id,
                 StudentId = result.StudentId,
@@ -35,15 +33,15 @@ namespace Lead2Change.Web.Ui.Controllers
                 WasItAccomplished = result.WasItAccomplished,
                 Explanation = result.Explanation,             
             };
-            return View(barrel);
+            return View(goal);
         }
 
         public async Task<IActionResult> Update(Goal model)
         {
             if (ModelState.IsValid)
             {
-                var Barrel = await GoalsService.Update(model);
-                return RedirectToAction("Index");
+                var Goal = await GoalsService.Update(model);
+                return RedirectToAction("Index", new { studentID = model.StudentId });
             }
             return View(model);
         }
@@ -63,9 +61,19 @@ namespace Lead2Change.Web.Ui.Controllers
             };
             return View(goal);
         }
-        public async Task<IActionResult> Create()
+
+        /**
+         * Accepts the Guid of the student that the goal is being created for
+         */
+        public async Task<IActionResult> Create(Guid studentID)
         {
-            return View(new GoalViewModel());
+            return View(new GoalViewModel()
+            {
+                StudentId = studentID,
+                // This changes the initial date displayed in the chooser
+                DateGoalSet = DateTime.Today,
+                GoalReviewDate = DateTime.Today,
+            }) ;
         }
         [HttpPost]
         public async Task<IActionResult> Register(GoalViewModel model)
@@ -76,8 +84,8 @@ namespace Lead2Change.Web.Ui.Controllers
                                     Goal goal = new Goal()
                                     {
                                         GoalSet = model.GoalSet,
+                                        StudentId = model.StudentId,
                                         Id = model.Id,
-                                        StudentId = Guid.Parse("443c3f37-1801-4955-b144-93b10a1e3bb4"),
                                         DateGoalSet = model.DateGoalSet,
                                         SEL = model.SEL,
                                         GoalReviewDate = model.GoalReviewDate,
@@ -86,16 +94,22 @@ namespace Lead2Change.Web.Ui.Controllers
 
                                     };
                                     var result = await GoalsService.Create(goal);
-                                    return RedirectToAction("Index");
+                                    return RedirectToAction("Index", new { studentID = goal.StudentId });
                                 
 
             }
             return View("Create", model);
         }
-        public async Task<IActionResult> Index()
+
+        /**
+         * Note that Index takes in a studentID (it displays the goals for that student)
+         * And returns a special view model which contains a list of GoalViewModels
+         * And the studentID
+         */
+        public async Task<IActionResult> Index(Guid studentID)
         {
             List<GoalViewModel> result = new List<GoalViewModel>();
-            List<Goal> goals = await GoalsService.GetGoals();
+            List<Goal> goals = await GoalsService.GetGoals(studentID);
             foreach (Goal goal in goals)
             {
                 result.Add(new GoalViewModel()
@@ -112,8 +126,21 @@ namespace Lead2Change.Web.Ui.Controllers
                 });
             }
 
-            return View(result);
+            return View(new GoalsAndIDViewModel(studentID)
+            {
+                GoalModels = result
+            }) ;
         
+        }
+
+        /**
+         * Handles the deletion of a goal based off the goal's id
+         */
+        public async Task<IActionResult> Delete(Guid id, Guid studentID)
+        {
+            var goal = await GoalsService.GetGoal(id);
+            await GoalsService.Delete(goal);
+            return RedirectToAction("Index", new { studentID = goal.StudentId });
         }
 
     }
