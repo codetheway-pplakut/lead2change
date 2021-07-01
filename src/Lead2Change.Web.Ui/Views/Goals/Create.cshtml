@@ -96,6 +96,61 @@
             </div>
         </div>
    
+    <h1 id="GoalCreateHeading">Create A Goal</h1>
+    <form asp-action="Register">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group d-none">
+            <input asp-for="StudentId" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="GoalSet" class="control-label"></label>
+            <input asp-for="GoalSet" class="form-control" />
+            <span asp-validation-for="GoalSet" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DateGoalSet" class="control-label"></label>
+            <input asp-for="DateGoalSet" class="form-control" />
+            <span asp-validation-for="DateGoalSet" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SEL" class="control-label"></label>
+            <select asp-for="SEL" class="form-control">
+                <option selected>Select A Choice</option>
+                <option value="Self-Awareness">Self-Awareness</option>
+                <option value="Self-Management">Self-Management</option>
+                <option value="Social-Awareness">Social-Awareness</option>
+                <option value="Relationship Skills">Relationship Skills</option>
+                <option value="Responsible Decision-Making">Responsible Decision-Making</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="GoalReviewDate" class="control-label"></label>
+            <input asp-for="GoalReviewDate" class="form-control" />
+            <span asp-validation-for="GoalReviewDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="WasItAccomplished" class="control-label"></label>
+            <select asp-for="WasItAccomplished" class="form-control">
+                <option selected>Select A Choice</option>
+                <option value="No">No</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Yes!">Yes!</option>
+            </select>
+        </div>
+        <div class="form-group, shipping">
+            <label asp-for="Explanation" class="control-label"></label>
+            <textarea asp-for="Explanation" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <span asp-validation-for="Explanation" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+    <div align="center">
+        <a asp-action="Index" asp-route-studentID=@Model.StudentId>Back to List of Goals</a>
+    </div>
+</div>
 
 
     @section Scripts {

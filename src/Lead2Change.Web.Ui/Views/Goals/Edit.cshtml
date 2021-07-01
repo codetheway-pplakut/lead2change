@@ -5,11 +5,11 @@
 <h1>Edit</h1>
 <form asp-action="Update">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div id="hidden" class="form-group" display="none">
+    <div class="form-group, d-none" display="none">
         <label asp-for="Id" class="control-label"></label>
         <input asp-for="Id" class="form-control" value=@Model.Id />
     </div>
-    <div id="hidden" class="form-group" display="none">
+    <div id="hidden" class="form-group, d-none" display="none">
         <label asp-for="StudentId" class="control-label"></label>
         <input asp-for="StudentId" class="form-control" value=@Model.StudentId />
     </div>
@@ -50,7 +50,7 @@
     </div>
     <div class="form-group, shipping">
         <label asp-for="Explanation" class="control-label"></label>
-        <input asp-for="Explanation" class="form-control" value=@Model.Explanation />
+        <textarea asp-for="Explanation" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         <span asp-validation-for="Explanation" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -58,7 +58,7 @@
     </div>
 </form>
 <div align="center">
-    <a asp-action="Index"  asp-route-studentID=@Model.StudentId>Back to List</a>
+    <a asp-action="Index" asp-route-studentID=@Model.StudentId>Back to List</a>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
