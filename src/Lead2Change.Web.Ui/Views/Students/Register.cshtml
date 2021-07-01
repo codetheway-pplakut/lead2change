@@ -155,6 +155,55 @@
                 <input asp-for="DiscussWithGuidanceCounselor" class="form-control" />
                 <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
             </div>
+            <h3>Post-Secondary Plans</h3>
+            <div class="form-group">
+                <label for="PlanAfterHighSchool">Plan After High School:</label>
+                <select name="PlanAfterHighSchool" id="PlanAfterHighSchool">
+                    <option value="College">College</option>
+                    <option value="Trade School">Trade School</option>
+                    <option value="Armed Forces">Armed Forces</option>
+                    <option value="Work">Work</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CollegeApplicationStatus" class="control-label">Have you applied to college?</label>
+                <input asp-for="CollegeApplicationStatus" class="form-control" />
+                <span asp-validation-for="CollegeApplicationStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CollegesList" class="control-label">What schools have you applied to?</label>
+                <input asp-for="CollegesList" class="form-control" />
+                <span asp-validation-for="CollegesList" class="text-danger"></span>
+            </div>
+            @*Add thingy dependent on previous question*@
+            <div class="form-group">
+                <label asp-for="CollegeEssayStatus" class="control-label">Have you begun work on your college essay?</label>
+                <input asp-for="CollegeEssayStatus" class="form-control" />
+                <span asp-validation-for="CollegeEssayStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CollegeEssayHelp" class="control-label">Do you need help writing your college esasy?</label>
+                <input asp-for="CollegeEssayHelp" class="form-control" />
+                <span asp-validation-for="CollegeEssayHelp" class="text-danger"></span>
+            </div>
+            <p>Please rank the schools you are interested in applying to:</p>
+            <div class="form-group">
+                <label asp-for="FirstChoiceCollege" class="control-label">First Choice/Reach School:</label>
+                <input asp-for="FirstChoiceCollege" class="form-control" />
+                <span asp-validation-for="FirstChoiceCollege" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondChoiceCollege" class="control-label">Second Choice/Middle of the Road School</label>
+                <input asp-for="SecondChoiceCollege" class="form-control" />
+                <span asp-validation-for="SecondChoiceCollege" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThirdChoiceCollege" class="control-label">Third Choice/Safety School</label>
+                <input asp-for="ThirdChoiceCollege" class="form-control" />
+                <span asp-validation-for="ThirdChoiceCollege" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
