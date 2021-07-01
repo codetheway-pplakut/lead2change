@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lead2Change.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210629194140_Models")]
-    partial class Models
+    [Migration("20210630194949_CareerDeclarationId")]
+    partial class CareerDeclarationId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -289,6 +289,9 @@ namespace Lead2Change.Data.Migrations
                     b.Property<int>("ACTTestScore")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("Accepted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
 
@@ -302,6 +305,9 @@ namespace Lead2Change.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<Guid>("CareerDeclarationId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("CareerDeclarationId1")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CareerPathList")
@@ -318,6 +324,9 @@ namespace Lead2Change.Data.Migrations
 
                     b.Property<string>("CollegesList")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("Declined")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("DiscussWithGuidanceCounselor")
                         .HasColumnType("TEXT");
@@ -349,8 +358,8 @@ namespace Lead2Change.Data.Migrations
                     b.Property<int>("PACTTestScore")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ParentCellPhone")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ParentCellPhone")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ParentCity")
                         .HasColumnType("TEXT");
@@ -361,8 +370,8 @@ namespace Lead2Change.Data.Migrations
                     b.Property<string>("ParentFirstName")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ParentHomePhone")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ParentHomePhone")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ParentLastName")
                         .HasColumnType("TEXT");
@@ -376,8 +385,8 @@ namespace Lead2Change.Data.Migrations
                     b.Property<string>("ParentState")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ParentZipCode")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ParentZipCode")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PlanAfterHighSchool")
                         .HasColumnType("TEXT");
@@ -406,8 +415,8 @@ namespace Lead2Change.Data.Migrations
                     b.Property<string>("StudentCareerPath")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("StudentCellPhone")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("StudentCellPhone")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("StudentCity")
                         .HasColumnType("TEXT");
@@ -421,8 +430,8 @@ namespace Lead2Change.Data.Migrations
                     b.Property<string>("StudentFirstName")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("StudentHomePhone")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("StudentHomePhone")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("StudentLastName")
                         .HasColumnType("TEXT");
@@ -433,8 +442,8 @@ namespace Lead2Change.Data.Migrations
                     b.Property<DateTime>("StudentSignatureDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("StudentZipCode")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("StudentZipCode")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ThirdChoiceCollege")
                         .HasColumnType("TEXT");
@@ -449,6 +458,8 @@ namespace Lead2Change.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CareerDeclarationId1");
 
                     b.ToTable("Students");
                 });
@@ -511,6 +522,13 @@ namespace Lead2Change.Data.Migrations
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Lead2Change.Domain.Models.Student", b =>
+                {
+                    b.HasOne("Lead2Change.Domain.Models.CareerDeclaration", "CareerDeclaration")
+                        .WithMany()
+                        .HasForeignKey("CareerDeclarationId1");
                 });
 #pragma warning restore 612, 618
         }

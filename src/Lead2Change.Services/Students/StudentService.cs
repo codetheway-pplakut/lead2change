@@ -41,5 +41,9 @@ namespace Lead2Change.Services.Students
         {
             return await this._studentRepo.Create(student);
         }
+        public bool HasCareerAssosiation(Student student)
+        {
+            return student.CareerDeclarationId != Guid.Empty;
+        }
     }
 }

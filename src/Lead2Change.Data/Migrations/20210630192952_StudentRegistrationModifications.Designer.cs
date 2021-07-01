@@ -3,14 +3,16 @@ using System;
 using Lead2Change.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lead2Change.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210630192952_StudentRegistrationModifications")]
+    partial class StudentRegistrationModifications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -353,6 +355,15 @@ namespace Lead2Change.Data.Migrations
                     b.Property<int>("PACTTestScore")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("PSATTestDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PSATTestScore")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ParentApartmentNumber")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ParentCellPhone")
                         .HasColumnType("TEXT");
 
@@ -437,7 +448,13 @@ namespace Lead2Change.Data.Migrations
                     b.Property<DateTime>("StudentSignatureDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("StudentState")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("StudentZipCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SupportNeeded")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ThirdChoiceCollege")

@@ -3,16 +3,14 @@ using System;
 using Lead2Change.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lead2Change.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210630144916_NewModels")]
-    partial class NewModels
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,9 +238,6 @@ namespace Lead2Change.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentId")
-                        .IsUnique();
-
                     b.ToTable("CareerDeclarations");
                 });
 
@@ -307,6 +302,12 @@ namespace Lead2Change.Data.Migrations
                     b.Property<bool>("AssistanceForForms")
                         .HasColumnType("INTEGER");
 
+                    b.Property<Guid>("CareerDeclarationId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("CareerDeclarationId1")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("CareerPathList")
                         .HasColumnType("TEXT");
 
@@ -354,6 +355,15 @@ namespace Lead2Change.Data.Migrations
 
                     b.Property<int>("PACTTestScore")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("PSATTestDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PSATTestScore")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ParentApartmentNumber")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ParentCellPhone")
                         .HasColumnType("TEXT");
@@ -439,7 +449,13 @@ namespace Lead2Change.Data.Migrations
                     b.Property<DateTime>("StudentSignatureDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("StudentState")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("StudentZipCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SupportNeeded")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ThirdChoiceCollege")
@@ -455,6 +471,8 @@ namespace Lead2Change.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CareerDeclarationId1");
 
                     b.ToTable("Students");
                 });
@@ -510,15 +528,6 @@ namespace Lead2Change.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Lead2Change.Domain.Models.CareerDeclaration", b =>
-                {
-                    b.HasOne("Lead2Change.Domain.Models.Student", null)
-                        .WithOne("CareerDeclaration")
-                        .HasForeignKey("Lead2Change.Domain.Models.CareerDeclaration", "StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Lead2Change.Domain.Models.Goal", b =>
                 {
                     b.HasOne("Lead2Change.Domain.Models.Student", null)
@@ -526,6 +535,13 @@ namespace Lead2Change.Data.Migrations
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Lead2Change.Domain.Models.Student", b =>
+                {
+                    b.HasOne("Lead2Change.Domain.Models.CareerDeclaration", "CareerDeclaration")
+                        .WithMany()
+                        .HasForeignKey("CareerDeclarationId1");
                 });
 #pragma warning restore 612, 618
         }
