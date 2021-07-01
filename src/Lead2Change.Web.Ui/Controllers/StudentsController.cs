@@ -35,11 +35,54 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             return View(new RegistrationViewModel());
         }
+
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var studentscontainer = await _studentService.GetStudent(id);
+            RegistrationViewModel a = new RegistrationViewModel()
+            {
+                Id = studentscontainer.Id,
+                StudentFirstName = studentscontainer.StudentFirstName,
+                StudentLastName = studentscontainer.StudentLastName,
+                StudentDateOfBirth = studentscontainer.StudentDateOfBirth,
+                StudentAddress = studentscontainer.StudentAddress,
+                StudentApartmentNumber = studentscontainer.StudentApartmentNumber,
+                StudentCity = studentscontainer.StudentCity,
+                StudentState = studentscontainer.StudentState,
+                StudentZipCode = studentscontainer.StudentZipCode,
+                StudentHomePhone = studentscontainer.StudentHomePhone,
+                StudentCellPhone = studentscontainer.StudentCellPhone,
+                StudentEmail = studentscontainer.StudentEmail,
+                StudentCareerPath = studentscontainer.StudentCareerPath,
+                StudentCareerInterest = studentscontainer.StudentCareerInterest,
+
+                ParentFirstName = studentscontainer.ParentFirstName,
+                ParentLastName = studentscontainer.ParentLastName,
+                Address = studentscontainer.Address,
+                ParentApartmentNumber = studentscontainer.ParentApartmentNumber,
+                ParentCity = studentscontainer.ParentCity,
+                ParentState = studentscontainer.ParentState,
+                ParentZipCode = studentscontainer.ParentZipCode,
+                ParentHomePhone = studentscontainer.ParentHomePhone,
+                ParentCellPhone = studentscontainer.ParentCellPhone,
+                ParentEmail = studentscontainer.ParentEmail,
+
+                KnowGuidanceCounselor = studentscontainer.KnowGuidanceCounselor,
+                GuidanceCounselorName = studentscontainer.GuidanceCounselorName,
+                MeetWithGuidanceCounselor = studentscontainer.MeetWithGuidanceCounselor,
+                HowOftenMeetWithGuidanceCounselor = studentscontainer.HowOftenMeetWithGuidanceCounselor,
+                DiscussWithGuidanceCounselor = studentscontainer.DiscussWithGuidanceCounselor
+            };
+            return View(a);
+        }
+
+
+
         [HttpPost]
         public async Task<IActionResult> Register(RegistrationViewModel model)
-         {
-             if (ModelState.IsValid)
-             {
+        {
+            if (ModelState.IsValid)
+            {
                 if (model.StudentFirstName.Length > 0)
                 {
                     Student student = new Student()
@@ -51,6 +94,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentAddress = model.StudentAddress,
                         StudentApartmentNumber = model.StudentApartmentNumber,
                         StudentCity = model.StudentCity,
+                        StudentState = model.StudentState,
                         StudentZipCode = model.StudentZipCode,
                         StudentHomePhone = model.StudentHomePhone,
                         StudentCellPhone = model.StudentCellPhone,
@@ -58,11 +102,10 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentCareerPath = model.StudentCareerPath,
                         StudentCareerInterest = model.StudentCareerInterest,
                         ParentFirstName = model.ParentFirstName,
+                        ParentLastName = model.ParentLastName,
                         Address = model.Address,
-                        //ParentAdress^
-                        /*ParentAdress = model.ParentAddress,
-                         * ParentApartmentNumber = model.ParentApartmentApartmentNumber,
-                         */
+                        //ParentAdress
+                        ParentApartmentNumber = model.ParentApartmentNumber,
                         ParentCity = model.ParentCity,
                         ParentState = model.ParentState,
                         ParentZipCode = model.ParentZipCode,
@@ -77,10 +120,12 @@ namespace Lead2Change.Web.Ui.Controllers
                     };
                     var abc = await _studentService.Create(student);
                 }
-                 return RedirectToAction("Index");
-             }
-             return View(model);
-         } 
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+
         public async Task<IActionResult> Edit(Guid id)
         {
             var student = await _studentService.GetStudent(id);
@@ -94,6 +139,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentAddress = student.StudentAddress,
                 StudentApartmentNumber = student.StudentApartmentNumber,
                 StudentCity = student.StudentCity,
+                StudentState = student.StudentState,
                 StudentZipCode = student.StudentZipCode,
                 StudentHomePhone = student.StudentHomePhone,
                 StudentCellPhone = student.StudentCellPhone,
@@ -104,6 +150,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 ParentFirstName = student.ParentFirstName,
                 ParentLastName = student.ParentLastName,
                 Address = student.Address,
+                ParentApartmentNumber = student.ParentApartmentNumber,
                 ParentCity = student.ParentCity,
                 ParentState = student.ParentState,
                 ParentZipCode = student.ParentZipCode,
@@ -125,7 +172,7 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(model.StudentFirstName.Length > 0)
+                if (model.StudentFirstName.Length > 0)
                 {
                     Student list = new Student()
                     {
@@ -137,6 +184,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentAddress = model.StudentAddress,
                         StudentApartmentNumber = model.StudentApartmentNumber,
                         StudentCity = model.StudentCity,
+                        StudentState = model.StudentState,
                         StudentZipCode = model.StudentZipCode,
                         StudentHomePhone = model.StudentHomePhone,
                         StudentCellPhone = model.StudentCellPhone,
@@ -147,6 +195,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         ParentFirstName = model.ParentFirstName,
                         ParentLastName = model.ParentLastName,
                         Address = model.Address,
+                        ParentApartmentNumber = model.ParentApartmentNumber,
                         ParentCity = model.ParentCity,
                         ParentState = model.ParentState,
                         ParentZipCode = model.ParentZipCode,
@@ -167,6 +216,4 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(model);
         }
     }
-
-   
 }

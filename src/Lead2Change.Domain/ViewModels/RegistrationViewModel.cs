@@ -16,6 +16,7 @@ namespace Lead2Change.Domain.ViewModels
         public string StudentAddress { get; set; }
         public string StudentApartmentNumber { get; set; }
         public string StudentCity { get; set; }
+        public string StudentState { get; set; }
         public string StudentZipCode { get; set; }
         public string StudentHomePhone { get; set; }
         public string StudentCellPhone { get; set; }
@@ -25,6 +26,7 @@ namespace Lead2Change.Domain.ViewModels
         public string ParentFirstName { get; set; }
         public string ParentLastName { get; set; }
         public string Address { get; set; }
+        public string ParentApartmentNumber { get; set; }
         public string ParentCity { get; set; }
         public string ParentState { get; set; }
         public string ParentZipCode { get; set; }
@@ -54,7 +56,8 @@ namespace Lead2Change.Domain.ViewModels
 
         public DateTime PACTTestDate { get; set; }
         public int PACTTestScore { get; set; }
-
+        public DateTime PSATTestDate { get; set; }
+        public int PSATTestScore { get; set; }
         public DateTime SATTestDate { get; set; }
         public int SATTestScore { get; set; }
         public DateTime ACTTestDate { get; set; }
@@ -62,6 +65,7 @@ namespace Lead2Change.Domain.ViewModels
         public bool PrepClassRequired { get; set; }
         public bool AssistanceForForms { get; set; }
         public bool FinancialAidProcessComplete { get; set; }
+        public string SupportNeeded { get; set; }
         public string StudentSignature { get; set; }
         public DateTime StudentSignatureDate { get; set; }
         public string ParentSignature { get; set; }
