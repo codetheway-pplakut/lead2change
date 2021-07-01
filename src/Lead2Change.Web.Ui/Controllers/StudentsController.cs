@@ -57,6 +57,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
                 ParentFirstName = studentscontainer.ParentFirstName,
                 ParentLastName = studentscontainer.ParentLastName,
+                Address = studentscontainer.Address,
                 ParentCity = studentscontainer.ParentCity,
                 ParentState = studentscontainer.ParentState,
                 ParentZipCode = studentscontainer.ParentZipCode,
@@ -91,6 +92,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentAddress = model.StudentAddress,
                         StudentApartmentNumber = model.StudentApartmentNumber,
                         StudentCity = model.StudentCity,
+                        StudentState = model.StudentState,
                         StudentZipCode = model.StudentZipCode,
                         StudentHomePhone = model.StudentHomePhone,
                         StudentCellPhone = model.StudentCellPhone,
@@ -98,11 +100,10 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentCareerPath = model.StudentCareerPath,
                         StudentCareerInterest = model.StudentCareerInterest,
                         ParentFirstName = model.ParentFirstName,
+                        ParentLastName = model.ParentLastName,
                         Address = model.Address,
-                        //ParentAdress^
-                        /*ParentAdress = model.ParentAddress,
-                         * ParentApartmentNumber = model.ParentApartmentApartmentNumber,
-                         */
+                        //ParentAdress
+                        ParentApartmentNumber = model.ParentApartmentNumber,
                         ParentCity = model.ParentCity,
                         ParentState = model.ParentState,
                         ParentZipCode = model.ParentZipCode,
