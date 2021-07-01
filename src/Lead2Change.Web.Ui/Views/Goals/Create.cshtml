@@ -28,7 +28,7 @@
                             <div class="form-group, col-sm-6" >
 
                                     <label asp-for="DateGoalSet" class="control-label"></label>
-                                    <input asp-for="DateGoalSet" class="form-control" />
+                                    <input asp-for="DateGoalSet" class="form-control"  data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                                     <span asp-validation-for="DateGoalSet" class="text-danger"></span>
                                 </div>
 
@@ -54,7 +54,7 @@
                             <div class=" row">
                                 <div class="form-group, col-sm-6">
                                     <label asp-for="GoalReviewDate" class="control-label"></label>
-                                    <input asp-for="GoalReviewDate" class="form-control" />
+                                    <input asp-for="GoalReviewDate" class="form-control"  data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                                     <span asp-validation-for="GoalReviewDate" class="text-danger"></span>
                                 </div>
                            
@@ -64,7 +64,7 @@
                                     <select asp-for="WasItAccomplished" class="form-control">
                                         <option selected>Select A Choice</option>
                                         <option value="Yes">Yes</option>
-                                        <option value="In Progress">This goal remains in progress</option>
+                                        <option value="In Progress">In progress</option>
                                         <option value="No">No</option>
                                     </select>
                                 </div>
