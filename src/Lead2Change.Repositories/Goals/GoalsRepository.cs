@@ -38,6 +38,13 @@ namespace Lead2Change.Repositories.Goals
             return result.Entity;
 
         }
+
+        public async Task<Goal> Delete(Goal model)
+        {
+            AppDbContext.Goals.Remove(model);
+            await AppDbContext.SaveChangesAsync();
+            return model;
+        }
     }
 }
 

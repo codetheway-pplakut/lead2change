@@ -56,5 +56,10 @@ namespace Lead2Change.Services.Goals
             return result;
 
         }
+
+        public async Task<Goal> Delete(Goal goal)
+        {
+            return await GoalsRepository.Delete(goal);
+        }
     }
 }

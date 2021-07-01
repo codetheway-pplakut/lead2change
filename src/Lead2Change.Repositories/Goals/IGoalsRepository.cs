@@ -13,5 +13,8 @@ namespace Lead2Change.Repositories.Goals
         public Task<Goal> GetGoal(Guid id);
         public Task<Goal> Update(Goal model);
         public Task<Goal> Create(Goal goal);
+
+        public Task<Goal> Delete(Goal model);
+
     }
 }
