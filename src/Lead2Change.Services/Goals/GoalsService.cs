@@ -40,6 +40,9 @@ namespace Lead2Change.Services.Goals
             return await this.GoalsRepository.GetGoals();
 
         }
+        /**
+         * Returns all goals matching a given student ID
+         */
         public async Task<List<Goal>> GetGoals(Guid studentID)
         {
             var allGoals = await this.GoalsRepository.GetGoals();
