@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Lead2Change.Domain.Models;
-using System.Text;
-using Lead2Change.Domain.Models;
-using System.Threading.Tasks;
-using System.Linq;
-using Lead2Change.Data.Contexts;
+
 
 namespace Lead2Change.Repositories.Goals
 {

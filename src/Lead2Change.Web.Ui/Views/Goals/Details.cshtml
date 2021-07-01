@@ -3,14 +3,44 @@
     ViewData["Title"] = "Details";
 *@
 <h1>Details</h1>
-<p>StudentId: @Model.StudentId</p>
-<p>Goal: @Model.GoalSet</p>
-<p>Goal Set Date: @Model.DateGoalSet</p>
-<p>SEL: @Model.SEL</p>
-<p>Goal Review Date: @Model.GoalReviewDate</p>
-<p>Accomplishment State: @Model.WasItAccomplished</p>
-<p>Explanation: @Model.Explanation</p>
-
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Info Type</th>
+            <th scope="col">Info</th>          
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>StudentId:</b> </td>
+            <td>@Model.StudentId</td>
+        </tr>
+        <tr>
+            <td><b>Goal:</b> </td>
+            <td>@Model.GoalSet</td>
+        </tr>
+        <tr>
+            <td><b>Goal Set Date:</b> </td>
+            <td>@Model.DateGoalSet</td>
+        </tr>
+        <tr>
+            <td><b>SEL:</b> </td>
+            <td>@Model.SEL</td>
+        </tr>
+        <tr>
+            <td><b>Goal Review Date: </b></td>
+            <td>@Model.GoalReviewDate</td>
+        </tr>
+        <tr>
+            <td><b>Accomplishment State: </b></td>
+            <td>@Model.WasItAccomplished</td>
+        </tr>
+        <tr>
+            <td><b>Explanation: </b></td>
+            <td>@Model.Explanation</td>
+        </tr>
+    </tbody>
+</table>
 <div>
     <a asp-action="Index" asp-route-studentID=@Model.StudentId>Back to List</a>
 </div>

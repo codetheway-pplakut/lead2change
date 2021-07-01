@@ -6,10 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Lead2Change.Web.Ui.Models;
-using Lead2Change.Services.Goals;
+
 using Lead2Change.Domain.Models;
-using Lead2Change.Domain.ViewModels;
 
 
 namespace Lead2Change.Web.Ui.Controllers
@@ -67,7 +65,7 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             return View(new GoalViewModel()
             {
-                StudentId = studentID
+                StudentId = studentID,
                 DateGoalSet = DateTime.Today,
                 GoalReviewDate = DateTime.Today,
             }) ;
