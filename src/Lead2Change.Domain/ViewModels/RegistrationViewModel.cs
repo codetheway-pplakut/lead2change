@@ -55,7 +55,8 @@ namespace Lead2Change.Domain.ViewModels
 
         public DateTime PACTTestDate { get; set; }
         public int PACTTestScore { get; set; }
-
+        public DateTime PSATTestDate { get; set; }
+        public int PSATTestScore { get; set; }
         public DateTime SATTestDate { get; set; }
         public int SATTestScore { get; set; }
         public DateTime ACTTestDate { get; set; }
@@ -63,6 +64,7 @@ namespace Lead2Change.Domain.ViewModels
         public bool PrepClassRequired { get; set; }
         public bool AssistanceForForms { get; set; }
         public bool FinancialAidProcessComplete { get; set; }
+        public string SupportNeeded { get; set; }
         public string StudentSignature { get; set; }
         public DateTime StudentSignatureDate { get; set; }
         public string ParentSignature { get; set; }
