@@ -11,7 +11,7 @@ namespace Lead2Change.Domain.ViewModels
 
         public Guid Id { get; set; }
         public Guid StudentId { get; set; }
-        [Display(Name = "Goal:")]
+        [Display(Name ="Goal:")]
         public string GoalSet { get; set; }
         [Display(Name = "Date Goal Set:")]
         public DateTime DateGoalSet { get; set; }

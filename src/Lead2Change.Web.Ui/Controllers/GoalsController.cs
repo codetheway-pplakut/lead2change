@@ -68,6 +68,8 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(new GoalViewModel()
             {
                 StudentId = studentID
+                DateGoalSet = DateTime.Today,
+                GoalReviewDate = DateTime.Today,
             }) ;
         }
         [HttpPost]

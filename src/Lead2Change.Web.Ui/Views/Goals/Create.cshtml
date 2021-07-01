@@ -1,9 +1,12 @@
 ﻿@model Lead2Change.Domain.ViewModels.GoalViewModel
 @* ViewData["Title"] = "Create";
 *@
-
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
 <div class="PaddingForAdam">
-    <h1>Create Goals</h1>
+   
+    <h1 id="GoalCreateHeading">Create A Goal</h1>
     <form asp-action="Register">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group d-none">
@@ -31,14 +34,19 @@
         </div>
         <div class="form-group">
             <label asp-for="WasItAccomplished" class="control-label"></label>
-            <input asp-for="WasItAccomplished" class="form-control" />
-            <span asp-validation-for="WasItAccomplished" class="text-danger"></span>
+            <select asp-for="WasItAccomplished" class="form-control">
+                <option selected>Select A Choice</option>
+                <option value="HR">No</option>
+                <option value="Sales">In Progress</option>
+                <option value="Other">Yes!</option>
+            </select>
         </div>
         <div class="form-group, shipping">
             <label asp-for="Explanation" class="control-label"></label>
             <input asp-for="Explanation" class="form-control" />
             <span asp-validation-for="Explanation" class="text-danger"></span>
         </div>
+        <br />
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-primary" />
         </div>
