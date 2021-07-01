@@ -50,7 +50,7 @@
     </div>
     <div class="form-group, shipping">
         <label asp-for="Explanation" class="control-label"></label>
-        <input asp-for="Explanation" class="form-control" value=@Model.Explanation />
+        <textarea asp-for="Explanation" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         <span asp-validation-for="Explanation" class="text-danger"></span>
     </div>
     <div class="form-group">
