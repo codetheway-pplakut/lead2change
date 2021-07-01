@@ -1,11 +1,7 @@
 ﻿@model Lead2Change.Domain.ViewModels.GoalViewModel
 @* ViewData["Title"] = "Create";
 *@
-<head>
-    <link href="~/css/site.css" rel="stylesheet" />
-    <script src="..\wwwroot\lib\bootstrap\dist\js\bootstrap.js"></script>
-    <link href="..\wwwroot\lib\bootstrap\dist\css\bootstrap.css" rel="stylesheet">
-</head>
+
 
     <div class="container-fluid">
         <div class=" row">
@@ -27,19 +23,19 @@
                             <input asp-for="GoalSet" class="form-control" />
                             <span asp-validation-for="GoalSet" class="text-danger"></span>
                         </div>
+                        <div class="form-group">
                         <div class=" row">
-                            <div class="form-group" >
+                            <div class="form-group, col-sm-6" >
 
-                                <div class="col-sm-6">
                                     <label asp-for="DateGoalSet" class="control-label"></label>
                                     <input asp-for="DateGoalSet" class="form-control" />
                                     <span asp-validation-for="DateGoalSet" class="text-danger"></span>
                                 </div>
 
-                            </div>
-                            <div class="form-group">
+                            
+                            <div class="form-group, col-sm-6">
 
-                                <div class="col-sm-6">
+                               
                                     <label asp-for="SEL" class="control-label"></label>
                                     <select asp-for="SEL" class="form-control">
                                         <option selected>Select A Choice</option>
@@ -50,33 +46,30 @@
                                         <option value="Responsible Decision-Making">Responsible Decision-Making</option>
                                     </select>
                                 </div>
-                            </div>
+                            
                         </div>
-                        <div class=" row">
-                            <div class="form-group">
-
-                                <div class="col-sm-12">
+                            </div>
+                        
+                        <div class="form-group">
+                            <div class=" row">
+                                <div class="form-group, col-sm-6">
                                     <label asp-for="GoalReviewDate" class="control-label"></label>
                                     <input asp-for="GoalReviewDate" class="form-control" />
                                     <span asp-validation-for="GoalReviewDate" class="text-danger"></span>
                                 </div>
-                                </div>
-
-
-
-                                <div class="form-group">
-
-                                    <div class="col-sm-12">
-                                        <label asp-for="WasItAccomplished" class="control-label"></label>
-                                        <select asp-for="WasItAccomplished" class="form-control">
-                                            <option selected>Select A Choice</option>
-                                            <option value="Yes">Yes</option>
-                                            <option value="In Progress">This goal remains in progress</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
+                           
+                            <div class="form-group, col-sm-6">
+                                
+                                    <label asp-for="WasItAccomplished" class="control-label"></label>
+                                    <select asp-for="WasItAccomplished" class="form-control">
+                                        <option selected>Select A Choice</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="In Progress">This goal remains in progress</option>
+                                        <option value="No">No</option>
+                                    </select>
                                 </div>
                             </div>
+                        </div>
                             <div class="form-group, shipping">
                                 <label asp-for="Explanation" class="control-label"></label>
                                 <input asp-for="Explanation" class="form-control" />
