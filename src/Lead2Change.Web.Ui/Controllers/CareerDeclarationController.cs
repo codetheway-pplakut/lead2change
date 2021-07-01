@@ -1,4 +1,5 @@
-﻿using Lead2Change.Domain.Models;
+﻿using Lead2Change.Domain.Constants;
+using Lead2Change.Domain.Models;
 using Lead2Change.Domain.ViewModels;
 using Lead2Change.Services.CareerDeclarationService;
 using Lead2Change.Services.Identity;
@@ -52,7 +53,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         Id = model.Id,
                         StudentId = model.StudentId,
                         CollegeBound = model.CollegeBound,
-                        CareerCluster = model.CareerCluster,
+                        CareerCluster = (int)model.CareerCluster,
                         SpecificCareer = model.SpecificCareer,
                         TechnicalCollegeBound = model.TechnicalCollegeBound,
                     };
@@ -72,7 +73,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 Id = careerDeclaration.Id,
                 StudentId = careerDeclaration.StudentId,
                 CollegeBound = careerDeclaration.CollegeBound,
-                CareerCluster = careerDeclaration.CareerCluster,
+                CareerCluster = (CareerCluster)careerDeclaration.CareerCluster,
                 SpecificCareer = careerDeclaration.SpecificCareer,
                 TechnicalCollegeBound = careerDeclaration.TechnicalCollegeBound,
             };
@@ -88,7 +89,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     Id = model.Id,
                     StudentId = model.StudentId,
                     CollegeBound = model.CollegeBound,
-                    CareerCluster = model.CareerCluster,
+                    CareerCluster = (int)model.CareerCluster,
                     SpecificCareer = model.SpecificCareer,
                     TechnicalCollegeBound = model.TechnicalCollegeBound,
                 };
@@ -108,7 +109,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     Id = careerDeclaration.Id,
                     StudentId = careerDeclaration.StudentId,
                     CollegeBound = careerDeclaration.CollegeBound,
-                    CareerCluster = careerDeclaration.CareerCluster,
+                    CareerCluster = (CareerCluster)careerDeclaration.CareerCluster,
                     SpecificCareer = careerDeclaration.SpecificCareer,
                     TechnicalCollegeBound = careerDeclaration.TechnicalCollegeBound,
                 };
