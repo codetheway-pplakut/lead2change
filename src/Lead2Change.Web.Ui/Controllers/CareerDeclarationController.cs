@@ -28,11 +28,16 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Create(Guid studentId)
         {
-            CareerDeclarationViewModel careerDeclarationViewModel = new CareerDeclarationViewModel()
+            var student = await _studentService.GetStudent(studentId);
+            if (!_studentService.HasCareerAssosiation(student))
             {
-                StudentId = studentId,
-            };
-            return View(careerDeclarationViewModel);
+                CareerDeclarationViewModel careerDeclarationViewModel = new CareerDeclarationViewModel()
+                {
+                    StudentId = studentId,
+                };
+                return View(careerDeclarationViewModel);
+            }
+            return RedirectToAction("Index", "Students");
         }
         [HttpPost]
         public async Task<IActionResult> Register(CareerDeclarationViewModel model)
@@ -40,7 +45,7 @@ namespace Lead2Change.Web.Ui.Controllers
             var student = await _studentService.GetStudent(model.StudentId);
             if (student != null)
             {
-                if (ModelState.IsValid && student.CareerDeclarationId == Guid.Empty)
+                if (ModelState.IsValid && !_studentService.HasCareerAssosiation(student))
                 {
                     CareerDeclaration careerDeclaration = new CareerDeclaration()
                     {
@@ -57,7 +62,6 @@ namespace Lead2Change.Web.Ui.Controllers
                 }
             }
             return RedirectToAction("Index", "Students");
-            // return View(model);
         }
 
         public async Task<IActionResult> Edit(Guid id)
@@ -89,7 +93,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     TechnicalCollegeBound = model.TechnicalCollegeBound,
                 };
                 await _service.Update(careerDeclaration);
-                return RedirectToAction("Index", "Students");
+                return RedirectToAction("Details", "CareerDeclaration", model);
             }
             return View(model);
         }
@@ -120,7 +124,7 @@ namespace Lead2Change.Web.Ui.Controllers
             var student = await _studentService.GetStudent(careerDeclaration.StudentId);
             student.CareerDeclarationId = Guid.Empty;
             await _studentService.Update(student);
-            return RedirectToAction("Index", "Student");
+            return RedirectToAction("Index", "Students");
         }
 
     }
