@@ -8,5 +8,8 @@
 <p>SpecificCareer:  @Model.SpecificCareer</p>
 <p>TechnicalCollegeBound:  @Model.TechnicalCollegeBound</p>
 <div>
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Edit Career", "Edit", "CareerDeclaration", new { id = Model.Id })
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Students">Back to List</a>
 </div>
