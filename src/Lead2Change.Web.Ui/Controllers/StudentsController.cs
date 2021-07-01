@@ -3,7 +3,6 @@ using Lead2Change.Services.Identity;
 using Lead2Change.Services.Students;
 using Microsoft.AspNetCore.Mvc;
 using Lead2Change.Domain.Models;
-using Lead2Change.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
