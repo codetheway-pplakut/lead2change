@@ -209,91 +209,93 @@
                 <span asp-validation-for="TradeSchoolStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TradeSchoolsList" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="TradeSchoolsList" class="control-label">What schools have you applied to?</label>
                 <input asp-for="TradeSchoolsList" class="form-control" />
                 <span asp-validation-for="TradeSchoolsList" class="text-danger"></span>
             </div>
+            @*Add the other question dependent on prevous question*@
             <div class="form-group">
-                <label asp-for="ArmedForcesStatus" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="ArmedForcesStatus" class="control-label">Have you already applied to the armed forces?</label>
                 <input asp-for="ArmedForcesStatus" class="form-control" />
                 <span asp-validation-for="ArmedForcesStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ArmedForcesBranch" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="ArmedForcesBranch" class="control-label">What branch did you apply to?</label>
                 <input asp-for="ArmedForcesBranch" class="form-control" />
                 <span asp-validation-for="ArmedForcesBranch" class="text-danger"></span>
             </div>
+            @*Add the other question dependent on prevous question*@
             <div class="form-group">
-                <label asp-for="WorkStatus" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="WorkStatus" class="control-label">Do you plan to go directly into the workforce after high school?</label>
                 <input asp-for="WorkStatus" class="form-control" />
                 <span asp-validation-for="WorkStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CareerPathList" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="CareerPathList" class="control-label">What carrer path(s) are you interested in pursuing?</label>
                 <input asp-for="CareerPathList" class="form-control" />
                 <span asp-validation-for="CareerPathList" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OtherPlans" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="OtherPlans" class="control-label">What are your plans for after high school?</label>
                 <input asp-for="OtherPlans" class="form-control" />
                 <span asp-validation-for="OtherPlans" class="text-danger"></span>
             </div>
             <h3>College Entrance Exam Information</h3>
             <div class="form-group">
-                <label asp-for="PACTTestDate" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="PACTTestDate" class="control-label">PACT Test Date:</label>
                 <input asp-for="PACTTestDate" class="form-control" />
                 <span asp-validation-for="PACTTestDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PACTTestScore" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="PACTTestScore" class="control-label">PACT Test Score:</label>
                 <input asp-for="PACTTestScore" class="form-control" />
                 <span asp-validation-for="PACTTestScore" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PSATTestDate" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="PSATTestDate" class="control-label">PSAT Test Date:</label>
                 <input asp-for="PSATTestDate" class="form-control" />
                 <span asp-validation-for="PSATTestDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PSATTestScore" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="PSATTestScore" class="control-label">PSAT Test Score:</label>
                 <input asp-for="PSATTestScore" class="form-control" />
                 <span asp-validation-for="PSATTestScore" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SATTestDate" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="SATTestDate" class="control-label">SAT Test Date:</label>
                 <input asp-for="SATTestDate" class="form-control" />
                 <span asp-validation-for="SATTestDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SATTestScore" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="SATTestScore" class="control-label">SAT Test Score:</label>
                 <input asp-for="SATTestScore" class="form-control" />
                 <span asp-validation-for="SATTestScore" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ACTTestDate" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="ACTTestDate" class="control-label">ACT Test Date:</label>
                 <input asp-for="ACTTestDate" class="form-control" />
                 <span asp-validation-for="ACTTestDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ACTTestScore" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="ACTTestScore" class="control-label">ACT Test Score:</label>
                 <input asp-for="ACTTestScore" class="form-control" />
                 <span asp-validation-for="ACTTestScore" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PrepClassRequired" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="PrepClassRequired" class="control-label">Do you need a prep class?</label>
                 <input asp-for="PrepClassRequired" class="form-control" />
                 <span asp-validation-for="PrepClassRequired" class="text-danger"></span>
             </div>
             <h3>Financial Aid Information</h3>
             <div class="form-group">
-                <label asp-for="AssistanceForForms" class="control-label">Third Choice/Safety School</label>
-                <input asp-for="AssistanceForForms" class="form-control" />
-                <span asp-validation-for="AssistanceForForms" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FinancialAidProcessComplete" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="FinancialAidProcessComplete" class="control-label">Have you already completed the financial aid process?</label>
                 <input asp-for="FinancialAidProcessComplete" class="form-control" />
                 <span asp-validation-for="FinancialAidProcessComplete" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AssistanceForForms" class="control-label">Do you need assistance filling out your FAFSA/Financial aid forms?</label>
+                <input asp-for="AssistanceForForms" class="form-control" />
+                <span asp-validation-for="AssistanceForForms" class="text-danger"></span>
             </div>
             <h3>What support is need for you most while in this program?</h3>
             <div class="form-group">
@@ -301,27 +303,29 @@
                 <input asp-for="SupportNeeded" class="form-control" />
                 <span asp-validation-for="SupportNeeded" class="text-danger"></span>
             </div>
+            @*Make sure there isn't a gap or label for this question*@
             <h3>Signatures</h3>
             <div class="form-group">
-                <label asp-for="StudentSignature" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="StudentSignature" class="control-label">Student Signature:</label>
                 <input asp-for="StudentSignature" class="form-control" />
                 <span asp-validation-for="StudentSignature" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StudentSignatureDate" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="StudentSignatureDate" class="control-label">Date:</label>
                 <input asp-for="StudentSignatureDate" class="form-control" />
                 <span asp-validation-for="StudentSignatureDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ParentSignature" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="ParentSignature" class="control-label">Parent Signature:</label>
                 <input asp-for="ParentSignature" class="form-control" />
                 <span asp-validation-for="ParentSignature" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ParentSignatureDate" class="control-label">Third Choice/Safety School</label>
+                <label asp-for="ParentSignatureDate" class="control-label">Date:</label>
                 <input asp-for="ParentSignatureDate" class="form-control" />
                 <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
             </div>
+            @*Include any disclaimers necessary for signatures*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
