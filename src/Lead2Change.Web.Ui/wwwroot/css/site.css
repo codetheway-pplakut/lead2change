@@ -118,3 +118,7 @@ body {
 .calibri{
     font-family: Calibri;
 }
+
+#hidden {
+    visibility: hidden;
+}

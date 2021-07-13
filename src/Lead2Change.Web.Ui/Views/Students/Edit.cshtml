@@ -4,267 +4,270 @@
 *@
 @{
 }
-<h1>Edit</h1>
-<form asp-action="UpDate">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <h3>Student Information</h3>
-    <div class="form-group">
-        <label asp-for="StudentFirstName" class="control-label">First Name:</label>
-        <input asp-for="StudentFirstName" class="form-control" value=@Model.StudentFirstName required/>
-        <span asp-validation-for="StudentFirstName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentLastName" class="control-label">Last Name:</label>
-        <input asp-for="StudentLastName" class="form-control" value=@Model.StudentLastName required/>
-        <span asp-validation-for="StudentLastName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentDateOfBirth" class="control-label">Date of Birth:</label>
-        <input asp-for="StudentDateOfBirth" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required/>
-        <span asp-validation-for="StudentDateOfBirth" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentAddress" class="control-label">Address:</label>
-        <input asp-for="StudentAddress" class="form-control" value=@Model.StudentAddress required/>
-        <span asp-validation-for="StudentAddress" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentApartmentNumber" class="control-label">Apartment Number (If Applicable):</label>
-        <input asp-for="StudentApartmentNumber" class="form-control" value=@Model.StudentApartmentNumber />
-        <span asp-validation-for="StudentApartmentNumber" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentCity" class="control-label">City:</label>
-        <input asp-for="StudentCity" class="form-control" value=@Model.StudentCity required/>
-        <span asp-validation-for="StudentCity" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentState" class="control-label">State:</label>
-        <select asp-for="StudentState" class="form-control" required>
-            <option value="Alabama">AL</option>
-            <option value="Alaska">AK</option>
-            <option value="rizona">AZ</option>
-            <option value="Arkansas">AR</option>
-            <option value="California">CA</option>
-            <option value="Colorado">CO</option>
-            <option value="Connecticut">CT</option>
-            <option value="Delaware">DE</option>
-            <option value="Florida">FL</option>
-            <option value="Georgia">GA</option>
-            <option value="Hawaii">HI</option>
-            <option value="Idaho">ID</option>
-            <option value="Illinois">IL</option>
-            <option value="Indiana">IN</option>
-            <option value="Iowa">IA</option>
-            <option value="Kansas">KS</option>
-            <option value="Kentucky">KY</option>
-            <option value="Louisiana">LA</option>
-            <option value="Maine">ME</option>
-            <option value="Maryland">MD</option>
-            <option value="Massachusetts">MA</option>
-            <option value="Michigan">MI</option>
-            <option value="Minnesota">MN</option>
-            <option value="Mississippi">MS</option>
-            <option value="Missouri">MO</option>
-            <option value="Montana">MT</option>
-            <option value="Nebraska">NE</option>
-            <option value="Nevada">NV</option>
-            <option value="New Hampshire">NH</option>
-            <option value="New Jersey">NJ</option>
-            <option value="New Mexico">NM</option>
-            <option value="New York">NY</option>
-            <option value="North Carolina">NC</option>
-            <option value="North Dakota">ND</option>
-            <option value="Ohio">OH</option>
-            <option value="Oklahoma">OK</option>
-            <option value="Oregon">OR</option>
-            <option value="Pennsylvania">PA</option>
-            <option value="Rhode Island">RI</option>
-            <option value="South Carolina">SC</option>
-            <option value="South Dakota">SD</option>
-            <option value="Tennessee">TN</option>
-            <option value="Texas">TX</option>
-            <option value="Utah">UT</option>
-            <option value="Vermont">VT</option>
-            <option value="Virginia">VA</option>
-            <option value="Washington">WA</option>
-            <option value="West Virginia">WV</option>
-            <option value="Wisconsin">WI</option>
-            <option value="Wyoming">WY</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentZipCode" class="control-label">Zip Code:</label>
-        <input asp-for="StudentZipCode" class="form-control" value=@Model.StudentZipCode required/>
-        <span asp-validation-for="StudentZipCode" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentHomePhone" class="control-label">Home Phone:</label>
-        <input type="tel" pattern="^\d{3}-\d{3}-\d{4}$" asp-for="StudentHomePhone" class="form-control" value=@Model.StudentHomePhone required/>
-        <span asp-validation-for="StudentHomePhone" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentCellPhone" class="control-label">Cell Phone:</label>
-        <input asp-for="StudentCellPhone" class="form-control" value=@Model.StudentCellPhone required/>
-        <span asp-validation-for="StudentCellPhone" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentEmail" class="control-label">Email:</label>
-        <input asp-for="StudentEmail" class="form-control" value=@Model.StudentEmail type="email" required />
-        <span asp-validation-for="StudentEmail" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentCareerPath" class="control-label">Career Path:</label>
-        <input asp-for="StudentCareerPath" class="form-control" value=@Model.StudentCareerPath required/>
-        <span asp-validation-for="StudentCareerPath" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentCareerInterest" class="control-label">Career Interest:</label>
-        <input asp-for="StudentCareerInterest" class="form-control" value=@Model.StudentCareerInterest required/>
-        <span asp-validation-for="StudentCareerInterest" class="text-danger"></span>
-    </div>
-    <h3>Parent/Guardian Information</h3>
-    <div class="form-group">
-        <label asp-for="ParentFirstName" class="control-label">First Name:</label>
-        <input asp-for="ParentFirstName" class="form-control" value=@Model.ParentFirstName required/>
-        <span asp-validation-for="ParentFirstName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ParentLastName" class="control-label">Last Name:</label>
-        <input asp-for="ParentLastName" class="form-control" value=@Model.ParentLastName required/>
-        <span asp-validation-for="ParentLastName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Address" class="control-label">Address:</label>
-        <input asp-for="Address" class="form-control" value=@Model.Address required/>
-        <span asp-validation-for="Address" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ParentApartmentNumber" class="control-label">Apartment Number (If Applicable):</label>
-        <input asp-for="ParentApartmentNumber" class="form-control" value=@Model.ParentApartmentNumber />
-        <span asp-validation-for="ParentApartmentNumber" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ParentCity" class="control-label">City:</label>
-        <input asp-for="ParentCity" class="form-control" value=@Model.ParentCity required/>
-        <span asp-validation-for="ParentCity" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ParentState" class="control-label">State:</label>
-        <select asp-for="ParentState" class="form-control" required>
-            <option selected>Select A Choice</option>
-            <option value="Alabama">AL</option>
-            <option value="Alaska">AK</option>
-            <option value="rizona">AZ</option>
-            <option value="Arkansas">AR</option>
-            <option value="California">CA</option>
-            <option value="Colorado">CO</option>
-            <option value="Connecticut">CT</option>
-            <option value="Delaware">DE</option>
-            <option value="Florida">FL</option>
-            <option value="Georgia">GA</option>
-            <option value="Hawaii">HI</option>
-            <option value="Idaho">ID</option>
-            <option value="Illinois">IL</option>
-            <option value="Indiana">IN</option>
-            <option value="Iowa">IA</option>
-            <option value="Kansas">KS</option>
-            <option value="Kentucky">KY</option>
-            <option value="Louisiana">LA</option>
-            <option value="Maine">ME</option>
-            <option value="Maryland">MD</option>
-            <option value="Massachusetts">MA</option>
-            <option value="Michigan">MI</option>
-            <option value="Minnesota">MN</option>
-            <option value="Mississippi">MS</option>
-            <option value="Missouri">MO</option>
-            <option value="Montana">MT</option>
-            <option value="Nebraska">NE</option>
-            <option value="Nevada">NV</option>
-            <option value="New Hampshire">NH</option>
-            <option value="New Jersey">NJ</option>
-            <option value="New Mexico">NM</option>
-            <option value="New York">NY</option>
-            <option value="North Carolina">NC</option>
-            <option value="North Dakota">ND</option>
-            <option value="Ohio">OH</option>
-            <option value="Oklahoma">OK</option>
-            <option value="Oregon">OR</option>
-            <option value="Pennsylvania">PA</option>
-            <option value="Rhode Island">RI</option>
-            <option value="South Carolina">SC</option>
-            <option value="South Dakota">SD</option>
-            <option value="Tennessee">TN</option>
-            <option value="Texas">TX</option>
-            <option value="Utah">UT</option>
-            <option value="Vermont">VT</option>
-            <option value="Virginia">VA</option>
-            <option value="Washington">WA</option>
-            <option value="West Virginia">WV</option>
-            <option value="Wisconsin">WI</option>
-            <option value="Wyoming">WY</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label asp-for="ParentZipCode" class="control-label">Zip Code:</label>
-        <input asp-for="ParentZipCode" class="form-control" value=@Model.ParentZipCode required/>
-        <span asp-validation-for="ParentZipCode" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ParentHomePhone" class="control-label">Home Phone:</label>
-        <input asp-for="ParentHomePhone" class="form-control" value=@Model.ParentHomePhone required/>
-        <span asp-validation-for="ParentHomePhone" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ParentCellPhone" class="control-label">Cell Phone:</label>
-        <input asp-for="ParentCellPhone" class="form-control" value=@Model.ParentCellPhone required/>
-        <span asp-validation-for="ParentCellPhone" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ParentEmail" class="control-label">Email:</label>
-        <input asp-for="ParentEmail" class="form-control" value=@Model.ParentEmail type="email" required />
-        <span asp-validation-for="ParentEmail" class="text-danger"></span>
-    </div>
-    <h3>Guidance Counselor Information</h3>
-    <div class="form-group">
-        <label asp-for="KnowGuidanceCounselor" class="control-label">Do you know who your guidance counselor is?</label>
-        <input asp-for="KnowGuidanceCounselor" class="form-control" value=@Model.KnowGuidanceCounselor required/>
-        <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="GuidanceCounselorName" class="control-label">Guidance Counselor Name:</label>
-        <input asp-for="GuidanceCounselorName" class="form-control" value=@Model.GuidanceCounselorName />
-        <span asp-validation-for="GuidanceCounselorName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="MeetWithGuidanceCounselor" class="control-label">Do you meet with your guidance counselor?</label>
-        <input asp-for="MeetWithGuidanceCounselor" class="form-control" value=@Model.MeetWithGuidanceCounselor />
-        <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="HowOftenMeetWithGuidanceCounselor" class="control-label">How often?</label>
-        <input asp-for="HowOftenMeetWithGuidanceCounselor" class="form-control" value=@Model.HowOftenMeetWithGuidanceCounselor />
-        <span asp-validation-for="HowOftenMeetWithGuidanceCounselor" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="DiscussWithGuidanceCounselor" class="control-label">If you meet with your guidance counselor, what do you discuss with them?</label>
-        <input asp-for="DiscussWithGuidanceCounselor" class="form-control" value=@Model.DiscussWithGuidanceCounselor />
-        <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
-    </div>
+< container="fluid">
+    <h1>Edit</h1>
+    <hr />
+    <form asp-action="UpDate">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h3>Student Information</h3>
+        <div class="form-group">
+            <label asp-for="StudentFirstName" class="control-label">First Name:</label>
+            <input asp-for="StudentFirstName" class="form-control" value=@Model.StudentFirstName required />
+            <span asp-validation-for="StudentFirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentLastName" class="control-label">Last Name:</label>
+            <input asp-for="StudentLastName" class="form-control" value=@Model.StudentLastName required />
+            <span asp-validation-for="StudentLastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentDateOfBirth" class="control-label">Date of Birth:</label>
+            <input asp-for="StudentDateOfBirth" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
+            <span asp-validation-for="StudentDateOfBirth" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentAddress" class="control-label">Address:</label>
+            <input asp-for="StudentAddress" class="form-control" value=@Model.StudentAddress required />
+            <span asp-validation-for="StudentAddress" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentApartmentNumber" class="control-label">Apartment Number (If Applicable):</label>
+            <input asp-for="StudentApartmentNumber" class="form-control" value=@Model.StudentApartmentNumber />
+            <span asp-validation-for="StudentApartmentNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentCity" class="control-label">City:</label>
+            <input asp-for="StudentCity" class="form-control" value=@Model.StudentCity required />
+            <span asp-validation-for="StudentCity" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentState" class="control-label">State:</label>
+            <select asp-for="StudentState" class="form-control" required>
+                <option value="Alabama">AL</option>
+                <option value="Alaska">AK</option>
+                <option value="rizona">AZ</option>
+                <option value="Arkansas">AR</option>
+                <option value="California">CA</option>
+                <option value="Colorado">CO</option>
+                <option value="Connecticut">CT</option>
+                <option value="Delaware">DE</option>
+                <option value="Florida">FL</option>
+                <option value="Georgia">GA</option>
+                <option value="Hawaii">HI</option>
+                <option value="Idaho">ID</option>
+                <option value="Illinois">IL</option>
+                <option value="Indiana">IN</option>
+                <option value="Iowa">IA</option>
+                <option value="Kansas">KS</option>
+                <option value="Kentucky">KY</option>
+                <option value="Louisiana">LA</option>
+                <option value="Maine">ME</option>
+                <option value="Maryland">MD</option>
+                <option value="Massachusetts">MA</option>
+                <option value="Michigan">MI</option>
+                <option value="Minnesota">MN</option>
+                <option value="Mississippi">MS</option>
+                <option value="Missouri">MO</option>
+                <option value="Montana">MT</option>
+                <option value="Nebraska">NE</option>
+                <option value="Nevada">NV</option>
+                <option value="New Hampshire">NH</option>
+                <option value="New Jersey">NJ</option>
+                <option value="New Mexico">NM</option>
+                <option value="New York">NY</option>
+                <option value="North Carolina">NC</option>
+                <option value="North Dakota">ND</option>
+                <option value="Ohio">OH</option>
+                <option value="Oklahoma">OK</option>
+                <option value="Oregon">OR</option>
+                <option value="Pennsylvania">PA</option>
+                <option value="Rhode Island">RI</option>
+                <option value="South Carolina">SC</option>
+                <option value="South Dakota">SD</option>
+                <option value="Tennessee">TN</option>
+                <option value="Texas">TX</option>
+                <option value="Utah">UT</option>
+                <option value="Vermont">VT</option>
+                <option value="Virginia">VA</option>
+                <option value="Washington">WA</option>
+                <option value="West Virginia">WV</option>
+                <option value="Wisconsin">WI</option>
+                <option value="Wyoming">WY</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentZipCode" class="control-label">Zip Code:</label>
+            <input asp-for="StudentZipCode" class="form-control" value=@Model.StudentZipCode required />
+            <span asp-validation-for="StudentZipCode" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentHomePhone" class="control-label">Home Phone:</label>
+            <input type="tel" pattern="^\d{3}-\d{3}-\d{4}$" asp-for="StudentHomePhone" class="form-control" value=@Model.StudentHomePhone required />
+            <span asp-validation-for="StudentHomePhone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentCellPhone" class="control-label">Cell Phone:</label>
+            <input asp-for="StudentCellPhone" class="form-control" value=@Model.StudentCellPhone required />
+            <span asp-validation-for="StudentCellPhone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentEmail" class="control-label">Email:</label>
+            <input asp-for="StudentEmail" class="form-control" value=@Model.StudentEmail type="email" required />
+            <span asp-validation-for="StudentEmail" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentCareerPath" class="control-label">Career Path:</label>
+            <input asp-for="StudentCareerPath" class="form-control" value=@Model.StudentCareerPath required />
+            <span asp-validation-for="StudentCareerPath" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentCareerInterest" class="control-label">Career Interest:</label>
+            <input asp-for="StudentCareerInterest" class="form-control" value=@Model.StudentCareerInterest required />
+            <span asp-validation-for="StudentCareerInterest" class="text-danger"></span>
+        </div>
+        <h3>Parent/Guardian Information</h3>
+        <div class="form-group">
+            <label asp-for="ParentFirstName" class="control-label">First Name:</label>
+            <input asp-for="ParentFirstName" class="form-control" value=@Model.ParentFirstName required />
+            <span asp-validation-for="ParentFirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParentLastName" class="control-label">Last Name:</label>
+            <input asp-for="ParentLastName" class="form-control" value=@Model.ParentLastName required />
+            <span asp-validation-for="ParentLastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address" class="control-label">Address:</label>
+            <input asp-for="Address" class="form-control" value=@Model.Address required />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParentApartmentNumber" class="control-label">Apartment Number (If Applicable):</label>
+            <input asp-for="ParentApartmentNumber" class="form-control" value=@Model.ParentApartmentNumber />
+            <span asp-validation-for="ParentApartmentNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParentCity" class="control-label">City:</label>
+            <input asp-for="ParentCity" class="form-control" value=@Model.ParentCity required />
+            <span asp-validation-for="ParentCity" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParentState" class="control-label">State:</label>
+            <select asp-for="ParentState" class="form-control" required>
+                <option selected>Select A Choice</option>
+                <option value="Alabama">AL</option>
+                <option value="Alaska">AK</option>
+                <option value="rizona">AZ</option>
+                <option value="Arkansas">AR</option>
+                <option value="California">CA</option>
+                <option value="Colorado">CO</option>
+                <option value="Connecticut">CT</option>
+                <option value="Delaware">DE</option>
+                <option value="Florida">FL</option>
+                <option value="Georgia">GA</option>
+                <option value="Hawaii">HI</option>
+                <option value="Idaho">ID</option>
+                <option value="Illinois">IL</option>
+                <option value="Indiana">IN</option>
+                <option value="Iowa">IA</option>
+                <option value="Kansas">KS</option>
+                <option value="Kentucky">KY</option>
+                <option value="Louisiana">LA</option>
+                <option value="Maine">ME</option>
+                <option value="Maryland">MD</option>
+                <option value="Massachusetts">MA</option>
+                <option value="Michigan">MI</option>
+                <option value="Minnesota">MN</option>
+                <option value="Mississippi">MS</option>
+                <option value="Missouri">MO</option>
+                <option value="Montana">MT</option>
+                <option value="Nebraska">NE</option>
+                <option value="Nevada">NV</option>
+                <option value="New Hampshire">NH</option>
+                <option value="New Jersey">NJ</option>
+                <option value="New Mexico">NM</option>
+                <option value="New York">NY</option>
+                <option value="North Carolina">NC</option>
+                <option value="North Dakota">ND</option>
+                <option value="Ohio">OH</option>
+                <option value="Oklahoma">OK</option>
+                <option value="Oregon">OR</option>
+                <option value="Pennsylvania">PA</option>
+                <option value="Rhode Island">RI</option>
+                <option value="South Carolina">SC</option>
+                <option value="South Dakota">SD</option>
+                <option value="Tennessee">TN</option>
+                <option value="Texas">TX</option>
+                <option value="Utah">UT</option>
+                <option value="Vermont">VT</option>
+                <option value="Virginia">VA</option>
+                <option value="Washington">WA</option>
+                <option value="West Virginia">WV</option>
+                <option value="Wisconsin">WI</option>
+                <option value="Wyoming">WY</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParentZipCode" class="control-label">Zip Code:</label>
+            <input asp-for="ParentZipCode" class="form-control" value=@Model.ParentZipCode required />
+            <span asp-validation-for="ParentZipCode" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParentHomePhone" class="control-label">Home Phone:</label>
+            <input asp-for="ParentHomePhone" class="form-control" value=@Model.ParentHomePhone required />
+            <span asp-validation-for="ParentHomePhone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParentCellPhone" class="control-label">Cell Phone:</label>
+            <input asp-for="ParentCellPhone" class="form-control" value=@Model.ParentCellPhone required />
+            <span asp-validation-for="ParentCellPhone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParentEmail" class="control-label">Email:</label>
+            <input asp-for="ParentEmail" class="form-control" value=@Model.ParentEmail type="email" required />
+            <span asp-validation-for="ParentEmail" class="text-danger"></span>
+        </div>
+        <h3>Guidance Counselor Information</h3>
+        <div class="form-group">
+            <label asp-for="KnowGuidanceCounselor" class="control-label">Do you know who your guidance counselor is?</label>
+            <input asp-for="KnowGuidanceCounselor" class="form-control" required />
+            <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
+        </div>
+            <div class="form-group">
+                <label asp-for="GuidanceCounselorName" class="control-label">Guidance Counselor Name:</label>
+                <input asp-for="GuidanceCounselorName" class="form-control" value=@Model.GuidanceCounselorName />
+                <span asp-validation-for="GuidanceCounselorName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MeetWithGuidanceCounselor" class="control-label">Do you meet with your guidance counselor?</label>
+                <input asp-for="MeetWithGuidanceCounselor" class="form-control" value=@Model.MeetWithGuidanceCounselor />
+                <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HowOftenMeetWithGuidanceCounselor" class="control-label">How often?</label>
+                <input asp-for="HowOftenMeetWithGuidanceCounselor" class="form-control" value=@Model.HowOftenMeetWithGuidanceCounselor />
+                <span asp-validation-for="HowOftenMeetWithGuidanceCounselor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscussWithGuidanceCounselor" class="control-label">If you meet with your guidance counselor, what do you discuss with them?</label>
+                <input asp-for="DiscussWithGuidanceCounselor" class="form-control" value=@Model.DiscussWithGuidanceCounselor />
+                <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
+            </div>
+        
+        <div id="hidden" class="form-group" display="none">
+            <label asp-for="Id" class="control-label"></label>
+            <input asp-for="Id" class="form-control" value=@Model.Id />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
 
-
-
-    <div id="hidden" class="form-group" display="none">
-        <label asp-for="Id" class="control-label"></label>
-        <input asp-for="Id" class="form-control" value=@Model.Id />
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-primary" />
-    </div>
-</form>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
