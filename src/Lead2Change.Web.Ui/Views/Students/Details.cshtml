@@ -2,12 +2,13 @@
 @*
     ViewData["Title"] = "Details";
 *@
+<script src="~/js/site.js"></script>
 <h1>Details</h1>
 
 <h3>Student Info</h3>
 <p>First Name:  @Model.StudentFirstName</p>
 <p>Last Name: @Model.StudentLastName</p>
-<p>Date of Birth: @Model.StudentDateOfBirth</p>
+<p>Date of Birth: <script>toDate(@Model.StudentDateOfBirth)</script></p>
 <p>Address: @Model.StudentAddress</p>
 <p>Apartment Number: @Model.StudentApartmentNumber</p>
 <p>City: @Model.StudentCity</p>
