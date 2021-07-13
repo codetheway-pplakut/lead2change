@@ -9,7 +9,7 @@
         </div>
     </div>
     <table class="table table-striped pt-2">
-        <thead class="thead-dark">
+        <thead class="thead blueStyle">
             <tr>
                 <th>
                     Goal
@@ -41,20 +41,20 @@
                 <td>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn btn-info btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Goals", new { id = item.Id, studentID = item.StudentId })'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Goals", new { id = item.Id, studentID = item.StudentId })'" />
 
                         </div>
                     </div>
                     <div class="row">
                         <div class=" col-sm-12">
-                            <input type="button" class="btn btn-info btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Goals", new { id = item.Id, studentID = item.StudentId })'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Goals", new { id = item.Id, studentID = item.StudentId })'" />
 
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn btn-info btn-block" value="Delete" onclick="location.href='@Url.Action("Delete","Goals", new { id = item.Id, studentID = item.StudentId })'" />
+                            <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href='@Url.Action("Delete","Goals", new { id = item.Id, studentID = item.StudentId })'" />
 
                         </div>
                     </div>
