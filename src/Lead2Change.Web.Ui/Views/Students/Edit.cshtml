@@ -147,8 +147,8 @@
     </div>
     <h3>Post-Secondary Plans</h3>
     <div class="form-group">
-        <label for="PlanAfterHighSchool">Plan After High School:</label>
-        <select name="PlanAfterHighSchool" id="PlanAfterHighSchool">
+        <label asp-for="PlanAfterHighSchool" class="control-label">Plan After High School:</label>
+        <select asp-for="PlanAfterHighSchool" class="form-control" requried>
             <option value="College">College</option>
             <option value="Trade School">Trade School</option>
             <option value="Armed Forces">Armed Forces</option>
@@ -286,7 +286,6 @@
     </div>
     <h4>What support is needed for you most while in this program?</h4>
     <div class="form-group">
-        <label asp-for="SupportNeeded" class="control-label"></label>
         <input asp-for="SupportNeeded" class="form-control" value=@Model.SupportNeeded />
         <span asp-validation-for="SupportNeeded" class="text-danger"></span>
     </div>
