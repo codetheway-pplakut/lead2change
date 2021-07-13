@@ -2,12 +2,22 @@
 @*
     ViewData["Title"] = "Details";
 *@
-<h1>Details</h1>
-<p>CollegeBound:  @Model.CollegeBound</p>
-<p>CareerCluster:  @Model.CareerCluster</p>
-<p>SpecificCareer:  @Model.SpecificCareer</p>
-<p>TechnicalCollegeBound:  @Model.TechnicalCollegeBound</p>
-<div>
+<div class="row">
+    <h1>Details</h1>
+</div>
+<div class="row">
+    <p class="col-sm-6">Going to attend college:  @Model.CollegeBound</p>
+</div>
+<div class="row">
+    <p class="col-sm-6">Specific career cluster:  @Model.CareerCluster</p>
+</div>
+<div class="row">
+    <p class="col-sm-6">Specific career:  @Model.SpecificCareer</p>
+</div>
+<div class="row">
+    <p class="col-sm-6">Going to attend technical college:  @Model.TechnicalCollegeBound</p>
+</div>
+<div class="row">
     @Html.ActionLink("Edit Career", "Edit", "CareerDeclaration", new { id = Model.Id })
 </div>
 <div>

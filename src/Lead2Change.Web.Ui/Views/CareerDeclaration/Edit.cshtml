@@ -16,22 +16,22 @@
         <span asp-validation-for="StudentId" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="CollegeBound" class="control-label"></label>
+        <label asp-for="CollegeBound" class="control-label">Are you planning to attend a college?</label>
         <input asp-for="CollegeBound" class="form-control" value=@Model.CollegeBound />
         <span asp-validation-for="CollegeBound" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="CareerCluster" class="control-label"> </label>
+        <label asp-for="CareerCluster" class="control-label">What Career cluster are you interested in? </label>
         @Html.DropDownListFor(m => m.CareerCluster, Model.CareerCluster.ToSelectList(), null, new { @class = "form-control" })
         <span asp-validation-for="CareerCluster" class="text-danger"> </span>
     </div>
     <div class="form-group">
-        <label asp-for="SpecificCareer" class="control-label"> </label>
+        <label asp-for="SpecificCareer" class="control-label">What specific career are you most interested in? </label>
         <input asp-for="SpecificCareer" class="form-label" value=@Model.SpecificCareer>
         <span asp-validation-for="SpecificCareer" class="text-danger"> </span>
     </div>
     <div class="form-group">
-        <label asp-for="TechnicalCollegeBound" class="control-label"> </label>
+        <label asp-for="TechnicalCollegeBound" class="control-label">Are you planning to attend a technical college? </label>
         <input asp-for="TechnicalCollegeBound" class="form-label" value=@Model.TechnicalCollegeBound>
         <span asp-validation-for="TechnicalCollegeBound" class="text-danger"> </span>
     </div>
