@@ -61,14 +61,19 @@
                             <div>
                                 @Html.ActionLink("Goals", "Index", "Goals", new { studentID = item.Id })
                             </div>
-
-                            <div>
-                                @Html.ActionLink("View Career", "Details", "CareerDeclaration", new { id = item.CareerDeclarationId })
-                            </div>
-
-                            <div>
-                                @Html.ActionLink("Add Career", "Create", "CareerDeclaration", new { studentId = item.Id })
-                            </div>
+                            
+                            @if (item.CareerDeclarationId == Guid.Empty)
+                            {
+                                <div>
+                                    @Html.ActionLink("Add Career", "Create", "CareerDeclaration", new { studentId = item.Id })
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    @Html.ActionLink("View Career", "Details", "CareerDeclaration", new { id = item.CareerDeclarationId })
+                                </div>
+                            }
                         </div>
                     </td>
                 </tr>
