@@ -100,7 +100,7 @@
     </div>
     <div class="form-group">
         <label asp-for="StudentHomePhone" class="control-label">Home Phone:</label>
-        <input asp-for="StudentHomePhone" class="form-control" value=@Model.StudentHomePhone required/>
+        <input type="tel" pattern="^\d{3}-\d{3}-\d{4}$" asp-for="StudentHomePhone" class="form-control" value=@Model.StudentHomePhone required/>
         <span asp-validation-for="StudentHomePhone" class="text-danger"></span>
     </div>
     <div class="form-group">
