@@ -70,7 +70,38 @@ namespace Lead2Change.Web.Ui.Controllers
                 GuidanceCounselorName = studentscontainer.GuidanceCounselorName,
                 MeetWithGuidanceCounselor = studentscontainer.MeetWithGuidanceCounselor,
                 HowOftenMeetWithGuidanceCounselor = studentscontainer.HowOftenMeetWithGuidanceCounselor,
-                DiscussWithGuidanceCounselor = studentscontainer.DiscussWithGuidanceCounselor
+                DiscussWithGuidanceCounselor = studentscontainer.DiscussWithGuidanceCounselor,
+                PlanAfterHighSchool = studentscontainer.PlanAfterHighSchool,
+                CollegeApplicationStatus = studentscontainer.CollegeApplicationStatus,
+                CollegesList = studentscontainer.CollegesList,
+                CollegeEssayStatus = studentscontainer.CollegeEssayStatus,
+                CollegeEssayHelp = studentscontainer.CollegeEssayHelp,
+                FirstChoiceCollege = studentscontainer.FirstChoiceCollege,
+                SecondChoiceCollege = studentscontainer.SecondChoiceCollege,
+                ThirdChoiceCollege = studentscontainer.ThirdChoiceCollege,
+                TradeSchoolStatus = studentscontainer.TradeSchoolStatus,
+                TradeSchoolsList = studentscontainer.TradeSchoolsList,
+                ArmedForcesStatus = studentscontainer.ArmedForcesStatus,
+                ArmedForcesBranch = studentscontainer.ArmedForcesBranch,
+                WorkStatus = studentscontainer.WorkStatus,
+                CareerPathList = studentscontainer.CareerPathList,
+                OtherPlans = studentscontainer.OtherPlans,
+                PACTTestDate = studentscontainer.PACTTestDate,
+                PACTTestScore = studentscontainer.PACTTestScore,
+                PSATTestDate = studentscontainer.PSATTestDate,
+                PSATTestScore = studentscontainer.PSATTestScore,
+                SATTestDate = studentscontainer.SATTestDate,
+                SATTestScore = studentscontainer.SATTestScore,
+                ACTTestDate = studentscontainer.ACTTestDate,
+                ACTTestScore = studentscontainer.ACTTestScore,
+                PrepClassRequired = studentscontainer.PrepClassRequired,
+                AssistanceForForms = studentscontainer.AssistanceForForms,
+                FinancialAidProcessComplete = studentscontainer.FinancialAidProcessComplete,
+                SupportNeeded = studentscontainer.SupportNeeded,
+                StudentSignature = studentscontainer.StudentSignature,
+                StudentSignatureDate = studentscontainer.StudentSignatureDate,
+                ParentSignature = studentscontainer.ParentSignature,
+                ParentSignatureDate = studentscontainer.ParentSignatureDate
             };
             return View(a);
         }
@@ -146,7 +177,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentSignature = model.StudentSignature,
                         StudentSignatureDate = model.StudentSignatureDate,
                         ParentSignature = model.ParentSignature,
-                        ParentSignatureDate = model.ParentSignatureDate,
+                        ParentSignatureDate = model.ParentSignatureDate
 
                     };
                     var abc = await _studentService.Create(student);
