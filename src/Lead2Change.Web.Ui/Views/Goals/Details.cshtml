@@ -2,9 +2,15 @@
 @*
     ViewData["Title"] = "Details";
 *@
-<h1>Details</h1>
+<h1 align="center">Details</h1>
+<style>
+    tr:nth-child(1) {
+        background: #004cbb;
+        color: white;
+    }   
+</style>
 <table class="table table-striped table-hover">
-    <thead class="thead-dark">
+    <thead>
         <tr>
             <th scope="col">Info Type</th>
             <th scope="col">Info</th>
@@ -21,7 +27,7 @@
         </tr>
         <tr>
             <td><b>Goal Set Date:</b> </td>
-            <td>@Model.DateGoalSet</td>
+            <td>@Model.DateGoalSet.ToShortDateString()</td>
         </tr>
         <tr>
             <td><b>SEL:</b> </td>
@@ -29,7 +35,7 @@
         </tr>
         <tr>
             <td><b>Goal Review Date: </b></td>
-            <td>@Model.GoalReviewDate</td>
+            <td>@Model.GoalReviewDate.ToShortDateString()</td>
         </tr>
         <tr>
             <td><b>Accomplishment State: </b></td>
@@ -42,5 +48,5 @@
     </tbody>
 </table>
 <div>
-    <a asp-action="Index" asp-route-studentID=@Model.StudentId>Back to List</a>
+    <input type="button" class="btn btn-primary" value="Back to Goals" onclick="location.href='@Url.Action("Index", "Goals", new { studentId = @Model.StudentId })'" />
 </div>
