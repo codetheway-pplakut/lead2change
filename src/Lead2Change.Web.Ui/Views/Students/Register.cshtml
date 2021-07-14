@@ -244,7 +244,7 @@
             <h3>College Entrance Exam Information</h3>
             <div class="form-group">
                 <label asp-for="PACTTestDate" class="control-label">PACT Test Date:</label>
-                <input asp-for="PACTTestDate" class="form-control" />
+                <input asp-for="PACTTestDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                 <span asp-validation-for="PACTTestDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -254,7 +254,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="PSATTestDate" class="control-label">PSAT Test Date:</label>
-                <input asp-for="PSATTestDate" class="form-control" />
+                <input asp-for="PSATTestDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                 <span asp-validation-for="PSATTestDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -264,7 +264,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="SATTestDate" class="control-label">SAT Test Date:</label>
-                <input asp-for="SATTestDate" class="form-control" />
+                <input asp-for="SATTestDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                 <span asp-validation-for="SATTestDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -274,7 +274,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ACTTestDate" class="control-label">ACT Test Date:</label>
-                <input asp-for="ACTTestDate" class="form-control" />
+                <input asp-for="ACTTestDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                 <span asp-validation-for="ACTTestDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -312,7 +312,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="StudentSignatureDate" class="control-label">Date:</label>
-                <input asp-for="StudentSignatureDate" class="form-control" />
+                <input asp-for="StudentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                 <span asp-validation-for="StudentSignatureDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -322,7 +322,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ParentSignatureDate" class="control-label">Date:</label>
-                <input asp-for="ParentSignatureDate" class="form-control" />
+                <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                 <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
             </div>
             @*Include any disclaimers necessary for signatures*@
