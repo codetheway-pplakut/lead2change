@@ -6,7 +6,7 @@
 function showHideClass(id1) {
     var x = document.getElementsByClassName(id1);
     for (let i = 0; i < x.length; i++) {
-        if (x[i].style.display == "block") {
+        if (x[i].style.display !== "none") {
             x[i].style.display = "none";
         } else {
             x[i].style.display = "block";
@@ -14,16 +14,44 @@ function showHideClass(id1) {
     }
 }
 
-$(".showHide").on("click", function () {
-
-    if () {
-
+function checkerShowHide(id1) {
+    var y = document.getElementById("checkboxTest").checked;
+    var x = document.getElementsByClassName(id1);
+    if (y) {
+        for (let i = 0; i < x.length; i++) {
+            x[i].style.display = "block";
+        }
     } else {
-
+        for (let i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
     }
+}
 
-    $(".showHide").toggle(
-        function () { $(".showHide").css({ "display": "none" }); },
-        function () { $("showHide").css({ "display": "block" }) }
-    );
+$(".hide").click(function () {
+    $("knowCounselor").hide();
+})
+
+$(".show").click(function () {
+    $("knowCounselor").show();
+})
+
+/*
+ * $(".showHide").on("click", function () {
+    var knowGuidanceCounselor = @Html.Raw(Json.Encode(Model.knowGuidanceCounselor));
+    if (knowGuidanceCounselor) {
+        $(".knowCounselor").toggle(
+            function () { $(".showHide").css({ "visibility": "hidden" }); },
+            function () { $(".showHide").css({ "visibility": "visible" }) });
+    } else {
+        $(".knowCounselor").toggle(
+            function () { $(".showHide").css({ "visibility": "visible" }); },
+            function () { $(".showHide").css({ "visibility": "hidden" }) });
+    }
 });
+*/
+
+/*$(".showHide").toggle(
+    function () { $(".showHide").css({ "visibility": "visible" }); },
+    function () { $(".showHide").css({ "visibility": "hidden" }) });
+*/

@@ -234,10 +234,10 @@
         <h3>Guidance Counselor Information</h3>
         <div class="form-group">
             <label asp-for="KnowGuidanceCounselor" class="control-label">Do you know who your guidance counselor is?</label>
-            <input asp-for="KnowGuidanceCounselor" class="form-control showHide" />
+            <input asp-for="KnowGuidanceCounselor" class="form-control showHide" id="checkboxTest" oninput="showHideClass('knowCounselor')" />
             <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
         </div>
-        <div class="knowCounselor hidden">
+        <div class="knowCounselor">
             <div class="form-group">
                 <label asp-for="GuidanceCounselorName" class="control-label">Guidance Counselor Name:</label>
                 <input asp-for="GuidanceCounselorName" class="form-control"  />

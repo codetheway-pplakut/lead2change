@@ -4,7 +4,8 @@
 *@
 @{
 }
-< container="fluid">
+<div container="fluid">
+
 <h1>Edit</h1>
 <hr />
 <form asp-action="UpDate">
@@ -226,14 +227,12 @@
         <input asp-for="ParentEmail" class="form-control" value=@Model.ParentEmail type="email" required />
         <span asp-validation-for="ParentEmail" class="text-danger"></span>
     </div>
+    
+    
     <h3>Guidance Counselor Information</h3>
-    @if (Model.KnowGuidanceCounselor)
-    {
-        <script>this.showHideClass('knowCounselor')</script>
-    }
     <div class="form-group">
         <label asp-for="KnowGuidanceCounselor" class="control-label">Do you know who your guidance counselor is?</label>
-        <input asp-for="KnowGuidanceCounselor" class="form-control" value=@Model.KnowGuidanceCounselor oninput="showHideClass('knowCounselor')" />
+        <input asp-for="KnowGuidanceCounselor" class="form-control" id="checkboxTest" value=@Model.KnowGuidanceCounselor oninput="showHideClass('knowCounselor')" /> 
         <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
     </div>
     <div class="form-group knowCounselor">
