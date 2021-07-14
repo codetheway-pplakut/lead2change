@@ -21,7 +21,6 @@
         <input asp-for="GoalSet" class="form-control" value=@Model.GoalSet />
         <span asp-validation-for="GoalSet" class="text-danger"></span>
     </div>
-    <br />
     <div class="form-group">
         <b><label asp-for="DateGoalSet" class="control-label"></label></b>
         <input asp-for="DateGoalSet" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
@@ -31,19 +30,19 @@
             <b><label asp-for="SEL" class="control-label"></label></b>
             <div class="list-group">
                 <label class="list-group-item" style="border: none">
-                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Self-Awareness" /> Self Awareness - What assets do you bring to a team environment?
+                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Self-Awareness" /> Self-Awareness - What assets do you bring to a team environment?
                 </label>
                 <label class="list-group-item" style="border: none">
                     <input class="form-check-input me-1" name="SEL" type="checkbox" value="Self-Management" /> Self-Management - When your class is discussing a topic and you disagree with someone else, what are your reactions?
                 </label>
                 <label class="list-group-item" style="border: none">
-                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Social-Awareness" /> Social Awareness - What is the single problem affecting the people of your community the most? How do you know?
+                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Social-Awareness" /> Social-Awareness - What is the single problem affecting the people of your community the most? How do you know?
                 </label>
                 <label class="list-group-item" style="border: none">
-                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Relationship-Skills" /> Relationship Skills - What are some examples of productive and effective relationships while working in a team?
+                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Relationship-Skills" /> Relationship-Skills - What are some examples of productive and effective relationships while working in a team?
                 </label>
                 <label class="list-group-item" style="border: none">
-                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Responsible Decision-Making" /> Responsible Decision Making - If you had a million dollars to address a problem/need within our community, what would you do? Who would you think about first?
+                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Responsible Decision-Making" /> Responsible Decision-Making - If you had a million dollars to address a problem/need within our community, what would you do? Who would you think about first?
                 </label>
             </div>
         </div>
@@ -70,8 +69,7 @@
         <textarea asp-for="Explanation" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         <span asp-validation-for="Explanation" class="text-danger"></span>
     </div>
-    
-    
+    <br />
     <div class="form-group">
         <input type="submit" value="Submit" class="btn btn-submit" />
     </div>
