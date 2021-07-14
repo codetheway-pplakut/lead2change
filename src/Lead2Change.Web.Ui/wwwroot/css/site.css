@@ -144,3 +144,21 @@ body {
     color: white;
 }
 /*Goal Create Page Above*/
+
+.btn-back {
+    color: #fff;
+    background-color: transparent;
+    border-color: #004cbb;
+    border-radius: 40px;
+}
+
+.btn-submit {
+    color: #fff;
+    background-color: #ff5307;
+    border-color: #ff5307;
+}
+
+#goalEdit {
+    font-family: Gotham;
+    color: #ff5307;
+}

@@ -2,11 +2,11 @@
 @*
     ViewData["Title"] = "Edit";
 *@
-
-<h1>Edit</h1>
-
-
-<form asp-action="Update">
+<div align="center">
+    <img src="https://lead2changeinc.org/wp-content/uploads/2019/04/BIG-PNG-e1583952815934.png" />
+    <h5 id="goalEdit">Edit A Goal</h5>
+</div>
+<form asp-action="Update" class="calibri">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group, d-none" display="none">
         <label asp-for="Id" class="control-label"></label>
@@ -72,13 +72,53 @@
             <span asp-validation-for="Explanation" class="text-danger"></span>
         </div>
     </div>
-    <br />
+    <div class="container-fluid, form-group">
+        <div class="row">
+            <div class="form-group, col-sm-6">
+                <label asp-for="DateGoalSet" class="control-label"></label>
+                <input asp-for="DateGoalSet" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
+                <span asp-validation-for="DateGoalSet" class="text-danger"></span>
+            </div>
+            <div class="form-group, col-sm-6">
+                <label asp-for="SEL" class="control-label"></label>
+                <select asp-for="SEL" class="form-control">
+                    <option selected>Select A Choice</option>
+                    <option value="Self-Awareness">Self-Awareness</option>
+                    <option value="Self-Management">Self-Management</option>
+                    <option value="Social-Awareness">Social-Awareness</option>
+                    <option value="Relationship Skills">Relationship Skills</option>
+                    <option value="Responsible Decision-Making">Responsible Decision-Making</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group, col-sm-6">
+                <label asp-for="GoalReviewDate" class="control-label"></label>
+                <input asp-for="GoalReviewDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
+                <span asp-validation-for="GoalReviewDate" class="text-danger"></span>
+            </div>
+            <div class="form-group col-sm-6">
+                <label asp-for="WasItAccomplished" class="control-label"></label>
+                <select asp-for="WasItAccomplished" class="form-control">
+                    <option selected>Select A Choice</option>
+                    <option value="No">No</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Yes!">Yes!</option>
+                </select>
+            </div>
+        </div>
+    </div>
     <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-primary" />
+        <label asp-for="Explanation" class="control-label"></label>
+        <textarea asp-for="Explanation" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <span asp-validation-for="Explanation" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-submit" />
     </div>
 </form>
 <div align="center">
-    <a asp-action="Index" asp-route-studentID=@Model.StudentId>Back to List</a>
+    <button class="btn btn-back"><a asp-action="Index" asp-route-studentID=@Model.StudentId>Back to List</a></button>
 </div>
        
 @section Scripts {
