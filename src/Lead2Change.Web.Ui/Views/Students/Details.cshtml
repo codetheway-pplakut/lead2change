@@ -54,13 +54,13 @@
 <p>Career paths they are interested in pursuing: @Model.CareerPathList</p>
 <p>Plans for after high schooL: @Model.OtherPlans</p>
 <h3>College Entrance Exam Information</h3>
-<p>Date of PACT: @Model.PACTTestDate</p>
+<p>Date of PACT: @Convert.ToDateTime(Model.PACTTestDate).ToString("MM/dd/yyyy")</p>
 <p>PACT Score: @Model.PACTTestScore</p>
-<p>Date of PSAT: @Model.PSATTestDate</p>
+<p>Date of PSAT: @Convert.ToDateTime(Model.PSATTestDate).ToString("MM/dd/yyyy")</p>
 <p>PSAT Score: @Model.PSATTestScore</p>
-<p>Date of SAT: @Model.SATTestDate</p>
+<p>Date of SAT: @Model.@Convert.ToDateTime(Model.SATTestDate).ToString("MM/dd/yyyy")</p>
 <p>SAT Score: @Model.SATTestScore</p>
-<p>Date of ACT: @Model.ACTTestDate</p>
+<p>Date of ACT: @Convert.ToDateTime(Model.ACTTestDate).ToString("MM/dd/yyyy")</p>
 <p>ACT Score: @Model.ACTTestScore</p>
 <p>Do they need a prep class? @Model.PrepClassRequired</p>
 <h3>Financial Aid Information</h3>
@@ -69,9 +69,9 @@
 <p>What kind of support do they require? @Model.SupportNeeded</p>
 <h3>Signatures</h3>
 <p>Student Signature: @Model.StudentSignature</p>
-<p>Date Signed: @Model.StudentSignatureDate</p>
+<p>Date Signed: @Convert.ToDateTime(Model.StudentSignatureDate).ToString("MM/dd/yyyy")</p>
 <p>Parent Signature: @Model.ParentSignature</p>
-<p>Date Signed: @Model.ParentSignatureDate</p>
+<p>Date Signed: @Convert.ToDateTime(Model.ParentSignatureDate).ToString("MM/dd/yyyy")</p>
 
 @*<p> @Model.</p>*@
 <div>

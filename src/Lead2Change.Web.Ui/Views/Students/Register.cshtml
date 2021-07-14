@@ -243,8 +243,8 @@
             </div>
             <h3>College Entrance Exam Information</h3>
             <div class="form-group">
-                <label asp-for="PACTTestDate" class="control-label">PACT Test Date:</label>
-                <input asp-for="PACTTestDate" class="form-control" />
+                <label asp-for="PACTTestDate" class="control-label">Date of Birth:</label>
+                <input asp-for="PACTTestDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                 <span asp-validation-for="PACTTestDate" class="text-danger"></span>
             </div>
             <div class="form-group">
