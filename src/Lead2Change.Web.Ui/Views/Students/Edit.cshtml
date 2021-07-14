@@ -280,8 +280,8 @@
         <span asp-validation-for="FinancialAidProcessComplete" class="text-danger"></span>
     </div>
     <div class="form-group">
+        <input asp-for="AssistanceForForms" class="form-check-input me-1" type="checkbox" value=@Model.AssistanceForForms />
         <label asp-for="AssistanceForForms" class="control-label">Do you need assistance filling out your FAFSA/Financial aid forms?</label>
-        <input asp-for="AssistanceForForms" class="form-check-input" type="checkbox" value=@Model.AssistanceForForms />
         <span asp-validation-for="AssistanceForForms" class="text-danger"></span>
     </div>
     <h4>What support is needed for you most while in this program?</h4>
