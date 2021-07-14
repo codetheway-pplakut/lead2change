@@ -16,12 +16,15 @@ namespace Lead2Change.Domain.ViewModels
         [Display(Name = "Date Goal Set:")]
         public DateTime DateGoalSet { get; set; }
         [Display(Name = "Social Emotional Learning (SEL):")]
-        public string SEL { get; set; }
+        public string[] SEL { get; set; }
+        public string SELDisplay { get { return String.Join(", ", SEL); } }
         [Display(Name = "Goal Review Date:")]
         public DateTime GoalReviewDate { get; set; }
         [Display(Name = "Was It Accomplished?")]
         public string WasItAccomplished { get; set; }
         [Display(Name = "Explanation:")]
         public string Explanation { get; set; }
+
+
     }
 }

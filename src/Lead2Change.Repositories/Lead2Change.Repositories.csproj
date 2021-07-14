@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SendGrid" Version="9.24.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Lead2Change.Data\Lead2Change.Data.csproj" />
     <ProjectReference Include="..\Lead2Change.Domain\Lead2Change.Domain.csproj" />
   </ItemGroup>
