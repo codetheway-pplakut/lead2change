@@ -231,8 +231,8 @@
     
     <h3>Guidance Counselor Information</h3>
     <div class="form-group">
+        <input asp-for="KnowGuidanceCounselor" class="form-check-input me-1" type="checkbox" value=@Model.KnowGuidanceCounselor />
         <label asp-for="KnowGuidanceCounselor" class="control-label">Do you know who your guidance counselor is?</label>
-        <input asp-for="KnowGuidanceCounselor" class="form-control" id="checkboxTest" value=@Model.KnowGuidanceCounselor oninput="showHideClass('knowCounselor')" /> 
         <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
     </div>
     <div class="form-group knowCounselor">
@@ -240,9 +240,9 @@
         <input asp-for="GuidanceCounselorName" class="form-control" value=@Model.GuidanceCounselorName />
         <span asp-validation-for="GuidanceCounselorName" class="text-danger"></span>
     </div>
-    <div class="form-group knowCounselor">
+    <div class="form-group">
+        <input asp-for="MeetWithGuidanceCounselor" class="form-check-input me-1" type="checkbox" value=@Model.MeetWithGuidanceCounselor />
         <label asp-for="MeetWithGuidanceCounselor" class="control-label">Do you meet with your guidance counselor?</label>
-        <input asp-for="MeetWithGuidanceCounselor" class="form-control" value=@Model.MeetWithGuidanceCounselor />
         <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
     </div>
     <div class="form-group knowCounselor">
@@ -255,11 +255,176 @@
         <input asp-for="DiscussWithGuidanceCounselor" class="form-control" value=@Model.DiscussWithGuidanceCounselor />
         <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
     </div>
+    <h3>Post-Secondary Plans</h3>
+    <div class="form-group">
+        <label asp-for="PlanAfterHighSchool" class="control-label">Plan After High School:</label>
+        <select asp-for="PlanAfterHighSchool" class="form-control" requried>
+            <option value="College">College</option>
+            <option value="Trade School">Trade School</option>
+            <option value="Armed Forces">Armed Forces</option>
+            <option value="Work">Work</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input asp-for="CollegeApplicationStatus" class="form-check-input me-1" type="checkbox" value=@Model.CollegeApplicationStatus />
+        <label asp-for="CollegeApplicationStatus" class="control-label">Have you applied to college?</label>
+        <span asp-validation-for="CollegeApplicationStatus" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CollegesList" class="control-label">What schools have you applied to?</label>
+        <input asp-for="CollegesList" class="form-control" value=@Model.CollegesList />
+        <span asp-validation-for="CollegesList" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input asp-for="CollegeEssayStatus" class="form-check-input me-1" type="checkbox" value=@Model.CollegeEssayStatus />
+        <label asp-for="CollegeEssayStatus" class="control-label">Have you begun work on your college essay?</label>
+        <span asp-validation-for="CollegeEssayStatus" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input asp-for="CollegeEssayHelp" class="form-check-input me-1" type="checkbox" value=@Model.CollegeEssayHelp />
+        <label asp-for="CollegeEssayHelp" class="control-label">Do you need help writing your college esasy?</label>
+        <span asp-validation-for="CollegeEssayHelp" class="text-danger"></span>
+    </div>
+    <p>Please rank the schools you are interested in applying to:</p>
+    <div class="form-group">
+        <label asp-for="FirstChoiceCollege" class="control-label">First Choice/Reach School(s):</label>
+        <input asp-for="FirstChoiceCollege" class="form-control" value=@Model.FirstChoiceCollege />
+        <span asp-validation-for="FirstChoiceCollege" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SecondChoiceCollege" class="control-label">Second Choice/Middle of the Road School(s):</label>
+        <input asp-for="SecondChoiceCollege" class="form-control" value=@Model.SecondChoiceCollege />
+        <span asp-validation-for="SecondChoiceCollege" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ThirdChoiceCollege" class="control-label">Third Choice/Safety School(s):</label>
+        <input asp-for="ThirdChoiceCollege" class="form-control" value=@Model.ThirdChoiceCollege />
+        <span asp-validation-for="ThirdChoiceCollege" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input asp-for="TradeSchoolStatus" class="form-check-input me-1" type="checkbox" value=@Model.TradeSchoolStatus />
+        <label asp-for="TradeSchoolStatus" class="control-label">Have you already applied to a trade school?</label>
+        <span asp-validation-for="TradeSchoolStatus" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TradeSchoolsList" class="control-label">What schools have you applied to?</label>
+        <input asp-for="TradeSchoolsList" class="form-control" value=@Model.TradeSchoolsList />
+        <span asp-validation-for="TradeSchoolsList" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input asp-for="ArmedForcesStatus" class="form-check-input me-1" value=@Model.ArmedForcesStatus />
+        <label asp-for="ArmedForcesStatus" class="control-label">Have you already applied to the armed forces?</label>
+        <span asp-validation-for="ArmedForcesStatus" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ArmedForcesBranch" class="control-label">What branch did you apply to?</label>
+        <input asp-for="ArmedForcesBranch" class="form-control" value=@Model.ArmedForcesBranch />
+        <span asp-validation-for="ArmedForcesBranch" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input asp-for="WorkStatus" class="form-check-input me-1" type="checkbox" value=@Model.WorkStatus />
+        <label asp-for="WorkStatus" class="control-label">Do you plan to go directly into the workforce after high school?</label>
+        <span asp-validation-for="WorkStatus" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CareerPathList" class="control-label">What career path(s) are you interested in pursuing?</label>
+        <input asp-for="CareerPathList" class="form-control" value=@Model.CareerPathList />
+        <span asp-validation-for="CareerPathList" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="OtherPlans" class="control-label">What are your plans for after high school?</label>
+        <input asp-for="OtherPlans" class="form-control" value=@Model.OtherPlans />
+        <span asp-validation-for="OtherPlans" class="text-danger"></span>
+    </div>
+    <h3>College Entrance Exam Information</h3>
+    <div class="form-group">
+        <label asp-for="PACTTestDate" class="control-label">PACT Test Date:</label>
+        <input asp-for="PACTTestDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
+        <span asp-validation-for="PACTTestDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PACTTestScore" class="control-label">PACT Test Score:</label>
+        <input asp-for="PACTTestScore" class="form-control" value=@Model.PACTTestScore />
+        <span asp-validation-for="PACTTestScore" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PSATTestDate" class="control-label">PSAT Test Date:</label>
+        <input asp-for="PSATTestDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
+        <span asp-validation-for="PSATTestDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PSATTestScore" class="control-label">PSAT Test Score:</label>
+        <input asp-for="PSATTestScore" class="form-control" value=@Model.PSATTestScore />
+        <span asp-validation-for="PSATTestScore" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SATTestDate" class="control-label">SAT Test Date:</label>
+        <input asp-for="SATTestDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
+        <span asp-validation-for="SATTestDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SATTestScore" class="control-label">SAT Test Score:</label>
+        <input asp-for="SATTestScore" class="form-control" value=@Model.SATTestScore />
+        <span asp-validation-for="SATTestScore" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ACTTestDate" class="control-label">PACT Test Date:</label>
+        <input asp-for="ACTTestDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
+        <span asp-validation-for="ACTTestDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ACTTestScore" class="control-label">ACT Test Score:</label>
+        <input asp-for="ACTTestScore" class="form-control" value=@Model.ACTTestScore />
+        <span asp-validation-for="ACTTestScore" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input asp-for="PrepClassRequired" class="form-check-input me-1" type="checkbox" value=@Model.PrepClassRequired />
+        <label asp-for="PrepClassRequired" class="control-label">Do you need a prep class?</label>
+        <span asp-validation-for="PrepClassRequired" class="text-danger"></span>
+    </div>
+    <h3>Financial Aid Information</h3>
+    <div class="form-group">
+        <input asp-for="FinancialAidProcessComplete" class="form-check-input me-1" type="checkbox" value=@Model.FinancialAidProcessComplete />
+        <label asp-for="FinancialAidProcessComplete" class="control-label">Have you already completed the financial aid process?</label>
+        <span asp-validation-for="FinancialAidProcessComplete" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input asp-for="AssistanceForForms" class="form-check-input me-1" type="checkbox" value=@Model.AssistanceForForms />
+        <label asp-for="AssistanceForForms" class="control-label">Do you need assistance filling out your FAFSA/Financial aid forms?</label>
+        <span asp-validation-for="AssistanceForForms" class="text-danger"></span>
+    </div>
+    <h4>What support is needed for you most while in this program?</h4>
+    <div class="form-group">
+        <input asp-for="SupportNeeded" class="form-control" value=@Model.SupportNeeded />
+        <span asp-validation-for="SupportNeeded" class="text-danger"></span>
+    </div>
+    <h3>Signatures</h3>
+    <div class="form-group">
+        <label asp-for="StudentSignature" class="control-label">Student Signature:</label>
+        <input asp-for="StudentSignature" class="form-control" value=@Model.StudentSignature />
+        <span asp-validation-for="StudentSignature" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StudentSignatureDate" class="control-label">Date:</label>
+        <input asp-for="StudentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
+        <span asp-validation-for="StudentSignatureDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ParentSignature" class="control-label">Parent Signature:</label>
+        <input asp-for="ParentSignature" class="form-control" value=@Model.ParentSignature />
+        <span asp-validation-for="ParentSignature" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ParentSignatureDate" class="control-label">Date:</label>
+        <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
+        <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
+    </div>
 
 
 
 
-    <div class="form-group hidden" display="none">
+    <div id="hidden" class="form-group" display="none">
         <label asp-for="Id" class="control-label"></label>
         <input asp-for="Id" class="form-control" value=@Model.Id />
     </div>
