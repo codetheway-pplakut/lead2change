@@ -16,103 +16,62 @@
         <label asp-for="StudentId" class="control-label"></label>
         <input asp-for="StudentId" class="form-control" value=@Model.StudentId />
     </div>
-    <div class="container-fluid">
-
+    <div class="form-group">
+        <b><label asp-for="GoalSet" class="control-label"></label></b>
+        <input asp-for="GoalSet" class="form-control" value=@Model.GoalSet />
+        <span asp-validation-for="GoalSet" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <b><label asp-for="DateGoalSet" class="control-label"></label></b>
+        <input asp-for="DateGoalSet" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
+        <span asp-validation-for="DateGoalSet" class="text-danger"></span>
+    </div>
         <div class="form-group">
-            <label asp-for="GoalSet" class="control-label"></label>
-            <input asp-for="GoalSet" class="form-control" value=@Model.GoalSet />
-            <span asp-validation-for="GoalSet" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <div class=" row">
-                <div class="form-group, col-sm-6">
-
-                    <label asp-for="DateGoalSet" class="control-label"></label>
-                    <input asp-for="DateGoalSet" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
-                    <span asp-validation-for="DateGoalSet" class="text-danger"></span>
-                </div>
-                <div class="form-group, col-sm-6">
-
-
-                    <label asp-for="SEL" class="control-label"></label>
-                    <select asp-for="SEL" class="form-control">
-                        <option selected>Select A Choice</option>
-                        <option value="Self-Awareness">Self-Awareness</option>
-                        <option value="Self-Management">Self-Management</option>
-                        <option value="Social-Awareness">Social-Awareness</option>
-                        <option value="Relationship Skills">Relationship Skills</option>
-                        <option value="Responsible Decision-Making">Responsible Decision-Making</option>
-                    </select>
-                </div>
-
+            <b><label asp-for="SEL" class="control-label"></label></b>
+            <div class="list-group">
+                <label class="list-group-item" style="border: none">
+                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Self-Awareness" /> Self Awareness - What assets do you bring to a team environment?
+                </label>
+                <label class="list-group-item" style="border: none">
+                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Self-Management" /> Self-Management - When your class is discussing a topic and you disagree with someone else, what are your reactions?
+                </label>
+                <label class="list-group-item" style="border: none">
+                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Social-Awareness" /> Social Awareness - What is the single problem affecting the people of your community the most? How do you know?
+                </label>
+                <label class="list-group-item" style="border: none">
+                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Relationship-Skills" /> Relationship Skills - What are some examples of productive and effective relationships while working in a team?
+                </label>
+                <label class="list-group-item" style="border: none">
+                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Responsible Decision-Making" /> Responsible Decision Making - If you had a million dollars to address a problem/need within our community, what would you do? Who would you think about first?
+                </label>
             </div>
         </div>
-        <div class="form-group">
-            <div class=" row">
+        <div class="container-fluid, form-group">
+            <div class="row">
                 <div class="form-group, col-sm-6">
-                    <label asp-for="GoalReviewDate" class="control-label"></label>
+                    <b><label asp-for="GoalReviewDate" class="control-label"></label></b>
                     <input asp-for="GoalReviewDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                     <span asp-validation-for="GoalReviewDate" class="text-danger"></span>
                 </div>
                 <div class="form-group, col-sm-6">
-                    <label asp-for="WasItAccomplished" class="control-label"></label>
+                    <b><label asp-for="WasItAccomplished" class="control-label"></label></b>
                     <select asp-for="WasItAccomplished" class="form-control">
                         <option selected>Select A Choice</option>
-                        <option value="Yes">Yes</option>
-                        <option value="In Progress">In Progress</option>
                         <option value="No">No</option>
+                        <option value="In Progress">This goal remains in progress.</option>
+                        <option value="Yes">Yes</option>
                     </select>
                 </div>
-
             </div>
         </div>
-        <div class="form-group, shipping">
-            <label asp-for="Explanation" class="control-label"></label>
-            <textarea asp-for="Explanation" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            <span asp-validation-for="Explanation" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="container-fluid, form-group">
-        <div class="row">
-            <div class="form-group, col-sm-6">
-                <label asp-for="DateGoalSet" class="control-label"></label>
-                <input asp-for="DateGoalSet" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
-                <span asp-validation-for="DateGoalSet" class="text-danger"></span>
-            </div>
-            <div class="form-group, col-sm-6">
-                <label asp-for="SEL" class="control-label"></label>
-                <select asp-for="SEL" class="form-control">
-                    <option selected>Select A Choice</option>
-                    <option value="Self-Awareness">Self-Awareness</option>
-                    <option value="Self-Management">Self-Management</option>
-                    <option value="Social-Awareness">Social-Awareness</option>
-                    <option value="Relationship Skills">Relationship Skills</option>
-                    <option value="Responsible Decision-Making">Responsible Decision-Making</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group, col-sm-6">
-                <label asp-for="GoalReviewDate" class="control-label"></label>
-                <input asp-for="GoalReviewDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
-                <span asp-validation-for="GoalReviewDate" class="text-danger"></span>
-            </div>
-            <div class="form-group col-sm-6">
-                <label asp-for="WasItAccomplished" class="control-label"></label>
-                <select asp-for="WasItAccomplished" class="form-control">
-                    <option selected>Select A Choice</option>
-                    <option value="No">No</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Yes!">Yes!</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Explanation" class="control-label"></label>
+    <div class="form-group, shipping">
+        <b><label asp-for="Explanation" class="control-label"></label></b>
         <textarea asp-for="Explanation" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         <span asp-validation-for="Explanation" class="text-danger"></span>
     </div>
+    
+    
     <div class="form-group">
         <input type="submit" value="Submit" class="btn btn-submit" />
     </div>

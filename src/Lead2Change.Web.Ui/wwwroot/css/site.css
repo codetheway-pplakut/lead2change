@@ -79,7 +79,7 @@ body {
     padding-left: 40px;
 }
 
-#GoalCreateHeading{
+.GoalHeadingFont{
 
     font-family: Gotham;
 }
@@ -120,6 +120,28 @@ body {
 .calibri{
     font-family: Calibri;
 }
+
+/* Basic Styling for Goal Index Page */
+thead.blueStyle{
+    background-color: #004cbb;
+    color:white;
+}
+.orangeBtn {
+    background-color: #ff7c00;
+    color:white;
+}
+
+    .orangeBtn:hover, .open > .dropdown-toggle.orangeBtn {
+        background-color: #c77c30;
+        border-color: #ff7c00;
+        color:white;
+    }
+
+    .orangeBtn:active, orangeBtn.active {
+        background-color: #c77c30;
+        border-color: #ff7c00;
+        color:white;
+    }
 
 /* The hero image */
 .goalCreateBanner {
