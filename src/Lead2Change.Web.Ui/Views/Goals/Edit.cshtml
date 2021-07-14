@@ -2,7 +2,10 @@
 @*
     ViewData["Title"] = "Edit";
 *@
+
 <h1>Edit</h1>
+
+
 <form asp-action="Update">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group, d-none" display="none">
@@ -18,6 +21,7 @@
         <input asp-for="GoalSet" class="form-control" value=@Model.GoalSet />
         <span asp-validation-for="GoalSet" class="text-danger"></span>
     </div>
+    <br />
     <div class="form-group">
         <b><label asp-for="DateGoalSet" class="control-label"></label></b>
         <input asp-for="DateGoalSet" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
@@ -74,6 +78,7 @@
 <div align="center">
     <a asp-action="Index" asp-route-studentID=@Model.StudentId>Back to List</a>
 </div>
+       
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
