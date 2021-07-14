@@ -99,6 +99,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentHomePhone = model.StudentHomePhone,
                         StudentCellPhone = model.StudentCellPhone,
                         StudentEmail = model.StudentEmail,
+                        OldStudentEmail = model.StudentEmail,
                         StudentCareerPath = model.StudentCareerPath,
                         StudentCareerInterest = model.StudentCareerInterest,
                         ParentFirstName = model.ParentFirstName,
@@ -112,6 +113,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         ParentHomePhone = model.ParentHomePhone,
                         ParentCellPhone = model.ParentCellPhone,
                         ParentEmail = model.ParentEmail,
+                        OldParentEmail = model.ParentEmail,
                         KnowGuidanceCounselor = model.KnowGuidanceCounselor,
                         GuidanceCounselorName = model.GuidanceCounselorName,
                         MeetWithGuidanceCounselor = model.MeetWithGuidanceCounselor,
@@ -213,6 +215,16 @@ namespace Lead2Change.Web.Ui.Controllers
                         DiscussWithGuidanceCounselor = model.DiscussWithGuidanceCounselor
                     };
                     var student = await _studentService.Update(list);
+                    if(model.StudentEmail != model.OldStudentEmail)
+                    {
+                        await Email("1joel.kuriakose@gmail.com", model.StudentEmail, "Lead2Change Update Confirmation: Your student email has been changed to this email", "Your email has been updated in the Lead2Change database!", "Your email has been updated in the Lead2Change database!", "Lead2Change", model.StudentFirstName + " " + model.StudentLastName);
+                        model.OldStudentEmail = model.StudentEmail;
+                    }
+                    if(model.ParentEmail != model.OldParentEmail)
+                    {
+                        await Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Update Confirmation: Your parent email has been changed to this email", "Your email has been updated in the Lead2Change database!", "Your email has been updated in the Lead2Change database!", "Lead2Change", model.ParentFirstName + " " + model.ParentLastName);
+                        model.OldParentEmail = model.ParentEmail;
+                    }
                 }
                 return RedirectToAction("Index");
             }

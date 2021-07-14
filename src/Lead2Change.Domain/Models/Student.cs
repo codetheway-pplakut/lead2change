@@ -22,6 +22,7 @@ namespace Lead2Change.Domain.Models
         public string StudentHomePhone { get; set; }
         public string StudentCellPhone { get; set; }
         public string StudentEmail { get; set; }
+        public string OldStudentEmail { get; set; }
         public string StudentCareerPath { get; set; }
         public string StudentCareerInterest { get; set; }
         public string ParentFirstName { get; set; }
@@ -34,6 +35,7 @@ namespace Lead2Change.Domain.Models
         public string ParentHomePhone { get; set; }
         public string ParentCellPhone { get; set; }
         public string ParentEmail { get; set; }
+        public string OldParentEmail { get; set; }
         public bool KnowGuidanceCounselor { get; set; }
         public string GuidanceCounselorName { get; set; }
         public bool MeetWithGuidanceCounselor { get; set; }
