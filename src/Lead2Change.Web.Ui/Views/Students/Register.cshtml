@@ -234,10 +234,10 @@
         <h3>Guidance Counselor Information</h3>
         <div class="form-group">
             <label asp-for="KnowGuidanceCounselor" class="control-label">Do you know who your guidance counselor is?</label>
-            <input asp-for="KnowGuidanceCounselor" class="form-control"  onchange="showHideClass('knowCounselor')" />
+            <input asp-for="KnowGuidanceCounselor" class="form-control showHide" />
             <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
         </div>
-        <div class="knowCounselor">
+        <div class="knowCounselor hidden">
             <div class="form-group">
                 <label asp-for="GuidanceCounselorName" class="control-label">Guidance Counselor Name:</label>
                 <input asp-for="GuidanceCounselorName" class="form-control"  />
@@ -258,7 +258,6 @@
                 <input asp-for="DiscussWithGuidanceCounselor" class="form-control" />
                 <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
             </div>
-
         </div>
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-primary" />

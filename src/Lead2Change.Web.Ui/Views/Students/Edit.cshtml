@@ -229,29 +229,29 @@
     <h3>Guidance Counselor Information</h3>
     @if (Model.KnowGuidanceCounselor)
     {
-        <script>showHideClass('knowCounselor')</script>
+        <script>this.showHideClass('knowCounselor')</script>
     }
     <div class="form-group">
         <label asp-for="KnowGuidanceCounselor" class="control-label">Do you know who your guidance counselor is?</label>
         <input asp-for="KnowGuidanceCounselor" class="form-control" value=@Model.KnowGuidanceCounselor oninput="showHideClass('knowCounselor')" />
         <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
     </div>
-    <div class="form-group, knowCounselor">
+    <div class="form-group knowCounselor">
         <label asp-for="GuidanceCounselorName" class="control-label">Guidance Counselor Name:</label>
         <input asp-for="GuidanceCounselorName" class="form-control" value=@Model.GuidanceCounselorName />
         <span asp-validation-for="GuidanceCounselorName" class="text-danger"></span>
     </div>
-    <div class="form-group, knowCounselor">
+    <div class="form-group knowCounselor">
         <label asp-for="MeetWithGuidanceCounselor" class="control-label">Do you meet with your guidance counselor?</label>
         <input asp-for="MeetWithGuidanceCounselor" class="form-control" value=@Model.MeetWithGuidanceCounselor />
         <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
     </div>
-    <div class="form-group, knowCounselor">
+    <div class="form-group knowCounselor">
         <label asp-for="HowOftenMeetWithGuidanceCounselor" class="control-label">How often?</label>
         <input asp-for="HowOftenMeetWithGuidanceCounselor" class="form-control" value=@Model.HowOftenMeetWithGuidanceCounselor />
         <span asp-validation-for="HowOftenMeetWithGuidanceCounselor" class="text-danger"></span>
     </div>
-    <div class="form-group, knowCounselor">
+    <div class="form-group knowCounselor">
         <label asp-for="DiscussWithGuidanceCounselor" class="control-label">If you meet with your guidance counselor, what do you discuss with them?</label>
         <input asp-for="DiscussWithGuidanceCounselor" class="form-control" value=@Model.DiscussWithGuidanceCounselor />
         <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
@@ -260,7 +260,7 @@
 
 
 
-    <div id="hidden" class="form-group" display="none">
+    <div class="form-group hidden" display="none">
         <label asp-for="Id" class="control-label"></label>
         <input asp-for="Id" class="form-control" value=@Model.Id />
     </div>

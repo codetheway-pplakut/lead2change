@@ -103,7 +103,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         ParentFirstName = model.ParentFirstName,
                         ParentLastName = model.ParentLastName,
                         Address = model.Address,
-                        //ParentAdress
+                        //ParentAddress
                         ParentApartmentNumber = model.ParentApartmentNumber,
                         ParentCity = model.ParentCity,
                         ParentState = model.ParentState,

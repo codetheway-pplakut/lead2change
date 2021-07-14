@@ -6,7 +6,7 @@
 function showHideClass(id1) {
     var x = document.getElementsByClassName(id1);
     for (let i = 0; i < x.length; i++) {
-        if (x[i].style.display !== "none") {
+        if (x[i].style.display == "block") {
             x[i].style.display = "none";
         } else {
             x[i].style.display = "block";
@@ -14,13 +14,16 @@ function showHideClass(id1) {
     }
 }
 
-function showHideClass2(id2) {
-    var x = document.getElementsByClassName(id2);
-    for (let i = 0; i < x.length; i++) {
-        if (x[i].style.display !== "none") {
-            x[i].style.display = "none";
-        } else {
-            x[i].style.display = "block";
-        }
+$(".showHide").on("click", function () {
+
+    if () {
+
+    } else {
+
     }
-}
+
+    $(".showHide").toggle(
+        function () { $(".showHide").css({ "display": "none" }); },
+        function () { $("showHide").css({ "display": "block" }) }
+    );
+});

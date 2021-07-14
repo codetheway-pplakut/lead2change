@@ -119,6 +119,6 @@ body {
     font-family: Calibri;
 }
 
-#hidden {
-    visibility: hidden;
+.hidden {
+    display: none;
 }
