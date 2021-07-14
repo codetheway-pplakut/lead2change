@@ -3,13 +3,12 @@
 *@
 
 
-    <div class="container-fluid">
-        
-                <h1 id="GoalCreateHeading">Create A Goal</h1>
-      
-            <div class="calibri">
-
-
+<div class="container-fluid">
+    <div align="center">
+        <img src="https://lead2changeinc.org/wp-content/uploads/2019/04/BIG-PNG-e1583952815934.png" />
+        <h5 id="goalEdit">Create A Goal</h5>
+    </div>
+    <div class="calibri">
         <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group d-none">
@@ -33,19 +32,19 @@
                     <b><label asp-for="SEL" class="control-label"></label></b>
                     <div class="list-group">
                         <label class="list-group-item" style="border: none">
-                            <input class="form-check-input" name="SEL" type="checkbox" value="Self-Awareness" />Self Awareness - What assets do you bring to a team environment?
+                            <input class="form-check-input" name="SEL" type="checkbox" value="Self-Awareness" />Self-Awareness - What assets do you bring to a team environment?
                         </label>
                         <label class="list-group-item" style="border: none">
                             <input class="form-check-input" name="SEL" type="checkbox" value="Self-Management" /> Self-Management - When your class is discussing a topic and you disagree with someone else, what are your reactions?
                         </label>
                         <label class="list-group-item" style="border: none">
-                            <input class="form-check-input" name="SEL" type="checkbox" value="Social-Awareness" /> Social Awareness - What is the single problem affecting the people of your community the most? How do you know?
+                            <input class="form-check-input" name="SEL" type="checkbox" value="Social-Awareness" /> Social-Awareness - What is the single problem affecting the people of your community the most? How do you know?
                         </label>
                         <label class="list-group-item" style="border: none">
-                            <input class="form-check-input " name="SEL" type="checkbox" value="Relationship-Skills" /> Relationship Skills - What are some examples of productive and effective relationships while working in a team?
+                            <input class="form-check-input " name="SEL" type="checkbox" value="Relationship-Skills" /> Relationship-Skills - What are some examples of productive and effective relationships while working in a team?
                         </label>
                         <label class="list-group-item" style="border: none">
-                            <input class="form-check-input " name="SEL" type="checkbox" value="Responsible Decision-Making" /> Responsible Decision Making - If you had a million dollars to address a problem/need within our community, what would you do? Who would you think about first?
+                            <input class="form-check-input " name="SEL" type="checkbox" value="Responsible Decision-Making" /> Responsible Decision-Making - If you had a million dollars to address a problem/need within our community, what would you do? Who would you think about first?
                         </label>
                     </div>
                 </div>
@@ -71,14 +70,14 @@
                 </div>
                 <div class="form-group, shipping">
                     <b><label asp-for="Explanation" class="control-label"></label></b>
-                    <input asp-for="Explanation" class="form-control" />
+                    <textarea asp-for="Explanation" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                     <span asp-validation-for="Explanation" class="text-danger"></span>
                 </div>
             </div>
             <br />
             <div class="form-group">
 
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-submit" />
 
             </div>
         </form>
