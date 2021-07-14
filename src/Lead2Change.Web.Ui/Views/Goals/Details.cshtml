@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <td><b>Goal Set Date:</b> </td>
-            <td>@Model.DateGoalSet</td>
+            <td>@Model.DateGoalSet.ToShortDateString()</td>
         </tr>
         <tr>
             <td><b>SEL:</b> </td>
@@ -35,7 +35,7 @@
         </tr>
         <tr>
             <td><b>Goal Review Date: </b></td>
-            <td>@Model.GoalReviewDate</td>
+            <td>@Model.GoalReviewDate.ToShortDateString()</td>
         </tr>
         <tr>
             <td><b>Accomplishment State: </b></td>
