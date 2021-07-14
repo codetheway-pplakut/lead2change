@@ -131,8 +131,8 @@
             </div>
             <h3>Guidance Counselor Information</h3>
             <div class="form-group">
+                <input asp-for="KnowGuidanceCounselor" class="form-check-input me-1" type="checkbox" />
                 <label asp-for="KnowGuidanceCounselor" class="control-label">Do you know who your guidance counselor is?</label>
-                <input asp-for="KnowGuidanceCounselor" class="form-control" />
                 <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -141,8 +141,8 @@
                 <span asp-validation-for="GuidanceCounselorName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <input asp-for="MeetWithGuidanceCounselor" class="form-check-input me-1" type="checkbox" />
                 <label asp-for="MeetWithGuidanceCounselor" class="control-label">Do you meet with your guidance counselor?</label>
-                <input asp-for="MeetWithGuidanceCounselor" class="form-control" />
                 <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -168,8 +168,8 @@
                 </select>
             </div>
             <div class="form-group">
+                <input asp-for="CollegeApplicationStatus" class="form-check-input me-1" type="checkbox" />
                 <label asp-for="CollegeApplicationStatus" class="control-label">Have you applied to college?</label>
-                <input asp-for="CollegeApplicationStatus" class="form-control" />
                 <span asp-validation-for="CollegeApplicationStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -178,16 +178,16 @@
                 <span asp-validation-for="CollegesList" class="text-danger"></span>
             </div>
             @*Add thingy dependent on previous question*@
-            <div class="form-group">
-                <label asp-for="CollegeEssayStatus" class="control-label">Have you begun work on your college essay?</label>
-                <input asp-for="CollegeEssayStatus" class="form-control" />
-                <span asp-validation-for="CollegeEssayStatus" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CollegeEssayHelp" class="control-label">Do you need help writing your college esasy?</label>
-                <input asp-for="CollegeEssayHelp" class="form-control" />
-                <span asp-validation-for="CollegeEssayHelp" class="text-danger"></span>
-            </div>
+        <div class="form-group">
+            <input asp-for="CollegeEssayStatus" class="form-check-input me-1" type="checkbox" />
+            <label asp-for="CollegeEssayStatus" class="control-label">Have you begun work on your college essay?</label>
+            <span asp-validation-for="CollegeEssayStatus" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="CollegeEssayHelp" class="form-check-input me-1" type="checkbox" />
+            <label asp-for="CollegeEssayHelp" class="control-label">Do you need help writing your college esasy?</label>
+            <span asp-validation-for="CollegeEssayHelp" class="text-danger"></span>
+        </div>
             <p>Please rank the schools you are interested in applying to:</p>
             <div class="form-group">
                 <label asp-for="FirstChoiceCollege" class="control-label">First Choice/Reach School(s):</label>
@@ -205,8 +205,8 @@
                 <span asp-validation-for="ThirdChoiceCollege" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <input asp-for="TradeSchoolStatus" class="form-check-input me-1" type="checkbox" />
                 <label asp-for="TradeSchoolStatus" class="control-label">Have you already applied to a trade school?</label>
-                <input asp-for="TradeSchoolStatus" class="form-control" />
                 <span asp-validation-for="TradeSchoolStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -215,27 +215,27 @@
                 <span asp-validation-for="TradeSchoolsList" class="text-danger"></span>
             </div>
             @*Add the other question dependent on prevous question*@
-            <div class="form-group">
-                <label asp-for="ArmedForcesStatus" class="control-label">Have you already applied to the armed forces?</label>
-                <input asp-for="ArmedForcesStatus" class="form-control" />
-                <span asp-validation-for="ArmedForcesStatus" class="text-danger"></span>
-            </div>
+        <div class="form-group">
+            <input asp-for="ArmedForcesStatus" class="form-check-input me-1" type="checkbox" />
+            <label asp-for="ArmedForcesStatus" class="control-label">Have you already applied to the armed forces?</label>
+            <span asp-validation-for="ArmedForcesStatus" class="text-danger"></span>
+        </div>
             <div class="form-group">
                 <label asp-for="ArmedForcesBranch" class="control-label">What branch did you apply to?</label>
                 <input asp-for="ArmedForcesBranch" class="form-control" />
                 <span asp-validation-for="ArmedForcesBranch" class="text-danger"></span>
             </div>
             @*Add the other question dependent on prevous question*@
-            <div class="form-group">
-                <label asp-for="WorkStatus" class="control-label">Do you plan to go directly into the workforce after high school?</label>
-                <input asp-for="WorkStatus" class="form-control" />
-                <span asp-validation-for="WorkStatus" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CareerPathList" class="control-label">What career path(s) are you interested in pursuing?</label>
-                <input asp-for="CareerPathList" class="form-control" />
-                <span asp-validation-for="CareerPathList" class="text-danger"></span>
-            </div>
+        <div class="form-group">
+            <input asp-for="WorkStatus" class="form-check-input me-1" type="checkbox" />
+            <label asp-for="WorkStatus" class="control-label">Do you plan to go directly into the workforce after high school?</label>
+            <span asp-validation-for="WorkStatus" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="CareerPathList" class="form-check-input me-1" type="checkbox" />
+            <label asp-for="CareerPathList" class="control-label">What career path(s) are you interested in pursuing?</label>
+            <span asp-validation-for="CareerPathList" class="text-danger"></span>
+        </div>
             <div class="form-group">
                 <label asp-for="OtherPlans" class="control-label">What are your plans for after high school?</label>
                 <input asp-for="OtherPlans" class="form-control" />
@@ -283,19 +283,19 @@
                 <span asp-validation-for="ACTTestScore" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <input asp-for="PrepClassRequired" class="form-check-input me-1" type="checkbox" />
                 <label asp-for="PrepClassRequired" class="control-label">Do you need a prep class?</label>
-                <input asp-for="PrepClassRequired" class="form-control" />
                 <span asp-validation-for="PrepClassRequired" class="text-danger"></span>
             </div>
             <h3>Financial Aid Information</h3>
             <div class="form-group">
+                <input asp-for="FinancialAidProcessComplete" class="form-check-input me-1" type="checkbox" />
                 <label asp-for="FinancialAidProcessComplete" class="control-label">Have you already completed the financial aid process?</label>
-                <input asp-for="FinancialAidProcessComplete" class="form-control" />
                 <span asp-validation-for="FinancialAidProcessComplete" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <input asp-for="AssistanceForForms" class="form-check-input me-1" type="checkbox" />
                 <label asp-for="AssistanceForForms" class="control-label">Do you need assistance filling out your FAFSA/Financial aid forms?</label>
-                <input asp-for="AssistanceForForms" class="form-control" />
                 <span asp-validation-for="AssistanceForForms" class="text-danger"></span>
             </div>
             <h4>What support is needed for you most while in this program?</h4>
