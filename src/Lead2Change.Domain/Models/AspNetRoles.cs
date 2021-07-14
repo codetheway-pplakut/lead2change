@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Lead2Change.Domain.Models
 {
-    public partial class AspNetRoles
+    public partial class AspNetRoles : IdentityRole<Guid>
     {
         public AspNetRoles()
         {
@@ -15,7 +16,7 @@ namespace Lead2Change.Domain.Models
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
         }
 
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string NormalizedName { get; set; }
         public string ConcurrencyStamp { get; set; }

@@ -17,7 +17,7 @@ namespace Lead2Change.Web.Ui.Controllers
         private ICareerDeclarationService _service;
         private IStudentService _studentService;
 
-        public CareerDeclarationController(IIdentityService identityService, ICareerDeclarationService careerDeclarationService, IStudentService studentService) : base(identityService)
+        public CareerDeclarationController(IUserService identityService, ICareerDeclarationService careerDeclarationService, IStudentService studentService) : base(identityService)
         {
             _service = careerDeclarationService;
             _studentService = studentService;

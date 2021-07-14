@@ -14,7 +14,7 @@ namespace Lead2Change.Web.Ui.Controllers
     {
         IStudentService _studentService;
 
-        public StudentsController(IIdentityService identityService, IStudentService studentService) : base(identityService)
+        public StudentsController(IUserService identityService, IStudentService studentService) : base(identityService)
         {
             _studentService = studentService;
         }

@@ -16,6 +16,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Lead2Change.Domain.Models;
 
 namespace Lead2Change.Web.Ui
 {
@@ -33,7 +36,7 @@ namespace Lead2Change.Web.Ui
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<ICareerDeclarationService, CareerDeclarationService>();
             services.AddScoped<IGoalsService, GoalsService>();
@@ -51,7 +54,7 @@ namespace Lead2Change.Web.Ui
                         Configuration.GetConnectionString("DefaultConnection")));
             }
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<AspNetUsers>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AppDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();

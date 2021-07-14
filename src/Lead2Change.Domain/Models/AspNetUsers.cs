@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -7,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Lead2Change.Domain.Models
 {
-    public partial class AspNetUsers
+    public partial class AspNetUsers : IdentityUser<Guid>
     {
         public AspNetUsers()
         {
@@ -17,7 +19,7 @@ namespace Lead2Change.Domain.Models
             AspNetUserTokens = new HashSet<AspNetUserTokens>();
         }
 
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public string UserName { get; set; }
         public string NormalizedUserName { get; set; }
         public string Email { get; set; }

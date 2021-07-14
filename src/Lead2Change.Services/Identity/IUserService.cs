@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lead2Change.Repositories.Identity
+namespace Lead2Change.Services.Identity
 {
-    public interface IUserRepository
+    public interface IUserService
     {
         public Task<AspNetUsers> GetUserById(Guid id);
         public Task<AspNetUsers> GetUserByUserName(string userName);

@@ -9,9 +9,9 @@ namespace Lead2Change.Web.Ui.Controllers
 {
     public class _BaseController : Controller
     {
-        IIdentityService _identityService;
+        IUserService _identityService;
 
-        public _BaseController(IIdentityService identityService)
+        public _BaseController(IUserService identityService)
         {
             _identityService = identityService;
         }
