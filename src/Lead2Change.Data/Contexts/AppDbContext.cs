@@ -24,6 +24,7 @@ namespace Lead2Change.Data.Contexts
             }
         }
 
+        public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<AppEvent> AppEvents { get; set; }
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
@@ -32,12 +33,26 @@ namespace Lead2Change.Data.Contexts
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<CareerDeclaration> CareerDeclarations { get; set; }
+        public virtual DbSet<Interview> Interviews { get; set; }
+
         public virtual DbSet<Goal> Goals { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
+
+        public virtual DbSet<QuestionInInterview> QuestionInInterviews { get; set; }
+
+
+        public virtual DbSet<Student> Students { get; set; }
+        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Answer>(entity =>
+            {
+                entity.HasKey(e => new { e.Id });
+
+            });
             modelBuilder.Entity<AspNetRoleClaims>(entity =>
             {
                 entity.HasIndex(e => e.RoleId);
@@ -117,6 +132,37 @@ namespace Lead2Change.Data.Contexts
                     .HasName("UserNameIndex")
                     .IsUnique();
             });
+            modelBuilder.Entity<Interview>(entity =>
+            {
+                entity.HasKey(e => new { e.Id });
+
+
+            });
+            modelBuilder.Entity<Question>(entity =>
+            {
+                entity.HasKey(e => new { e.Id });
+
+                
+
+
+            });
+            modelBuilder.Entity<QuestionInInterview>(entity =>
+            {
+                entity.HasKey(e => new { e.InterviewId, e.QuestionId});
+
+                entity.HasOne(d => d.Question)
+                    .WithMany(p => p.QuestionInInterviews)
+                    .HasForeignKey(d => d.QuestionId);
+
+                entity.HasOne(d => d.Interview)
+                    .WithMany(p => p.QuestionInInterviews)
+                    .HasForeignKey(d => d.InterviewId);
+            });
+
+            
+            
+
+
 
             OnModelCreatingPartial(modelBuilder);
         }
