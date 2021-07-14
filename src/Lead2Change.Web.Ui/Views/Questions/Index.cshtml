@@ -1,0 +1,37 @@
+﻿@model List<Lead2Change.Domain.Models.Question>
+@*
+    ViewData["Title"] = "Index";
+*@
+<div class="container-fluid pr-sm-4 pl-sm-4">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Questions
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionString)
+                </td>
+                <td>
+                    <div>
+                        <div>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        </div>
+                    </div>
+                    <div>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div>
+        <a asp-action="Create">Create a Question.</a>
+    </div>
+</div>

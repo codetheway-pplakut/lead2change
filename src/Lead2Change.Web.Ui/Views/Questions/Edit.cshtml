@@ -1,0 +1,27 @@
+﻿@model Lead2Change.Domain.ViewModels.QuestionsViewModel;
+@*
+    ViewData["Title"] = "Edit";
+*@
+<form asp-action="Update">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group, d-none" display="none">
+        <label asp-for="Id" class="control-label"></label>
+        <input asp-for="Id" class="form-control" value=@Model.Id />
+    </div>  
+    <div class="form-group">
+        <b><label asp-for="QuestionString" class="control-label"></label></b>
+        <input asp-for="QuestionString" class="form-control" value=@Model.QuestionString />
+        <span asp-validation-for="QuestionString" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Submit"/>
+    </div>
+</form>
+<div align="center">
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
