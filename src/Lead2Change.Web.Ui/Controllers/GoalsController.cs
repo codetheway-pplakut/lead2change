@@ -38,13 +38,17 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Update(GoalViewModel model)
         {
+            // Prevents null exceptions from no SEL input being selected
+            string goalSEL = (model.SEL == null) ? "" : String.Join(", ", model.SEL);
+
+
             Goal goal = new Goal
             {
                 GoalSet = model.GoalSet,
                 StudentId = model.StudentId,
                 Id = model.Id,
                 DateGoalSet = model.DateGoalSet,
-                SEL = String.Join(", ", model.SEL),
+                SEL = goalSEL,
                 GoalReviewDate = model.GoalReviewDate,
                 WasItAccomplished = model.WasItAccomplished,
                 Explanation = model.Explanation,
@@ -91,14 +95,17 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+                // Checks to prevent null exception errors
+                string goalSEL = (model.SEL == null) ? "" : String.Join(", ", model.SEL);
+
+
                                     Goal goal = new Goal()
                                     {
                                         GoalSet = model.GoalSet,
                                         StudentId = model.StudentId,
                                         Id = model.Id,
                                         DateGoalSet = model.DateGoalSet,
-                                        SEL = String.Join(", ",model.SEL),
+                                        SEL = goalSEL,
                                         GoalReviewDate = model.GoalReviewDate,
                                         WasItAccomplished = model.WasItAccomplished,
                                         Explanation = model.Explanation,
