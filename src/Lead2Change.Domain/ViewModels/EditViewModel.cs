@@ -6,10 +6,12 @@ using System.Text;
 
 namespace Lead2Change.Domain.ViewModels
 {
-    public class RegistrationViewModel
+    public class EditViewModel
     {
         public Guid Id { get; set; }
         public Guid CareerDeclarationId { get; set; }
+        public bool Accepted { get; set; }
+        public bool Declined { get; set; }
         public string StudentFirstName { get; set; }
         public string StudentLastName { get; set; }
         public DateTime StudentDateOfBirth { get; set; }
@@ -21,6 +23,7 @@ namespace Lead2Change.Domain.ViewModels
         public string StudentHomePhone { get; set; }
         public string StudentCellPhone { get; set; }
         public string StudentEmail { get; set; }
+        public string OldStudentEmail { get; set; }
         public string StudentCareerPath { get; set; }
         public string StudentCareerInterest { get; set; }
         public string ParentFirstName { get; set; }
@@ -32,7 +35,8 @@ namespace Lead2Change.Domain.ViewModels
         public string ParentZipCode { get; set; }
         public string ParentHomePhone { get; set; }
         public string ParentCellPhone { get; set; }
-        public string ParentEmail { get; set; }       
+        public string ParentEmail { get; set; }
+        public string OldParentEmail { get; set; }
         public bool KnowGuidanceCounselor { get; set; }
         public string GuidanceCounselorName { get; set; }
         public bool MeetWithGuidanceCounselor { get; set; }
@@ -53,7 +57,6 @@ namespace Lead2Change.Domain.ViewModels
         public bool WorkStatus { get; set; }
         public string CareerPathList { get; set; } // List
         public string OtherPlans { get; set; }
-
         public DateTime PACTTestDate { get; set; }
         public int PACTTestScore { get; set; }
         public DateTime PSATTestDate { get; set; }
@@ -70,6 +73,7 @@ namespace Lead2Change.Domain.ViewModels
         public DateTime StudentSignatureDate { get; set; }
         public string ParentSignature { get; set; }
         public DateTime ParentSignatureDate { get; set; }
-
+        public CareerDeclaration CareerDeclaration { get; set; }
+        public List<Goal> Goals { get; set; }
     }
 }

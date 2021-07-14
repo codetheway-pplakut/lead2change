@@ -98,8 +98,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentZipCode = model.StudentZipCode,
                         StudentHomePhone = model.StudentHomePhone,
                         StudentCellPhone = model.StudentCellPhone,
-                        StudentEmail = model.StudentEmail,
-                        OldStudentEmail = model.StudentEmail,
+                        StudentEmail = model.StudentEmail,                       
                         StudentCareerPath = model.StudentCareerPath,
                         StudentCareerInterest = model.StudentCareerInterest,
                         ParentFirstName = model.ParentFirstName,
@@ -112,8 +111,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         ParentZipCode = model.ParentZipCode,
                         ParentHomePhone = model.ParentHomePhone,
                         ParentCellPhone = model.ParentCellPhone,
-                        ParentEmail = model.ParentEmail,
-                        OldParentEmail = model.ParentEmail,
+                        ParentEmail = model.ParentEmail,                        
                         KnowGuidanceCounselor = model.KnowGuidanceCounselor,
                         GuidanceCounselorName = model.GuidanceCounselorName,
                         MeetWithGuidanceCounselor = model.MeetWithGuidanceCounselor,
@@ -134,7 +132,7 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var student = await _studentService.GetStudent(id);
-            RegistrationViewModel list = new RegistrationViewModel()
+            EditViewModel list = new EditViewModel()
             {
                 Id = student.Id,
                 //General Student Info
@@ -149,6 +147,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentHomePhone = student.StudentHomePhone,
                 StudentCellPhone = student.StudentCellPhone,
                 StudentEmail = student.StudentEmail,
+                OldStudentEmail = student.StudentEmail,
                 StudentCareerPath = student.StudentCareerPath,
                 StudentCareerInterest = student.StudentCareerInterest,
                 //Parent Info
@@ -162,6 +161,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 ParentHomePhone = student.ParentHomePhone,
                 ParentCellPhone = student.ParentCellPhone,
                 ParentEmail = student.ParentEmail,
+                OldParentEmail = student.ParentEmail,
                 //Guidance Counselor Info
                 KnowGuidanceCounselor = student.KnowGuidanceCounselor,
                 GuidanceCounselorName = student.GuidanceCounselorName,
@@ -173,7 +173,7 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(list);
         }
 
-        public async Task<IActionResult> Update(Student model)
+        public async Task<IActionResult> Update(EditViewModel model)
         {
             if (ModelState.IsValid)
             {
