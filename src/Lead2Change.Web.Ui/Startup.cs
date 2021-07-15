@@ -3,6 +3,7 @@ using Lead2Change.Services.CareerDeclarationService;
 using Lead2Change.Services.Identity;
 using Lead2Change.Services.Students;
 using Lead2Change.Services.Goals;
+using Lead2Change.Services.Answers;
 using Lead2Change.Services.Questions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,6 +43,7 @@ namespace Lead2Change.Web.Ui
             services.AddScoped<IGoalsService, GoalsService>();
             services.AddScoped<IInterviewService, InterviewService>();
             services.AddScoped<IQuestionsService, QuestionsService>();
+            services.AddScoped<IAnswersService, AnswersService>();
 
             if (Environment.IsDevelopment())
             {
