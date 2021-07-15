@@ -3,17 +3,24 @@
     ViewData["Title"] = "Index";
 *@
 <div class="container-fluid pr-sm-4 pl-sm-4">
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-striped pt-2">
+        <thead class="thead blueStyle">
             <tr>
-                <th>
+                <th scope="col" width="50px">
+                    #
+                </th>
+                <th scope="col">
                     Questions
+                </th>
+                <th scope="col">
+                    Options
                 </th>
             </tr>
         </thead>
         @foreach (var item in Model)
         {
     <tr>
+        <th scope="row">@(Model.IndexOf(item)+1)</th>
         <td>
             @Html.DisplayFor(modelItem => item.QuestionString)
         </td>
