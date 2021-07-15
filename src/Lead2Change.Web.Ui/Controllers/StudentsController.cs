@@ -21,12 +21,12 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _studentService.GetStudents());
+            return View(await _studentService.GetActiveStudents());
         }
 
         public async Task<IActionResult> InactiveIndex()
         {
-            return View(await _studentService.GetStudents());
+            return View(await _studentService.GetInactiveStudents());
         }
 
         public async Task<IActionResult> Delete(Guid id)

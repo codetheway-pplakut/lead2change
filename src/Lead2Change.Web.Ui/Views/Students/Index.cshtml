@@ -19,10 +19,7 @@
         </thead>
 
         <tbody>
-            @foreach (var item in Model) 
-                if(item.Active == true)
-                {
-
+            @foreach (var item in Model) { 
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.StudentLastName)
