@@ -43,8 +43,59 @@
         </div>
         <div class="form-group">
             <label asp-for="StudentState" class="control-label">State:</label>
-            <input asp-for="StudentState" class="form-control" />
-            <span asp-validation-for="StudentState" class="text-danger"></span>
+            <select asp-for="StudentState" class="form-control" required>
+                <option selected>Select A Choice</option>
+                <option value="Alabama">AL</option>
+                <option value="Alaska">AK</option>
+                <option value="Arkansas">AR</option>
+                <option value="rizona">AZ</option>
+                <option value="California">CA</option>
+                <option value="Colorado">CO</option>
+                <option value="Connecticut">CT</option>
+                <option value="Georgia">GA</option>
+                <option value="Delaware">DE</option>
+                <option value="Florida">FL</option>
+                <option value="Idaho">ID</option>
+                <option value="Hawaii">HI</option>
+                <option value="Illinois">IL</option>
+                <option value="Indiana">IN</option>
+                <option value="Kansas">KS</option>
+                <option value="Iowa">IA</option>
+                <option value="Kentucky">KY</option>
+                <option value="Louisiana">LA</option>
+                <option value="Maine">ME</option>
+                <option value="Maryland">MD</option>
+                <option value="Massachusetts">MA</option>
+                <option value="Michigan">MI</option>
+                <option value="Minnesota">MN</option>
+                <option value="Mississippi">MS</option>
+                <option value="Missouri">MO</option>
+                <option value="Montana">MT</option>
+                <option value="Nebraska">NE</option>
+                <option value="Nevada">NV</option>
+                <option value="New Hampshire">NH</option>
+                <option value="New Jersey">NJ</option>
+                <option value="New Mexico">NM</option>
+                <option value="New York">NY</option>
+                <option value="North Carolina">NC</option>
+                <option value="North Dakota">ND</option>
+                <option value="Ohio">OH</option>
+                <option value="Oklahoma">OK</option>
+                <option value="Oregon">OR</option>
+                <option value="Pennsylvania">PA</option>
+                <option value="Rhode Island">RI</option>
+                <option value="South Carolina">SC</option>
+                <option value="South Dakota">SD</option>
+                <option value="Tennessee">TN</option>
+                <option value="Texas">TX</option>
+                <option value="Utah">UT</option>
+                <option value="Vermont">VT</option>
+                <option value="Virginia">VA</option>
+                <option value="Washington">WA</option>
+                <option value="Wisconsin">WI</option>
+                <option value="West Virginia">WV</option>
+                <option value="Wyoming">WY</option>
+            </select>
         </div>
         <div class="form-group">
             <label asp-for="StudentZipCode" class="control-label">Zip Code:</label>
@@ -105,8 +156,59 @@
         </div>
         <div class="form-group">
             <label asp-for="ParentState" class="control-label">State:</label>
-            <input asp-for="ParentState" class="form-control" />
-            <span asp-validation-for="ParentState" class="text-danger"></span>
+            <select asp-for="ParentState" class="form-control" required>
+                <option selected>Select A Choice</option>
+                <option value="Alabama">AL</option>
+                <option value="rizona">AZ</option>
+                <option value="Alaska">AK</option>
+                <option value="Arkansas">AR</option>
+                <option value="California">CA</option>
+                <option value="Connecticut">CT</option>
+                <option value="Colorado">CO</option>
+                <option value="Delaware">DE</option>
+                <option value="Florida">FL</option>
+                <option value="Hawaii">HI</option>
+                <option value="Georgia">GA</option>
+                <option value="Idaho">ID</option>
+                <option value="Illinois">IL</option>
+                <option value="Indiana">IN</option>
+                <option value="Iowa">IA</option>
+                <option value="Kansas">KS</option>
+                <option value="Kentucky">KY</option>
+                <option value="Louisiana">LA</option>
+                <option value="Maine">ME</option>
+                <option value="Maryland">MD</option>
+                <option value="Massachusetts">MA</option>
+                <option value="Michigan">MI</option>
+                <option value="Minnesota">MN</option>
+                <option value="Mississippi">MS</option>
+                <option value="Missouri">MO</option>
+                <option value="Montana">MT</option>
+                <option value="Nebraska">NE</option>
+                <option value="Nevada">NV</option>
+                <option value="New Hampshire">NH</option>
+                <option value="New Jersey">NJ</option>
+                <option value="New Mexico">NM</option>
+                <option value="New York">NY</option>
+                <option value="North Carolina">NC</option>
+                <option value="North Dakota">ND</option>
+                <option value="Ohio">OH</option>
+                <option value="Oklahoma">OK</option>
+                <option value="Oregon">OR</option>
+                <option value="Pennsylvania">PA</option>
+                <option value="Rhode Island">RI</option>
+                <option value="South Carolina">SC</option>
+                <option value="South Dakota">SD</option>
+                <option value="Texas">TX</option>
+                <option value="Tennessee">TN</option>
+                <option value="Utah">UT</option>
+                <option value="Vermont">VT</option>
+                <option value="Virginia">VA</option>
+                <option value="Washington">WA</option>
+                <option value="West Virginia">WV</option>
+                <option value="Wisconsin">WI</option>
+                <option value="Wyoming">WY</option>
+            </select>
         </div>
         <div class="form-group">
             <label asp-for="ParentZipCode" class="control-label">Zip Code:</label>
@@ -130,30 +232,35 @@
         </div>
         <h3>Guidance Counselor Information</h3>
         <div class="form-group">
-            <input asp-for="KnowGuidanceCounselor" class="form-check-input me-1" type="checkbox" />
             <label asp-for="KnowGuidanceCounselor" class="control-label">Do you know who your guidance counselor is?</label>
+            <input asp-for="KnowGuidanceCounselor" class="form-control showHide" id="checkboxTest" oninput="showHideClass('conditionalQuestion')" />
             <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="GuidanceCounselorName" class="control-label">Guidance Counselor name:</label>
-            <input asp-for="GuidanceCounselorName" class="form-control" />
-            <span asp-validation-for="GuidanceCounselorName" class="text-danger"></span>
+        <div class="conditionalQuestion">
+            <div class="form-group">
+                <label asp-for="GuidanceCounselorName" class="control-label">Guidance Counselor Name:</label>
+                <input asp-for="GuidanceCounselorName" class="form-control" />
+                <span asp-validation-for="GuidanceCounselorName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
+                <input asp-for="MeetWithGuidanceCounselor" class="form-control" />
+                <label asp-for="MeetWithGuidanceCounselor" class="control-label">Do you meet with your guidance counselor?</label>
+            </div>
+            <div class="form-group">
+                <label asp-for="HowOftenMeetWithGuidanceCounselor" class="control-label">How often?</label>
+                <input asp-for="HowOftenMeetWithGuidanceCounselor" class="form-control" />
+                <span asp-validation-for="HowOftenMeetWithGuidanceCounselor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiscussWithGuidanceCounselor" class="control-label">If you meet with your guidance counselor, what do you discuss with them?</label>
+                <input asp-for="DiscussWithGuidanceCounselor" class="form-control" />
+                <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
+            </div>
         </div>
-        <div class="form-group">
-            <input asp-for="MeetWithGuidanceCounselor" class="form-check-input me-1" type="checkbox" />
-            <label asp-for="MeetWithGuidanceCounselor" class="control-label">Do you meet with your guidance counselor?</label>
-            <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="HowOftenMeetWithGuidanceCounselor" class="control-label">How Often?</label>
-            <input asp-for="HowOftenMeetWithGuidanceCounselor" class="form-control" />
-            <span asp-validation-for="HowOftenMeetWithGuidanceCounselor" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="DiscussWithGuidanceCounselor" class="control-label">What do you discuss with your guidance counselor?</label>
-            <input asp-for="DiscussWithGuidanceCounselor" class="form-control" />
-            <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
-        </div>
+
+
+
         <h3>Post-Secondary Plans</h3>
         <div class="form-group">
             <label asp-for="PlanAfterHighSchool" class="control-label">Plan After High School:</label>
@@ -331,9 +438,8 @@
     </form>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

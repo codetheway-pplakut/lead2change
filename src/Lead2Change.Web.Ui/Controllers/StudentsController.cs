@@ -113,7 +113,7 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.StudentFirstName.Length > 0)
+                if (ModelState.IsValid)
                 {
                     Student student = new Student()
                     {
