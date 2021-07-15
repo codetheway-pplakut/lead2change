@@ -3,38 +3,20 @@ using System;
 using Lead2Change.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lead2Change.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210714174007_UpdateEmail")]
+    partial class UpdateEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.15");
-
-            modelBuilder.Entity("Lead2Change.Domain.Models.Answer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AnswerString")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Answers");
-                });
 
             modelBuilder.Entity("Lead2Change.Domain.Models.AppEvent", b =>
                 {
@@ -293,52 +275,6 @@ namespace Lead2Change.Data.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("Goals");
-                });
-
-            modelBuilder.Entity("Lead2Change.Domain.Models.Interview", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("InterviewName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Interviews");
-                });
-
-            modelBuilder.Entity("Lead2Change.Domain.Models.Question", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("QuestionString")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("Lead2Change.Domain.Models.QuestionInInterview", b =>
-                {
-                    b.Property<Guid>("InterviewId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("InterviewId", "QuestionId");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("QuestionInInterviews");
                 });
 
             modelBuilder.Entity("Lead2Change.Domain.Models.Student", b =>
@@ -605,21 +541,6 @@ namespace Lead2Change.Data.Migrations
                     b.HasOne("Lead2Change.Domain.Models.Student", null)
                         .WithMany("Goals")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Lead2Change.Domain.Models.QuestionInInterview", b =>
-                {
-                    b.HasOne("Lead2Change.Domain.Models.Interview", "Interview")
-                        .WithMany("QuestionInInterviews")
-                        .HasForeignKey("InterviewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Lead2Change.Domain.Models.Question", "Question")
-                        .WithMany("QuestionInInterviews")
-                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -1,4 +1,4 @@
-﻿@model Lead2Change.Domain.ViewModels.RegistrationViewModel
+﻿@model Lead2Change.Domain.ViewModels.EditViewModel
 @*
     ViewData["Title"] = "Edit";
 *@
@@ -63,6 +63,10 @@
         <input asp-for="StudentEmail" class="form-control" value=@Model.StudentEmail />
         <span asp-validation-for="StudentEmail" class="text-danger"></span>
     </div>
+    <div class="form-group, d-none">
+        <label asp-for="OldStudentEmail" class="control-label"></label>
+        <input asp-for="OldStudentEmail" class="form-control" value=@Model.OldStudentEmail />
+    </div>
     <div class="form-group">
         <label asp-for="StudentCareerPath" class="control-label">Career Path:</label>
         <input asp-for="StudentCareerPath" class="form-control" value=@Model.StudentCareerPath />
@@ -118,6 +122,10 @@
         <label asp-for="ParentEmail" class="control-label">Email:</label>
         <input asp-for="ParentEmail" class="form-control" value=@Model.ParentEmail />
         <span asp-validation-for="ParentEmail" class="text-danger"></span>
+    </div>
+    <div class="form-group, d-none">
+        <label asp-for="OldParentEmail" class="control-label"></label>
+        <input asp-for="OldParentEmail" class="form-control" value=@Model.OldParentEmail />
     </div>
     <h3>Guidance Counselor Information</h3>
     <div class="form-group">
