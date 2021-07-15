@@ -3,14 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Lead2Change.Domain.Models
+namespace Lead2Change.Domain.ViewModels
 {
-    public class Interview
+    public class InterviewViewModel
     {
         public ICollection<QuestionInInterview> QuestionInInterviews { get; set; }
-
-        public string InterviewName { get; set; }
-
         public Guid Id { get; set; }
     }
 }

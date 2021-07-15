@@ -1,0 +1,100 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+ using Lead2Change.Services.Interviews;
+using Lead2Change.Domain.ViewModels;
+using Lead2Change.Domain.Models;
+
+namespace Lead2Change.Web.Ui.Controllers
+{
+    public class InterviewsController : Controller
+    {
+        private IInterviewService _interviewsService;
+
+        public InterviewsController(IInterviewService interviewsService)
+        {
+            this._interviewsService = interviewsService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            return View(await _interviewsService.GetInterviews());
+
+        }
+
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var interview = await _interviewsService.GetInterview(id);
+            await _interviewsService.Delete(interview);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            return View(new InterviewViewModel());
+        }
+
+        public async Task<IActionResult> Register(InterviewViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                Interview interview = new Interview()
+                {
+                    QuestionInInterviews = model.QuestionInInterviews,
+                    Id = model.Id
+                    
+                };
+                var result = await _interviewsService.Create(interview);
+                return RedirectToAction("Index");
+
+
+            }
+            return View("Create", model);
+        }
+
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var result = await _interviewsService.GetInterview(id);
+            InterviewViewModel interview = new InterviewViewModel()
+            {
+                Id = id,
+                QuestionInInterviews=result.QuestionInInterviews
+            };
+            return View(interview);
+        }
+
+        public async Task<IActionResult> Update(InterviewViewModel model)
+        {
+            
+
+
+            Interview interview = new Interview
+            {
+                Id = model.Id,
+                QuestionInInterviews = model.QuestionInInterviews
+            };
+            if (ModelState.IsValid)
+            {
+                interview = await _interviewsService.Update(interview);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var result = await _interviewsService.GetInterview(id);
+            InterviewViewModel goal = new InterviewViewModel()
+            {
+                Id = id,
+                QuestionInInterviews = result.QuestionInInterviews
+            };
+            return View(goal);
+        }
+
+    }
+}
+   
+
