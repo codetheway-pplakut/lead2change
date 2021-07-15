@@ -1,19 +1,16 @@
 ﻿@model Lead2Change.Domain.ViewModels.QuestionsViewModel
 @* ViewData["Title"] = "Create";
 *@
-<form asp-action="Register">
+<form asp-action="Register" class="calibri">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group d-none">
         <input asp-for="Id" class="form-control" />
     </div>
-
-    <div class="container-fluid">
-        <div class="form-group">
-            <b><label asp-for="QuestionString" class="control-label"></label></b>
-            <input asp-for="QuestionString" class="form-control" />
-            <span asp-validation-for="QuestionString" class="text-danger"></span>
-        </div>
-    <br />
+    <div class="form-group">
+        <b><label asp-for="QuestionString" class="control-label">Add a Question:</label></b>
+        <input asp-for="QuestionString" class="form-control" />
+        <span asp-validation-for="QuestionString" class="text-danger"></span>
+    </div>
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-primary" />
     </div>
@@ -21,10 +18,6 @@
 <div align="center">
     <button class="btn btn-back"><a asp-action="Index">Back to List</a></button>
 </div>
-
-
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

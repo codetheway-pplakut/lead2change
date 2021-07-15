@@ -2,43 +2,53 @@
 @*
     ViewData["Title"] = "Index";
 *@
-<div class="container-fluid pr-sm-4 pl-sm-4">
+<div class="container-fluid pr-sm-4 pl-sm-4, calibri">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="GoalHeadingFont"><strong>Interview Questions</strong></h4>
+        </div>
+    </div>
     <table class="table table-striped pt-2">
         <thead class="thead blueStyle">
             <tr>
-                <th class="col-1">
+                <th class="col-sm-1">
                     #
                 </th>
-                <th class="col-8">
+                <th class="col-sm-8">
                     Questions
                 </th>
-                <th class="col-3">
+                <th class="col-sm-3">
                     Options
                 </th>
             </tr>
         </thead>
         @foreach (var item in Model)
         {
-    <tr>
-        <th scope="row">@(Model.IndexOf(item)+1)</th>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuestionString)
-        </td>
-        <td>
-            <div>
-                <div>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                </div>
-            </div>
-            <div>
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </div>
-        </td>
-    </tr>
+            <tr>
+                <th scope="row">@(Model.IndexOf(item)+1)</th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionString)
+                </td>
+                <td>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Questions", new { id = item.Id })'" />
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href='@Url.Action("Delete","Questions", new { id = item.Id })'" />
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
         }
     </table>
-
-    <div>
-        <a asp-action="Create">Create a Question.</a>
+    <div class="row">
+        <div class="col-sm-12 pb-sm-2">
+            <input type="button" class="btn btn-primary" value="Create a Question" onclick="location.href='@Url.Action("Create","Questions")'" />
+        </div>
     </div>
 </div>
