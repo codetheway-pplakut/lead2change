@@ -1,4 +1,61 @@
-﻿@model Lead2Change.Domain.ViewModels.InterviewViewModel
+﻿@model List<Lead2Change.Domain.ViewModels.InterviewViewModel>
 @*
     ViewData["Title"] = "Index";
 *@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="GoalHeadingFont"><strong>Your Interviews</strong></h2>
+        </div>
+    </div>
+    <table class="table table-striped pt-2">
+        <thead class="thead blueStyle">
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Options
+                </th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InterviewName)
+                </td>
+                <td>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Interviews", new { id = item.Id })'" />
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" col-sm-12">
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Interviews", new { id = item.Id })'" />
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href='@Url.Action("Delete","Interviews", new { id = item.Id })'" />
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="row">
+        <div class="col-sm-12 pb-sm-2">
+            <input type="button" class="btn btn-primary" value="Create a New Interview" onclick="location.href='@Url.Action("Create","Interviews")'" />
+        </div>
+    </div>
+</div>

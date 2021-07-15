@@ -1,0 +1,25 @@
+﻿@model Lead2Change.Domain.ViewModels.InterviewViewModel
+@* ViewData["Title"] = "Create";
+*@
+<div class="calibri">
+    <form asp-action="Register">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+        <div class="container-fluid">
+            <div class="form-group">
+                <b><label asp-for="InterviewName" class="control-label"></label></b>
+                <input asp-for="InterviewName" class="form-control" />
+                <span asp-validation-for="InterviewName" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+
+            <input type="submit" value="Create" class="btn btn-submit" />
+
+        </div>
+    </form>
+    <div align="center">
+        <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("Index","Interviews")'">Back To List</button>
+    </div>
+</div>

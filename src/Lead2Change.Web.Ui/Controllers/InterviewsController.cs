@@ -19,7 +19,18 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View(await _interviewsService.GetInterviews());
+            List<InterviewViewModel> result = new List<InterviewViewModel>();
+            List<Interview> interviews = await _interviewsService.GetInterviews();
+            foreach (Interview interview in interviews)
+            {
+                result.Add(new InterviewViewModel
+                {
+                    InterviewName = interview.InterviewName,
+                    Id = interview.Id,
+                    QuestionInInterviews = interview.QuestionInInterviews
+                });
+            }
+            return View(result);
 
         }
 
@@ -43,6 +54,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 Interview interview = new Interview()
                 {
                     QuestionInInterviews = model.QuestionInInterviews,
+                    InterviewName = model.InterviewName,
                     Id = model.Id
                     
                 };
@@ -60,7 +72,8 @@ namespace Lead2Change.Web.Ui.Controllers
             InterviewViewModel interview = new InterviewViewModel()
             {
                 Id = id,
-                QuestionInInterviews=result.QuestionInInterviews
+                QuestionInInterviews=result.QuestionInInterviews,
+                InterviewName=result.InterviewName
             };
             return View(interview);
         }
@@ -73,7 +86,8 @@ namespace Lead2Change.Web.Ui.Controllers
             Interview interview = new Interview
             {
                 Id = model.Id,
-                QuestionInInterviews = model.QuestionInInterviews
+                QuestionInInterviews = model.QuestionInInterviews,
+                InterviewName = model.InterviewName
             };
             if (ModelState.IsValid)
             {
@@ -89,7 +103,8 @@ namespace Lead2Change.Web.Ui.Controllers
             InterviewViewModel goal = new InterviewViewModel()
             {
                 Id = id,
-                QuestionInInterviews = result.QuestionInInterviews
+                QuestionInInterviews = result.QuestionInInterviews,
+                InterviewName=result.InterviewName
             };
             return View(goal);
         }

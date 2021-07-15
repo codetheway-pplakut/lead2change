@@ -9,5 +9,6 @@ namespace Lead2Change.Domain.ViewModels
     {
         public ICollection<QuestionInInterview> QuestionInInterviews { get; set; }
         public Guid Id { get; set; }
+        public string InterviewName { get; set; }
     }
 }
