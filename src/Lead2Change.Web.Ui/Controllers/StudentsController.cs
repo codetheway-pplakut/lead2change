@@ -24,6 +24,11 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(await _studentService.GetStudents());
         }
 
+        public async Task<IActionResult> InactiveIndex()
+        {
+            return View(await _studentService.GetStudents());
+        }
+
         public async Task<IActionResult> Delete(Guid id)
         {
             var student = await _studentService.GetStudent(id);
@@ -70,7 +75,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 GuidanceCounselorName = studentscontainer.GuidanceCounselorName,
                 MeetWithGuidanceCounselor = studentscontainer.MeetWithGuidanceCounselor,
                 HowOftenMeetWithGuidanceCounselor = studentscontainer.HowOftenMeetWithGuidanceCounselor,
-                DiscussWithGuidanceCounselor = studentscontainer.DiscussWithGuidanceCounselor
+                DiscussWithGuidanceCounselor = studentscontainer.DiscussWithGuidanceCounselor,
+                Active = studentscontainer.Active
             };
             return View(a);
         }
@@ -116,7 +122,8 @@ namespace Lead2Change.Web.Ui.Controllers
                         GuidanceCounselorName = model.GuidanceCounselorName,
                         MeetWithGuidanceCounselor = model.MeetWithGuidanceCounselor,
                         HowOftenMeetWithGuidanceCounselor = model.HowOftenMeetWithGuidanceCounselor,
-                        DiscussWithGuidanceCounselor = model.DiscussWithGuidanceCounselor
+                        DiscussWithGuidanceCounselor = model.DiscussWithGuidanceCounselor,
+                        Active = true
                     };
                     var abc = await _studentService.Create(student);
                     await Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName+ " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
@@ -165,13 +172,13 @@ namespace Lead2Change.Web.Ui.Controllers
                 GuidanceCounselorName = student.GuidanceCounselorName,
                 MeetWithGuidanceCounselor = student.MeetWithGuidanceCounselor,
                 HowOftenMeetWithGuidanceCounselor = student.HowOftenMeetWithGuidanceCounselor,
-                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor
-
+                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor,
+                Active = student.Active
             };
             return View(list);
         }
 
-        public async Task<IActionResult> Update(Student model)
+        public async Task<IActionResult> Update(RegistrationViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -210,7 +217,8 @@ namespace Lead2Change.Web.Ui.Controllers
                         GuidanceCounselorName = model.GuidanceCounselorName,
                         MeetWithGuidanceCounselor = model.MeetWithGuidanceCounselor,
                         HowOftenMeetWithGuidanceCounselor = model.HowOftenMeetWithGuidanceCounselor,
-                        DiscussWithGuidanceCounselor = model.DiscussWithGuidanceCounselor
+                        DiscussWithGuidanceCounselor = model.DiscussWithGuidanceCounselor,
+                        Active = model.Active
                     };
                     var student = await _studentService.Update(list);
                 }

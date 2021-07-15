@@ -145,6 +145,11 @@
         <input asp-for="DiscussWithGuidanceCounselor" class="form-control" value=@Model.DiscussWithGuidanceCounselor />
         <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="Active" class="control-label">IS this student active?</label>
+        <input asp-for="Active" class="form-control" type="checkbox" />
+        <span asp-validation-for="Active" class="text-danger"></span>
+    </div>
 
 
 

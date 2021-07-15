@@ -1,6 +1,6 @@
 ﻿@model List<Lead2Change.Domain.Models.Student>
 @*
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "InactiveIndex";
 *@
 
 <div class="container">
@@ -19,10 +19,10 @@
         </thead>
 
         <tbody>
-            @foreach (var item in Model) 
-                if(item.Active == true)
-                {
+            @foreach (var item in Model)
 
+             if(item.Active == false)
+                {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.StudentLastName)
@@ -76,7 +76,4 @@
                 }
         </tbody>
     </table>
-    <div>
-        <a asp-action="Register"><b>Add new student.</b></a>
-    </div>
 </div>

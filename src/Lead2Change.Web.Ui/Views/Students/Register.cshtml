@@ -155,6 +155,12 @@
                 <input asp-for="DiscussWithGuidanceCounselor" class="form-control" />
                 <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
             </div>
+            <div id="hidden" class="form-group" display="none">
+                <label asp-for="Active" class="control-label"></label>
+                <input asp-for="Active" class="form-control" type="checkbox"/>
+            </div>
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
