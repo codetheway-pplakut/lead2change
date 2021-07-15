@@ -232,8 +232,8 @@
         </div>
         <h3>Guidance Counselor Information</h3>
         <div class="form-group">
+            <input asp-for="KnowGuidanceCounselor" class="form-check-input me-1 showHide" type="checkbox" id="checkboxTest" oninput="showHideClass('conditionalQuestion')" />
             <label asp-for="KnowGuidanceCounselor" class="control-label">Do you know who your guidance counselor is?</label>
-            <input asp-for="KnowGuidanceCounselor" class="form-control showHide" id="checkboxTest" oninput="showHideClass('conditionalQuestion')" />
             <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
         </div>
         <div class="conditionalQuestion">
@@ -243,9 +243,9 @@
                 <span asp-validation-for="GuidanceCounselorName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
-                <input asp-for="MeetWithGuidanceCounselor" class="form-control" />
+                <input asp-for="MeetWithGuidanceCounselor" class="form-check-input me-1" type="checkbox" />
                 <label asp-for="MeetWithGuidanceCounselor" class="control-label">Do you meet with your guidance counselor?</label>
+                <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="HowOftenMeetWithGuidanceCounselor" class="control-label">How often?</label>
