@@ -257,7 +257,7 @@
     <h3>Post-Secondary Plans</h3>
     <div class="form-group">
         <label asp-for="PlanAfterHighSchool" class="control-label">Plan After High School:</label>
-        <select asp-for="PlanAfterHighSchool" class="form-control" requried>
+        <select asp-for="PlanAfterHighSchool" class="form-control" required>
             <option value="College">College</option>
             <option value="Trade School">Trade School</option>
             <option value="Armed Forces">Armed Forces</option>
@@ -272,7 +272,7 @@
     </div>
     <div class="form-group">
         <label asp-for="CollegesList" class="control-label">What schools have you applied to?</label>
-        <input asp-for="CollegesList" class="form-control" value=@Model.CollegesList />
+        <input asp-for="CollegesList" class="form-control" value=@Model.CollegesList required/>
         <span asp-validation-for="CollegesList" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -328,12 +328,12 @@
     </div>
     <div class="form-group">
         <label asp-for="CareerPathList" class="control-label">What career path(s) are you interested in pursuing?</label>
-        <input asp-for="CareerPathList" class="form-control" value=@Model.CareerPathList />
+        <input asp-for="CareerPathList" class="form-control" value=@Model.CareerPathList required/>
         <span asp-validation-for="CareerPathList" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="OtherPlans" class="control-label">What are your plans for after high school?</label>
-        <input asp-for="OtherPlans" class="form-control" value=@Model.OtherPlans />
+        <input asp-for="OtherPlans" class="form-control" value=@Model.OtherPlans required/>
         <span asp-validation-for="OtherPlans" class="text-danger"></span>
     </div>
     <h3>College Entrance Exam Information</h3>
@@ -401,22 +401,22 @@
     <h3>Signatures</h3>
     <div class="form-group">
         <label asp-for="StudentSignature" class="control-label">Student Signature:</label>
-        <input asp-for="StudentSignature" class="form-control" value=@Model.StudentSignature />
+        <input asp-for="StudentSignature" class="form-control" value=@Model.StudentSignature required/>
         <span asp-validation-for="StudentSignature" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="StudentSignatureDate" class="control-label">Date:</label>
-        <input asp-for="StudentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
+        <input asp-for="StudentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required/>
         <span asp-validation-for="StudentSignatureDate" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="ParentSignature" class="control-label">Parent Signature:</label>
-        <input asp-for="ParentSignature" class="form-control" value=@Model.ParentSignature />
+        <input asp-for="ParentSignature" class="form-control" value=@Model.ParentSignature required/>
         <span asp-validation-for="ParentSignature" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="ParentSignatureDate" class="control-label">Date:</label>
-        <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
+        <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required/>
         <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
     </div>
 
