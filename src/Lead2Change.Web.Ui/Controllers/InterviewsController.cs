@@ -43,13 +43,17 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Create()
         {
-            return View(new InterviewViewModel());
+            return View(new InterviewViewModel()
+            {
+                QuestionInInterviews = new List<QuestionInInterview>()
+            }) ;
         }
 
         public async Task<IActionResult> Register(InterviewViewModel model)
         {
             if (ModelState.IsValid)
             {
+                
 
                 Interview interview = new Interview()
                 {
@@ -58,6 +62,9 @@ namespace Lead2Change.Web.Ui.Controllers
                     Id = model.Id
                     
                 };
+                // This Code is solely for testing the connection between Interviews and Questions and shouldn't be included in final code
+                Question testQuestion = new Question() { QuestionString = "Test Question" };
+                interview.QuestionInInterviews.Add(new QuestionInInterview { Interview = interview, InterviewId = interview.Id, Question = testQuestion, QuestionId = testQuestion.Id });
                 var result = await _interviewsService.Create(interview);
                 return RedirectToAction("Index");
 
@@ -100,13 +107,13 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             var result = await _interviewsService.GetInterview(id);
-            InterviewViewModel goal = new InterviewViewModel()
+            InterviewViewModel interview = new InterviewViewModel()
             {
                 Id = id,
                 QuestionInInterviews = result.QuestionInInterviews,
                 InterviewName=result.InterviewName
             };
-            return View(goal);
+            return View(interview);
         }
 
     }
