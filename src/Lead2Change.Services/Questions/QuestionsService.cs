@@ -1,7 +1,6 @@
 ﻿using Lead2Change.Data.Contexts;
 using Lead2Change.Domain.Constants;
 using Lead2Change.Domain.Models;
-using Lead2Change.Domain.ViewModels;
 using Lead2Change.Repositories.AppEvents;
 using Lead2Change.Repositories.Questions;
 using System;

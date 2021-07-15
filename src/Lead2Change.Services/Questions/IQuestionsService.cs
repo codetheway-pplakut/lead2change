@@ -11,9 +11,8 @@ namespace Lead2Change.Services.Questions
     {
         public Task<List<Question>> GetQuestions();
         public Task<Question> GetQuestion(Guid id);
-        public Task<Question> Update(Question model);
         public Task<Question> Create(Question question);
-
+        public Task<Question> Update(Question model);
         public Task<Question> Delete(Question question);
     }
 }
