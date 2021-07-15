@@ -3,14 +3,16 @@ using System;
 using Lead2Change.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lead2Change.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210714181945_InterviewsAndQuestions")]
+    partial class InterviewsAndQuestions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -301,9 +303,6 @@ namespace Lead2Change.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("InterviewName")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
                     b.ToTable("Interviews");
@@ -412,12 +411,6 @@ namespace Lead2Change.Data.Migrations
 
                     b.Property<bool>("MeetWithGuidanceCounselor")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("OldParentEmail")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("OldStudentEmail")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("OtherPlans")
                         .HasColumnType("TEXT");

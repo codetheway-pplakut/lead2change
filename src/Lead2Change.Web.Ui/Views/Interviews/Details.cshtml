@@ -1,0 +1,38 @@
+﻿@model Lead2Change.Domain.ViewModels.InterviewViewModel;
+@using Lead2Change.Domain.Models;
+@*
+    ViewData["Title"] = "Details";
+*@
+<h1 align="center">Details</h1>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Info Type</th>
+            <th scope="col">Info</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Interview Title</b> </td>
+            <td>@Model.InterviewName</td>
+        </tr>
+        <tr>
+            <td><b>Does the question exist?</b> </td>
+            <td>@Model.QuestionInInterviews</td>
+        </tr>
+        @if (Model.QuestionInInterviews != null)
+        {
+            @foreach (QuestionInInterview questionInInterview in Model.QuestionInInterviews)
+            {
+                <tr>
+                    <td>Question:</td>
+                    <td>@questionInInterview.Question.QuestionString</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<div>
+    <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("Index","Interviews")'">Back To List</button>
+</div>
