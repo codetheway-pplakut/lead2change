@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Lead2Change.Services.Answers
 {
@@ -28,6 +29,19 @@ namespace Lead2Change.Services.Answers
         public async Task<Answer> Update(Answer model)
         {
             return await this.AnswersRepository.Update(model);
+        }
+    }
+        public async Task<Answer> Create(Answer answer)
+        {
+            return await this.AnswersRepository.Create(answer);
+        }
+        public async Task<Answer> GetAnswer(Guid id)
+        {
+            return await this.AnswersRepository.GetAnswer(id);
+        }
+        public async Task<Answer> Delete(Answer answer)
+        {
+            return await AnswersRepository.Delete(answer);
         }
     }
 }
