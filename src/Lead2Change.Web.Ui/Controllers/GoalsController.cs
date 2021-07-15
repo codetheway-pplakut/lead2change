@@ -28,7 +28,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentId = result.StudentId,
                 GoalSet = result.GoalSet,
                 DateGoalSet = result.DateGoalSet,
-                SEL = result.SEL,
+                SEL = result.SEL.Split(","),
                 GoalReviewDate = result.GoalReviewDate,
                 WasItAccomplished = result.WasItAccomplished,
                 Explanation = result.Explanation,             
@@ -36,11 +36,26 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(goal);
         }
 
-        public async Task<IActionResult> Update(Goal model)
+        public async Task<IActionResult> Update(GoalViewModel model)
         {
+            // Prevents null exceptions from no SEL input being selected
+            string goalSEL = (model.SEL == null) ? "" : String.Join(", ", model.SEL);
+
+
+            Goal goal = new Goal
+            {
+                GoalSet = model.GoalSet,
+                StudentId = model.StudentId,
+                Id = model.Id,
+                DateGoalSet = model.DateGoalSet,
+                SEL = goalSEL,
+                GoalReviewDate = model.GoalReviewDate,
+                WasItAccomplished = model.WasItAccomplished,
+                Explanation = model.Explanation,
+            };
             if (ModelState.IsValid)
             {
-                var Goal = await GoalsService.Update(model);
+                var Goal = await GoalsService.Update(goal);
                 return RedirectToAction("Index", new { studentID = model.StudentId });
             }
             return View(model);
@@ -54,7 +69,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentId = result.StudentId,
                 DateGoalSet = result.DateGoalSet,
                 GoalSet = result.GoalSet,
-                SEL = result.SEL,
+                SEL =result.SEL.Split(",") ,
                 GoalReviewDate = result.GoalReviewDate,
                 WasItAccomplished = result.WasItAccomplished,
                 Explanation = result.Explanation
@@ -80,14 +95,17 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+                // Checks to prevent null exception errors
+                string goalSEL = (model.SEL == null) ? "" : String.Join(", ", model.SEL);
+
+
                                     Goal goal = new Goal()
                                     {
                                         GoalSet = model.GoalSet,
                                         StudentId = model.StudentId,
                                         Id = model.Id,
                                         DateGoalSet = model.DateGoalSet,
-                                        SEL = model.SEL,
+                                        SEL = goalSEL,
                                         GoalReviewDate = model.GoalReviewDate,
                                         WasItAccomplished = model.WasItAccomplished,
                                         Explanation = model.Explanation,
@@ -118,7 +136,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     Id = goal.Id,
                     StudentId = goal.StudentId,
                     DateGoalSet = goal.DateGoalSet,
-                    SEL = goal.SEL,
+                    SEL = goal.SEL.Split(","),
                     GoalReviewDate = goal.GoalReviewDate,
                     WasItAccomplished = goal.WasItAccomplished,
                     Explanation = goal.Explanation
