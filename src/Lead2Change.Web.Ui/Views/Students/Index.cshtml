@@ -58,19 +58,25 @@
                             @Html.ActionLink("Details", "Details", new { id = item.Id })
                         </div>
 
-                        <div>
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                        </div>
-                        <div>
-                            @Html.ActionLink("Goals", "Index", "Goals", new { studentID = item.Id })
-                        </div>
-
-                        <div>
-                            @Html.ActionLink("View Career", "Details", "CareerDeclaration", new { id = item.CareerDeclarationId })
-                        </div>
-
-                        <div>
-                            @Html.ActionLink("Add Career", "Create", "CareerDeclaration", new { studentId = item.Id })
+                            <div>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </div>
+                            <div>
+                                @Html.ActionLink("Goals", "Index", "Goals", new { studentID = item.Id })
+                            </div>
+                            
+                            @if (item.CareerDeclarationId == Guid.Empty)
+                            {
+                                <div>
+                                    @Html.ActionLink("Add Career", "Create", "CareerDeclaration", new { studentId = item.Id })
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    @Html.ActionLink("View Career", "Details", "CareerDeclaration", new { id = item.CareerDeclarationId })
+                                </div>
+                            }
                         </div>
                     </div>
                 </td>
