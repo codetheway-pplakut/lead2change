@@ -1,4 +1,8 @@
 ﻿@using Lead2Change.Domain.Constants;
+@using Microsoft.AspNetCore.Identity
+@using Lead2Change.Domain.Models
+@inject SignInManager<AspNetUsers> SignInManager
+@inject UserManager<AspNetUsers> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,10 +28,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                       
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
-                        </li>
+
+                        @if (SignInManager.IsSignedIn(User) && (User.IsInRole(StringConstants.RoleNameCoach) || User.IsInRole(StringConstants.RoleNameAdmin)))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
