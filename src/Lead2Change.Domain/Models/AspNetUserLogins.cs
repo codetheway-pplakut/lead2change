@@ -9,13 +9,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Lead2Change.Domain.Models
 {
-    public partial class AspNetUserLogins : IdentityUserLogin<Guid>
-    {
-        public string LoginProvider { get; set; }
-        public string ProviderKey { get; set; }
-        public string ProviderDisplayName { get; set; }
-        public Guid UserId { get; set; }
+    //public partial class AspNetUserLogins : IdentityUserLogin<string>
+    //{
+    //    public string LoginProvider { get; set; }
+    //    public string ProviderKey { get; set; }
+    //    public string ProviderDisplayName { get; set; }
+    //    public Guid UserId { get; set; }
 
-        public virtual AspNetUsers User { get; set; }
-    }
+    //    public virtual AspNetUsers User { get; set; }
+    //}
 }

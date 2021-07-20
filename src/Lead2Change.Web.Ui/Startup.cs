@@ -54,10 +54,9 @@ namespace Lead2Change.Web.Ui
                         Configuration.GetConnectionString("DefaultConnection")));
             }
 
-            services.AddDefaultIdentity<AspNetUsers>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<AppDbContext>();
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddIdentity<AspNetUsers, AspNetRoles>(options => {
+                options.SignIn.RequireConfirmedAccount = true;
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -90,6 +89,9 @@ namespace Lead2Change.Web.Ui
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

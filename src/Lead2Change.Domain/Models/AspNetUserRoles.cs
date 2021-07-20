@@ -9,12 +9,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Lead2Change.Domain.Models
 {
-    public partial class AspNetUserRoles : IdentityUserRole<Guid>
-    {
-        public Guid UserId { get; set; }
-        public Guid RoleId { get; set; }
+    //public partial class AspNetUserRoles : IdentityUserRole
+    //{
+    //    public Guid UserId { get; set; }
+    //    public Guid RoleId { get; set; }
 
-        public virtual AspNetRoles Role { get; set; }
-        public virtual AspNetUsers User { get; set; }
-    }
+    //    public virtual AspNetRoles Role { get; set; }
+    //    public virtual AspNetUsers User { get; set; }
+    //}
 }

@@ -7,20 +7,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Lead2Change.Domain.Constants;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
     public class StudentsController : _BaseController
     {
+        RoleManager<AspNetRoles> _roleManager;
         IStudentService _studentService;
+        UserManager<AspNetUsers> _userManager;
 
-        public StudentsController(IUserService identityService, IStudentService studentService) : base(identityService)
+        public StudentsController(IUserService identityService, RoleManager<AspNetRoles> roleManager, IStudentService studentService, UserManager<AspNetUsers> userManager) : base(identityService)
         {
+            _roleManager = roleManager;
             _studentService = studentService;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
         {
+            await CreateDefaultRoles();
+            await CreateNewUser("test0001@test.com", "test0001@test.com", "Testtest@123", "student");
+
             return View(await _studentService.GetStudents());
         }
 
@@ -213,6 +222,72 @@ namespace Lead2Change.Web.Ui.Controllers
                 return RedirectToAction("Index");
             }
             return View(model);
+        }
+
+
+        /// <summary>
+        /// This is an example of how to create roles
+        /// </summary>
+        /// <returns></returns>
+        private async Task CreateDefaultRoles()
+        {
+            var hasAdmin = await _roleManager.FindByNameAsync(StringConstants.RoleNameAdmin);
+
+            if (hasAdmin == null)
+                await _roleManager.CreateAsync(new AspNetRoles() { 
+                    Name = StringConstants.RoleNameAdmin,
+                    NormalizedName = StringConstants.RoleNameAdmin
+                });
+
+            var hasCoach = await _roleManager.FindByNameAsync(StringConstants.RoleNameCoach);
+
+            if (hasCoach == null)
+                await _roleManager.CreateAsync(new AspNetRoles() {
+                    Name = StringConstants.RoleNameCoach,
+                    NormalizedName = StringConstants.RoleNameCoach
+                });
+
+            var hasStudent = await _roleManager.FindByNameAsync(StringConstants.RoleNameStudent);
+
+            if (hasStudent == null)
+                await _roleManager.CreateAsync(new AspNetRoles() {
+                    Name = StringConstants.RoleNameStudent,
+                    NormalizedName = StringConstants.RoleNameStudent
+                });
+        }
+
+        /// <summary>
+        /// This is an example of how to create a user and assign that user to a role
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        private async Task CreateNewUser(string userName, string email, string password, string roleName)
+        {
+            var identityUser = new AspNetUsers() {
+                UserName = userName,
+                Email = email
+            };
+
+            var result = await _userManager.CreateAsync(identityUser, password);
+
+            if (result.Succeeded)
+            {
+                var user = await _userManager.FindByNameAsync(userName);
+
+                if (user != null)
+                {
+                    var role = await _userManager.AddToRoleAsync(user, roleName);
+                }
+                else
+                {
+                    //Do something because the user does not exist
+                }
+            }
+            else
+            { 
+                //Do something because the user could not be created
+            }
         }
     }
 }
