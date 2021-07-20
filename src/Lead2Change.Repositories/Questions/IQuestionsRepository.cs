@@ -9,6 +9,7 @@ namespace Lead2Change.Repositories.Questions
     public interface IQuestionsRepository
     {
         public Task<List<Question>> GetQuestions();
+        public Task<List<Question>> GetArchivedQuestions();
         public Task<Question> GetQuestion(Guid id);
         public Task<Question> Update(Question model);
         public Task<Question> Create(Question question);

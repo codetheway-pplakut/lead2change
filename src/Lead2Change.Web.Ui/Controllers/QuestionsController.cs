@@ -27,6 +27,10 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             return View(new QuestionsViewModel());
         }
+        public async Task<IActionResult> ArchivedQuestions()
+        {
+            return View(await QuestionsService.GetArchivedQuestions());
+        }
 
         [HttpPost]
 

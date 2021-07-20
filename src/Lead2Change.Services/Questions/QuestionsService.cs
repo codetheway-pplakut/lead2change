@@ -22,6 +22,10 @@ namespace Lead2Change.Services.Questions
         {
             return await this.QuestionsRepository.GetQuestions();
         }
+        public async Task<List<Question>> GetArchivedQuestions()
+        {
+            return await this.QuestionsRepository.GetArchivedQuestions();
+        }
         public async Task<Question> GetQuestion(Guid id)
         {
             return await this.QuestionsRepository.GetQuestion(id);
