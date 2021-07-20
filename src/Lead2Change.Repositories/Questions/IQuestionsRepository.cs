@@ -12,7 +12,6 @@ namespace Lead2Change.Repositories.Questions
         public Task<Question> GetQuestion(Guid id);
         public Task<Question> Update(Question model);
         public Task<Question> Create(Question question);
-
         public Task<Question> Delete(Question question);
     }
 }

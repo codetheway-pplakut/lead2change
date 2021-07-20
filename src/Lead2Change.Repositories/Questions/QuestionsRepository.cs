@@ -19,10 +19,10 @@ namespace Lead2Change.Repositories.Questions
         }
         public async Task<List<Question>> GetQuestions()
         {
-            return await this.AppDbContext.Questions.ToListAsync();
+            return await this.AppDbContext.Questions.Where(x => x.IsArchived == false).ToListAsync();
         }
         public async Task<Question> GetQuestion(Guid id)
-        {
+        {                     
             return await this.AppDbContext.Questions.FirstOrDefaultAsync(i => i.Id == id);
         }
         public async Task<Question> Update(Question model)
@@ -36,12 +36,12 @@ namespace Lead2Change.Repositories.Questions
             var result = await this.AppDbContext.AddAsync(question);
             await this.AppDbContext.SaveChangesAsync();
             return result.Entity;
-
         }
 
         public async Task<Question> Delete(Question model)
         {
-            AppDbContext.Questions.Remove(model);
+            model.IsArchived = true;
+            AppDbContext.Questions.Update(model);
             await AppDbContext.SaveChangesAsync();
             return model;
         }
