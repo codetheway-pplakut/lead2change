@@ -28,7 +28,7 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Index()
         {
             await CreateDefaultRoles();
-            await CreateNewUser("test0001@test.com", "test0001@test.com", "Testtest@123", "student");
+            await CreateNewUser("test0001@test.com", "Testtest@123", StringConstants.RoleNameStudent);
 
             return View(await _studentService.GetStudents());
         }
@@ -257,23 +257,29 @@ namespace Lead2Change.Web.Ui.Controllers
         }
 
         /// <summary>
-        /// This is an example of how to create a user and assign that user to a role
+        /// THIS IS NOT CALLED WHEN A USER USES THE WEBSITE TO CREATE A USER
+        /// 
+        /// This is used for creating a user on the backend, programmatically
         /// </summary>
-        /// <param name="userName"></param>
         /// <param name="email"></param>
         /// <returns></returns>
-        private async Task CreateNewUser(string userName, string email, string password, string roleName)
+        private async Task CreateNewUser(string email, string password, string roleName, bool confirm = true)
         {
             var identityUser = new AspNetUsers() {
-                UserName = userName,
+                UserName = email,
                 Email = email
             };
 
             var result = await _userManager.CreateAsync(identityUser, password);
+            if(confirm)
+            {
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(identityUser);
+                _ = _userManager.ConfirmEmailAsync(identityUser, token);
+            }
 
             if (result.Succeeded)
             {
-                var user = await _userManager.FindByNameAsync(userName);
+                var user = await _userManager.FindByEmailAsync(email);
 
                 if (user != null)
                 {
