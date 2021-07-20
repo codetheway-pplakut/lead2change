@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Lead2Change.Domain.Constants;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
