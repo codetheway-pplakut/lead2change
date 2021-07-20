@@ -10,29 +10,29 @@
         <label asp-for="Id" class="control-label"></label>
         <input asp-for="Id" class="form-control" value=@Model.Id />
     </div>
-    <div class="form-group">
+    <div id="hidden" class="form-group">
         <label asp-for="StudentId" class="control-label"></label>
         <input asp-for="StudentId" class="form-control" value=@Model.StudentId />
         <span asp-validation-for="StudentId" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="CollegeBound" class="control-label"></label>
-        <input asp-for="CollegeBound" class="form-control" value=@Model.CollegeBound />
-        <span asp-validation-for="CollegeBound" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CareerCluster" class="control-label"> </label>
-        @Html.DropDownListFor(m => m.CareerCluster, Model.CareerCluster.ToSelectList(), null, new { @class = "form-control" })
+    <div class="form-group row">
+        <label asp-for="CareerCluster" class="control-label col-md-3">Career Cluster</label>
+        @Html.DropDownListFor(m => m.CareerCluster, Model.CareerCluster.ToSelectList(), null, new { @class = "form-control  col-md-9" })
         <span asp-validation-for="CareerCluster" class="text-danger"> </span>
     </div>
-    <div class="form-group">
-        <label asp-for="SpecificCareer" class="control-label"> </label>
-        <input asp-for="SpecificCareer" class="form-label" value=@Model.SpecificCareer>
+    <div class="form-group row">
+        <label asp-for="SpecificCareer" class="control-label col-md-3">Specific Career</label>
+        <input asp-for="SpecificCareer" class="form-control col-md-9" value=@Model.SpecificCareer>
         <span asp-validation-for="SpecificCareer" class="text-danger"> </span>
     </div>
-    <div class="form-group">
-        <label asp-for="TechnicalCollegeBound" class="control-label"> </label>
-        <input asp-for="TechnicalCollegeBound" class="form-label" value=@Model.TechnicalCollegeBound>
+    <div class="form-group row">
+        <label asp-for="CollegeBound" class="control-label col-md-3">Student is College Bound</label>
+        <input asp-for="CollegeBound" class="form-control col-md-9" value=@Model.CollegeBound />
+        <span asp-validation-for="CollegeBound" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <label asp-for="TechnicalCollegeBound" class="control-label col-md-3">Student is Technical College Bound</label>
+        <input asp-for="TechnicalCollegeBound" class="form-control col-md-9" value=@Model.TechnicalCollegeBound>
         <span asp-validation-for="TechnicalCollegeBound" class="text-danger"> </span>
     </div>
 
