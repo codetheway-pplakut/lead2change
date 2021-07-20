@@ -1,19 +1,18 @@
-﻿using Lead2Change.Web.Ui.Models;
+﻿using Lead2Change.Domain.Models;
+using Lead2Change.Services.Identity;
+using Lead2Change.Web.Ui.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : _BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUserService identityService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
         {
             _logger = logger;
         }

@@ -4,6 +4,7 @@ using Lead2Change.Domain.ViewModels;
 using Lead2Change.Services.CareerDeclarationService;
 using Lead2Change.Services.Identity;
 using Lead2Change.Services.Students;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Lead2Change.Web.Ui.Controllers
         private ICareerDeclarationService _service;
         private IStudentService _studentService;
 
-        public CareerDeclarationController(IUserService identityService, ICareerDeclarationService careerDeclarationService, IStudentService studentService) : base(identityService)
+        public CareerDeclarationController(IUserService identityService, ICareerDeclarationService careerDeclarationService, IStudentService studentService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
         {
             _service = careerDeclarationService;
             _studentService = studentService;

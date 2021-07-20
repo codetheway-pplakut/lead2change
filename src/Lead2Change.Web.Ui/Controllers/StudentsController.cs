@@ -4,37 +4,28 @@ using Lead2Change.Services.Students;
 using Microsoft.AspNetCore.Mvc;
 using Lead2Change.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Lead2Change.Domain.Constants;
-using Microsoft.AspNetCore.Authorization;
 using Lead2Change.Web.Ui.Models;
+using Lead2Change.Domain.Constants;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
     public class StudentsController : _BaseController
     {
-        RoleManager<AspNetRoles> _roleManager;
         IStudentService _studentService;
-        UserManager<AspNetUsers> _userManager;
-        SignInManager<AspNetUsers> _signInManager;
 
-        public StudentsController(IUserService identityService, IStudentService studentService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService)
+        public StudentsController(IUserService identityService, IStudentService studentService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
         {
-            _roleManager = roleManager;
             _studentService = studentService;
-            _userManager = userManager;
-            _signInManager = signInManager;
         }
 
         public async Task<IActionResult> Index()
         {
-            await CreateDefaultRoles();
-            await CreateNewUser("test0001@test.com", "Testtest@123", StringConstants.RoleNameStudent);
-            await CreateNewUser("admin@admin.net", "Testtest@123", StringConstants.RoleNameAdmin);
-
+            if (!User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                return Error("403: You are not authorized to view this page.");
+            }
             return View(await _studentService.GetStudents());
         }
 
@@ -42,21 +33,30 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (!await CanEditStudent(id))
             {
-                // TODO: Change
-                return RedirectToAction("Error", "Home");
+                return Error("403: You are not authorized to delete this student.");
             }
 
             var student = await _studentService.GetStudent(id);
             await _studentService.Delete(student);
             return RedirectToAction("Index");
         }
+
         public async Task<IActionResult> Register()
         {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("403: Must be signed in to access the student registration form.");
+            }
             return View(new RegistrationViewModel());
         }
 
         public async Task<IActionResult> Details(Guid id)
         {
+            if (!await CanEditStudent(id))
+            {
+                return Error("403: Not authorized to view this student.");
+            }
+
             var studentscontainer = await _studentService.GetStudent(id);
             RegistrationViewModel viewModel = new RegistrationViewModel()
             {
@@ -95,12 +95,10 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(viewModel);
         }
 
-
-
         [HttpPost]
         public async Task<IActionResult> Register(RegistrationViewModel viewModel)
         {
-            if (_signInManager.IsSignedIn(User) && ModelState.IsValid)
+            if (SignInManager.IsSignedIn(User) && ModelState.IsValid)
             {
                 if (viewModel.StudentFirstName.Length > 0)
                 {
@@ -140,13 +138,13 @@ namespace Lead2Change.Web.Ui.Controllers
                     var student = await _studentService.Create(model);
 
                     // Registers a relation in user to studentId
-                    var user = await _userManager.GetUserAsync(User);
+                    var user = await UserManager.GetUserAsync(User);
                     user.StudentId = student.Id;
-                    await _userManager.UpdateAsync(user);
+                    await UserManager.UpdateAsync(user);
                 }
                 return RedirectToAction("Index");
             }
-            return View(viewModel);
+            return Error("403: Not signed in, cannot register a user.");
         }
 
 
@@ -156,8 +154,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
             if (student == null || !await CanEditStudent(id))
             {
-                // TODO: Change
-                return RedirectToAction("Error", "Home");
+                return Error("403: Not authorized to edit the details of this student or this student does not exist.");
             }
 
             RegistrationViewModel viewModel = new RegistrationViewModel()
@@ -201,12 +198,11 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Update(RegistrationViewModel viewModel)
         {
-            var user = await _userManager.GetUserAsync(User);
+            var user = await UserManager.GetUserAsync(User);
 
             if (!await CanEditStudent(viewModel.Id))
             {
-                // TODO: Change
-                return RedirectToAction("Error", "Home");
+                return Error("403: Not authorized to edit the details of this student.");
             }
 
             if (ModelState.IsValid)
@@ -253,100 +249,6 @@ namespace Lead2Change.Web.Ui.Controllers
                 return RedirectToAction("Index");
             }
             return View(viewModel);
-        }
-
-
-        /// <summary>
-        /// This is an example of how to create roles
-        /// </summary>
-        /// <returns></returns>
-        private async Task CreateDefaultRoles()
-        {
-            var hasAdmin = await _roleManager.FindByNameAsync(StringConstants.RoleNameAdmin);
-
-            if (hasAdmin == null)
-                await _roleManager.CreateAsync(new AspNetRoles() { 
-                    Name = StringConstants.RoleNameAdmin,
-                    NormalizedName = StringConstants.RoleNameAdmin
-                });
-
-            var hasCoach = await _roleManager.FindByNameAsync(StringConstants.RoleNameCoach);
-
-            if (hasCoach == null)
-                await _roleManager.CreateAsync(new AspNetRoles() {
-                    Name = StringConstants.RoleNameCoach,
-                    NormalizedName = StringConstants.RoleNameCoach
-                });
-
-            var hasStudent = await _roleManager.FindByNameAsync(StringConstants.RoleNameStudent);
-
-            if (hasStudent == null)
-                await _roleManager.CreateAsync(new AspNetRoles() {
-                    Name = StringConstants.RoleNameStudent,
-                    NormalizedName = StringConstants.RoleNameStudent
-                });
-        }
-
-        /// <summary>
-        /// THIS IS NOT CALLED WHEN A USER USES THE WEBSITE TO CREATE A USER
-        /// 
-        /// This is used for creating a user on the backend, programmatically
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
-        private async Task CreateNewUser(string email, string password, string roleName, bool confirm = true)
-        {
-            var identityUser = new AspNetUsers() {
-                UserName = email,
-                Email = email
-            };
-
-            var result = await _userManager.CreateAsync(identityUser, password);
-            if(confirm)
-            {
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync(identityUser);
-                _ = _userManager.ConfirmEmailAsync(identityUser, token);
-            }
-
-            if (result.Succeeded)
-            {
-                var user = await _userManager.FindByEmailAsync(email);
-
-                if (user != null)
-                {
-                    var role = await _userManager.AddToRoleAsync(user, roleName);
-                }
-                else
-                {
-                    //Do something because the user does not exist
-                }
-            }
-            else
-            { 
-                //Do something because the user could not be created
-            }
-        }
-        
-        private async Task<bool> CanEditStudent(Guid studentId)
-        {
-            if (_signInManager.IsSignedIn(User))
-            {
-                if(User.IsInRole(StringConstants.RoleNameStudent))
-                {
-                    var user = await _userManager.GetUserAsync(User);
-                    return studentId == user.StudentId;
-                }
-                else if (User.IsInRole(StringConstants.RoleNameCoach))
-                {
-                    // TODO: Return only if coach "owns" this student
-                    return true;
-                }
-                else if (User.IsInRole(StringConstants.RoleNameAdmin))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

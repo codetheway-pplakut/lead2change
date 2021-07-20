@@ -8,14 +8,15 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Lead2Change.Domain.Models;
-
+using Lead2Change.Services.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
-    public class GoalsController : Controller
+    public class GoalsController : _BaseController
     {
         private IGoalsService GoalsService;
-        public GoalsController(IGoalsService goalsService)
+        public GoalsController(IUserService identityService, IGoalsService goalsService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
         {
             this.GoalsService = goalsService;
         }
