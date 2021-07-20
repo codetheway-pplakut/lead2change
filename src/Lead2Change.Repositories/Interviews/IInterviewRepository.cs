@@ -17,7 +17,7 @@ namespace Lead2Change.Repositories.Interviews
         public Task<Interview> Create(Interview interview);
         public Task<Interview> Delete(Interview model);
 
-
+        public Task<List<QuestionInInterview>> GetInterviewAndQuestions(Guid interviewId);
 
     }
 }

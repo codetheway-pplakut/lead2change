@@ -40,5 +40,11 @@ namespace Lead2Change.Services.Interviews
         {
             return await this._interviewRepository.Delete(interview);
         }
+
+        public async Task<List<QuestionInInterview>> GetInterviewAndQuestions(Guid interviewId)
+        {
+            return await this._interviewRepository.GetInterviewAndQuestions(interviewId);
+        }
+        
     }
 }

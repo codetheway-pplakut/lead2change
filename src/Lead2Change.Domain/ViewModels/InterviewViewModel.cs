@@ -7,6 +7,10 @@ namespace Lead2Change.Domain.ViewModels
 {
     public class InterviewViewModel
     {
+        public InterviewViewModel()
+        {
+            QuestionInInterviews = new List<QuestionInInterview>();
+        }
         public ICollection<QuestionInInterview> QuestionInInterviews { get; set; }
         public Guid Id { get; set; }
         public string InterviewName { get; set; }
