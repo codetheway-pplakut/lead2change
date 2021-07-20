@@ -46,15 +46,28 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Create()
         {
-            return View(new InterviewViewModel()) ;
+            return View(new InterviewQuestionCreateViewModel()) ;
         }
 
-        public async Task<IActionResult> Register(InterviewViewModel model)
+        public async Task<IActionResult> Register(InterviewQuestionCreateViewModel model, String submitButton)
         {
             if (ModelState.IsValid)
             {
-                
+                // The value of the submitButton tells the code which button (add question or save) was pushed
+                if (submitButton.Equals("addQuestion"))
+                {
+                    if(model.QuestionText != null && !model.QuestionText.Equals(""))
+                    {
+                        Question newQuestion = new Question() { QuestionString = model.QuestionText };
+                        model.QuestionInInterviews.Add(new QuestionInInterview { InterviewId = model.Id, Question = newQuestion, QuestionId = newQuestion.Id });
+                        await _questionService.Create(newQuestion);
+                        model.QuestionText = null;
+                    }
+                    return View("Create", model);
 
+
+                }
+                // Creates the interview
                 Interview interview = new Interview()
                 {
                     QuestionInInterviews = model.QuestionInInterviews,
@@ -62,10 +75,12 @@ namespace Lead2Change.Web.Ui.Controllers
                     Id = model.Id
                     
                 };
-                // This Code is solely for testing the connection between Interviews and Questions and shouldn't be included in final code
-                Question testQuestion = new Question() { QuestionString = "Test Question" };
-                interview.QuestionInInterviews.Add(new QuestionInInterview { Interview = interview, InterviewId = interview.Id, Question = testQuestion, QuestionId = testQuestion.Id });
-                await _questionService.Create(testQuestion);
+                // Handles Question Creation
+                Question addedQuestion = new Question() { QuestionString = model.QuestionText };
+                // Links the question and interview
+                interview.QuestionInInterviews.Add(new QuestionInInterview { Interview = interview, InterviewId = interview.Id, Question = addedQuestion, QuestionId = addedQuestion.Id });
+                // Adds them to the database
+                await _questionService.Create(addedQuestion);
                 var result = await _interviewsService.Create(interview);
                 return RedirectToAction("Index");
 
