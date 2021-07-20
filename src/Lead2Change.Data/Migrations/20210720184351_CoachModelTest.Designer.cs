@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lead2Change.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210630192952_StudentRegistrationModifications")]
-    partial class StudentRegistrationModifications
+    [Migration("20210720184351_CoachModelTest")]
+    partial class CoachModelTest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -240,10 +240,30 @@ namespace Lead2Change.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentId")
-                        .IsUnique();
-
                     b.ToTable("CareerDeclarations");
+                });
+
+            modelBuilder.Entity("Lead2Change.Domain.Models.Coach", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoachEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoachFirstName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoachLastName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoachPhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Coaches");
                 });
 
             modelBuilder.Entity("Lead2Change.Domain.Models.Goal", b =>
@@ -307,7 +327,16 @@ namespace Lead2Change.Data.Migrations
                     b.Property<bool>("AssistanceForForms")
                         .HasColumnType("INTEGER");
 
+                    b.Property<Guid>("CareerDeclarationId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("CareerDeclarationId1")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("CareerPathList")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("CoachId")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("CollegeApplicationStatus")
@@ -471,6 +500,10 @@ namespace Lead2Change.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CareerDeclarationId1");
+
+                    b.HasIndex("CoachId");
+
                     b.ToTable("Students");
                 });
 
@@ -525,20 +558,24 @@ namespace Lead2Change.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Lead2Change.Domain.Models.CareerDeclaration", b =>
-                {
-                    b.HasOne("Lead2Change.Domain.Models.Student", null)
-                        .WithOne("CareerDeclaration")
-                        .HasForeignKey("Lead2Change.Domain.Models.CareerDeclaration", "StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Lead2Change.Domain.Models.Goal", b =>
                 {
                     b.HasOne("Lead2Change.Domain.Models.Student", null)
                         .WithMany("Goals")
                         .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Lead2Change.Domain.Models.Student", b =>
+                {
+                    b.HasOne("Lead2Change.Domain.Models.CareerDeclaration", "CareerDeclaration")
+                        .WithMany()
+                        .HasForeignKey("CareerDeclarationId1");
+
+                    b.HasOne("Lead2Change.Domain.Models.Coach", null)
+                        .WithMany("Students")
+                        .HasForeignKey("CoachId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

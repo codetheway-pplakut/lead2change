@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Lead2Change.Data.Migrations
 {
-    public partial class CareerDeclarationId : Migration
+    public partial class CoachModelTest : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -73,6 +73,21 @@ namespace Lead2Change.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CareerDeclarations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Coaches",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CoachFirstName = table.Column<string>(nullable: true),
+                    CoachLastName = table.Column<string>(nullable: true),
+                    CoachEmail = table.Column<string>(nullable: true),
+                    CoachPhoneNumber = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Coaches", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -193,6 +208,7 @@ namespace Lead2Change.Data.Migrations
                     StudentAddress = table.Column<string>(nullable: true),
                     StudentApartmentNumber = table.Column<string>(nullable: true),
                     StudentCity = table.Column<string>(nullable: true),
+                    StudentState = table.Column<string>(nullable: true),
                     StudentZipCode = table.Column<string>(nullable: true),
                     StudentHomePhone = table.Column<string>(nullable: true),
                     StudentCellPhone = table.Column<string>(nullable: true),
@@ -202,6 +218,7 @@ namespace Lead2Change.Data.Migrations
                     ParentFirstName = table.Column<string>(nullable: true),
                     ParentLastName = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
+                    ParentApartmentNumber = table.Column<string>(nullable: true),
                     ParentCity = table.Column<string>(nullable: true),
                     ParentState = table.Column<string>(nullable: true),
                     ParentZipCode = table.Column<string>(nullable: true),
@@ -230,6 +247,8 @@ namespace Lead2Change.Data.Migrations
                     OtherPlans = table.Column<string>(nullable: true),
                     PACTTestDate = table.Column<DateTime>(nullable: false),
                     PACTTestScore = table.Column<int>(nullable: false),
+                    PSATTestDate = table.Column<DateTime>(nullable: false),
+                    PSATTestScore = table.Column<int>(nullable: false),
                     SATTestDate = table.Column<DateTime>(nullable: false),
                     SATTestScore = table.Column<int>(nullable: false),
                     ACTTestDate = table.Column<DateTime>(nullable: false),
@@ -237,11 +256,13 @@ namespace Lead2Change.Data.Migrations
                     PrepClassRequired = table.Column<bool>(nullable: false),
                     AssistanceForForms = table.Column<bool>(nullable: false),
                     FinancialAidProcessComplete = table.Column<bool>(nullable: false),
+                    SupportNeeded = table.Column<string>(nullable: true),
                     StudentSignature = table.Column<string>(nullable: true),
                     StudentSignatureDate = table.Column<DateTime>(nullable: false),
                     ParentSignature = table.Column<string>(nullable: true),
                     ParentSignatureDate = table.Column<DateTime>(nullable: false),
-                    CareerDeclarationId1 = table.Column<Guid>(nullable: true)
+                    CareerDeclarationId1 = table.Column<Guid>(nullable: true),
+                    CoachId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -252,6 +273,12 @@ namespace Lead2Change.Data.Migrations
                         principalTable: "CareerDeclarations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Students_Coaches_CoachId",
+                        column: x => x.CoachId,
+                        principalTable: "Coaches",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -324,6 +351,11 @@ namespace Lead2Change.Data.Migrations
                 name: "IX_Students_CareerDeclarationId1",
                 table: "Students",
                 column: "CareerDeclarationId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_CoachId",
+                table: "Students",
+                column: "CoachId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -360,6 +392,9 @@ namespace Lead2Change.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "CareerDeclarations");
+
+            migrationBuilder.DropTable(
+                name: "Coaches");
         }
     }
 }

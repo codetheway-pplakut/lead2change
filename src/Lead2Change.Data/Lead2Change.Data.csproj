@@ -17,6 +17,14 @@
     <Compile Remove="Migrations\20210629194205_ModelsNew.Designer.cs" />
     <Compile Remove="Migrations\20210630150913_Goals.cs" />
     <Compile Remove="Migrations\20210630150913_Goals.Designer.cs" />
+    <Compile Remove="Migrations\20210720175951_CoachModel.cs" />
+    <Compile Remove="Migrations\20210720175951_CoachModel.Designer.cs" />
+    <Compile Remove="Migrations\20210720180711_CoachModel.cs" />
+    <Compile Remove="Migrations\20210720180711_CoachModel.Designer.cs" />
+    <Compile Remove="Migrations\20210720182726_CoachModel.cs" />
+    <Compile Remove="Migrations\20210720182726_CoachModel.Designer.cs" />
+    <Compile Remove="Migrations\20210720183955_CoachModelTest.cs" />
+    <Compile Remove="Migrations\20210720183955_CoachModelTest.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
