@@ -18,7 +18,7 @@
             <div class="container-fluid">
                 <div class="form-group">
                     <b><label asp-for="GoalSet" class="control-label"></label></b>
-                    <input asp-for="GoalSet" class="form-control" />
+                    <input required asp-for="GoalSet" class="form-control" />
                     <span asp-validation-for="GoalSet" class="text-danger"></span>
                 </div>
 
@@ -70,7 +70,7 @@
                 </div>
                 <div class="form-group, shipping">
                     <b><label asp-for="Explanation" class="control-label"></label></b>
-                    <textarea asp-for="Explanation" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea required asp-for="Explanation" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                     <span asp-validation-for="Explanation" class="text-danger"></span>
                 </div>
             </div>
