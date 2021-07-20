@@ -21,7 +21,7 @@ namespace Lead2Change.Domain.Models
         public string StudentZipCode { get; set; }
         public string StudentHomePhone { get; set; }
         public string StudentCellPhone { get; set; }
-        public string StudentEmail { get; set; }
+        public string StudentEmail { get; set; }        
         public string StudentCareerPath { get; set; }
         public string StudentCareerInterest { get; set; }
         public string ParentFirstName { get; set; }

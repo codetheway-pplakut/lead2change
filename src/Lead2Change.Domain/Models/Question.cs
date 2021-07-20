@@ -6,6 +6,10 @@ namespace Lead2Change.Domain.Models
 {
     public class Question
     {
+        public Question()
+        {
+            this.QuestionInInterviews = new List<QuestionInInterview>();
+        }
         public string QuestionString { get; set; }
 
         public Guid Id { get; set; }

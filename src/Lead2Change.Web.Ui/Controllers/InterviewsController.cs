@@ -6,16 +6,19 @@ using System.Threading.Tasks;
  using Lead2Change.Services.Interviews;
 using Lead2Change.Domain.ViewModels;
 using Lead2Change.Domain.Models;
+using Lead2Change.Services.Questions;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
     public class InterviewsController : Controller
     {
         private IInterviewService _interviewsService;
+        private IQuestionsService _questionService;
 
-        public InterviewsController(IInterviewService interviewsService)
+        public InterviewsController(IInterviewService interviewsService, IQuestionsService questionService)
         {
             this._interviewsService = interviewsService;
+            this._questionService = questionService;
         }
         public async Task<IActionResult> Index()
         {
@@ -43,10 +46,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Create()
         {
-            return View(new InterviewViewModel()
-            {
-                QuestionInInterviews = new List<QuestionInInterview>()
-            }) ;
+            return View(new InterviewViewModel()) ;
         }
 
         public async Task<IActionResult> Register(InterviewViewModel model)
@@ -65,6 +65,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 // This Code is solely for testing the connection between Interviews and Questions and shouldn't be included in final code
                 Question testQuestion = new Question() { QuestionString = "Test Question" };
                 interview.QuestionInInterviews.Add(new QuestionInInterview { Interview = interview, InterviewId = interview.Id, Question = testQuestion, QuestionId = testQuestion.Id });
+                await _questionService.Create(testQuestion);
                 var result = await _interviewsService.Create(interview);
                 return RedirectToAction("Index");
 
@@ -106,12 +107,12 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Details(Guid id)
         {
-            var result = await _interviewsService.GetInterview(id);
+            var result = await _interviewsService.GetInterviewAndQuestions(id);
             InterviewViewModel interview = new InterviewViewModel()
             {
                 Id = id,
-                QuestionInInterviews = result.QuestionInInterviews,
-                InterviewName=result.InterviewName
+                QuestionInInterviews = result,
+                InterviewName = result.FirstOrDefault().Interview.InterviewName
             };
             return View(interview);
         }
