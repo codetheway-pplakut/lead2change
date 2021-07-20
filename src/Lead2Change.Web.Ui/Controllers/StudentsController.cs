@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Lead2Change.Domain.Constants;
 using Microsoft.AspNetCore.Authorization;
+using Lead2Change.Web.Ui.Models;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
@@ -18,24 +19,33 @@ namespace Lead2Change.Web.Ui.Controllers
         RoleManager<AspNetRoles> _roleManager;
         IStudentService _studentService;
         UserManager<AspNetUsers> _userManager;
+        SignInManager<AspNetUsers> _signInManager;
 
-        public StudentsController(IUserService identityService, RoleManager<AspNetRoles> roleManager, IStudentService studentService, UserManager<AspNetUsers> userManager) : base(identityService)
+        public StudentsController(IUserService identityService, IStudentService studentService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService)
         {
             _roleManager = roleManager;
             _studentService = studentService;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task<IActionResult> Index()
         {
             await CreateDefaultRoles();
             await CreateNewUser("test0001@test.com", "Testtest@123", StringConstants.RoleNameStudent);
+            await CreateNewUser("admin@admin.net", "Testtest@123", StringConstants.RoleNameAdmin);
 
             return View(await _studentService.GetStudents());
         }
 
         public async Task<IActionResult> Delete(Guid id)
         {
+            if (!await CanEditStudent(id))
+            {
+                // TODO: Change
+                return RedirectToAction("Error", "Home");
+            }
+
             var student = await _studentService.GetStudent(id);
             await _studentService.Delete(student);
             return RedirectToAction("Index");
@@ -48,7 +58,7 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             var studentscontainer = await _studentService.GetStudent(id);
-            RegistrationViewModel a = new RegistrationViewModel()
+            RegistrationViewModel viewModel = new RegistrationViewModel()
             {
                 Id = studentscontainer.Id,
                 StudentFirstName = studentscontainer.StudentFirstName,
@@ -82,63 +92,75 @@ namespace Lead2Change.Web.Ui.Controllers
                 HowOftenMeetWithGuidanceCounselor = studentscontainer.HowOftenMeetWithGuidanceCounselor,
                 DiscussWithGuidanceCounselor = studentscontainer.DiscussWithGuidanceCounselor
             };
-            return View(a);
+            return View(viewModel);
         }
 
 
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegistrationViewModel model)
+        public async Task<IActionResult> Register(RegistrationViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            if (_signInManager.IsSignedIn(User) && ModelState.IsValid)
             {
-                if (model.StudentFirstName.Length > 0)
+                if (viewModel.StudentFirstName.Length > 0)
                 {
-                    Student student = new Student()
+                    Student model = new Student()
                     {
-                        Id = model.Id,
-                        StudentFirstName = model.StudentFirstName,
-                        StudentLastName = model.StudentLastName,
-                        StudentDateOfBirth = model.StudentDateOfBirth,
-                        StudentAddress = model.StudentAddress,
-                        StudentApartmentNumber = model.StudentApartmentNumber,
-                        StudentCity = model.StudentCity,
-                        StudentState = model.StudentState,
-                        StudentZipCode = model.StudentZipCode,
-                        StudentHomePhone = model.StudentHomePhone,
-                        StudentCellPhone = model.StudentCellPhone,
-                        StudentEmail = model.StudentEmail,
-                        StudentCareerPath = model.StudentCareerPath,
-                        StudentCareerInterest = model.StudentCareerInterest,
-                        ParentFirstName = model.ParentFirstName,
-                        ParentLastName = model.ParentLastName,
-                        Address = model.Address,
+                        Id = viewModel.Id,
+                        StudentFirstName = viewModel.StudentFirstName,
+                        StudentLastName = viewModel.StudentLastName,
+                        StudentDateOfBirth = viewModel.StudentDateOfBirth,
+                        StudentAddress = viewModel.StudentAddress,
+                        StudentApartmentNumber = viewModel.StudentApartmentNumber,
+                        StudentCity = viewModel.StudentCity,
+                        StudentState = viewModel.StudentState,
+                        StudentZipCode = viewModel.StudentZipCode,
+                        StudentHomePhone = viewModel.StudentHomePhone,
+                        StudentCellPhone = viewModel.StudentCellPhone,
+                        StudentEmail = viewModel.StudentEmail,
+                        StudentCareerPath = viewModel.StudentCareerPath,
+                        StudentCareerInterest = viewModel.StudentCareerInterest,
+                        ParentFirstName = viewModel.ParentFirstName,
+                        ParentLastName = viewModel.ParentLastName,
+                        Address = viewModel.Address,
                         //ParentAdress
-                        ParentApartmentNumber = model.ParentApartmentNumber,
-                        ParentCity = model.ParentCity,
-                        ParentState = model.ParentState,
-                        ParentZipCode = model.ParentZipCode,
-                        ParentHomePhone = model.ParentHomePhone,
-                        ParentCellPhone = model.ParentCellPhone,
-                        ParentEmail = model.ParentEmail,
-                        KnowGuidanceCounselor = model.KnowGuidanceCounselor,
-                        GuidanceCounselorName = model.GuidanceCounselorName,
-                        MeetWithGuidanceCounselor = model.MeetWithGuidanceCounselor,
-                        HowOftenMeetWithGuidanceCounselor = model.HowOftenMeetWithGuidanceCounselor,
-                        DiscussWithGuidanceCounselor = model.DiscussWithGuidanceCounselor
+                        ParentApartmentNumber = viewModel.ParentApartmentNumber,
+                        ParentCity = viewModel.ParentCity,
+                        ParentState = viewModel.ParentState,
+                        ParentZipCode = viewModel.ParentZipCode,
+                        ParentHomePhone = viewModel.ParentHomePhone,
+                        ParentCellPhone = viewModel.ParentCellPhone,
+                        ParentEmail = viewModel.ParentEmail,
+                        KnowGuidanceCounselor = viewModel.KnowGuidanceCounselor,
+                        GuidanceCounselorName = viewModel.GuidanceCounselorName,
+                        MeetWithGuidanceCounselor = viewModel.MeetWithGuidanceCounselor,
+                        HowOftenMeetWithGuidanceCounselor = viewModel.HowOftenMeetWithGuidanceCounselor,
+                        DiscussWithGuidanceCounselor = viewModel.DiscussWithGuidanceCounselor
                     };
-                    var abc = await _studentService.Create(student);
+                    var student = await _studentService.Create(model);
+
+                    // Registers a relation in user to studentId
+                    var user = await _userManager.GetUserAsync(User);
+                    user.StudentId = student.Id;
+                    await _userManager.UpdateAsync(user);
                 }
                 return RedirectToAction("Index");
             }
-            return View(model);
+            return View(viewModel);
         }
 
 
         public async Task<IActionResult> Edit(Guid id)
         {
             var student = await _studentService.GetStudent(id);
-            RegistrationViewModel list = new RegistrationViewModel()
+
+            if (student == null || !await CanEditStudent(id))
+            {
+                // TODO: Change
+                return RedirectToAction("Error", "Home");
+            }
+
+            RegistrationViewModel viewModel = new RegistrationViewModel()
             {
                 Id = student.Id,
                 //General Student Info
@@ -174,55 +196,63 @@ namespace Lead2Change.Web.Ui.Controllers
                 DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor
 
             };
-            return View(list);
+            return View(viewModel);
         }
 
-        public async Task<IActionResult> Update(Student model)
+        public async Task<IActionResult> Update(RegistrationViewModel viewModel)
         {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (!await CanEditStudent(viewModel.Id))
+            {
+                // TODO: Change
+                return RedirectToAction("Error", "Home");
+            }
+
             if (ModelState.IsValid)
             {
-                if (model.StudentFirstName.Length > 0)
+                if (viewModel.StudentFirstName.Length > 0)
                 {
-                    Student list = new Student()
+                    Student model = new Student()
                     {
-                        Id = model.Id,
+                        Id = viewModel.Id,
                         //General Student Info
-                        StudentFirstName = model.StudentFirstName,
-                        StudentLastName = model.StudentLastName,
-                        StudentDateOfBirth = model.StudentDateOfBirth,
-                        StudentAddress = model.StudentAddress,
-                        StudentApartmentNumber = model.StudentApartmentNumber,
-                        StudentCity = model.StudentCity,
-                        StudentState = model.StudentState,
-                        StudentZipCode = model.StudentZipCode,
-                        StudentHomePhone = model.StudentHomePhone,
-                        StudentCellPhone = model.StudentCellPhone,
-                        StudentEmail = model.StudentEmail,
-                        StudentCareerPath = model.StudentCareerPath,
-                        StudentCareerInterest = model.StudentCareerInterest,
+                        StudentFirstName = viewModel.StudentFirstName,
+                        StudentLastName = viewModel.StudentLastName,
+                        StudentDateOfBirth = viewModel.StudentDateOfBirth,
+                        StudentAddress = viewModel.StudentAddress,
+                        StudentApartmentNumber = viewModel.StudentApartmentNumber,
+                        StudentCity = viewModel.StudentCity,
+                        StudentState = viewModel.StudentState,
+                        StudentZipCode = viewModel.StudentZipCode,
+                        StudentHomePhone = viewModel.StudentHomePhone,
+                        StudentCellPhone = viewModel.StudentCellPhone,
+                        StudentEmail = viewModel.StudentEmail,
+                        StudentCareerPath = viewModel.StudentCareerPath,
+                        StudentCareerInterest = viewModel.StudentCareerInterest,
                         //Parent Info
-                        ParentFirstName = model.ParentFirstName,
-                        ParentLastName = model.ParentLastName,
-                        Address = model.Address,
-                        ParentApartmentNumber = model.ParentApartmentNumber,
-                        ParentCity = model.ParentCity,
-                        ParentState = model.ParentState,
-                        ParentZipCode = model.ParentZipCode,
-                        ParentHomePhone = model.ParentHomePhone,
-                        ParentCellPhone = model.ParentCellPhone,
-                        ParentEmail = model.ParentEmail,
+                        ParentFirstName = viewModel.ParentFirstName,
+                        ParentLastName = viewModel.ParentLastName,
+                        Address = viewModel.Address,
+                        ParentApartmentNumber = viewModel.ParentApartmentNumber,
+                        ParentCity = viewModel.ParentCity,
+                        ParentState = viewModel.ParentState,
+                        ParentZipCode = viewModel.ParentZipCode,
+                        ParentHomePhone = viewModel.ParentHomePhone,
+                        ParentCellPhone = viewModel.ParentCellPhone,
+                        ParentEmail = viewModel.ParentEmail,
                         //Guidance Counselor Info
-                        KnowGuidanceCounselor = model.KnowGuidanceCounselor,
-                        GuidanceCounselorName = model.GuidanceCounselorName,
-                        MeetWithGuidanceCounselor = model.MeetWithGuidanceCounselor,
-                        HowOftenMeetWithGuidanceCounselor = model.HowOftenMeetWithGuidanceCounselor,
-                        DiscussWithGuidanceCounselor = model.DiscussWithGuidanceCounselor
+                        KnowGuidanceCounselor = viewModel.KnowGuidanceCounselor,
+                        GuidanceCounselorName = viewModel.GuidanceCounselorName,
+                        MeetWithGuidanceCounselor = viewModel.MeetWithGuidanceCounselor,
+                        HowOftenMeetWithGuidanceCounselor = viewModel.HowOftenMeetWithGuidanceCounselor,
+                        DiscussWithGuidanceCounselor = viewModel.DiscussWithGuidanceCounselor
                     };
-                    var student = await _studentService.Update(list);
+                    var student = await _studentService.Update(model);
                 }
                 return RedirectToAction("Index");
             }
-            return View(model);
+            return View(viewModel);
         }
 
 
@@ -295,6 +325,28 @@ namespace Lead2Change.Web.Ui.Controllers
             { 
                 //Do something because the user could not be created
             }
+        }
+        
+        private async Task<bool> CanEditStudent(Guid studentId)
+        {
+            if (_signInManager.IsSignedIn(User))
+            {
+                if(User.IsInRole(StringConstants.RoleNameStudent))
+                {
+                    var user = await _userManager.GetUserAsync(User);
+                    return studentId == user.StudentId;
+                }
+                else if (User.IsInRole(StringConstants.RoleNameCoach))
+                {
+                    // TODO: Return only if coach "owns" this student
+                    return true;
+                }
+                else if (User.IsInRole(StringConstants.RoleNameAdmin))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
