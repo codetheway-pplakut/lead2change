@@ -42,5 +42,9 @@ namespace Lead2Change.Services.Questions
         {
             return await QuestionsRepository.Delete(question);
         }
+        public async Task<Question> PermanentDelete(Question question)
+        {
+            return await QuestionsRepository.PermanentDelete(question);
+        }
     }
 }

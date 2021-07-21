@@ -49,5 +49,11 @@ namespace Lead2Change.Repositories.Questions
             await AppDbContext.SaveChangesAsync();
             return model;
         }
+        public async Task<Question> PermanentDelete(Question model)
+        {
+            AppDbContext.Questions.Remove(model);
+            await AppDbContext.SaveChangesAsync();
+            return model;
+        }
     }
 }
