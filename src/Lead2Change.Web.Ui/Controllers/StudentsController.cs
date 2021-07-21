@@ -16,9 +16,10 @@ namespace Lead2Change.Web.Ui.Controllers
         IStudentService _studentService;
         ICoachService _coachService;
 
-        public StudentsController(IIdentityService identityService, IStudentService studentService) : base(identityService)
+        public StudentsController(IIdentityService identityService, IStudentService studentService, ICoachService coachService) : base(identityService)
         {
             _studentService = studentService;
+            _coachService = coachService;
         }
 
         public async Task<IActionResult> Index()
@@ -50,6 +51,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentDateOfBirth = studentscontainer.StudentDateOfBirth,
                 StudentCellPhone = studentscontainer.StudentCellPhone,
                 StudentEmail = studentscontainer.StudentEmail,
+                CoachName = coachcontainer.CoachFirstName + " " + coachcontainer.CoachLastName
                 /*
                 StudentAddress = studentscontainer.StudentAddress,
                 StudentApartmentNumber = studentscontainer.StudentApartmentNumber,
