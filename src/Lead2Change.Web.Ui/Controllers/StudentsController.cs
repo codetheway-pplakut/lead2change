@@ -28,18 +28,14 @@ namespace Lead2Change.Web.Ui.Controllers
                 return Redirect("/Identity/Account/Login");
             }
 
-            if (!User.IsInRole(StringConstants.RoleNameStudent))
+            if (User.IsInRole(StringConstants.RoleNameStudent))
             {
                 return Error("403: You are not authorized to view this page.");
             }
 
             var user = await UserManager.GetUserAsync(User);
 
-            if (User.IsInRole(StringConstants.RoleNameStudent))
-            {
-                return View(await _studentService.GetStudent(user.StudentId));
-            }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
+            if (User.IsInRole(StringConstants.RoleNameCoach))
             {
                 // StudentId being used as assosiation to coach
                 return View(await _studentService.GetStudentsByCoachId(user.StudentId));
@@ -70,50 +66,64 @@ namespace Lead2Change.Web.Ui.Controllers
             {
                 return Error("403: Must be signed in to access the student registration form.");
             }
+
+            var user = await UserManager.GetUserAsync(User);
+
+            if (user.StudentId == Guid.Empty)
+            {
+                return Error("403: Not authorized to view this student.");
+            }
+
             return View(new RegistrationViewModel());
         }
 
         public async Task<IActionResult> Details(Guid id)
         {
-            if (!await CanEditStudent(id))
+            if (id == Guid.Empty)
+            {
+                return RedirectToAction("Register");
+            }
+
+            var student = await _studentService.GetStudent(id);
+
+            if (!await CanEditStudent(id) || student == null)
             {
                 return Error("403: Not authorized to view this student.");
             }
 
-            var studentscontainer = await _studentService.GetStudent(id);
             RegistrationViewModel viewModel = new RegistrationViewModel()
             {
-                Id = studentscontainer.Id,
-                StudentFirstName = studentscontainer.StudentFirstName,
-                StudentLastName = studentscontainer.StudentLastName,
-                StudentDateOfBirth = studentscontainer.StudentDateOfBirth,
-                StudentAddress = studentscontainer.StudentAddress,
-                StudentApartmentNumber = studentscontainer.StudentApartmentNumber,
-                StudentCity = studentscontainer.StudentCity,
-                StudentState = studentscontainer.StudentState,
-                StudentZipCode = studentscontainer.StudentZipCode,
-                StudentHomePhone = studentscontainer.StudentHomePhone,
-                StudentCellPhone = studentscontainer.StudentCellPhone,
-                StudentEmail = studentscontainer.StudentEmail,
-                StudentCareerPath = studentscontainer.StudentCareerPath,
-                StudentCareerInterest = studentscontainer.StudentCareerInterest,
+                Id = student.Id,
+                StudentFirstName = student.StudentFirstName,
+                StudentLastName = student.StudentLastName,
+                StudentDateOfBirth = student.StudentDateOfBirth,
+                StudentAddress = student.StudentAddress,
+                StudentApartmentNumber = student.StudentApartmentNumber,
+                StudentCity = student.StudentCity,
+                StudentState = student.StudentState,
+                StudentZipCode = student.StudentZipCode,
+                StudentHomePhone = student.StudentHomePhone,
+                StudentCellPhone = student.StudentCellPhone,
+                StudentEmail = student.StudentEmail,
+                StudentCareerPath = student.StudentCareerPath,
+                StudentCareerInterest = student.StudentCareerInterest,
 
-                ParentFirstName = studentscontainer.ParentFirstName,
-                ParentLastName = studentscontainer.ParentLastName,
-                Address = studentscontainer.Address,
-                ParentApartmentNumber = studentscontainer.ParentApartmentNumber,
-                ParentCity = studentscontainer.ParentCity,
-                ParentState = studentscontainer.ParentState,
-                ParentZipCode = studentscontainer.ParentZipCode,
-                ParentHomePhone = studentscontainer.ParentHomePhone,
-                ParentCellPhone = studentscontainer.ParentCellPhone,
-                ParentEmail = studentscontainer.ParentEmail,
+                ParentFirstName = student.ParentFirstName,
+                ParentLastName = student.ParentLastName,
+                Address = student.Address,
+                ParentApartmentNumber = student.ParentApartmentNumber,
+                ParentCity = student.ParentCity,
+                ParentState = student.ParentState,
+                ParentZipCode = student.ParentZipCode,
+                ParentHomePhone = student.ParentHomePhone,
+                ParentCellPhone = student.ParentCellPhone,
+                ParentEmail = student.ParentEmail,
 
-                KnowGuidanceCounselor = studentscontainer.KnowGuidanceCounselor,
-                GuidanceCounselorName = studentscontainer.GuidanceCounselorName,
-                MeetWithGuidanceCounselor = studentscontainer.MeetWithGuidanceCounselor,
-                HowOftenMeetWithGuidanceCounselor = studentscontainer.HowOftenMeetWithGuidanceCounselor,
-                DiscussWithGuidanceCounselor = studentscontainer.DiscussWithGuidanceCounselor
+                KnowGuidanceCounselor = student.KnowGuidanceCounselor,
+                GuidanceCounselorName = student.GuidanceCounselorName,
+                MeetWithGuidanceCounselor = student.MeetWithGuidanceCounselor,
+                HowOftenMeetWithGuidanceCounselor = student.HowOftenMeetWithGuidanceCounselor,
+                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor
             };
             return View(viewModel);
         }
@@ -123,6 +133,11 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (SignInManager.IsSignedIn(User) && ModelState.IsValid)
             {
+                var user = await UserManager.GetUserAsync(User);
+                if (user.StudentId == Guid.Empty)
+                {
+                    return Error("Cannot register a user.");
+                }
                 if (viewModel.StudentFirstName.Length > 0)
                 {
                     Student model = new Student()
@@ -161,11 +176,10 @@ namespace Lead2Change.Web.Ui.Controllers
                     var student = await _studentService.Create(model);
 
                     // Registers a relation in user to studentId
-                    var user = await UserManager.GetUserAsync(User);
                     user.StudentId = student.Id;
                     await UserManager.UpdateAsync(user);
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Details");
             }
             return Error("403: Not signed in, cannot register a user.");
         }

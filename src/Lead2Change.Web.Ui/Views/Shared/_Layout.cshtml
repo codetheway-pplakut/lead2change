@@ -29,6 +29,19 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole(StringConstants.RoleNameStudent))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Details">Students</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Goals" asp-action="Details">Goals</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="CareerDeclaration" asp-action="Details">Career</a>
+                            </li>
+                        }
+
                         @if (SignInManager.IsSignedIn(User) && (User.IsInRole(StringConstants.RoleNameCoach) || User.IsInRole(StringConstants.RoleNameAdmin)))
                         {
                             <li class="nav-item">

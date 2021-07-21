@@ -48,19 +48,30 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Details(Guid id)
         {
-            var result = await GoalsService.GetGoal(id);
-            GoalViewModel goal = new GoalViewModel()
+            var goal = await GoalsService.GetGoal(id);
+
+            if (goal == null)
+            {
+                return RedirectToAction("Register");
+            }
+
+            if (!await CanEditStudent(goal.StudentId))
+            {
+                return Error("403: Not authorized to view this student.");
+            }
+
+            GoalViewModel viewModel = new GoalViewModel()
             {
                 Id = id,
-                StudentId = result.StudentId,
-                DateGoalSet = result.DateGoalSet,
-                GoalSet = result.GoalSet,
-                SEL = result.SEL,
-                GoalReviewDate = result.GoalReviewDate,
-                WasItAccomplished = result.WasItAccomplished,
-                Explanation = result.Explanation
+                StudentId = goal.StudentId,
+                DateGoalSet = goal.DateGoalSet,
+                GoalSet = goal.GoalSet,
+                SEL = goal.SEL,
+                GoalReviewDate = goal.GoalReviewDate,
+                WasItAccomplished = goal.WasItAccomplished,
+                Explanation = goal.Explanation
             };
-            return View(goal);
+            return View(viewModel);
         }
 
         /**
@@ -77,29 +88,29 @@ namespace Lead2Change.Web.Ui.Controllers
             }) ;
         }
         [HttpPost]
-        public async Task<IActionResult> Register(GoalViewModel model)
+        public async Task<IActionResult> Register(GoalViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-               
-                                    Goal goal = new Goal()
-                                    {
-                                        GoalSet = model.GoalSet,
-                                        StudentId = model.StudentId,
-                                        Id = model.Id,
-                                        DateGoalSet = model.DateGoalSet,
-                                        SEL = model.SEL,
-                                        GoalReviewDate = model.GoalReviewDate,
-                                        WasItAccomplished = model.WasItAccomplished,
-                                        Explanation = model.Explanation,
+                Goal model = new Goal()
+                {
+                    GoalSet = viewModel.GoalSet,
+                    StudentId = viewModel.StudentId,
+                    Id = viewModel.Id,
+                    DateGoalSet = viewModel.DateGoalSet,
+                    SEL = viewModel.SEL,
+                    GoalReviewDate = viewModel.GoalReviewDate,
+                    WasItAccomplished = viewModel.WasItAccomplished,
+                    Explanation = viewModel.Explanation,
 
-                                    };
-                                    var result = await GoalsService.Create(goal);
-                                    return RedirectToAction("Index", new { studentID = goal.StudentId });
+                };
+                // TODO: Create StudentId on user Registration
+                var result = await GoalsService.Create(model);
+                return RedirectToAction("Index", new { studentID = model.StudentId });
                                 
 
             }
-            return View("Create", model);
+            return View("Create", viewModel);
         }
 
         /**
