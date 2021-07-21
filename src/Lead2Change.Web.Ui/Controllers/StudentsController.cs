@@ -7,12 +7,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Lead2Change.Services.Coaches;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
     public class StudentsController : _BaseController
     {
         IStudentService _studentService;
+        ICoachService _coachService;
 
         public StudentsController(IIdentityService identityService, IStudentService studentService) : base(identityService)
         {
@@ -38,20 +40,23 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             var studentscontainer = await _studentService.GetStudent(id);
+            var temporaryCoachId = studentscontainer.CoachId;
+            var coachcontainer = await _coachService.GetCoach(temporaryCoachId);
             RegistrationViewModel a = new RegistrationViewModel()
             {
                 Id = studentscontainer.Id,
                 StudentFirstName = studentscontainer.StudentFirstName,
                 StudentLastName = studentscontainer.StudentLastName,
                 StudentDateOfBirth = studentscontainer.StudentDateOfBirth,
+                StudentCellPhone = studentscontainer.StudentCellPhone,
+                StudentEmail = studentscontainer.StudentEmail,
+                /*
                 StudentAddress = studentscontainer.StudentAddress,
                 StudentApartmentNumber = studentscontainer.StudentApartmentNumber,
                 StudentCity = studentscontainer.StudentCity,
                 StudentState = studentscontainer.StudentState,
                 StudentZipCode = studentscontainer.StudentZipCode,
                 StudentHomePhone = studentscontainer.StudentHomePhone,
-                StudentCellPhone = studentscontainer.StudentCellPhone,
-                StudentEmail = studentscontainer.StudentEmail,
                 StudentCareerPath = studentscontainer.StudentCareerPath,
                 StudentCareerInterest = studentscontainer.StudentCareerInterest,
 
@@ -102,6 +107,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentSignatureDate = studentscontainer.StudentSignatureDate,
                 ParentSignature = studentscontainer.ParentSignature,
                 ParentSignatureDate = studentscontainer.ParentSignatureDate
+                */
             };
             return View(a);
         }
@@ -124,7 +130,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentDateOfBirth = model.StudentDateOfBirth,
                         StudentCellPhone = model.StudentCellPhone,
                         StudentEmail = model.StudentEmail,
-                        CoachId = new Guid("dea1550d-31b1-42b1-b94e-19e03e7e83a1")
+                        CoachId = new Guid("dea1550d-31b1-42b1-b94e-19e03e7e83a1") //set to unlisted/unassigned
                         /*
                         StudentAddress = model.StudentAddress,
                         StudentApartmentNumber = model.StudentApartmentNumber,
