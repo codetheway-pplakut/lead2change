@@ -11,6 +11,7 @@ namespace Lead2Change.Services.Coaches
     {
         public Task<Coach> Create(Coach coach);
         public Task<List<Coach>> GetCoaches();
-
+        public Task<Coach> Delete(Coach coach);
+        public Task<Coach> GetCoach(Guid id);
     }
 }

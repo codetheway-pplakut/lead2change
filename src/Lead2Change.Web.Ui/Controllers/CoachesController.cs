@@ -18,6 +18,13 @@ namespace Lead2Change.Web.Ui.Controllers
             _coachService = coachService;
         }
 
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var student = await _coachService.GetCoach(id);
+            await _coachService.Delete(student);
+            return RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> Create()
         {
             return View(new CoachViewModel());
