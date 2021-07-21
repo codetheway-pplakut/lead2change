@@ -184,3 +184,8 @@ thead.blueStyle{
     font-family: Gotham;
     color: #ff5307;
 }
+
+
+.hidden {
+    display: none;
+}
