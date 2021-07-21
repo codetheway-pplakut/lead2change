@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lead2Change.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210720184351_CoachModelTest")]
-    partial class CoachModelTest
+    [Migration("20210721185920_EverythingModel")]
+    partial class EverythingModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -336,7 +336,7 @@ namespace Lead2Change.Data.Migrations
                     b.Property<string>("CareerPathList")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CoachId")
+                    b.Property<Guid?>("CoachId")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("CollegeApplicationStatus")
@@ -575,9 +575,7 @@ namespace Lead2Change.Data.Migrations
 
                     b.HasOne("Lead2Change.Domain.Models.Coach", null)
                         .WithMany("Students")
-                        .HasForeignKey("CoachId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CoachId");
                 });
 #pragma warning restore 612, 618
         }

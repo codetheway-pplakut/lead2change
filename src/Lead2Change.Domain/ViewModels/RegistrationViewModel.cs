@@ -70,6 +70,7 @@ namespace Lead2Change.Domain.ViewModels
         public DateTime StudentSignatureDate { get; set; }
         public string ParentSignature { get; set; }
         public DateTime ParentSignatureDate { get; set; }
-
+        public Guid? CoachId { get; set; }
+        public String CoachName { get; set; }
     }
 }

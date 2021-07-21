@@ -1,1 +1,94 @@
-﻿
+﻿@model List<Lead2Change.Domain.Models.Student>
+@*
+    ViewData["Title"] = "Index";
+*@
+
+<div class="container">
+    <h1>Students</h1>
+
+    <table class="table sortable" id="myTable">
+        <thead>
+            <tr>
+                <th scope="col">Last Name</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Date Of Birth</th>
+                <th scope="col">Email</th>
+                <th scope="col">Parent Last Name</th>
+                <th scope="col">Parent First Name</th>
+                <th scope="col">Parent Email</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentFirstName)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.StudentDateOfBirth.ToString("d"))*@
+                        @*@Model.modelItem => item.StudentDateOfBirth.ToString("d")*@
+                        @Convert.ToDateTime(item.StudentDateOfBirth).ToString("MM/dd/yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParentLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParentFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParentEmail)
+                    </td>
+                    <td>
+                        <div>
+                            <div>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                            </div>
+
+                            <div>
+                                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                            </div>
+
+                            <div>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </div>
+                            <div>
+                                @Html.ActionLink("Goals", "Index", "Goals", new { studentID = item.Id })
+                            </div>
+
+                            @if (item.CareerDeclarationId == Guid.Empty)
+
+                            {
+                                <div>
+                                    @Html.ActionLink("Add Career", "Create", "CareerDeclaration", new { studentId = item.Id })
+                                </div>
+                            }
+                            else
+
+                            {
+                                <div>
+                                    @Html.ActionLink("View Career", "Details", "CareerDeclaration", new { id = item.CareerDeclarationId })
+                                </div>
+                            }
+                        </div>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+
+    <div>
+        <a asp-action="Register"><b>Add new student.</b></a>
+    </div>
+</div>
