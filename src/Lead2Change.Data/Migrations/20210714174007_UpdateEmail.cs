@@ -6,6 +6,7 @@ namespace Lead2Change.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.AddColumn<string>(
                 name: "OldParentEmail",
                 table: "Students",
@@ -15,10 +16,12 @@ namespace Lead2Change.Data.Migrations
                 name: "OldStudentEmail",
                 table: "Students",
                 nullable: true);
+            */
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.DropColumn(
                 name: "OldParentEmail",
                 table: "Students");
@@ -26,6 +29,7 @@ namespace Lead2Change.Data.Migrations
             migrationBuilder.DropColumn(
                 name: "OldStudentEmail",
                 table: "Students");
+            */
         }
     }
 }

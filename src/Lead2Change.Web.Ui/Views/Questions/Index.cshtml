@@ -24,9 +24,8 @@
         </thead>
         @foreach (var item in Model)
         {
-            var questionOrder= Model.IndexOf(item) + 1;
             <tr>
-                <th scope="row">@questionOrder</th>
+                <th scope="row">@(Model.IndexOf(item) + 1)</th>
                 <td>
                     @Html.DisplayFor(modelItem => item.QuestionString)
                 </td>
@@ -34,12 +33,11 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Questions", new { id = item.Id })'" />
-
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-sm-12">
                             <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Archive" onclick="location.href='@Url.Action("Delete","Questions", new { id = item.Id })'" />
-                        <div class=" col-sm-12">
                         </div>
                     </div>
                 </td>
@@ -55,5 +53,5 @@
         <div class="col-sm-12">
             <input type="button" class="btn btn-primary" value="Visit Archive" onclick="location.href='@Url.Action("ArchivedQuestions","Questions")'" />
         </div>
-    </div>  
+    </div>
 </div>

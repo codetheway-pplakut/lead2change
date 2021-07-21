@@ -7,14 +7,14 @@ namespace Lead2Change.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             
-            migrationBuilder.DropColumn(
+            /* migrationBuilder.DropColumn(
                 name: "OldParentEmail",
                 table: "Students");
 
             migrationBuilder.DropColumn(
                 name: "OldStudentEmail",
                 table: "Students");            
-
+            */
             migrationBuilder.AddColumn<bool>(
                 name: "IsArchived",
                 table: "Questions",
