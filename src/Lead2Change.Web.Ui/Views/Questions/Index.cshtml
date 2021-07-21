@@ -5,7 +5,7 @@
 <div class="container-fluid  pr-sm-4 pl-sm-4">
     <table class="table table-striped pt-2">
         <thead class="thead blueStyle">
-            <tr>               
+            <tr>
                 <th class="col-8">
                     Questions
                 </th>
@@ -16,7 +16,7 @@
         </thead>
         @foreach (var item in Model)
         {
-            <tr>               
+            <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.QuestionString)
                 </td>
@@ -31,16 +31,19 @@
                         <div class=" col-sm-12">
                             <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Archive" onclick="location.href='@Url.Action("Delete","Questions", new { id = item.Id })'" />
                         </div>
-                    </div>                   
+                    </div>
                 </td>
             </tr>
         }
     </table>
-
-    <div>
-        <a asp-action="Create">Create a Question.</a>
+    <div class="row">
+        <div class="col-sm-12 pb-sm-2">
+            <input type="button" class="btn btn-primary" value="Create a Question" onclick="location.href='@Url.Action("Create","Questions")'" />
+        </div>
     </div>
-    <div>
-        <a asp-action="ArchivedQuestions">Visit Archive</a>
-    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <input type="button" class="btn btn-primary" value="Visit Archive" onclick="location.href='@Url.Action("ArchivedQuestions","Questions")'" />
+        </div>
+    </div>  
 </div>
