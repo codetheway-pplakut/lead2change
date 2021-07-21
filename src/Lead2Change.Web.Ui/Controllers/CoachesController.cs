@@ -10,10 +10,10 @@ using Lead2Change.Services.Identity;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
-    public class CoachController : _BaseController
+    public class CoachesController : _BaseController
     {
         ICoachService _coachService; 
-        public CoachController(IIdentityService identityService, ICoachService coachService) : base(identityService)
+        public CoachesController(IIdentityService identityService, ICoachService coachService) : base(identityService)
         {
             _coachService = coachService;
         }

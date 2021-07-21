@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Lead2Change.Repositories.Coaches
 {
-    public class CoachRepository : _BaseRepository, ICoachRepository
+    public class CoachesRepository : _BaseRepository, ICoachesRepository
     {
         private AppDbContext AppDbContext;
-        public CoachRepository(AppDbContext dbContext) : base(dbContext)
+        public CoachesRepository(AppDbContext dbContext) : base(dbContext)
         {
             this.AppDbContext = dbContext;
         }

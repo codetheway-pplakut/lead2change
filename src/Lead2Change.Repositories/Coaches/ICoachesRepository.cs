@@ -8,7 +8,7 @@ using Lead2Change.Domain.Models;
 
 namespace Lead2Change.Repositories.Coaches
 {
-    public interface ICoachRepository
+    public interface ICoachesRepository
     {
         public Task<List<Coach>> GetCoaches();
     }

@@ -10,10 +10,10 @@ namespace Lead2Change.Services.Coaches
 {
     public class CoachService : _BaseService, ICoachService
     {
-        ICoachRepository _coachRepo;
+        ICoachesRepository _coachRepo;
         public CoachService(AppDbContext dbContext) : base(dbContext)
         {
-            _coachRepo = new CoachRepository(dbContext);
+            _coachRepo = new CoachesRepository(dbContext);
         }
         public async Task<List<Coach>> GetCoaches()
         {
