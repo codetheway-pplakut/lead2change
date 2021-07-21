@@ -10,13 +10,26 @@ using System.Threading.Tasks;
 
 namespace Lead2Change.Repositories.Coaches
 {
-    public class CoachRepository : _BaseRepository, ICoachesRepository
+    public class CoachesRepository : _BaseRepository, ICoachesRepository
     {
         private AppDbContext AppDbContext;
-        public CoachRepository(AppDbContext dbContext) : base(dbContext)
+        public CoachesRepository(AppDbContext dbContext) : base(dbContext)
         {
             this.AppDbContext = dbContext;
         }
+
+        public async Task<Coach> Create(Coach coach)
+        {
+            var result = await this.AppDbContext.AddAsync(coach);
+            await this.AppDbContext.SaveChangesAsync();
+
+            return result.Entity;
+        }
+
+        public async Task<List<Coach>> GetCoaches()
+        {
+            return await AppDbContext.Coaches.ToListAsync();
+    }
         public async Task<Coach> GetCoach(Guid id)
         {
             return await AppDbContext.Coaches.FirstOrDefaultAsync(i => i.Id == id);

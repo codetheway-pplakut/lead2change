@@ -12,14 +12,41 @@ namespace Lead2Change.Web.Ui.Controllers
 {
     public class CoachesController : _BaseController
     {
-        private ICoachService _coachService;
-        public IActionResult Index()
-        {
-            return View();
-        }
+        ICoachService _coachService;
         public CoachesController(IIdentityService identityService, ICoachService coachService) : base(identityService)
         {
             _coachService = coachService;
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            return View(new CoachViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CoachViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (ModelState.IsValid)
+                {
+                    Coach coach = new Coach()
+                    {
+                        Students = new List<Student>(),
+                        CoachFirstName = model.CoachFirstName,
+                        CoachLastName = model.CoachLastName,
+                        CoachEmail = model.CoachEmail,
+                        CoachPhoneNumber = model.CoachPhoneNumber
+                    };
+                    var abc = await _coachService.Create(coach);
+                }
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+        public async Task<IActionResult> Index()
+        {
+            return View(await _coachService.GetCoaches());
         }
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -29,8 +56,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 Id = coach.Id,
                 CoachFirstName = coach.CoachFirstName,
                 CoachLastName = coach.CoachLastName,
-                CoachEmail = coach.CoachEmail,
                 CoachPhoneNumber = coach.CoachPhoneNumber,
+                CoachEmail = coach.CoachEmail,
             };
             return View(list);
         }

@@ -122,14 +122,17 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentFirstName = model.StudentFirstName,
                         StudentLastName = model.StudentLastName,
                         StudentDateOfBirth = model.StudentDateOfBirth,
+                        StudentCellPhone = model.StudentCellPhone,
+                        StudentEmail = model.StudentEmail,
+                        CoachId = new Guid("dea1550d-31b1-42b1-b94e-19e03e7e83a1")
+                        /*
                         StudentAddress = model.StudentAddress,
                         StudentApartmentNumber = model.StudentApartmentNumber,
                         StudentCity = model.StudentCity,
                         StudentState = model.StudentState,
                         StudentZipCode = model.StudentZipCode,
                         StudentHomePhone = model.StudentHomePhone,
-                        StudentCellPhone = model.StudentCellPhone,
-                        StudentEmail = model.StudentEmail,
+                        
                         StudentCareerPath = model.StudentCareerPath,
                         StudentCareerInterest = model.StudentCareerInterest,
                         ParentFirstName = model.ParentFirstName,
@@ -179,7 +182,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentSignatureDate = model.StudentSignatureDate,
                         ParentSignature = model.ParentSignature,
                         ParentSignatureDate = model.ParentSignatureDate
-
+                        */
                     };
                     var abc = await _studentService.Create(student);
                     await Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName+ " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
