@@ -18,6 +18,10 @@ namespace Lead2Change.Services.Coaches
         {
             _coachRepo = new CoachRepository(dbContext);
         }
+        public async Task<Coach> GetCoach(Guid id)
+        {
+            return await this._coachRepo.GetCoach(id);
+        }
         public async Task<Coach> Update(Coach coach)
         {
             return await this._coachRepo.Update(coach);

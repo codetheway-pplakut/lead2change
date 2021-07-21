@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
-    public class CoachesController : Controller
+    public class CoachesController : _BaseController
     {
         private ICoachService _coachService;
         public IActionResult Index()
@@ -23,39 +23,34 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Edit(Guid id)
         {
-            var student = await _coachService.GetStudent(id);
-            RegistrationViewModel list = new RegistrationViewModel()
+            var coach = await _coachService.GetCoach(id);
+            CoachViewModel list = new CoachViewModel()
             {
-                Id = student.Id,
-                //General Student Info
-                StudentFirstName = student.StudentFirstName,
-                StudentLastName = student.StudentLastName,
-                StudentDateOfBirth = student.StudentDateOfBirth,
-                StudentAddress = student.StudentAddress,
-                
+                Id = coach.Id,
+                CoachFirstName = coach.CoachFirstName,
+                CoachLastName = coach.CoachLastName,
+                CoachEmail = coach.CoachEmail,
+                CoachPhoneNumber = coach.CoachPhoneNumber,
             };
             return View(list);
         }
 
-        public async Task<IActionResult> Update(Student model)
+        public async Task<IActionResult> Update(Coach model)
         {
             if (ModelState.IsValid)
             {
-                if (model.StudentFirstName.Length > 0)
+                if (ModelState.IsValid)
                 {
-                    Student list = new Student()
+                    Coach list = new Coach()
                     {
                         Id = model.Id,
-                        //General Student Info
-                        StudentFirstName = model.StudentFirstName,
-                        StudentLastName = model.StudentLastName,
-                        StudentDateOfBirth = model.StudentDateOfBirth,
-                        StudentAddress = model.StudentAddress,
-                        StudentApartmentNumber = model.StudentApartmentNumber,
-                        StudentCity = model.StudentCity,
-                        
+                        CoachFirstName = model.CoachFirstName,
+                        CoachLastName = model.CoachLastName,
+                        CoachEmail = model.CoachEmail,
+                        CoachPhoneNumber = model.CoachPhoneNumber,
+
                     };
-                    var student = await _studentService.Update(list);
+                    var student = await _coachService.Update(list);
                 }
                 return RedirectToAction("Index");
             }

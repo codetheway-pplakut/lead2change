@@ -17,6 +17,10 @@ namespace Lead2Change.Repositories.Coaches
         {
             this.AppDbContext = dbContext;
         }
+        public async Task<Coach> GetCoach(Guid id)
+        {
+            return await AppDbContext.Coaches.FirstOrDefaultAsync(i => i.Id == id);
+        }
         public async Task<Coach> Update(Coach model)
         {
             var result = _appDbContext.Coaches.Update(model);

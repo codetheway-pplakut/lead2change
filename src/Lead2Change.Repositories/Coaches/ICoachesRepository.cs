@@ -8,5 +8,6 @@ namespace Lead2Change.Repositories.Coaches
     public interface ICoachesRepository
     {
         public Task<Coach> Update(Coach student);
+        public Task<Coach> GetCoach(Guid id);
     }
 }
