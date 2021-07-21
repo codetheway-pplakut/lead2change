@@ -1,13 +1,12 @@
 ﻿using Lead2Change.Domain.Models;
-using Lead2Change.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lead2Change.Services.Coach
+namespace Lead2Change.Repositories.Coaches
 {
-    public interface ICoachService
+    public interface ICoachesRepository
     {
         public Task<Coach> Create(Coach coach);
     }
