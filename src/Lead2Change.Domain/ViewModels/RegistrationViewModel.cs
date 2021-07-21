@@ -71,5 +71,6 @@ namespace Lead2Change.Domain.ViewModels
         public string ParentSignature { get; set; }
         public DateTime ParentSignatureDate { get; set; }
 
+        public bool Active { get; set; }
     }
 }
