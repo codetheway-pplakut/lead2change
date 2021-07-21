@@ -38,6 +38,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         CoachEmail = model.CoachEmail,
                         CoachPhoneNumber = model.CoachPhoneNumber
                     };
+                    var abc = await _coachService.Create(coach);
                 }
                 return RedirectToAction("Index");
             }
