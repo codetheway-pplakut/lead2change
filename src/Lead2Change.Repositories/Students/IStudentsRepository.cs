@@ -14,5 +14,6 @@ namespace Lead2Change.Repositories.Students
         public Task<Student> Delete(Student model);
         public Task<Student> Update(Student student);
         public Task<Student> Create(Student student);
+        public Task<List<Student>> GetStudentsByCoachId(Guid id);
     }
 }

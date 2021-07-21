@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20210629194205_ModelsNew.Designer.cs" />
     <Compile Remove="Migrations\20210630150913_Goals.cs" />
     <Compile Remove="Migrations\20210630150913_Goals.Designer.cs" />
+    <Compile Remove="Migrations\20210721161950_CoachId.cs" />
+    <Compile Remove="Migrations\20210721161950_CoachId.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

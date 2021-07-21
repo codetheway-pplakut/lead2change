@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Lead2Change.Web.Ui.Models;
 using Lead2Change.Domain.Constants;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
@@ -22,11 +23,33 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("");
+            }
+
             if (!User.IsInRole(StringConstants.RoleNameStudent))
             {
                 return Error("403: You are not authorized to view this page.");
             }
-            return View(await _studentService.GetStudents());
+
+            var user = await UserManager.GetUserAsync(User);
+
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                return View(await _studentService.GetStudent(user.StudentId));
+            }
+            else if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                // Student Id being used as assosiation to coach
+                return View(await _studentService.GetStudentsByCoachId(user.StudentId));
+            }
+            else if (User.IsInRole(StringConstants.RoleNameAdmin))
+            {
+                return View(await _studentService.GetStudents());
+            }
+
+            return View();
         }
 
         public async Task<IActionResult> Delete(Guid id)
