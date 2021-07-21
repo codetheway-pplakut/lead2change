@@ -48,7 +48,7 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             return View(new InterviewQuestionCreateViewModel()) ;
         }
-
+        [HttpPost]
         public async Task<IActionResult> Register(InterviewQuestionCreateViewModel model, String submitButton)
         {
             if (ModelState.IsValid)
@@ -59,8 +59,9 @@ namespace Lead2Change.Web.Ui.Controllers
                     if(model.QuestionText != null && !model.QuestionText.Equals(""))
                     {
                         Question newQuestion = new Question() { QuestionString = model.QuestionText };
-                        model.QuestionInInterviews.Add(new QuestionInInterview { InterviewId = model.Id, Question = newQuestion, QuestionId = newQuestion.Id });
                         await _questionService.Create(newQuestion);
+                        model.QuestionInInterviews.Add(new QuestionInInterview { InterviewId = model.Id, Question = newQuestion, QuestionId = newQuestion.Id });
+                        
                         model.QuestionText = null;
                     }
                     return View("Create", model);

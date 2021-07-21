@@ -16,8 +16,21 @@
         <div class="container-fluid">
             <div class="form-group col-sm-12 d-none">
                 <input asp-for="Id" class="form-control" />
-                <input asp-for="QuestionInInterviews" class="form-control" />
             </div>
+            
+            <div class="form-group col-sm-12">
+                @for (int i = 0; i < Model.QuestionInInterviews.Count; i++)
+                {
+                    @Html.HiddenFor(model => Model.QuestionInInterviews[i].InterviewId)
+                    @Html.HiddenFor(model => Model.QuestionInInterviews[i].QuestionId)
+                    @Html.HiddenFor(model => Model.QuestionInInterviews[i].Question.Id)
+                    @Html.HiddenFor(model => Model.QuestionInInterviews[i].Question.QuestionString)
+
+
+                }
+
+            </div>
+           
             <div class="form-group col-sm-12">
                 <b><label asp-for="InterviewName" class="control-label">Interview Name</label></b>
                 <input asp-for="InterviewName" class="form-control" />
@@ -25,7 +38,7 @@
             </div>
             <div class="form-group col-sm-12">
                 <b><label asp-for="QuestionText" class="control-label">Add a Question</label></b>
-                <input asp-for="QuestionText" class="form-control" />
+                <input asp-for="QuestionText" class="form-control" value="" />
                 <span asp-validation-for="QuestionText" class="text-danger"></span>
             </div>
             <div class="form-group col-sm-12">
