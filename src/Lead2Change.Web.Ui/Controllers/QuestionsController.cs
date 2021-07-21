@@ -12,7 +12,6 @@ namespace Lead2Change.Web.Ui.Controllers
 {
     public class QuestionsController : Controller
     {
-
         private IQuestionsService QuestionsService;
 
         public QuestionsController(IQuestionsService questionsService)
@@ -26,6 +25,10 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Create()
         {
             return View(new QuestionsViewModel());
+        }
+        public async Task<IActionResult> ArchivedQuestions()
+        {
+            return View(await QuestionsService.GetArchivedQuestions());
         }
 
         [HttpPost]
@@ -48,6 +51,17 @@ namespace Lead2Change.Web.Ui.Controllers
             return View("Create", model);
         }
         public async Task<IActionResult> Edit(Guid id)
+        {
+            var result = await QuestionsService.GetQuestion(id);
+            QuestionsViewModel question = new QuestionsViewModel()
+            {
+                QuestionString = result.QuestionString,
+                Id = id,
+                QuestionInInterviews = result.QuestionInInterviews
+            };
+            return View(question);
+        }
+        public async Task<IActionResult> ArchiveEdit(Guid id)
         {
             var result = await QuestionsService.GetQuestion(id);
             QuestionsViewModel question = new QuestionsViewModel()
@@ -84,6 +98,12 @@ namespace Lead2Change.Web.Ui.Controllers
             var question = await QuestionsService.GetQuestion(id);
             await QuestionsService.Delete(question);
             return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> PermanentDelete(Guid id)
+        {
+            var question = await QuestionsService.GetQuestion(id);
+            await QuestionsService.PermanentDelete(question);
+            return RedirectToAction("ArchivedQuestions", new { questionID = question.Id });
         }
     }
 }

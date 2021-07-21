@@ -12,7 +12,7 @@ namespace Lead2Change.Domain.Models
 
         public ICollection<QuestionInInterview> QuestionInInterviews { get; set; }
 
-        
-        
+        public bool IsArchived { get; set; }
+
     }
 }

@@ -38,9 +38,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href='@Url.Action("Delete","Questions", new { id = item.Id })'" />
-
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Archive" onclick="location.href='@Url.Action("Delete","Questions", new { id = item.Id })'" />
+                        <div class=" col-sm-12">
                         </div>
                     </div>
                 </td>
@@ -52,4 +51,9 @@
             <input type="button" class="btn btn-primary" value="Create a Question" onclick="location.href='@Url.Action("Create","Questions")'" />
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <input type="button" class="btn btn-primary" value="Visit Archive" onclick="location.href='@Url.Action("ArchivedQuestions","Questions")'" />
+        </div>
+    </div>  
 </div>

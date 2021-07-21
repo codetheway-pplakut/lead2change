@@ -1,25 +1,30 @@
 ﻿@model Lead2Change.Domain.ViewModels.QuestionsViewModel;
 @*
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "ArchiveEdit";
 *@
-<form asp-action="Update" class="calibri">
+<form asp-action="Update">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group, d-none" display="none">
         <label asp-for="Id" class="control-label"></label>
         <input asp-for="Id" class="form-control" value=@Model.Id />
     </div>
     <div class="form-group">
-        <b><label asp-for="QuestionString" class="control-label">Edit the Question: </label></b>
+        <b><label asp-for="QuestionString" class="control-label"></label></b>
         <input asp-for="QuestionString" class="form-control" value=@Model.QuestionString />
         <span asp-validation-for="QuestionString" class="text-danger"></span>
-    </div>    
+    </div>   
+    <div class="form-group">       
+        <b><label asp-for="IsArchived" class="control-label"></label></b>
+        <input asp-for="IsArchived" class="form-control" value=@Model.IsArchived />
+        <span asp-validation-for="IsArchived" class="text-danger"></span>
+    </div>
     <br />
     <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-submit"/>
+        <input type="submit" value="Submit" class="btn btn-primary" />
     </div>
 </form>
 <div align="center">
-    <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("Index","Questions")'">Back to List</button>
+    <button class="btn btn-back"><a asp-action="ArchivedQuestions">Back to List</a></button>
 </div>
 
 @section Scripts {

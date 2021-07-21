@@ -21,7 +21,10 @@ namespace Lead2Change.Services.Questions
         public async Task<List<Question>> GetQuestions()
         {
             return await this.QuestionsRepository.GetQuestions();
-
+        }
+        public async Task<List<Question>> GetArchivedQuestions()
+        {
+            return await this.QuestionsRepository.GetArchivedQuestions();
         }
         public async Task<Question> GetQuestion(Guid id)
         {
@@ -38,6 +41,10 @@ namespace Lead2Change.Services.Questions
         public async Task<Question> Delete(Question question)
         {
             return await QuestionsRepository.Delete(question);
+        }
+        public async Task<Question> PermanentDelete(Question question)
+        {
+            return await QuestionsRepository.PermanentDelete(question);
         }
     }
 }
