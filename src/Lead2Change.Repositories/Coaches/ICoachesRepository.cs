@@ -11,6 +11,7 @@ namespace Lead2Change.Repositories.Coaches
         public Task<Coach> Create(Coach coach);
         public Task<List<Coach>> GetCoaches();
         public Task<Coach> Update(Coach student);
+        public Task<Coach> Delete(Coach model);
         public Task<Coach> GetCoach(Guid id);
     }
-}
+    }

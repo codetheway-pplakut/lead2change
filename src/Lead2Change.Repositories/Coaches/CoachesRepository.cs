@@ -18,6 +18,11 @@ namespace Lead2Change.Repositories.Coaches
             this.AppDbContext = dbContext;
         }
 
+        public async Task<Coach> GetCoach(Guid id)
+        {
+            return await AppDbContext.Coaches.FirstOrDefaultAsync(i => i.Id == id);
+        }
+
         public async Task<Coach> Create(Coach coach)
         {
             var result = await this.AppDbContext.AddAsync(coach);
@@ -30,9 +35,12 @@ namespace Lead2Change.Repositories.Coaches
         {
             return await AppDbContext.Coaches.ToListAsync();
         }
-        public async Task<Coach> GetCoach(Guid id)
+
+        public async Task<Coach> Delete(Coach model)
         {
-            return await AppDbContext.Coaches.FirstOrDefaultAsync(i => i.Id == id);
+            AppDbContext.Coaches.Remove(model);
+            await AppDbContext.SaveChangesAsync();
+            return model;
         }
         public async Task<Coach> Update(Coach model)
         {

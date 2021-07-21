@@ -20,6 +20,11 @@ namespace Lead2Change.Services.Coaches
             _coachRepo = new CoachesRepository(dbContext);
         }
 
+        public async Task<Coach> GetCoach(Guid id)
+        {
+            return await this._coachRepo.GetCoach(id);
+        }
+
         public async Task<Coach> Create(Coach coach)
         {
             return await this._coachRepo.Create(coach);
@@ -28,9 +33,9 @@ namespace Lead2Change.Services.Coaches
         {
             return await this._coachRepo.GetCoaches();
         }
-        public async Task<Coach> GetCoach(Guid id)
+        public async Task<Coach> Delete(Coach coach)
         {
-            return await this._coachRepo.GetCoach(id);
+            return await _coachRepo.Delete(coach);
         }
         public async Task<Coach> Update(Coach coach)
         {
