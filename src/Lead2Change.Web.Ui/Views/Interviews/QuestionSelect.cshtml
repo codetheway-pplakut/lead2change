@@ -1,0 +1,35 @@
+﻿@model Lead2Change.Domain.ViewModels.InterviewQuestionCreateViewModel
+@using Lead2Change.Domain.Models;
+
+@* ViewData["Title"] = "Question Select";
+*@
+<div class="container-fluid">
+
+    <table class="table table-striped pt-2">
+        <thead class="thead blueStyle">
+            <tr>
+                
+                <th>
+                    Question
+                </th>
+                <th>
+                    Select
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.QuestionInInterviews != null)
+            {
+                @foreach (QuestionInInterview questionInInterview in Model.QuestionInInterviews)
+                {
+                    <tr>
+                        <td>@questionInInterview.Question.QuestionString</td>
+                        <td>Insert button here</td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+
+    </table>
+</div>

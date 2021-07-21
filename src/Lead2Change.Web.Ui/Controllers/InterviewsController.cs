@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Lead2Change.Domain.ViewModels;
 using Lead2Change.Domain.Models;
 using Lead2Change.Services.Questions;
+using Lead2Change.Services.QuestionInInterviews;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
@@ -14,11 +15,13 @@ namespace Lead2Change.Web.Ui.Controllers
     {
         private IInterviewService _interviewsService;
         private IQuestionsService _questionService;
+        private IQuestionInInterviewService _questionInInterviewService;
 
-        public InterviewsController(IInterviewService interviewsService, IQuestionsService questionService)
+        public InterviewsController(IInterviewService interviewsService, IQuestionsService questionService, IQuestionInInterviewService questionInInterviewService)
         {
             this._interviewsService = interviewsService;
             this._questionService = questionService;
+            this._questionInInterviewService = questionInInterviewService;
         }
         public async Task<IActionResult> Index()
         {
@@ -52,54 +55,57 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                if(model.QuestionText != null && !model.QuestionText.Equals(""))
+                // Step 1: Update/Create interview if needed
+                if (model.Id == Guid.Empty)
                 {
+                    Interview interview = await _interviewsService.Create(new Interview { InterviewName = model.InterviewName });
+                    // Update the viewModel's ID
+                    model.Id = interview.Id;
+                }
+                else
+                {
+                    // Update database if title has changed
+                    Interview interview = await _interviewsService.GetInterview(model.Id);
+                    if (!interview.InterviewName.Equals(model.InterviewName))
+                    {
+                        interview.InterviewName = model.InterviewName;
+                        interview = await _interviewsService.Update(interview);
+                    }
+                }
+                // Step 2: Create and Add Question
+                if (!String.IsNullOrEmpty(model.QuestionText))
+                {
+                    // Add Question to Database
                     Question newQuestion = new Question() { QuestionString = model.QuestionText };
-                    await _questionService.Create(newQuestion);
+                    newQuestion = await _questionService.Create(newQuestion);
                     model.QuestionInInterviews.Add(new QuestionInInterview { InterviewId = model.Id, Question = newQuestion, QuestionId = newQuestion.Id });
-                        
+                    // Question Text is Reset after a corresponding question was added    
                     model.QuestionText = null;
+                    // Add Relationship to database through a QuestionInInterview()
+                    await _questionInInterviewService.Create(new QuestionInInterview()
+                    {
+                        InterviewId = model.Id,
+                        QuestionId = newQuestion.Id
+                    });
                 }
 
-                // The value of the submitButton tells the code which button (add question or save) was pushed
+
+                // Step 3: Return User to Correct View Based on the Button Pushed
                 if (submitButton.Equals("addQuestion"))
                 {
                     ModelState.Clear();
-
                     return View("Create", model);
 
                 }
-               
-                // Creates the interview
-                Interview interview = new Interview()
+                else
                 {
-                    
-                    InterviewName = model.InterviewName,
-                    Id = model.Id
-                    
-                };
-                List<QuestionInInterview> testQuestionInInterviews = new List<QuestionInInterview>();
-                // Try simply creating a new QuestionInInterviews
-                foreach (QuestionInInterview q in model.QuestionInInterviews)
-                {
-                    testQuestionInInterviews.Add(new QuestionInInterview
-                    {
-                        InterviewId = interview.Id,
-                        Interview = interview,
-                        QuestionId = q.QuestionId
-                    });
+                    return RedirectToAction("Index");
+
                 }
-                interview.QuestionInInterviews = testQuestionInInterviews;
-
-
-                var result = await _interviewsService.Create(interview);
-                return RedirectToAction("Index");
-
-
             }
             return View("Create", model);
         }
+    
 
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -142,6 +148,11 @@ namespace Lead2Change.Web.Ui.Controllers
                 InterviewName = result.FirstOrDefault().Interview.InterviewName
             };
             return View(interview);
+        }
+
+        public async Task<IActionResult> QuestionSelect(InterviewQuestionCreateViewModel model)
+        {
+            return View(model);
         }
 
     }

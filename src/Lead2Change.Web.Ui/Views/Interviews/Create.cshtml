@@ -42,13 +42,21 @@
                 <span asp-validation-for="QuestionText" class="text-danger"></span>
             </div>
             <div class="form-group col-sm-12">
-                <!--If this button is pushed a question is added to the database, but the interview isn't saved-->
-                <button type="submit" name="submitButton" value="addQuestion" class="btn btn-lg btn-block orangeBtn">Add Question</button>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <!--If this button is pushed a question is added to the database, but the interview isn't saved-->
+                        <button type="submit" name="submitButton" value="addQuestion" class="btn btn-lg btn-block orangeBtn">Add Question</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="button" class="btn btn-lg btn-block orangeBtn" onclick="location.href='@Url.Action("QuestionSelect","Interviews", Model)'">Select an Existing Question</button>
+                    </div>
+                </div>
+                
             </div>
             <br />
             <div class="form-group col-sm-12">
                 <div class="row">
-                    <div class="col-sm-6 text-center">
+                    <div class="col-sm-12 text-center">
                         <!--This button saves both the interview and whatever question had been inputed and returns user to interview index page-->
                         <button type="submit" name="submitButton" value="Create" class="btn btn-lg btn-block orangeBtn"> Create</button>
                     </div>
