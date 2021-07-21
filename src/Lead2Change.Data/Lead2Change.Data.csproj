@@ -25,6 +25,8 @@
     <Compile Remove="Migrations\20210720182726_CoachModel.Designer.cs" />
     <Compile Remove="Migrations\20210720183955_CoachModelTest.cs" />
     <Compile Remove="Migrations\20210720183955_CoachModelTest.Designer.cs" />
+    <Compile Remove="Migrations\20210721185541_CoachIdModel.cs" />
+    <Compile Remove="Migrations\20210721185541_CoachIdModel.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,7 +45,6 @@
   <ItemGroup>
     <Folder Include="Databases\" />
     <Folder Include="Databases\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>

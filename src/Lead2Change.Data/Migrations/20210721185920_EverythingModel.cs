@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Lead2Change.Data.Migrations
 {
-    public partial class CoachModelTest : Migration
+    public partial class EverythingModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -262,7 +262,7 @@ namespace Lead2Change.Data.Migrations
                     ParentSignature = table.Column<string>(nullable: true),
                     ParentSignatureDate = table.Column<DateTime>(nullable: false),
                     CareerDeclarationId1 = table.Column<Guid>(nullable: true),
-                    CoachId = table.Column<Guid>(nullable: false)
+                    CoachId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -278,7 +278,7 @@ namespace Lead2Change.Data.Migrations
                         column: x => x.CoachId,
                         principalTable: "Coaches",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

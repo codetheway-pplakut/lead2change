@@ -334,7 +334,7 @@ namespace Lead2Change.Data.Migrations
                     b.Property<string>("CareerPathList")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CoachId")
+                    b.Property<Guid?>("CoachId")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("CollegeApplicationStatus")
@@ -573,9 +573,7 @@ namespace Lead2Change.Data.Migrations
 
                     b.HasOne("Lead2Change.Domain.Models.Coach", null)
                         .WithMany("Students")
-                        .HasForeignKey("CoachId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CoachId");
                 });
 #pragma warning restore 612, 618
         }

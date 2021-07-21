@@ -69,5 +69,41 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             return View(await _coachService.GetCoaches());
         }
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var coach = await _coachService.GetCoach(id);
+            CoachViewModel list = new CoachViewModel()
+            {
+                Id = coach.Id,
+                CoachFirstName = coach.CoachFirstName,
+                CoachLastName = coach.CoachLastName,
+                CoachPhoneNumber = coach.CoachPhoneNumber,
+                CoachEmail = coach.CoachEmail,
+            };
+            return View(list);
+        }
+
+        public async Task<IActionResult> Update(Coach model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (ModelState.IsValid)
+                {
+                    Coach list = new Coach()
+                    {
+                        Id = model.Id,
+                        CoachFirstName = model.CoachFirstName,
+                        CoachLastName = model.CoachLastName,
+                        CoachEmail = model.CoachEmail,
+                        CoachPhoneNumber = model.CoachPhoneNumber,
+
+                    };
+                    var student = await _coachService.Update(list);
+                }
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
     }
+
 }
