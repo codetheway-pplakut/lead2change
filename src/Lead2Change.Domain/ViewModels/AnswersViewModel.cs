@@ -13,5 +13,6 @@ namespace Lead2Change.Domain.ViewModels
         public Guid Id { get; set; }
         public Guid StudentId { get; set; }
         public Guid QuestionId { get; set; }
+       
     }
 }

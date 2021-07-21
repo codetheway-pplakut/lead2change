@@ -51,23 +51,27 @@ namespace Lead2Change.Web.Ui.Controllers
             {
                 Id = id,
                 QuestionInInterviews = result,
-                InterviewName = result.FirstOrDefault().Interview.InterviewName
+                InterviewName = result.FirstOrDefault().Interview.InterviewName,
+                InterviewId = result.FirstOrDefault().Interview.Id,
             };
             return View(answer);
         }
         [HttpPost]
         public async Task<IActionResult> RegisterAnswerQuestion(AnswerQuestionViewModel model)
-        {
+        { 
+            
+           var questions = await _interviewsService.GetInterviewAndQuestions(model.InterviewId);
+      
             if (ModelState.IsValid)
             {
-                for (int i = 0; i < model.Answers.Count(); i++)
+                for (int i = 0; i < model.Answers.Count; i++)
                 {
                     Answer answer = new Answer()
                     {
                         AnswerString = model.Answers[i].AnswerString,
-                        Id = model.Id,
+
                         StudentId = model.StudentId,
-                        QuestionId = model.QuestionInInterviews[i].QuestionId,
+                        QuestionId = questions[i].QuestionId,
                     };
                     var result = await AnswersService.AnswerQuestion(answer);
                 }

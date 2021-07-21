@@ -10,37 +10,41 @@
             <h2 class="GoalHeadingFont">@Model.InterviewName</h2> 
         </div>
     </div>
-    <form asp-action="Register">
+    <form asp-action="RegisterAnswerQuestion">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group d-none">
             <input asp-for="@Model.Id" class="form-control" />
         </div>
-       
+        <div class="form-group d-none">
+            <input asp-for="@Model.InterviewId" class="form-control" />
+        </div>
+        <div class="form-group d-none">
+            <input asp-for="@Model.InterviewName" class="form-control" />
+        </div>
 
 
-                @for (int j = 0; j < Model.QuestionInInterviews.Count; j++)
-                {
+        @for (int j = 0; j < Model.QuestionInInterviews.Count; j++)
+        {
 
-                    <p>@Model.QuestionInInterviews[j].Question.QuestionString</p>
-
-
-                    <div class="form-group">
-                        <b><label asp-for="@Model.Answers[j].AnswerString" class="control-label"></label></b>
-                        <input asp-for="@Model.Answers[j].AnswerString" class="form-control" />
-                        <span asp-validation-for="@Model.Answers[j].AnswerString" class="text-danger"></span>
-                    </div>
-                    // @Model.Answers.Add(new Answer { AnswerString =  });
+            <p>@Model.QuestionInInterviews[j].Question.QuestionString</p>
 
 
-                }
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
+            <div class="form-group">
+                <b><label asp-for="@Model.Answers[j].AnswerString" class="control-label"></label></b>
+                <input asp-for="@Model.Answers[j].AnswerString" class="form-control" />
+                <span asp-validation-for="@Model.Answers[j].AnswerString" class="text-danger"></span>
+            </div>
+
+
+        }
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
     </form>
 </div>
 
 
 
 <div align="center">
-    <button class="btn btn-back"><a asp-action="Index">Back to List</a></button>
+    <button class="btn btn-outline-dark "  onclick="location.href='@Url.Action("Index","Interviews")'">Back To List</button>
 </div>
