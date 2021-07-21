@@ -37,7 +37,6 @@
             </div>
             <div class="form-group col-sm-12">
                 <b><label asp-for="QuestionText" class="control-label">Add a Question</label></b>
-                <!--<textarea id="QuestionTextInput" asp-for="QuestionText" class="form-control"></textarea>-->
                 
                 @Html.TextAreaFor(m => m.QuestionText, new { @class = "form-control"})
                 <span asp-validation-for="QuestionText" class="text-danger"></span>
