@@ -106,7 +106,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentSignature = studentscontainer.StudentSignature,
                 StudentSignatureDate = studentscontainer.StudentSignatureDate,
                 ParentSignature = studentscontainer.ParentSignature,
-                ParentSignatureDate = studentscontainer.ParentSignatureDate
+                ParentSignatureDate = studentscontainer.ParentSignatureDate,
                 Active = studentscontainer.Active
             };
             return View(a);
@@ -184,7 +184,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentSignature = model.StudentSignature,
                         StudentSignatureDate = model.StudentSignatureDate,
                         ParentSignature = model.ParentSignature,
-                        ParentSignatureDate = model.ParentSignatureDate
+                        ParentSignatureDate = model.ParentSignatureDate,
 
                         Active = true
                     };
@@ -266,7 +266,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentSignature = student.StudentSignature,
                 StudentSignatureDate = student.StudentSignatureDate,
                 ParentSignature = student.ParentSignature,
-                ParentSignatureDate = student.ParentSignatureDate
+                ParentSignatureDate = student.ParentSignatureDate,
                 Active = student.Active
             };
             return View(list);
@@ -342,7 +342,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentSignature = model.StudentSignature,
                         StudentSignatureDate = model.StudentSignatureDate,
                         ParentSignature = model.ParentSignature,
-                        ParentSignatureDate = model.ParentSignatureDate
+                        ParentSignatureDate = model.ParentSignatureDate,
                         Active = model.Active
                     };
                     var student = await _studentService.Update(list);
