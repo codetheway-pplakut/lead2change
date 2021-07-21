@@ -24,8 +24,9 @@
         </thead>
         @foreach (var item in Model)
         {
+            var questionOrder= Model.IndexOf(item) + 1;
             <tr>
-                <th scope="row">@(Model.IndexOf(item)+1)</th>
+                <th scope="row">@questionOrder</th>
                 <td>
                     @Html.DisplayFor(modelItem => item.QuestionString)
                 </td>
