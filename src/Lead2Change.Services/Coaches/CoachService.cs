@@ -32,5 +32,9 @@ namespace Lead2Change.Services.Coaches
         {
             return await this._coachRepo.GetCoach(id);
         }
+        public async Task<Coach> Update(Coach coach)
+        {
+            return await this._coachRepo.Update(coach);
+        }
     }
 }
