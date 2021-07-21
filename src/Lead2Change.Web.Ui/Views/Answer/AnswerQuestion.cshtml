@@ -1,6 +1,4 @@
-﻿
-@model List<Lead2Change.Domain.ViewModels.AnswerQuestionViewModel>
-
+﻿@model Lead2Change.Domain.ViewModels.AnswerQuestionViewModel
 @*
     ViewData["Title"] = "AnswerQuestion";
 *@
@@ -8,7 +6,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
-            <h2 class="GoalHeadingFont">@Model.InterviewName</h2>
+          
+            <h2 class="GoalHeadingFont">@Model.InterviewName</h2> 
         </div>
     </div>
     <form asp-action="Register">
@@ -16,25 +15,32 @@
         <div class="form-group d-none">
             <input asp-for="@Model.Id" class="form-control" />
         </div>
-        @foreach (var item in Model.QuestionInInterviews)
-        {
-            @Html.DisplayFor(modelItem => item.QuestionInInterviews)
+       
 
-            <p>@item.QuestionInInterviews.Question.QuestionString</p>
 
-            <div class="form-group">
-                <b><label asp-for="@item.AnswerString" class="control-label"></label></b>
-                <input asp-for="@item.AnswerString" class="form-control" />
-                <span asp-validation-for="@item.AnswerString" class="text-danger"></span>
-            </div>
+                @for (int j = 0; j < Model.QuestionInInterviews.Count; j++)
+                {
 
-        }
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>
+                    <p>@Model.QuestionInInterviews[j].Question.QuestionString</p>
+
+
+                    <div class="form-group">
+                        <b><label asp-for="@Model.Answers[j].AnswerString" class="control-label"></label></b>
+                        <input asp-for="@Model.Answers[j].AnswerString" class="form-control" />
+                        <span asp-validation-for="@Model.Answers[j].AnswerString" class="text-danger"></span>
+                    </div>
+                    // @Model.Answers.Add(new Answer { AnswerString =  });
+
+
+                }
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
     </form>
 </div>
+
+
+*/
 <div align="center">
     <button class="btn btn-back"><a asp-action="Index">Back to List</a></button>
 </div>
-     

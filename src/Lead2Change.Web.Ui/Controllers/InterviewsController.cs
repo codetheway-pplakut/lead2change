@@ -49,13 +49,7 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(new InterviewViewModel()) ;
         }
 
-        public async Task<IActionResult> AnswerQuestion()
-        {
-            return View(new AnswerQuestionViewModel()
-            {
-                QuestionInInterviews = new List<QuestionInInterview>()
-            });
-        }
+ 
 
         public async Task<IActionResult> Register(InterviewViewModel model)
         {

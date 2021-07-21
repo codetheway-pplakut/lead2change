@@ -6,15 +6,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Lead2Change.Domain.ViewModels;
 using Lead2Change.Domain.Models;
+using Lead2Change.Services.Interviews;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
     public class AnswerController : Controller
     {
+
         private IAnswersService AnswersService;
-        public AnswerController(IAnswersService answersService)
+        private IInterviewService _interviewsService;
+   
+        public AnswerController(IAnswersService answersService, IInterviewService interviewsService)
         {
             this.AnswersService = answersService;
+            this._interviewsService = interviewsService;
         }
         public async Task<IActionResult> Index()
         {
@@ -38,7 +43,40 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(new AnswersViewModel());
           
         }
+        public async Task<IActionResult> AnswerQuestion(Guid id)
+        {
+           
+            var result = await _interviewsService.GetInterviewAndQuestions(id);
+            AnswerQuestionViewModel answer = new AnswerQuestionViewModel()
+            {
+                Id = id,
+                QuestionInInterviews = result,
+                InterviewName = result.FirstOrDefault().Interview.InterviewName
+            };
+            return View(answer);
+        }
         [HttpPost]
+        public async Task<IActionResult> RegisterAnswerQuestion(AnswerQuestionViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                for (int i = 0; i < model.Answers.Count(); i++)
+                {
+                    Answer answer = new Answer()
+                    {
+                        AnswerString = model.Answers[i].AnswerString,
+                        Id = model.Id,
+                        StudentId = model.StudentId,
+                        QuestionId = model.QuestionInInterviews[i].QuestionId,
+                    };
+                    var result = await AnswersService.AnswerQuestion(answer);
+                }
+           
+                return RedirectToAction("Index");
+            }
+            return View("Create", model);
+        }
+        
         public async Task<IActionResult> Register(AnswersViewModel model)
         {
             if (ModelState.IsValid)

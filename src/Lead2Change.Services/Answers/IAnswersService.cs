@@ -13,5 +13,7 @@ namespace Lead2Change.Services.Answers
         public Task<Answer> Update(Answer model);
         public Task<Answer> Create(Answer answer);
         public Task<Answer> Delete(Answer answer);
+        public Task<Answer> AnswerQuestion(Answer answer);
+
     }
 }
