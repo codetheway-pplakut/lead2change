@@ -42,7 +42,12 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             var studentscontainer = await _studentService.GetStudent(id);
             var temporaryCoachId = studentscontainer.CoachId;
-            var coachcontainer = await _coachService.GetCoach(temporaryCoachId);
+            //check for null
+            var coachcontainer = new Coach();
+            if (temporaryCoachId.HasValue)
+            {
+                coachcontainer = await _coachService.GetCoach(temporaryCoachId.Value);
+            }
             RegistrationViewModel a = new RegistrationViewModel()
             {
                 Id = studentscontainer.Id,
@@ -51,7 +56,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentDateOfBirth = studentscontainer.StudentDateOfBirth,
                 StudentCellPhone = studentscontainer.StudentCellPhone,
                 StudentEmail = studentscontainer.StudentEmail,
-                CoachName = coachcontainer.CoachFirstName + " " + coachcontainer.CoachLastName
+                CoachName = temporaryCoachId.HasValue ? coachcontainer.CoachFirstName + " " + coachcontainer.CoachLastName : "Unassigned"
                 /*
                 StudentAddress = studentscontainer.StudentAddress,
                 StudentApartmentNumber = studentscontainer.StudentApartmentNumber,
@@ -111,6 +116,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 ParentSignatureDate = studentscontainer.ParentSignatureDate
                 */
             };
+
+
             return View(a);
         }
 
@@ -119,7 +126,7 @@ namespace Lead2Change.Web.Ui.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegistrationViewModel model)
         {
-            
+
             if (ModelState.IsValid)
             {
                 if (ModelState.IsValid)
@@ -132,7 +139,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentDateOfBirth = model.StudentDateOfBirth,
                         StudentCellPhone = model.StudentCellPhone,
                         StudentEmail = model.StudentEmail,
-                        CoachId = new Guid("dea1550d-31b1-42b1-b94e-19e03e7e83a1") //set to unlisted/unassigned
+                        CoachId = null //set to unlisted/unassigned
                         /*
                         StudentAddress = model.StudentAddress,
                         StudentApartmentNumber = model.StudentApartmentNumber,
@@ -193,7 +200,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         */
                     };
                     var abc = await _studentService.Create(student);
-                    await Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName+ " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
+                    await Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
                     await Email("1joel.kuriakose@gmail.com", "joeljk2003@gmail.com", "Lead2Change Student Registration Confirmation: A new student has been registered", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", "Lead2Change Student Registration", "Lead2Change");
                     await Email("1joel.kuriakose@gmail.com", model.StudentEmail, "Lead2Change Registration Confirmation: You are registered", "Congrats, you have sucessfully registered for Lead2Change!", "Congrats, you have sucessfully registered for Lead2Change!", "Lead2Change Student Registration", model.StudentFirstName + " " + model.StudentLastName);
                 }
