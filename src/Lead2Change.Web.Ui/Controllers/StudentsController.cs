@@ -1,4 +1,4 @@
-﻿using Lead2Change.Domain.ViewModels;
+using Lead2Change.Domain.ViewModels;
 using Lead2Change.Services.Identity;
 using Lead2Change.Services.Students;
 using Microsoft.AspNetCore.Mvc;
@@ -41,7 +41,7 @@ namespace Lead2Change.Web.Ui.Controllers
             }
             else if (User.IsInRole(StringConstants.RoleNameCoach))
             {
-                // Student Id being used as assosiation to coach
+                // StudentId being used as assosiation to coach
                 return View(await _studentService.GetStudentsByCoachId(user.StudentId));
             }
             else if (User.IsInRole(StringConstants.RoleNameAdmin))
