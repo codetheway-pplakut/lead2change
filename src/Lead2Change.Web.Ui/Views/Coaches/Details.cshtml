@@ -1,5 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿@model Lead2Change.Domain.ViewModels.CoachViewModel
+@*
+    ViewData["Title"] = "Details";
 *@
-@{
-}
+
+<h1>Details</h1>
+
+<p>First Name:  @Model.CoachFirstName</p>
+<p>Last Name:  @Model.CoachLastName</p>
+<p>Email:  @Model.CoachEmail</p>
+<p>Phone Number:  @Model.CoachPhoneNumber</p>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -30,6 +30,20 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(new CoachViewModel());
         }
 
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var coachescontainer = await _coachService.GetCoach(id);
+            CoachViewModel a = new CoachViewModel()
+            {
+                Id = coachescontainer.Id,
+                CoachFirstName = coachescontainer.CoachFirstName,
+                CoachLastName = coachescontainer.CoachLastName,
+                CoachEmail = coachescontainer.CoachEmail,
+                CoachPhoneNumber = coachescontainer.CoachPhoneNumber
+            };
+            return View(a);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(CoachViewModel model)
         {
