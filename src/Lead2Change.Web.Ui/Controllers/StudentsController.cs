@@ -25,7 +25,7 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (!SignInManager.IsSignedIn(User))
             {
-                return RedirectToAction("");
+                return Redirect("/Identity/Account/Login");
             }
 
             if (!User.IsInRole(StringConstants.RoleNameStudent))
