@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Lead2Change.Repositories.Coaches
 {
-    public interface ICoachRepository
+    public interface ICoachesRepository
     {
         public Task<Coach> Update(Coach student);
     }

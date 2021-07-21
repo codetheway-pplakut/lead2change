@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
-    public class CoachController : Controller
+    public class CoachesController : Controller
     {
         private ICoachService _coachService;
         public IActionResult Index()
         {
             return View();
         }
-        public CoachController(IIdentityService identityService, ICoachService coachService) : base(identityService)
+        public CoachesController(IIdentityService identityService, ICoachService coachService) : base(identityService)
         {
             _coachService = coachService;
         }
