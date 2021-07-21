@@ -44,7 +44,9 @@ namespace Lead2Change.Web.Ui.Controllers
                     QuestionInInterviews = model.QuestionInInterviews
                 };
                 var result = await QuestionsService.Create(question);
-                return RedirectToAction("Index");
+                if (Request.Form["RedirectCreateView"].Equals("Create and New")) { return RedirectToAction("Create"); }
+                else {return RedirectToAction("Index");}
+
             }
             return View("Create", model);
         }

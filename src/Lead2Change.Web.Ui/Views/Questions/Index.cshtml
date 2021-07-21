@@ -2,21 +2,31 @@
 @*
     ViewData["Title"] = "Index";
 *@
-<div class="container-fluid  pr-sm-4 pl-sm-4">
+<div class="container-fluid pr-sm-4 pl-sm-4, calibri">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="GoalHeadingFont"><strong>Interview Questions</strong></h4>
+        </div>
+    </div>
     <table class="table table-striped pt-2">
         <thead class="thead blueStyle">
             <tr>
-                <th class="col-8">
+                <th class="col-sm-1">
+                    #
+                </th>
+                <th class="col-sm-8">
                     Questions
                 </th>
-                <th class="col-4">
+                <th class="col-sm-3">
                     Options
                 </th>
             </tr>
         </thead>
         @foreach (var item in Model)
         {
+            var questionOrder= Model.IndexOf(item) + 1;
             <tr>
+                <th scope="row">@questionOrder</th>
                 <td>
                     @Html.DisplayFor(modelItem => item.QuestionString)
                 </td>
@@ -28,8 +38,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class=" col-sm-12">
                             <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Archive" onclick="location.href='@Url.Action("Delete","Questions", new { id = item.Id })'" />
+                        <div class=" col-sm-12">
                         </div>
                     </div>
                 </td>
