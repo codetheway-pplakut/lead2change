@@ -432,10 +432,6 @@
             <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
             <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
         </div>
-        <div id="hidden" class="form-group" display="none">
-            <label asp-for="Active" class="control-label"></label>
-            <input asp-for="Active" class="form-control" type="checkbox" />
-        </div>
         @*Include any disclaimers necessary for signatures*@
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-primary" />

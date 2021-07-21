@@ -185,7 +185,6 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentSignatureDate = model.StudentSignatureDate,
                         ParentSignature = model.ParentSignature,
                         ParentSignatureDate = model.ParentSignatureDate,
-
                         Active = true
                     };
                     var abc = await _studentService.Create(student);
