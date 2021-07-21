@@ -124,7 +124,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentDateOfBirth = model.StudentDateOfBirth,
                         StudentCellPhone = model.StudentCellPhone,
                         StudentEmail = model.StudentEmail,
-                        CoachId = new Guid()
+                        CoachId = new Guid("dea1550d-31b1-42b1-b94e-19e03e7e83a1")
                         /*
                         StudentAddress = model.StudentAddress,
                         StudentApartmentNumber = model.StudentApartmentNumber,
