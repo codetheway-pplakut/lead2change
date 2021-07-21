@@ -26,7 +26,8 @@ namespace Lead2Change.Services.Coaches
         }
         public async Task<List<Coach>> GetCoaches()
         {
-        }
             return await this._coachRepo.GetCoaches();
+        }
+            
 }
     }
