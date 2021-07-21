@@ -48,7 +48,6 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             return View(new InterviewQuestionCreateViewModel()) ;
         }
-        [HttpPost]
         public async Task<IActionResult> Register(InterviewQuestionCreateViewModel model, String submitButton)
         {
             if (ModelState.IsValid)
@@ -63,6 +62,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         model.QuestionInInterviews.Add(new QuestionInInterview { InterviewId = model.Id, Question = newQuestion, QuestionId = newQuestion.Id });
                         
                         model.QuestionText = null;
+                        ModelState.Clear();
                     }
                     return View("Create", model);
 

@@ -184,3 +184,7 @@ thead.blueStyle{
     font-family: Gotham;
     color: #ff5307;
 }
+#QuestionTextInput{
+    height:8em;
+}
+
