@@ -421,7 +421,7 @@
                         <span asp-validation-for="PACTTestDate" class="text-danger"></span>
                     </div>
                 </div>
-                
+
             </div>
             <div class="row">
                 <div class="col-sm-8">
@@ -455,7 +455,7 @@
                         <span asp-validation-for="SATTestDate" class="text-danger"></span>
                     </div>
                 </div>
-                
+
             </div>
             <div class="row">
                 <div class="col-sm-8">
@@ -473,12 +473,12 @@
                     </div>
                 </div>
             </div>
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
             <div class="form-group">
                 <input asp-for="PrepClassRequired" class="form-check-input me-1" type="checkbox" />
                 <label asp-for="PrepClassRequired" class="control-label">I need a prep class.</label>
@@ -520,6 +520,11 @@
                 <label asp-for="ParentSignatureDate" class="control-label">Date:</label>
                 <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
                 <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Active" class="control-label">Is this student active?</label>
+                <input asp-for="Active" class="form-control" type="checkbox" />
+                <span asp-validation-for="Active" class="text-danger"></span>
             </div>
 
 
