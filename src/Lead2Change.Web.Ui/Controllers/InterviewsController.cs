@@ -47,8 +47,20 @@ namespace Lead2Change.Web.Ui.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(Guid? interviewId)
         {
+            if (interviewId.HasValue)
+            {
+                List<QuestionInInterview> questionInInterviews = await _interviewsService.GetInterviewAndQuestions(interviewId.Value);
+                InterviewQuestionCreateViewModel newModel = new InterviewQuestionCreateViewModel
+                {
+                    AddedQuestions = questionInInterviews.Select(questionInInterview => questionInInterview.Question).ToList(),
+                    Id = interviewId.Value,
+                    InterviewName = questionInInterviews.FirstOrDefault().Interview.InterviewName,
+                    UnselectedQuestions = await _questionService.GetAllExcept(interviewId.Value)
+                };
+                return View(newModel);
+            }
             return View(new InterviewQuestionCreateViewModel()) ;
         }
         public async Task<IActionResult> Register(InterviewQuestionCreateViewModel model, String submitButton)
@@ -56,16 +68,28 @@ namespace Lead2Change.Web.Ui.Controllers
             if (ModelState.IsValid)
             {
                 // Step 1: Update/Create interview if needed
-                if (model.Id == Guid.Empty)
+                if (model.Id.Equals(Guid.Empty))
                 {
-                    Interview interview = await _interviewsService.Create(new Interview { InterviewName = model.InterviewName });
+                    // If everything is empty, then there is nothing to create and program should return to index
+                    if(String.IsNullOrEmpty(model.InterviewName) && String.IsNullOrEmpty(model.QuestionText) && (String.IsNullOrEmpty(submitButton) || submitButton.Equals("Create")))
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    Interview interview = await _interviewsService.Create(new Interview { InterviewName = (String.IsNullOrEmpty(model.InterviewName)) ? "Untitled" : model.InterviewName });
                     // Update the viewModel's ID
                     model.Id = interview.Id;
                 }
                 else
                 {
-                    // Update database if title has changed
-                    Interview interview = await _interviewsService.GetInterview(model.Id);
+                    // Get the interview's information in the database
+                    List<QuestionInInterview> questionInInterviews = await _interviewsService.GetInterviewAndQuestions(model.Id);
+                    Interview interview = new Interview {
+                        Id = model.Id,
+                        InterviewName = questionInInterviews.FirstOrDefault().Interview.InterviewName
+                    };
+                    model.AddedQuestions = questionInInterviews.Select(questionInInterview => questionInInterview.Question).ToList();
+
+                    // Update if the interview name changed
                     if (!interview.InterviewName.Equals(model.InterviewName))
                     {
                         interview.InterviewName = model.InterviewName;
@@ -78,7 +102,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     // Add Question to Database
                     Question newQuestion = new Question() { QuestionString = model.QuestionText };
                     newQuestion = await _questionService.Create(newQuestion);
-                    model.QuestionInInterviews.Add(new QuestionInInterview { InterviewId = model.Id, Question = newQuestion, QuestionId = newQuestion.Id });
+                    model.AddedQuestions.Add(newQuestion);
                     // Question Text is Reset after a corresponding question was added    
                     model.QuestionText = null;
                     // Add Relationship to database through a QuestionInInterview()
@@ -91,11 +115,17 @@ namespace Lead2Change.Web.Ui.Controllers
 
 
                 // Step 3: Return User to Correct View Based on the Button Pushed
-                if (submitButton.Equals("addQuestion"))
+                if (submitButton != null && submitButton.Equals("addQuestion"))
                 {
+                    // Prepares View Model
                     ModelState.Clear();
                     return View("Create", model);
 
+                }
+                else if(submitButton != null && submitButton.Equals("selectQuestion"))
+                {
+                    ModelState.Clear();
+                    return RedirectToAction("QuestionSelect", new { id = model.Id });
                 }
                 else
                 {
@@ -122,8 +152,6 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Update(InterviewViewModel model)
         {
             
-
-
             Interview interview = new Interview
             {
                 Id = model.Id,
@@ -141,18 +169,67 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             var result = await _interviewsService.GetInterviewAndQuestions(id);
-            InterviewViewModel interview = new InterviewViewModel()
+            InterviewViewModel interviewModel;
+            // If there are no questions in the interview, we can't get the title from QuestionInInterviews0
+            if(result == null || result.Count == 0)
             {
-                Id = id,
-                QuestionInInterviews = result,
-                InterviewName = result.FirstOrDefault().Interview.InterviewName
-            };
+                var interview = await _interviewsService.GetInterview(id);
+                interviewModel = new InterviewViewModel {
+                    Id = id,
+                    InterviewName = interview.InterviewName
+                };
+            }
+            else
+            {
+                interviewModel = new InterviewViewModel()
+                {
+                    Id = id,
+                    QuestionInInterviews = result,
+                    InterviewName = result.FirstOrDefault().Interview.InterviewName
+                };
+            }
+            return View(interviewModel);
+        }
+
+        public async Task<IActionResult> QuestionSelect(Guid id)
+        {
+            List<QuestionInInterview> interviewAndQuestions = await _interviewsService.GetInterviewAndQuestions(id);
+            List<Question> remainingQuestions = await _questionService.GetAllExcept(id);
+            InterviewQuestionCreateViewModel interview;
+            if(interviewAndQuestions != null && interviewAndQuestions.Count != 0)
+            {
+                interview = new InterviewQuestionCreateViewModel
+                {
+                    AddedQuestions = interviewAndQuestions.Select(questionInInterview => questionInInterview.Question).ToList(),
+                    InterviewName = interviewAndQuestions.FirstOrDefault().Interview.InterviewName,
+                    Id = id,
+                    UnselectedQuestions = remainingQuestions
+                };
+            }
+            else
+            {
+                // If there arent any QuestionInInterviews, info must be taken from the actual interview
+                var tempInterview = await _interviewsService.GetInterview(id);
+                interview = new InterviewQuestionCreateViewModel
+                {
+                    Id = id,
+                    InterviewName = tempInterview.InterviewName,
+                    UnselectedQuestions = remainingQuestions
+                };
+            }
+            
             return View(interview);
         }
 
-        public async Task<IActionResult> QuestionSelect(InterviewQuestionCreateViewModel model)
+        public async Task<IActionResult> SelectQuestion(Guid interviewId, Guid questionId)
         {
-            return View(model);
+            // Adds an existing question to an interview
+            QuestionInInterview result = await _questionInInterviewService.Create(new QuestionInInterview()
+            {
+                InterviewId = interviewId,
+                QuestionId = questionId
+            });
+            return RedirectToAction("QuestionSelect", new { id = interviewId });
         }
 
     }

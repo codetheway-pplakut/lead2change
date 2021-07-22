@@ -8,7 +8,7 @@
     <table class="table table-striped pt-2">
         <thead class="thead blueStyle">
             <tr>
-                
+
                 <th>
                     Question
                 </th>
@@ -18,18 +18,24 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model.QuestionInInterviews != null)
+            @if (Model.UnselectedQuestions != null)
             {
-                @foreach (QuestionInInterview questionInInterview in Model.QuestionInInterviews)
+                @foreach (Question question in Model.UnselectedQuestions)
                 {
                     <tr>
-                        <td>@questionInInterview.Question.QuestionString</td>
-                        <td>Insert button here</td>
+                        <td>@question.QuestionString</td>
+                        <td>
+                            <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("SelectQuestion","Interviews", new { questionId = question.Id, interviewId = Model.Id })'">Add Question</button>
+                        </td>
                     </tr>
                 }
             }
         </tbody>
-
-
     </table>
+    <div class="row">
+        <div class="col-sm-12">
+            <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("Create","Interviews", new { interviewId = Model.Id })'">Back To List</button>
+
+        </div>
+    </div>
 </div>

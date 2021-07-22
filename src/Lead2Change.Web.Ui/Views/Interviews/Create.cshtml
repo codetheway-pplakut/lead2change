@@ -19,16 +19,7 @@
                 <input asp-for="Id" class="form-control" />
             </div>
             
-            <!--This section is passes all information needed in to keep questionInInterview information to the controller-->
-            <div class="form-group col-sm-12 d-none">
-                @for (int i = 0; i < Model.QuestionInInterviews.Count; i++)
-                {
-                    @Html.HiddenFor(model => Model.QuestionInInterviews[i].InterviewId)
-                    @Html.HiddenFor(model => Model.QuestionInInterviews[i].QuestionId)
-                    @Html.HiddenFor(model => Model.QuestionInInterviews[i].Question.Id)
-                    @Html.HiddenFor(model => Model.QuestionInInterviews[i].Question.QuestionString)
-                }
-            </div>
+            
            
             <div class="form-group col-sm-12">
                 <b><label asp-for="InterviewName" class="control-label">Interview Name</label></b>
@@ -48,7 +39,7 @@
                         <button type="submit" name="submitButton" value="addQuestion" class="btn btn-lg btn-block orangeBtn">Add Question</button>
                     </div>
                     <div class="col-sm-6">
-                        <button type="button" class="btn btn-lg btn-block orangeBtn" onclick="location.href='@Url.Action("QuestionSelect","Interviews", Model)'">Select an Existing Question</button>
+                        <button type="submit" name ="submitButton" value="selectQuestion" class="btn btn-lg btn-block orangeBtn">Select an Existing Question</button>
                     </div>
                 </div>
                 
@@ -80,17 +71,14 @@
                         <td><b>Interview Title</b> </td>
                         <td>@Model.InterviewName</td>
                     </tr>
-                    <tr>
-                        <td><b>How many Questions are there? [Testing]</b> </td>
-                        <td>@Model.QuestionInInterviews.Count</td>
-                    </tr>
-                    @if (Model.QuestionInInterviews != null)
+       
+                    @if (Model.AddedQuestions != null)
                     {
-                        @foreach (QuestionInInterview questionInInterview in Model.QuestionInInterviews)
+                        @foreach (Question question in Model.AddedQuestions)
                         {
                             <tr>
                                 <td>Question:</td>
-                                <td>@questionInInterview.Question.QuestionString</td>
+                                <td>@question.QuestionString</td>
                             </tr>
                         }
                     }

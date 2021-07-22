@@ -13,14 +13,14 @@ namespace Lead2Change.Domain.ViewModels
     {
         public InterviewQuestionCreateViewModel()
         {
-            QuestionInInterviews = new List<QuestionInInterview>();
+            AddedQuestions = new List<Question>();
         }
-        public List<QuestionInInterview> QuestionInInterviews { get; set; }
+        public List<Question> AddedQuestions { get; set; }
 
-        public List<Question> UnselectedQuestions { get; set; } // Used in the Quesiton Select View
+        public List<Question> UnselectedQuestions { get; set; } // Used in the Question Select View
         public Guid Id { get; set; }
         public string InterviewName { get; set; }
        
-        public string QuestionText { get; set; }
+        public string QuestionText { get; set; } // Used in the Interview Question Create View
     }
 }
