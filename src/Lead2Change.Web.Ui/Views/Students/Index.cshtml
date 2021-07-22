@@ -9,12 +9,10 @@
     <table class="table sortable" id="myTable">
         <thead>
             <tr>
-                <th scope="col">Last Name</th>
-                <th scope="col">First Name</th>
+                <th scope="col">Name</th>
                 <th scope="col">Date Of Birth</th>
                 <th scope="col">Email</th>
-                <th scope="col">Parent Last Name</th>
-                <th scope="col">Parent First Name</th>
+                <th scope="col">Parent Name</th>
                 <th scope="col">Parent Email</th>
             </tr>
         </thead>
@@ -26,10 +24,7 @@
 
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.StudentLastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StudentFirstName)
+                        @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
                     </td>
                     <td>
                         @*@Html.DisplayFor(modelItem => item.StudentDateOfBirth.ToString("d"))*@
@@ -40,10 +35,7 @@
                         @Html.DisplayFor(modelItem => item.StudentEmail)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ParentLastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ParentFirstName)
+                        @Html.DisplayFor(modelItem => item.ParentLastName), @Html.DisplayFor(modelItem => item.ParentFirstName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ParentEmail)
