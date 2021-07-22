@@ -18,6 +18,22 @@ namespace Lead2Change.Services.Answers
         {
             this.AnswersRepository = new AnswersRepository(dbContext);
         }
+        public async Task<List<Answer>> GetAnswers(Guid interviewID)
+        {
+            var allAnswers = await this.AnswersRepository.GetAnswers();
+            var result = new List<Answer>();
+            foreach (Answer answer in allAnswers)
+            {
+
+                if (answer.InterviewId.Equals(interviewID))
+                {
+                    result.Add(answer);
+
+                }
+            }
+            return result;
+
+        }
         public async Task<Answer> GetAnswer(Guid id)
         {
             return await this.AnswersRepository.GetAnswer(id);

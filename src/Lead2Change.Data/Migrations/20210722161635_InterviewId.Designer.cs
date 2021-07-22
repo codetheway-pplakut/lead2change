@@ -3,14 +3,16 @@ using System;
 using Lead2Change.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lead2Change.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210722161635_InterviewId")]
+    partial class InterviewId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,9 +26,6 @@ namespace Lead2Change.Data.Migrations
 
                     b.Property<string>("AnswerString")
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("INTEGER");
 
                     b.Property<Guid>("InterviewId")
                         .HasColumnType("TEXT");
@@ -323,9 +322,6 @@ namespace Lead2Change.Data.Migrations
 
                     b.Property<Guid?>("InterviewId")
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsArchived")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("QuestionString")
                         .HasColumnType("TEXT");

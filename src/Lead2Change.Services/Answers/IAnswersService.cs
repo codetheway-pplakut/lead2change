@@ -14,6 +14,6 @@ namespace Lead2Change.Services.Answers
         public Task<Answer> Create(Answer answer);
         public Task<Answer> Delete(Answer answer);
         public Task<Answer> AnswerQuestion(Answer answer);
-
+        public  Task<List<Answer>> GetAnswers(Guid interviewID);
     }
 }
