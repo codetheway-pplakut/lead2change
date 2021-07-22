@@ -6,19 +6,21 @@ using System.Text;
 namespace Lead2Change.Domain.ViewModels
 {
     /**
-     * This class is used to contain the added information needed by the page which creates both an interview and it's questions
+     * This class is used to contain the added information needed by the page which creates both an interview and its questions
      * 
      */
     public class InterviewQuestionCreateViewModel
     {
         public InterviewQuestionCreateViewModel()
         {
-            QuestionInInterviews = new List<QuestionInInterview>();
+            AddedQuestions = new List<Question>();
         }
-        public List<QuestionInInterview> QuestionInInterviews { get; set; }
+        public List<Question> AddedQuestions { get; set; }
+
+        public List<Question> UnselectedQuestions { get; set; } // Used in the Question Select View
         public Guid Id { get; set; }
         public string InterviewName { get; set; }
        
-        public string QuestionText { get; set; }
+        public string QuestionText { get; set; } // Used in the Interview Question Create View
     }
 }
