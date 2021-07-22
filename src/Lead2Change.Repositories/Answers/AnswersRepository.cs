@@ -45,5 +45,11 @@ namespace Lead2Change.Repositories.Answers
             await AppDbContext.SaveChangesAsync();
             return result.Entity;
         }
+        public async Task<Answer> AnswerQuestion(Answer answer)
+        {
+            var result = await this.AppDbContext.AddAsync(answer);
+            await this.AppDbContext.SaveChangesAsync();
+            return result.Entity;
+        }
     }
 }

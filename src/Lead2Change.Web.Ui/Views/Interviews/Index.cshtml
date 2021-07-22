@@ -43,10 +43,17 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href='@Url.Action("Delete","Interviews", new { id = item.Id })'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Delete" onclick="location.href='@Url.Action("Delete","Interviews", new { id = item.Id })'" />
 
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="button" class="btn btn-block orangeBtn" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion","Answer", new { id = item.Id })'" />
+
+                        </div>
+                    </div>
+
                 </td>
             </tr>
         }

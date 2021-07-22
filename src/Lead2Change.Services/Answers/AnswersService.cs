@@ -7,6 +7,7 @@ using Lead2Change.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using Lead2Change.Domain.ViewModels;
 
 namespace Lead2Change.Services.Answers
 {
@@ -36,6 +37,10 @@ namespace Lead2Change.Services.Answers
         public async Task<Answer> Delete(Answer answer)
         {
             return await AnswersRepository.Delete(answer);
+        }
+        public async Task<Answer> AnswerQuestion(Answer answer)
+        {
+            return await this.AnswersRepository.AnswerQuestion(answer);
         }
     }
 }
