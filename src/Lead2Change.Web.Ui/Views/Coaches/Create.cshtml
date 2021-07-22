@@ -10,25 +10,40 @@
 
 <div container="fluid">
     <form asp-action="Create">
-        <div class="form-group">
-            <label asp-for="CoachFirstName" class="control-label">First Name:</label>
-            <input asp-for="CoachFirstName" class="form-control" required />
-            <span asp-validation-for="CoachFirstName" class="text-danger"></span>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="CoachFirstName" class="control-label">First Name:</label>
+                    <input asp-for="CoachFirstName" class="form-control" required />
+                    <span asp-validation-for="CoachFirstName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="CoachLastName" class="control-label">Last Name:</label>
+                    <input asp-for="CoachLastName" class="form-control" required />
+                    <span asp-validation-for="CoachLastName" class="text-danger"></span>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label asp-for="CoachLastName" class="control-label">Last Name:</label>
-            <input asp-for="CoachLastName" class="form-control" required />
-            <span asp-validation-for="CoachLastName" class="text-danger"></span>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label asp-for="CoachEmail" class="control-label">Email:</label>
+                    <input asp-for="CoachEmail" class="form-control" type="email" required />
+                    <span asp-validation-for="CoachEmail" class="text-danger"></span>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label asp-for="CoachEmail" class="control-label">Email:</label>
-            <input asp-for="CoachEmail" class="form-control" type="email" required />
-            <span asp-validation-for="CoachEmail" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="CoachPhoneNumber" class="control-label">Phone Number:</label>
-            <input asp-for="CoachPhoneNumber" class="form-control" required />
-            <span asp-validation-for="CoachPhoneNumber" class="text-danger"></span>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label asp-for="CoachPhoneNumber" class="control-label">Phone Number:</label>
+                    <input asp-for="CoachPhoneNumber" class="form-control" required />
+                    <span asp-validation-for="CoachPhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-primary" />
