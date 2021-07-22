@@ -56,8 +56,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentDateOfBirth = studentscontainer.StudentDateOfBirth,
                 StudentCellPhone = studentscontainer.StudentCellPhone,
                 StudentEmail = studentscontainer.StudentEmail,
-                CoachName = temporaryCoachId.HasValue ? coachcontainer.CoachFirstName + " " + coachcontainer.CoachLastName : "Unassigned"
-                /*
+                CoachName = temporaryCoachId.HasValue ? coachcontainer.CoachFirstName + " " + coachcontainer.CoachLastName : "Unassigned",
+                
                 StudentAddress = studentscontainer.StudentAddress,
                 StudentApartmentNumber = studentscontainer.StudentApartmentNumber,
                 StudentCity = studentscontainer.StudentCity,
@@ -114,7 +114,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentSignatureDate = studentscontainer.StudentSignatureDate,
                 ParentSignature = studentscontainer.ParentSignature,
                 ParentSignatureDate = studentscontainer.ParentSignatureDate
-                */
+                
             };
 
 
@@ -139,8 +139,8 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentDateOfBirth = model.StudentDateOfBirth,
                         StudentCellPhone = model.StudentCellPhone,
                         StudentEmail = model.StudentEmail,
-                        CoachId = null //set to unlisted/unassigned
-                        /*
+                        CoachId = null, //set to unlisted/unassigned
+                        
                         StudentAddress = model.StudentAddress,
                         StudentApartmentNumber = model.StudentApartmentNumber,
                         StudentCity = model.StudentCity,
@@ -197,7 +197,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentSignatureDate = model.StudentSignatureDate,
                         ParentSignature = model.ParentSignature,
                         ParentSignatureDate = model.ParentSignatureDate
-                        */
+                        
                     };
                     var abc = await _studentService.Create(student);
                     await Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
