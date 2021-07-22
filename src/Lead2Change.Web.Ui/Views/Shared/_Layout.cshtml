@@ -32,7 +32,8 @@
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole(StringConstants.RoleNameStudent))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Details">Students</a>
+                                @Html.ActionLink("Student", "Details", "Students", new { studentId = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
+                                
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Goals" asp-action="Details">Goals</a>
