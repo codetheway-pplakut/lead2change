@@ -21,10 +21,11 @@ namespace Lead2Change.Web.Ui.Controllers
             this.AnswersService = answersService;
             this._interviewsService = interviewsService;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Guid interviewID)
         {
+          
             List<AnswersViewModel> result = new List<AnswersViewModel>();
-            List<Answer> answers = await AnswersService.GetAnswers();
+            List<Answer> answers = await AnswersService.GetAnswers(interviewID);
             foreach (Answer answer in answers)
             {
                 result.Add(new AnswersViewModel()
@@ -32,7 +33,8 @@ namespace Lead2Change.Web.Ui.Controllers
                     AnswerString = answer.AnswerString,
                     Id = answer.Id,
                     StudentId = answer.StudentId,
-                    QuestionId = answer.QuestionId
+                    QuestionId = answer.QuestionId,
+                    InterviewId = answer.InterviewId,
                 });
             }
             return View(result);
@@ -69,14 +71,16 @@ namespace Lead2Change.Web.Ui.Controllers
                     Answer answer = new Answer()
                     {
                         AnswerString = model.Answers[i].AnswerString,
-
+                        InterviewId = model.InterviewId,
                         StudentId = model.StudentId,
                         QuestionId = questions[i].QuestionId,
                     };
                     var result = await AnswersService.AnswerQuestion(answer);
+                    
                 }
-           
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { interviewID = model.InterviewId });
+
+
             }
             return View("Create", model);
         }
@@ -97,11 +101,11 @@ namespace Lead2Change.Web.Ui.Controllers
             }
             return View("Create", model);
         }
-        public async Task<IActionResult> Delete(Guid id, Guid studentID)
+        public async Task<IActionResult> Delete(Guid id, Guid interviewID)
         {
             var answer = await AnswersService.GetAnswer(id);
             await AnswersService.Delete(answer);
-            return RedirectToAction("Index", new { studentID = answer.StudentId });
+            return RedirectToAction("Index", new { interviewID = answer.InterviewId });
         }
         public async Task<IActionResult> Edit(Guid id)
         {

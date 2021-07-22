@@ -9,7 +9,8 @@
             <h2 class="GoalHeadingFont"><strong>Answers</strong></h2>
         </div>
     </div>
-    <table class="table table-striped pt-2">
+ 
+    <table class="table table-striped pt-2"
         <thead class="thead blueStyle">
             <tr>
                 <th>
@@ -34,9 +35,9 @@
 
                         </div>
                     </div>
-                  
 
-                
+
+
                     <div class="row">
                         <div class="col-sm-12">
                             <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href='@Url.Action("Delete","Answer", new { id = item.Id })'" />
@@ -52,7 +53,7 @@
     <div class="row">
         <div class="col-sm-12 pb-sm-2">
             <input type="button" class="btn btn-primary" value="Your Interviews" onclick="location.href='@Url.Action("Index","Interviews")'" />
-            
+
 
         </div>
     </div>
