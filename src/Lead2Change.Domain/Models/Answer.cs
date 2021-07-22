@@ -13,5 +13,6 @@ namespace Lead2Change.Domain.Models
         public Guid StudentId { get; set; }
         public Guid QuestionId { get; set; }
         public Guid InterviewId { get; set; }
+        public bool IsArchived { get; set; }
     }
 }

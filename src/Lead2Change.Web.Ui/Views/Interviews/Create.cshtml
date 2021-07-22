@@ -19,16 +19,7 @@
                 <input asp-for="Id" class="form-control" />
             </div>
             
-            <!--This section is passes all information needed in to keep questionInInterview information to the controller-->
-            <div class="form-group col-sm-12 d-none">
-                @for (int i = 0; i < Model.QuestionInInterviews.Count; i++)
-                {
-                    @Html.HiddenFor(model => Model.QuestionInInterviews[i].InterviewId)
-                    @Html.HiddenFor(model => Model.QuestionInInterviews[i].QuestionId)
-                    @Html.HiddenFor(model => Model.QuestionInInterviews[i].Question.Id)
-                    @Html.HiddenFor(model => Model.QuestionInInterviews[i].Question.QuestionString)
-                }
-            </div>
+            
            
             <div class="form-group col-sm-12">
                 <b><label asp-for="InterviewName" class="control-label">Interview Name</label></b>
@@ -42,13 +33,21 @@
                 <span asp-validation-for="QuestionText" class="text-danger"></span>
             </div>
             <div class="form-group col-sm-12">
-                <!--If this button is pushed a question is added to the database, but the interview isn't saved-->
-                <button type="submit" name="submitButton" value="addQuestion" class="btn btn-lg btn-block orangeBtn">Add Question</button>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <!--If this button is pushed a question is added to the database, but the interview isn't saved-->
+                        <button type="submit" name="submitButton" value="addQuestion" class="btn btn-lg btn-block orangeBtn">Add Question</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="submit" name ="submitButton" value="selectQuestion" class="btn btn-lg btn-block orangeBtn">Select an Existing Question</button>
+                    </div>
+                </div>
+                
             </div>
             <br />
             <div class="form-group col-sm-12">
                 <div class="row">
-                    <div class="col-sm-6 text-center">
+                    <div class="col-sm-12 text-center">
                         <!--This button saves both the interview and whatever question had been inputed and returns user to interview index page-->
                         <button type="submit" name="submitButton" value="Create" class="btn btn-lg btn-block orangeBtn"> Create</button>
                     </div>
@@ -72,17 +71,14 @@
                         <td><b>Interview Title</b> </td>
                         <td>@Model.InterviewName</td>
                     </tr>
-                    <tr>
-                        <td><b>How many Questions are there? [Testing]</b> </td>
-                        <td>@Model.QuestionInInterviews.Count</td>
-                    </tr>
-                    @if (Model.QuestionInInterviews != null)
+       
+                    @if (Model.AddedQuestions != null)
                     {
-                        @foreach (QuestionInInterview questionInInterview in Model.QuestionInInterviews)
+                        @foreach (Question question in Model.AddedQuestions)
                         {
                             <tr>
                                 <td>Question:</td>
-                                <td>@questionInInterview.Question.QuestionString</td>
+                                <td>@question.QuestionString</td>
                             </tr>
                         }
                     }
