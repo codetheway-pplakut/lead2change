@@ -27,6 +27,10 @@
     <Compile Remove="Migrations\20210720183955_CoachModelTest.Designer.cs" />
     <Compile Remove="Migrations\20210721185541_CoachIdModel.cs" />
     <Compile Remove="Migrations\20210721185541_CoachIdModel.Designer.cs" />
+    <Compile Remove="Migrations\20210715142814_Inactive.cs" />
+    <Compile Remove="Migrations\20210715142814_Inactive.Designer.cs" />
+    <Compile Remove="Migrations\20210715143327_ActiveToggle.cs" />
+    <Compile Remove="Migrations\20210715143327_ActiveToggle.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

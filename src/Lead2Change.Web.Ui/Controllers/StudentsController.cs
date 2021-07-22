@@ -24,7 +24,12 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _studentService.GetStudents());
+            return View(await _studentService.GetActiveStudents());
+        }
+
+        public async Task<IActionResult> InactiveIndex()
+        {
+            return View(await _studentService.GetInactiveStudents());
         }
 
         public async Task<IActionResult> Delete(Guid id)
@@ -113,8 +118,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentSignature = studentscontainer.StudentSignature,
                 StudentSignatureDate = studentscontainer.StudentSignatureDate,
                 ParentSignature = studentscontainer.ParentSignature,
-                ParentSignatureDate = studentscontainer.ParentSignatureDate
-                
+                ParentSignatureDate = studentscontainer.ParentSignatureDate,
+                Active = studentscontainer.Active
             };
 
 
@@ -196,8 +201,8 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentSignature = model.StudentSignature,
                         StudentSignatureDate = model.StudentSignatureDate,
                         ParentSignature = model.ParentSignature,
-                        ParentSignatureDate = model.ParentSignatureDate
-                        
+                        ParentSignatureDate = model.ParentSignatureDate,
+                        Active = true
                     };
                     var abc = await _studentService.Create(student);
                     await Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
@@ -277,12 +282,13 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentSignature = student.StudentSignature,
                 StudentSignatureDate = student.StudentSignatureDate,
                 ParentSignature = student.ParentSignature,
-                ParentSignatureDate = student.ParentSignatureDate
+                ParentSignatureDate = student.ParentSignatureDate,
+                Active = student.Active
             };
             return View(list);
         }
 
-        public async Task<IActionResult> Update(Student model)
+        public async Task<IActionResult> Update(RegistrationViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -352,7 +358,8 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentSignature = model.StudentSignature,
                         StudentSignatureDate = model.StudentSignatureDate,
                         ParentSignature = model.ParentSignature,
-                        ParentSignatureDate = model.ParentSignatureDate
+                        ParentSignatureDate = model.ParentSignatureDate,
+                        Active = model.Active
                     };
                     var student = await _studentService.Update(list);
                 }

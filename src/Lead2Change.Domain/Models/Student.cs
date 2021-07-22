@@ -73,5 +73,6 @@ namespace Lead2Change.Domain.Models
         public CareerDeclaration CareerDeclaration { get; set; }
         public List<Goal> Goals { get; set; }
         public Guid? CoachId { get; set; }
+        public bool Active { get; set; }
     }
 }

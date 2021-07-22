@@ -3,14 +3,16 @@ using System;
 using Lead2Change.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lead2Change.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210714181124_InactiveToggle")]
+    partial class InactiveToggle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,29 +243,6 @@ namespace Lead2Change.Data.Migrations
                     b.ToTable("CareerDeclarations");
                 });
 
-            modelBuilder.Entity("Lead2Change.Domain.Models.Coach", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CoachEmail")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CoachFirstName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CoachLastName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CoachPhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Coaches");
-                });
-
             modelBuilder.Entity("Lead2Change.Domain.Models.Goal", b =>
                 {
                     b.Property<Guid>("Id")
@@ -335,9 +314,6 @@ namespace Lead2Change.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CareerPathList")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("CoachId")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("CollegeApplicationStatus")
@@ -503,8 +479,6 @@ namespace Lead2Change.Data.Migrations
 
                     b.HasIndex("CareerDeclarationId1");
 
-                    b.HasIndex("CoachId");
-
                     b.ToTable("Students");
                 });
 
@@ -573,10 +547,6 @@ namespace Lead2Change.Data.Migrations
                     b.HasOne("Lead2Change.Domain.Models.CareerDeclaration", "CareerDeclaration")
                         .WithMany()
                         .HasForeignKey("CareerDeclarationId1");
-
-                    b.HasOne("Lead2Change.Domain.Models.Coach", null)
-                        .WithMany("Students")
-                        .HasForeignKey("CoachId");
                 });
 #pragma warning restore 612, 618
         }

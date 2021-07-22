@@ -22,6 +22,17 @@ namespace Lead2Change.Repositories.Students
         {
             return await AppDbContext.Students.ToListAsync();
         }
+        public async Task<List<Student>> GetActiveStudents()
+        {
+            var students = await AppDbContext.Students.Where(i => i.Active).ToListAsync();
+            return students;
+        }
+        public async Task<List<Student>> GetInactiveStudents()
+        {
+            var students = await AppDbContext.Students.Where(i => i.Active == false).ToListAsync();
+            return students;
+        }
+
         public async Task<Student> GetStudent(Guid id)
         {
             return await AppDbContext.Students.FirstOrDefaultAsync(i => i.Id == id);
