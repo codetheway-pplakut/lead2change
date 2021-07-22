@@ -41,5 +41,9 @@ namespace Lead2Change.Services.Coaches
         {
             return await this._coachRepo.Update(coach);
         }
+        public async Task<Coach> AssignStudent(Student student)
+        {
+            return await this._coachRepo.AssignStudent(student);
+        }
     }
 }

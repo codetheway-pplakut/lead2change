@@ -107,18 +107,23 @@ namespace Lead2Change.Web.Ui.Controllers
             }
             return View(model);
         }
-        public async Task<IActionResult> AssignStudent(Guid id)
+        public async Task<IActionResult> AssignStudent(Guid studentId, Guid coachId)
         {
-            var student = await _coachService.GetCoach(id);
-            await _coachService.Delete(student);
+            var coach = await _coachService.GetCoach(coachId);
+            var student = await _studentService.GetStudent(studentId);
+            coach.Students.Add(student);
+            var coach1 = await _coachService.Update(coach);
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> AssignStudentIndex(Coach model)
+        //Need to add "AddStudent" method to Service
+        //Change above method^^^
+        //Change StudentService to change the CoachId
+        public async Task<IActionResult> AssignStudentIndex(Guid coachId)
         {
             AssignStudentViewModel assignStudentViewModel = new AssignStudentViewModel()
             {
                 UnassignedStudents = await _studentService.GetUnassignedStudents(),
-                CurrentCoach = model
+                CurrentCoach = await _coachService.GetCoach(coachId)
             };
             return View(assignStudentViewModel);
         }
