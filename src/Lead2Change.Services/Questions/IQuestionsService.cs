@@ -15,6 +15,7 @@ namespace Lead2Change.Services.Questions
         public Task<Question> Create(Question question);
         public Task<Question> Update(Question model);
         public Task<Question> Delete(Question question);
+        public Task<List<Question>> GetAllExcept(Guid interviewId);
         public Task<Question> PermanentDelete(Question question);
     }
 }

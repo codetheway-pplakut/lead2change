@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Lead2Change.Services.Interviews;
-
+using Lead2Change.Services.QuestionInInterviews;
 
 namespace Lead2Change.Web.Ui
 {
@@ -44,6 +44,7 @@ namespace Lead2Change.Web.Ui
             services.AddScoped<IInterviewService, InterviewService>();
             services.AddScoped<IQuestionsService, QuestionsService>();
             services.AddScoped<IAnswersService, AnswersService>();
+            services.AddScoped<IQuestionInInterviewService, QuestionInInterviewService>();
 
             if (Environment.IsDevelopment())
             {

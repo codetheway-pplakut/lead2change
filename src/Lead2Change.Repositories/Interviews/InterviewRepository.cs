@@ -21,15 +21,26 @@ namespace Lead2Change.Repositories.Interviews
         {
             return await this.AppDbContext.Interviews.ToListAsync();
         }
+        
         public async Task<Interview> GetInterview(Guid id)
         {
+            
             return await this.AppDbContext.Interviews.FirstOrDefaultAsync(i => i.Id == id);
+        }
+        public async Task<List<QuestionInInterview>> GetInterviewAndQuestions(Guid interviewId)
+        {
+            return await this.AppDbContext.QuestionInInterviews.Where(i => i.InterviewId == interviewId).OrderBy(i => i.Order).Include(i => i.Interview).Include(i => i.Question).ToListAsync();
+
         }
         public async Task<Interview> Update(Interview model)
         {
             var result = AppDbContext.Interviews.Update(model);
-            await AppDbContext.SaveChangesAsync();
+            await Save();
             return result.Entity;
+        }
+        public async Task Save()
+        {
+            await AppDbContext.SaveChangesAsync();
         }
         public async Task<Interview> Create(Interview interview)
         {

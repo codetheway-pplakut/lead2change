@@ -1,4 +1,7 @@
-﻿@model Lead2Change.Domain.ViewModels.InterviewViewModel
+﻿@model Lead2Change.Domain.ViewModels.InterviewQuestionCreateViewModel
+@using Lead2Change.Domain.Models;
+
+
 @* ViewData["Title"] = "Create";
 *@
 <div class="row">
@@ -6,33 +9,85 @@
         <h2 class="GoalHeadingFont"><strong>Create an Interview</strong></h2>
     </div>
 </div>
-<div class="calibri">
+<!--Input form for Interview + Question Creation-->
+<div class="container-fluid">
     <form asp-action="Register">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div class="container-fluid">
-            <div class="form-group">
+            <div class="form-group col-sm-12 d-none">
+                <input asp-for="Id" class="form-control" />
+            </div>
+            
+            
+           
+            <div class="form-group col-sm-12">
                 <b><label asp-for="InterviewName" class="control-label">Interview Name</label></b>
                 <input asp-for="InterviewName" class="form-control" />
                 <span asp-validation-for="InterviewName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <b><label asp-for="QuestionInInterviews" class="control-label">Test</label></b>
-                <input asp-for="QuestionInInterviews" class="form-control" />
-                <span asp-validation-for="QuestionInInterviews" class="text-danger"></span>
+            <div class="form-group col-sm-12">
+                <b><label asp-for="QuestionText" class="control-label">Add a Question</label></b>
+                
+                @Html.TextAreaFor(m => m.QuestionText, new { @class = "form-control"})
+                <span asp-validation-for="QuestionText" class="text-danger"></span>
+            </div>
+            <div class="form-group col-sm-12">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <!--If this button is pushed a question is added to the database, but the interview isn't saved-->
+                        <button type="submit" name="submitButton" value="addQuestion" class="btn btn-lg btn-block orangeBtn">Add Question</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="submit" name ="submitButton" value="selectQuestion" class="btn btn-lg btn-block orangeBtn">Select an Existing Question</button>
+                    </div>
+                </div>
+                
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-group col-sm-12">
                 <div class="row">
-                    <div class="col-sm-6 text-center">
-                        <input type="submit" value="Create" class="btn btn-lg btn-block orangeBtn" />
-                    </div>
-                    <div class="col-sm-6 text-center">
-                        <button class="btn btn-outline-dark btn-lg btn-block" onclick="location.href='@Url.Action("Index","Interviews")'">Back To List</button>
+                    <div class="col-sm-12 text-center">
+                        <!--This button saves both the interview and whatever question had been inputed and returns user to interview index page-->
+                        <button type="submit" name="submitButton" value="Create" class="btn btn-lg btn-block orangeBtn"> Create</button>
                     </div>
                 </div>
 
             </div>
         </div>
     </form>
+    <div class="row">
+        <div class="col-sm-12">
+            <!--Start of the table containing added questions-->
+            <table id="InterviewCreateTable" class="table table-striped table-hover table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Info Type</th>
+                        <th scope="col">Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Interview Title</b> </td>
+                        <td>@Model.InterviewName</td>
+                    </tr>
+       
+                    @if (Model.AddedQuestions != null)
+                    {
+                        @foreach (Question question in Model.AddedQuestions)
+                        {
+                            <tr>
+                                <td>Question:</td>
+                                <td>@question.QuestionString</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+    <div class="col-sm-6 text-center">
+        <button class="btn btn-outline-dark btn-lg btn-block" name="Back" onclick="location.href='@Url.Action("Index","Interviews")'">Back To List</button>
+    </div>
 </div>

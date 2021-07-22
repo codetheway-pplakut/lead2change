@@ -42,6 +42,27 @@ namespace Lead2Change.Services.Questions
         {
             return await QuestionsRepository.Delete(question);
         }
+        /*
+         * Returns a list of all questions not currently associated with the inputed interview
+         */
+        public async Task<List<Question>> GetAllExcept(Guid interviewId)
+        {
+            List<Question> allQuestions = await this.QuestionsRepository.GetQuestions();
+            List<Question> result = new List<Question>(allQuestions);
+            // Check if each question is already part of the interview
+            foreach(Question q in allQuestions)
+            {
+                foreach(QuestionInInterview questionInInterview in q.QuestionInInterviews)
+                {
+                    if (questionInInterview.InterviewId.Equals(interviewId))
+                    {
+                        result.Remove(q);
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
         public async Task<Question> PermanentDelete(Question question)
         {
             return await QuestionsRepository.PermanentDelete(question);
