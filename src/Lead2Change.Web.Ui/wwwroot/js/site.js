@@ -36,22 +36,3 @@ $(".show").click(function () {
     $("knowCounselor").show();
 })
 
-/*
- * $(".showHide").on("click", function () {
-    var knowGuidanceCounselor = @Html.Raw(Json.Encode(Model.knowGuidanceCounselor));
-    if (knowGuidanceCounselor) {
-        $(".knowCounselor").toggle(
-            function () { $(".showHide").css({ "visibility": "hidden" }); },
-            function () { $(".showHide").css({ "visibility": "visible" }) });
-    } else {
-        $(".knowCounselor").toggle(
-            function () { $(".showHide").css({ "visibility": "visible" }); },
-            function () { $(".showHide").css({ "visibility": "hidden" }) });
-    }
-});
-*/
-
-/*$(".showHide").toggle(
-    function () { $(".showHide").css({ "visibility": "visible" }); },
-    function () { $(".showHide").css({ "visibility": "hidden" }) });
-*/

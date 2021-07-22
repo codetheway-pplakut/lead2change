@@ -4,18 +4,23 @@
 *@
 <h1>Details</h1>
 
-<h3>Student Info</h3>
-<p>First Name:  @Model.StudentFirstName</p>
-<p>Last Name: @Model.StudentLastName</p>
-<p>Date of Birth: @Convert.ToDateTime(Model.StudentDateOfBirth).ToString("MM/dd/yyyy")</p>
+<h3>Basic Student Information</h3>
+<p><b>First Name:</b> @Model.StudentFirstName</p>
+<p><b>Last Name:</b> @Model.StudentLastName</p>
+<p><b>Date of Birth:</b> @Convert.ToDateTime(Model.StudentDateOfBirth).ToString("MM/dd/yyyy")</p>
+<p><b>Cell Phone:</b> @Model.StudentCellPhone</p>
+<p><b>Email:</b> @Model.StudentEmail</p>
+<p><b>Coach:</b> @Model.CoachName</p>
+
+
+<h3>Other Information</h3>
 <p>Address: @Model.StudentAddress</p>
 <p>Apartment Number: @Model.StudentApartmentNumber</p>
 <p>City: @Model.StudentCity</p>
 <p>State: @Model.StudentState</p>
 <p>Zip Code: @Model.StudentZipCode</p>
 <p>Home Phone: @Model.StudentHomePhone</p>
-<p>Cell Phone: @Model.StudentCellPhone</p>
-<p>Email: @Model.StudentEmail</p>
+
 <p>Career Path: @Model.StudentCareerPath</p>
 <p>Career Interest: @Model.StudentCareerInterest</p>
 
@@ -73,6 +78,8 @@
 <p>Parent Signature: @Model.ParentSignature</p>
 <p>Date Signed: @Convert.ToDateTime(Model.ParentSignatureDate).ToString("MM/dd/yyyy")</p>
 <p>Activity Status: @Model.Active</p>
+
+
 
 @*<p> @Model.</p>*@
 <div>
