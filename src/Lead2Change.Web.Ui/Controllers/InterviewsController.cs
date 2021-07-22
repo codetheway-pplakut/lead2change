@@ -57,7 +57,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 {
                     AddedQuestions = questionInInterviews.Select(questionInInterview => questionInInterview.Question).ToList(),
                     Id = interviewId.Value,
-                    InterviewName = await getInterviewName(interviewId.Value),
+                    InterviewName = await GetInterviewName(interviewId.Value),
                     UnselectedQuestions = await _questionService.GetAllExcept(interviewId.Value)
                 };
                 return View(newModel);
@@ -87,17 +87,18 @@ namespace Lead2Change.Web.Ui.Controllers
                 {
                     // Get the interview's information in the database
                     List<QuestionInInterview> questionInInterviews = await _interviewsService.GetInterviewAndQuestions(model.Id);
-                    Interview interview = new Interview {
-                        Id = model.Id,
-                        InterviewName = await getInterviewName(model.Id)
-                    };
                     model.AddedQuestions = questionInInterviews.Select(questionInInterview => questionInInterview.Question).ToList();
 
                     // Update if the interview name changed
-                    if (!interview.InterviewName.Equals(model.InterviewName))
+                    if (!((await GetInterviewName(model.Id)).Equals(model.InterviewName)))
                     {
-                        interview.InterviewName = model.InterviewName;
-                        interview = await _interviewsService.Update(interview);
+                        
+                       await _interviewsService.Update(new Interview
+                       {
+                           Id = model.Id,
+                           InterviewName = model.InterviewName
+                           
+                       });
                     }
                 }
                 // Step 2: Create and Add Question
@@ -139,6 +140,7 @@ namespace Lead2Change.Web.Ui.Controllers
             }
             return View("Create", model);
         }
+
     
 
         public async Task<IActionResult> Edit(Guid id)
@@ -235,7 +237,7 @@ namespace Lead2Change.Web.Ui.Controllers
             return RedirectToAction("QuestionSelect", new { id = interviewId });
         }
 
-        private async Task<String> getInterviewName(Guid id)
+        private async Task<String> GetInterviewName(Guid id)
         {
             return (await _interviewsService.GetInterview(id)).InterviewName;
         }
