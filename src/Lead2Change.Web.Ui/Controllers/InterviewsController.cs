@@ -49,18 +49,20 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Create(Guid? interviewId)
         {
-            if (interviewId.HasValue)
+            // If a good ID is provided, a Create Page is preloaded with a model for the ID
+            if (interviewId.HasValue && !interviewId.Value.Equals(Guid.Empty))
             {
                 List<QuestionInInterview> questionInInterviews = await _interviewsService.GetInterviewAndQuestions(interviewId.Value);
                 InterviewQuestionCreateViewModel newModel = new InterviewQuestionCreateViewModel
                 {
                     AddedQuestions = questionInInterviews.Select(questionInInterview => questionInInterview.Question).ToList(),
                     Id = interviewId.Value,
-                    InterviewName = questionInInterviews.FirstOrDefault().Interview.InterviewName,
+                    InterviewName = await getInterviewName(interviewId.Value),
                     UnselectedQuestions = await _questionService.GetAllExcept(interviewId.Value)
                 };
                 return View(newModel);
             }
+            // Otherwise an empty model is sent
             return View(new InterviewQuestionCreateViewModel()) ;
         }
         public async Task<IActionResult> Register(InterviewQuestionCreateViewModel model, String submitButton)
@@ -75,7 +77,9 @@ namespace Lead2Change.Web.Ui.Controllers
                     {
                         return RedirectToAction("Index");
                     }
-                    Interview interview = await _interviewsService.Create(new Interview { InterviewName = (String.IsNullOrEmpty(model.InterviewName)) ? "Untitled" : model.InterviewName });
+                    // Interviews with no set names default to Untitled
+                    model.InterviewName = (String.IsNullOrEmpty(model.InterviewName)) ? "Untitled" : model.InterviewName;
+                    Interview interview = await _interviewsService.Create(new Interview { InterviewName = model.InterviewName });
                     // Update the viewModel's ID
                     model.Id = interview.Id;
                 }
@@ -85,7 +89,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     List<QuestionInInterview> questionInInterviews = await _interviewsService.GetInterviewAndQuestions(model.Id);
                     Interview interview = new Interview {
                         Id = model.Id,
-                        InterviewName = questionInInterviews.FirstOrDefault().Interview.InterviewName
+                        InterviewName = await getInterviewName(model.Id)
                     };
                     model.AddedQuestions = questionInInterviews.Select(questionInInterview => questionInInterview.Question).ToList();
 
@@ -155,7 +159,6 @@ namespace Lead2Change.Web.Ui.Controllers
             Interview interview = new Interview
             {
                 Id = model.Id,
-                QuestionInInterviews = model.QuestionInInterviews,
                 InterviewName = model.InterviewName
             };
             if (ModelState.IsValid)
@@ -232,6 +235,10 @@ namespace Lead2Change.Web.Ui.Controllers
             return RedirectToAction("QuestionSelect", new { id = interviewId });
         }
 
+        private async Task<String> getInterviewName(Guid id)
+        {
+            return (await _interviewsService.GetInterview(id)).InterviewName;
+        }
     }
 }
    
