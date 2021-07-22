@@ -10,7 +10,7 @@
             <h2 class="GoalHeadingFont">@Model.InterviewName</h2> 
         </div>
     </div>
-    <form asp-action="RegisterAnswerQuestion">
+    <form asp-action="RegisterAnswerQuestion" class="calibri">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group d-none">
             <input asp-for="@Model.Id" class="form-control" />
@@ -26,19 +26,16 @@
         @for (int j = 0; j < Model.QuestionInInterviews.Count; j++)
         {
 
-            <p>@Model.QuestionInInterviews[j].Question.QuestionString</p>
+            <b>@Model.QuestionInInterviews[j].Question.QuestionString</b>
 
 
             <div class="form-group">
-                <b><label asp-for="@Model.Answers[j].AnswerString" class="control-label"></label></b>
-                <input asp-for="@Model.Answers[j].AnswerString" class="form-control" />
+                <textarea asp-for="@Model.Answers[j].AnswerString" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Your Answer"></textarea>
                 <span asp-validation-for="@Model.Answers[j].AnswerString" class="text-danger"></span>
             </div>
-
-
         }
         <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Submit" class="btn btn-submit" />
         </div>
     </form>
 </div>
