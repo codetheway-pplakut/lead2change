@@ -38,7 +38,10 @@ namespace Lead2Change.Web.Ui.Controllers
             if (User.IsInRole(StringConstants.RoleNameCoach))
             {
                 // StudentId being used as assosiation to coach
-                return View(await _studentService.GetStudentsByCoachId(user.StudentId));
+
+                // TODO: Replace to use list of students in coach model
+                // return View(await _studentService.GetStudentsByCoachId(user.StudentId));
+                return Error("Coach access of index is not currently functioning");
             }
             else if (User.IsInRole(StringConstants.RoleNameAdmin))
             {
@@ -69,7 +72,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
             var user = await UserManager.GetUserAsync(User);
 
-            if (user.StudentId == Guid.Empty)
+            if (user == null || user.StudentId == Guid.Empty)
             {
                 return Error("403: Not authorized to view this student.");
             }

@@ -41,10 +41,6 @@ namespace Lead2Change.Services.Students
         {
             return await this._studentRepo.Create(student);
         }
-        public async Task<List<Student>> GetStudentsByCoachId(Guid id)
-        {
-            return await this._studentRepo.GetStudentsByCoachId(id);
-        }
         public bool HasCareerAssosiation(Student student)
         {
             return student.CareerDeclarationId != Guid.Empty;

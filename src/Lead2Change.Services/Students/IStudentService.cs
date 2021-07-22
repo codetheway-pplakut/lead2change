@@ -16,6 +16,5 @@ namespace Lead2Change.Services.Students
         public Task<Student> Create(Student student);
         public Task<Student> Update(Student student);
         public bool HasCareerAssosiation(Student student);
-        public Task<List<Student>> GetStudentsByCoachId(Guid id);
     }
 }

@@ -23,8 +23,9 @@ namespace Lead2Change.Web.Ui.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
             CreateDefaultRoles().Wait();
-            CreateNewUser("test0001@test.com", "Testtest@123", StringConstants.RoleNameStudent).Wait();
-            CreateNewUser("admin@admin.net", "Testtest@123", StringConstants.RoleNameAdmin).Wait();
+            CreateNewUser("student@test.com", "Testtest@123", StringConstants.RoleNameStudent).Wait();
+            CreateNewUser("coach@test.com", "Testtest@123", StringConstants.RoleNameCoach).Wait();
+            CreateNewUser("admin@test.net", "Testtest@123", StringConstants.RoleNameAdmin).Wait();
         }
 
         /// <summary>
