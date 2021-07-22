@@ -16,6 +16,7 @@ namespace Lead2Change.Repositories.Students
         public Task<Student> Create(Student student);
         public Task<List<Student>> GetActiveStudents();
         public Task<List<Student>> GetInactiveStudents();
+        public Task<List<Student>> GetUnassignedStudents();
 
     }
 }

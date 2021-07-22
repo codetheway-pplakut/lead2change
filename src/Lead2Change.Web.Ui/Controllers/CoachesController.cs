@@ -7,15 +7,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Lead2Change.Services.Students;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
     public class CoachesController : _BaseController
     {
         ICoachService _coachService;
-        public CoachesController(IIdentityService identityService, ICoachService coachService) : base(identityService)
+        IStudentService _studentService;
+        public CoachesController(IIdentityService identityService, ICoachService coachService, IStudentService studentService) : base(identityService)
         {
             _coachService = coachService;
+            _studentService = studentService;
         }
 
         public async Task<IActionResult> Delete(Guid id)
@@ -103,6 +106,21 @@ namespace Lead2Change.Web.Ui.Controllers
                 return RedirectToAction("Index");
             }
             return View(model);
+        }
+        public async Task<IActionResult> AssignStudent(Guid id)
+        {
+            var student = await _coachService.GetCoach(id);
+            await _coachService.Delete(student);
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> AssignStudentIndex(Coach model)
+        {
+            AssignStudentViewModel assignStudentViewModel = new AssignStudentViewModel()
+            {
+                UnassignedStudents = await _studentService.GetUnassignedStudents(),
+                CurrentCoach = model
+            };
+            return View(assignStudentViewModel);
         }
     }
 

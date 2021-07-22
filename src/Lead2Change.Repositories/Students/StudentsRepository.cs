@@ -62,5 +62,10 @@ namespace Lead2Change.Repositories.Students
 
             return result.Entity;
         }
+        public async Task<List<Student>> GetUnassignedStudents()
+        {
+            var students = await AppDbContext.Students.Where(i => i.CoachId.HasValue == false).ToListAsync();
+            return students;
+        }
     }
 }

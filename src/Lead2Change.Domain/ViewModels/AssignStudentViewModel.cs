@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lead2Change.Domain.ViewModels
 {
-    class AssignStudentViewModel
+    public class AssignStudentViewModel
     {
         public Coach CurrentCoach { get; set; }
         public List<Student> UnassignedStudents { get; set; }

@@ -53,5 +53,9 @@ namespace Lead2Change.Services.Students
         {
             return student.CareerDeclarationId != Guid.Empty;
         }
+        public async Task<List<Student>> GetUnassignedStudents()
+        {
+            return await this._studentRepo.GetUnassignedStudents();
+        }
     }
 }
