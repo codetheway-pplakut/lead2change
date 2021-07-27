@@ -48,5 +48,12 @@ namespace Lead2Change.Repositories.Coaches
             await _appDbContext.SaveChangesAsync();
             return result.Entity;
         }
+
+        /*
+         public async Task<Coach> AssignStudent(Student student)
+        {
+            
+        }
+        */
     }
 }

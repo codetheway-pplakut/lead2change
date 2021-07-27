@@ -42,7 +42,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 CoachFirstName = coachescontainer.CoachFirstName,
                 CoachLastName = coachescontainer.CoachLastName,
                 CoachEmail = coachescontainer.CoachEmail,
-                CoachPhoneNumber = coachescontainer.CoachPhoneNumber
+                CoachPhoneNumber = coachescontainer.CoachPhoneNumber,
+                Students=coachescontainer.Students
             };
             return View(a);
         }
@@ -111,19 +112,37 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             var coach = await _coachService.GetCoach(coachId);
             var student = await _studentService.GetStudent(studentId);
-            coach.Students.Add(student);
-            var coach1 = await _coachService.Update(coach);
+            if (ModelState.IsValid)
+            {
+                if (ModelState.IsValid)
+                {
+                    Coach list = new Coach()
+                    {
+                        Id = coach.Id,
+                        CoachFirstName = coach.CoachFirstName,
+                        CoachLastName = coach.CoachLastName,
+                        CoachEmail = coach.CoachEmail,
+                        CoachPhoneNumber = coach.CoachPhoneNumber,
+                        Students = coach.Students.Count == 0 ? new List<Student>() : coach.Students
+                        //CoachName = temporaryCoachId.HasValue ? coachcontainer.CoachFirstName + " " + coachcontainer.CoachLastName : "Unassigned"
+                    };
+                }
+                var coach1 = await _coachService.Update(coach);
+            }
+            
             return RedirectToAction("Index");
         }
         //Need to add "AddStudent" method to Service
         //Change above method^^^
         //Change StudentService to change the CoachId
-        public async Task<IActionResult> AssignStudentIndex(Guid coachId)
+
+        public async Task<IActionResult> AssignStudentIndex(Guid id)
         {
+            Coach tempCoach = await _coachService.GetCoach(id);
             AssignStudentViewModel assignStudentViewModel = new AssignStudentViewModel()
             {
                 UnassignedStudents = await _studentService.GetUnassignedStudents(),
-                CurrentCoach = await _coachService.GetCoach(coachId)
+                CurrentCoach = tempCoach
             };
             return View(assignStudentViewModel);
         }

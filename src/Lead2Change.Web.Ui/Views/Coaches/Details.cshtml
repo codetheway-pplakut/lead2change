@@ -10,6 +10,36 @@
 <p>Email:  @Model.CoachEmail</p>
 <p>Phone Number:  @Model.CoachPhoneNumber</p>
 
+
+<table class="table table-striped pt-2" id="myTable">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Students)
+
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modeItem => item.StudentFirstName), @Html.DisplayFor(modelItem => item.StudentLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentCellPhone)
+                </td>
+            
+            </tr>
+        }
+    </tbody>
+</table>
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
