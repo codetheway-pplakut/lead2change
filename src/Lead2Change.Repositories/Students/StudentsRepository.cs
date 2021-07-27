@@ -67,6 +67,10 @@ namespace Lead2Change.Repositories.Students
             var students = await AppDbContext.Students.Where(i => i.CoachId.HasValue == false).ToListAsync();
             return students;
         }
-    
+        public async Task<List<Student>> GetCoachStudents(Guid coachId)
+        {
+            var students = await AppDbContext.Students.Where(i => i.CoachId == coachId).ToListAsync();
+            return students;
+        }
     }
 }
