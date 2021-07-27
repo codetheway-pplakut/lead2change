@@ -9,16 +9,19 @@ using Microsoft.AspNetCore.Identity;
 using Lead2Change.Web.Ui.Models;
 using Lead2Change.Domain.Constants;
 using Microsoft.AspNetCore.Authorization;
+using Lead2Change.Services.Coaches;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
     public class StudentsController : _BaseController
     {
         IStudentService _studentService;
+        ICoachService _coachService;
 
-        public StudentsController(IUserService identityService, IStudentService studentService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
+        public StudentsController(IUserService identityService, IStudentService studentService, ICoachService coachService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
         {
             _studentService = studentService;
+            _coachService = coachService;
         }
 
         public async Task<IActionResult> Index()
@@ -49,6 +52,11 @@ namespace Lead2Change.Web.Ui.Controllers
             }
 
             return View();
+        }
+
+        public async Task<IActionResult> InactiveIndex()
+        {
+            return View(await _studentService.GetInactiveStudents());
         }
 
         public async Task<IActionResult> Delete(Guid id)
@@ -160,6 +168,13 @@ namespace Lead2Change.Web.Ui.Controllers
             {
                 return Error("400: Bad Request");
             }
+            
+            //check for null
+            var coachcontainer = new Coach();
+            if (student.CoachId.HasValue)
+            {
+                coachcontainer = await _coachService.GetCoach(student.CoachId.Value);
+            }
 
             // Create a new viewModel
             RegistrationViewModel viewModel = new RegistrationViewModel()
@@ -178,6 +193,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentEmail = student.StudentEmail,
                 StudentCareerPath = student.StudentCareerPath,
                 StudentCareerInterest = student.StudentCareerInterest,
+                CoachName = student.CoachId.HasValue ? coachcontainer.CoachFirstName + " " + coachcontainer.CoachLastName : "Unassigned",
 
                 ParentFirstName = student.ParentFirstName,
                 ParentLastName = student.ParentLastName,
@@ -252,6 +268,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentHomePhone = viewModel.StudentHomePhone,
                 StudentCellPhone = viewModel.StudentCellPhone,
                 StudentEmail = viewModel.StudentEmail,
+                CoachId = null, // set to unlisted/unknown
                 StudentCareerPath = viewModel.StudentCareerPath,
                 StudentCareerInterest = viewModel.StudentCareerInterest,
                 ParentFirstName = viewModel.ParentFirstName,
@@ -271,7 +288,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 HowOftenMeetWithGuidanceCounselor = viewModel.HowOftenMeetWithGuidanceCounselor,
                 DiscussWithGuidanceCounselor = viewModel.DiscussWithGuidanceCounselor
             };
-
+            
             // Add model
             var student = await _studentService.Create(model);
 
@@ -281,6 +298,10 @@ namespace Lead2Change.Web.Ui.Controllers
                 user.StudentId = student.Id;
                 await UserManager.UpdateAsync(user);
             }
+            
+            await Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
+            await Email("1joel.kuriakose@gmail.com", "joeljk2003@gmail.com", "Lead2Change Student Registration Confirmation: A new student has been registered", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", "Lead2Change Student Registration", "Lead2Change");
+            await Email("1joel.kuriakose@gmail.com", model.StudentEmail, "Lead2Change Registration Confirmation: You are registered", "Congrats, you have sucessfully registered for Lead2Change!", "Congrats, you have sucessfully registered for Lead2Change!", "Lead2Change Student Registration", model.StudentFirstName + " " + model.StudentLastName);
 
             return RedirectToAction("Details");
         }
@@ -358,8 +379,39 @@ namespace Lead2Change.Web.Ui.Controllers
                 GuidanceCounselorName = student.GuidanceCounselorName,
                 MeetWithGuidanceCounselor = student.MeetWithGuidanceCounselor,
                 HowOftenMeetWithGuidanceCounselor = student.HowOftenMeetWithGuidanceCounselor,
-                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor
-
+                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor,
+                PlanAfterHighSchool = student.PlanAfterHighSchool,
+                CollegeApplicationStatus = student.CollegeApplicationStatus,
+                CollegesList = student.CollegesList,
+                CollegeEssayStatus = student.CollegeEssayStatus,
+                CollegeEssayHelp = student.CollegeEssayHelp,
+                FirstChoiceCollege = student.FirstChoiceCollege,
+                SecondChoiceCollege = student.SecondChoiceCollege,
+                ThirdChoiceCollege = student.ThirdChoiceCollege,
+                TradeSchoolStatus = student.TradeSchoolStatus,
+                TradeSchoolsList = student.TradeSchoolsList,
+                ArmedForcesStatus = student.ArmedForcesStatus,
+                ArmedForcesBranch = student.ArmedForcesBranch,
+                WorkStatus = student.WorkStatus,
+                CareerPathList = student.CareerPathList,
+                OtherPlans = student.OtherPlans,
+                PACTTestDate = student.PACTTestDate,
+                PACTTestScore = student.PACTTestScore,
+                PSATTestDate = student.PSATTestDate,
+                PSATTestScore = student.PSATTestScore,
+                SATTestDate = student.SATTestDate,
+                SATTestScore = student.SATTestScore,
+                ACTTestDate = student.ACTTestDate,
+                ACTTestScore = student.ACTTestScore,
+                PrepClassRequired = student.PrepClassRequired,
+                AssistanceForForms = student.AssistanceForForms,
+                FinancialAidProcessComplete = student.FinancialAidProcessComplete,
+                SupportNeeded = student.SupportNeeded,
+                StudentSignature = student.StudentSignature,
+                StudentSignatureDate = student.StudentSignatureDate,
+                ParentSignature = student.ParentSignature,
+                ParentSignatureDate = student.ParentSignatureDate,
+                Active = student.Active
             };
 
             return View(viewModel);

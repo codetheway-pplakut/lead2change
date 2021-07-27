@@ -4,17 +4,17 @@
 *@
 
 <div class="container">
+    <h1>Students</h1>
 
-    <table class="table sortable" id="myTable">
+    <table class="table table-striped pt-2" id="myTable">
         <thead>
             <tr>
-                <th scope="col">Last Name</th>
-                <th scope="col">First Name</th>
+                <th scope="col">Name</th>
                 <th scope="col">Date Of Birth</th>
                 <th scope="col">Email</th>
-                <th scope="col">Parent Last Name</th>
-                <th scope="col">Parent First Name</th>
+                <th scope="col">Parent Name</th>
                 <th scope="col">Parent Email</th>
+                <th scope="col">Options</th>
             </tr>
         </thead>
 
@@ -24,29 +24,25 @@
                 @foreach (var item in Model)
                 {
 
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StudentLastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StudentFirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StudentDateOfBirth)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StudentEmail)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ParentLastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ParentFirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ParentEmail)
-                        </td>
-                        <td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.StudentDateOfBirth.ToString("d"))*@
+                        @*@Model.modelItem => item.StudentDateOfBirth.ToString("d")*@
+                        @Convert.ToDateTime(item.StudentDateOfBirth).ToString("MM/dd/yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParentLastName), @Html.DisplayFor(modelItem => item.ParentFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParentEmail)
+                    </td>
+                    <td>
                             <div>
                                 <div>
                                     @Html.ActionLink("Edit", "Edit", new { studentId = item.Id })
@@ -57,10 +53,15 @@
                                 </div>
 
                                 <div>
-                                    @Html.ActionLink("Delete", "Delete", new { studentId = item.Id })
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                                 </div>
+                            
                                 <div>
                                     @Html.ActionLink("Goals", "Index", "Goals", new { studentID = item.Id })
+                                </div>
+                                
+                                <div>
+                                    @Html.ActionLink("Delete", "Delete", new { studentId = item.Id })
                                 </div>
                             
                                 @if (item.CareerDeclarationId == Guid.Empty)
@@ -83,6 +84,8 @@
             }
         </tbody>
     </table>
+
+
     <div>
         <a asp-action="Register"><b>Add new student.</b></a>
     </div>

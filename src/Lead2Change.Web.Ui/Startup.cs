@@ -13,6 +13,10 @@ using Microsoft.Extensions.Hosting;
 using System;
 using Lead2Change.Domain.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Lead2Change.Services.Coaches;
 
 namespace Lead2Change.Web.Ui
 {
@@ -34,6 +38,7 @@ namespace Lead2Change.Web.Ui
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<ICareerDeclarationService, CareerDeclarationService>();
             services.AddScoped<IGoalsService, GoalsService>();
+            services.AddScoped<ICoachService, CoachService>();
 
             if (Environment.IsDevelopment())
             {

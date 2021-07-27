@@ -72,5 +72,7 @@ namespace Lead2Change.Domain.Models
         public DateTime ParentSignatureDate { get; set; }
         public CareerDeclaration CareerDeclaration { get; set; }
         public List<Goal> Goals { get; set; }
+        public Guid? CoachId { get; set; }
+        public bool Active { get; set; }
     }
 }

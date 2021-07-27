@@ -29,7 +29,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentId = result.StudentId,
                 GoalSet = result.GoalSet,
                 DateGoalSet = result.DateGoalSet,
-                SEL = result.SEL,
+                SEL = result.SEL.Split(","),
                 GoalReviewDate = result.GoalReviewDate,
                 WasItAccomplished = result.WasItAccomplished,
                 Explanation = result.Explanation,             
@@ -37,11 +37,26 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(goal);
         }
 
-        public async Task<IActionResult> Update(Goal model)
+        public async Task<IActionResult> Update(GoalViewModel model)
         {
+            // Prevents null exceptions from no SEL input being selected
+            string goalSEL = (model.SEL == null) ? "" : String.Join(", ", model.SEL);
+
+
+            Goal goal = new Goal
+            {
+                GoalSet = model.GoalSet,
+                StudentId = model.StudentId,
+                Id = model.Id,
+                DateGoalSet = model.DateGoalSet,
+                SEL = goalSEL,
+                GoalReviewDate = model.GoalReviewDate,
+                WasItAccomplished = model.WasItAccomplished,
+                Explanation = model.Explanation,
+            };
             if (ModelState.IsValid)
             {
-                var Goal = await GoalsService.Update(model);
+                var Goal = await GoalsService.Update(goal);
                 return RedirectToAction("Index", new { studentID = model.StudentId });
             }
             return View(model);
@@ -66,7 +81,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentId = goal.StudentId,
                 DateGoalSet = goal.DateGoalSet,
                 GoalSet = goal.GoalSet,
-                SEL = goal.SEL,
+                SEL = goal.SEL.Split(",") ,
                 GoalReviewDate = goal.GoalReviewDate,
                 WasItAccomplished = goal.WasItAccomplished,
                 Explanation = goal.Explanation
@@ -92,23 +107,22 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-                Goal model = new Goal()
+                // Checks to prevent null exception errors
+                string goalSEL = (viewModel.SEL == null) ? "" : string.Join(", ", viewModel.SEL);
+                Goal goal = new Goal()
                 {
                     GoalSet = viewModel.GoalSet,
                     StudentId = viewModel.StudentId,
                     Id = viewModel.Id,
                     DateGoalSet = viewModel.DateGoalSet,
-                    SEL = viewModel.SEL,
+                    SEL = goalSEL,
                     GoalReviewDate = viewModel.GoalReviewDate,
                     WasItAccomplished = viewModel.WasItAccomplished,
                     Explanation = viewModel.Explanation,
-
                 };
                 // TODO: Create StudentId on user Registration
-                var result = await GoalsService.Create(model);
-                return RedirectToAction("Index", new { studentID = model.StudentId });
-                                
-
+                var result = await GoalsService.Create(goal);
+                return RedirectToAction("Index", new { studentID = result.StudentId });
             }
             return View("Create", viewModel);
         }
@@ -130,7 +144,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     Id = goal.Id,
                     StudentId = goal.StudentId,
                     DateGoalSet = goal.DateGoalSet,
-                    SEL = goal.SEL,
+                    SEL = goal.SEL.Split(","),
                     GoalReviewDate = goal.GoalReviewDate,
                     WasItAccomplished = goal.WasItAccomplished,
                     Explanation = goal.Explanation

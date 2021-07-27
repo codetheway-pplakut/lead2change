@@ -59,6 +59,29 @@ namespace Lead2Change.Data.Migrations
                     b.ToTable("CareerDeclarations");
                 });
 
+            modelBuilder.Entity("Lead2Change.Domain.Models.Coach", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoachEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoachFirstName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoachLastName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoachPhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Coaches");
+                });
+
             modelBuilder.Entity("Lead2Change.Domain.Models.Goal", b =>
                 {
                     b.Property<Guid>("Id")
@@ -108,6 +131,9 @@ namespace Lead2Change.Data.Migrations
                     b.Property<bool>("Accepted")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
 
@@ -127,6 +153,9 @@ namespace Lead2Change.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CareerPathList")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("CoachId")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("CollegeApplicationStatus")
@@ -291,6 +320,8 @@ namespace Lead2Change.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CareerDeclarationId1");
+
+                    b.HasIndex("CoachId");
 
                     b.ToTable("Students");
                 });
@@ -510,10 +541,8 @@ namespace Lead2Change.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<Guid?>("StudentId")
+                    b.Property<Guid>("StudentId")
                         .HasColumnType("TEXT");
-
-                    b.HasIndex("StudentId");
 
                     b.HasDiscriminator().HasValue("AspNetUsers");
                 });
@@ -532,6 +561,10 @@ namespace Lead2Change.Data.Migrations
                     b.HasOne("Lead2Change.Domain.Models.CareerDeclaration", "CareerDeclaration")
                         .WithMany()
                         .HasForeignKey("CareerDeclarationId1");
+
+                    b.HasOne("Lead2Change.Domain.Models.Coach", null)
+                        .WithMany("Students")
+                        .HasForeignKey("CoachId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -583,13 +616,6 @@ namespace Lead2Change.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Lead2Change.Domain.Models.AspNetUsers", b =>
-                {
-                    b.HasOne("Lead2Change.Domain.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
                 });
 #pragma warning restore 612, 618
         }

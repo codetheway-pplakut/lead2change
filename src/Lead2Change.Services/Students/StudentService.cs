@@ -33,6 +33,14 @@ namespace Lead2Change.Services.Students
         {
             return await this._studentRepo.GetStudents();
         }
+        public async Task<List<Student>> GetActiveStudents()
+        {
+            return await this._studentRepo.GetActiveStudents();
+        }
+        public async Task<List<Student>> GetInactiveStudents()
+        {
+            return await this._studentRepo.GetInactiveStudents();
+        }
         public async Task<Student> Update(Student student)
         {
             return await this._studentRepo.Update(student);

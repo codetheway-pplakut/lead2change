@@ -70,6 +70,8 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+/*Goal Create Page Below*/
+
 .PaddingForAdam {
     padding-top: 25px;
     padding-right: 30px;
@@ -77,7 +79,7 @@ body {
     padding-left: 40px;
 }
 
-#GoalCreateHeading{
+.GoalHeadingFont{
 
     font-family: Gotham;
 }
@@ -117,4 +119,73 @@ body {
 
 .calibri{
     font-family: Calibri;
+}
+
+/* Basic Styling for Goal Index Page */
+thead.blueStyle{
+    background-color: #004cbb;
+    color:white;
+}
+.orangeBtn {
+    background-color: #ff7c00;
+    color:white;
+}
+
+    .orangeBtn:hover, .open > .dropdown-toggle.orangeBtn {
+        background-color: #c77c30;
+        border-color: #ff7c00;
+        color:white;
+    }
+
+    .orangeBtn:active, orangeBtn.active {
+        background-color: #c77c30;
+        border-color: #ff7c00;
+        color:white;
+    }
+
+/* The hero image */
+.goalCreateBanner {
+    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://d2slcw3kip6qmk.cloudfront.net/marketing/blog/2018Q1/smart-goals/smart-goals-header@2x.png");
+    /* Set a specific height */
+    height: 50%;
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+/* Place text in the middle of the image */
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+/*Goal Create Page Above*/
+
+.btn-back {
+    color: #fff;
+    background-color: transparent;
+    border-color: #004cbb;
+    border-radius: 40px;
+}
+
+.btn-submit {
+    color: #fff;
+    background-color: #ff5307;
+    border-color: #ff5307;
+}
+
+#goalEdit {
+    font-family: Gotham;
+    color: #ff5307;
+}
+
+
+.hidden {
+    display: none;
 }
