@@ -23,8 +23,14 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Delete(Guid id)
         {
-            var student = await _coachService.GetCoach(id);
-            await _coachService.Delete(student);
+            var coach = await _coachService.GetCoach(id);
+            coach.Students = await _studentService.GetCoachStudents(id);
+            foreach(var item in coach.Students)
+            {
+                item.CoachId = null;
+            }
+
+            await _coachService.Delete(coach);
             return RedirectToAction("Index");
         }
 
