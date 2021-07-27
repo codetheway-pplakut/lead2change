@@ -19,11 +19,11 @@ namespace Lead2Change.Repositories.Questions
         }
         public async Task<List<Question>> GetQuestions()
         {
-            return await this.AppDbContext.Questions.Where(x => x.IsArchived == false).ToListAsync();
+            return await this.AppDbContext.Questions.Where(x => x.IsArchived == false).OrderBy( q => q.QuestionString).ToListAsync();
         }
         public async Task<List<Question>> GetArchivedQuestions()
         {
-            return await this.AppDbContext.Questions.Where(x => x.IsArchived == true).ToListAsync();
+            return await this.AppDbContext.Questions.Where(x => x.IsArchived == true).OrderBy(q => q.QuestionString).ToListAsync();
         }
         public async Task<Question> GetQuestion(Guid id)
         {                     

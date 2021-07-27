@@ -45,7 +45,7 @@ namespace Lead2Change.Repositories.Interviews
         public async Task<Interview> Create(Interview interview)
         {
             var result = await this.AppDbContext.AddAsync(interview);
-            await this.AppDbContext.SaveChangesAsync();
+            await Save();
             return result.Entity;
 
         }
