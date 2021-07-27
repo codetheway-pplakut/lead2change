@@ -101,7 +101,7 @@ namespace Lead2Change.Web.Ui.Controllers
             }
             return View("Create", model);
         }
-        public async Task<IActionResult> Delete(Guid id, Guid interviewID)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var answer = await AnswersService.GetAnswer(id);
             await AnswersService.Delete(answer);
@@ -115,7 +115,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 AnswerString = result.AnswerString,
                 Id = id,
                 StudentId = result.StudentId,
-                QuestionId = result.QuestionId
+                QuestionId = result.QuestionId,
+                InterviewId = result.InterviewId,
             };
             return View(answer);
         }
@@ -124,8 +125,9 @@ namespace Lead2Change.Web.Ui.Controllers
             if (ModelState.IsValid)
             {
                 var Answer = await AnswersService.Update(model);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { interviewID = model.InterviewId });
             }
+
             return View(model);
         }
     }
