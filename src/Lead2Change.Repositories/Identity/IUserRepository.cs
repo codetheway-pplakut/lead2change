@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Lead2Change.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Lead2Change.Repositories.Identity
 {
     public interface IUserRepository
     {
-        public Task<IdentityUser> GetUserById(Guid id);
-        public Task<IdentityUser> GetUserByUserName(string userName);
+        public Task<AspNetUsers> GetUserById(Guid id);
+        public Task<AspNetUsers> GetUserByUserName(string userName);
     }
 }
