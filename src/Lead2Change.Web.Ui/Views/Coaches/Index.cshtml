@@ -35,7 +35,10 @@
                     <td>
                         <div>
                             <div>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id})
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                            </div>
+                            <div>
+                                @Html.ActionLink("Assign Student", "AssignStudentIndex", new { id = item.Id })
                             </div>
                             <div>
                                 @Html.ActionLink("Details", "Details", new { id = item.Id })
