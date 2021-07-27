@@ -13,7 +13,10 @@
     <table class="table table-striped pt-2"
         <thead class="thead blueStyle">
             <tr>
-                <th class="col-sm-9">
+                <th class="col-sm-4">
+                    Question
+                </th>
+                <th class="col-sm-5">
                     Answer
                 </th>
                 <th class="col-sm-3">
@@ -24,28 +27,32 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AnswerString)
-                </td>
-                <td>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Answer", new { id = item.Id })'" />
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionString)
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnswerString)
+        </td>
+        <td>
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit Answer" onclick="location.href='@Url.Action("Edit","Answer", new { id = item.Id })'" />
 
-                        </div>
-                    </div>
+                </div>
+            </div>
 
 
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href='@Url.Action("Delete","Answer", new { id = item.Id })'" />
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn btn-block orangeBtn" value="Delete Answer" onclick="location.href='@Url.Action("Delete","Answer", new { id = item.Id })'" />
 
-                        </div>
-                    </div>
-                </td>
-            </tr>
+                </div>
+            </div>
+        </td>
+    </tr>
         }
 
     </table>

@@ -68,6 +68,7 @@ namespace Lead2Change.Web.Ui.Controllers
             if (ModelState.IsValid)
             {
                 // Step 1: Update/Create interview if needed
+                
                 if (model.Id.Equals(Guid.Empty))
                 {
                     // If everything is empty, then there is nothing to create and program should return to index
@@ -78,7 +79,9 @@ namespace Lead2Change.Web.Ui.Controllers
                     Interview interview = await _interviewsService.Create(new Interview { InterviewName = (String.IsNullOrEmpty(model.InterviewName)) ? "Untitled" : model.InterviewName });
                     // Update the viewModel's ID
                     model.Id = interview.Id;
+                   
                 }
+                
                 else
                 {
                     // Get the interview's information in the database
