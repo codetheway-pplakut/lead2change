@@ -5,15 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 using Lead2Change.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
     public class CoachesController : _BaseController
     {
         ICoachService _coachService;
-        public CoachesController(IIdentityService identityService, ICoachService coachService) : base(identityService)
+
+        public CoachesController(IUserService identityService, ICoachService coachService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
         {
             _coachService = coachService;
         }

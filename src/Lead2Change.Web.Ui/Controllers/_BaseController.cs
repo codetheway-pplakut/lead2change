@@ -1,21 +1,135 @@
-﻿using Lead2Change.Services.Identity;
+using Lead2Change.Domain.Constants;
+using Lead2Change.Domain.Models;
+using Lead2Change.Services.Identity;
+using Lead2Change.Web.Ui.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using System;
+using System.Threading.Tasks;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
     public class _BaseController : Controller
     {
-        IIdentityService _identityService;
+        public IUserService IdentityService;
+        public RoleManager<AspNetRoles> RoleManager;
+        public UserManager<AspNetUsers> UserManager;
+        public SignInManager<AspNetUsers> SignInManager;
 
-        public _BaseController(IIdentityService identityService)
+        public _BaseController(IUserService identityService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager)
         {
-            _identityService = identityService;
+            IdentityService = identityService;
+            RoleManager = roleManager;
+            UserManager = userManager;
+            SignInManager = signInManager;
+            CreateDefaultRoles().Wait();
+            CreateNewUser("student@test.com", "Testtest@123", StringConstants.RoleNameStudent).Wait();
+            CreateNewUser("coach@test.com", "Testtest@123", StringConstants.RoleNameCoach).Wait();
+            CreateNewUser("admin@test.com", "Testtest@123", StringConstants.RoleNameAdmin).Wait();
+        }
+
+        /// <summary>
+        /// This is an example of how to create roles
+        /// </summary>
+        /// <returns></returns>
+        private async Task CreateDefaultRoles()
+        {
+            var hasAdmin = await RoleManager.FindByNameAsync(StringConstants.RoleNameAdmin);
+
+            if (hasAdmin == null)
+                await RoleManager.CreateAsync(new AspNetRoles()
+                {
+                    Name = StringConstants.RoleNameAdmin,
+                    NormalizedName = StringConstants.RoleNameAdmin
+                });
+
+            var hasCoach = await RoleManager.FindByNameAsync(StringConstants.RoleNameCoach);
+
+            if (hasCoach == null)
+                await RoleManager.CreateAsync(new AspNetRoles()
+                {
+                    Name = StringConstants.RoleNameCoach,
+                    NormalizedName = StringConstants.RoleNameCoach
+                });
+
+            var hasStudent = await RoleManager.FindByNameAsync(StringConstants.RoleNameStudent);
+
+            if (hasStudent == null)
+                await RoleManager.CreateAsync(new AspNetRoles()
+                {
+                    Name = StringConstants.RoleNameStudent,
+                    NormalizedName = StringConstants.RoleNameStudent
+                });
+        }
+
+        /// <summary>
+        /// THIS IS NOT CALLED WHEN A USER USES THE WEBSITE TO CREATE A USER
+        /// 
+        /// This is used for creating a user on the backend, programmatically
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public async Task CreateNewUser(string email, string password, string roleName, bool confirm = true)
+        {
+            var identityUser = new AspNetUsers()
+            {
+                UserName = email,
+                Email = email
+            };
+
+            var result = await UserManager.CreateAsync(identityUser, password);
+            if (confirm)
+            {
+                var token = await UserManager.GenerateEmailConfirmationTokenAsync(identityUser);
+                _ = UserManager.ConfirmEmailAsync(identityUser, token);
+            }
+
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByEmailAsync(email);
+
+                if (user != null)
+                {
+                    var role = await UserManager.AddToRoleAsync(user, roleName);
+                }
+                else
+                {
+                    //Do something because the user does not exist
+                }
+            }
+            else
+            {
+                //Do something because the user could not be created
+            }
+        }
+
+        public async Task<bool> CanEditStudent(Guid studentId)
+        {
+            if (SignInManager.IsSignedIn(User))
+            {
+                if (User.IsInRole(StringConstants.RoleNameStudent))
+                {
+                    var user = await UserManager.GetUserAsync(User);
+                    return studentId == user.StudentId;
+                }
+                else if (User.IsInRole(StringConstants.RoleNameCoach))
+                {
+                    // TODO: Return only if coach "owns" this student
+                    return true;
+                }
+                else if (User.IsInRole(StringConstants.RoleNameAdmin))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public ViewResult Error(ErrorViewModel e)
+        {
+            return View("Error", e);
         }
 
         public async Task Email(string sender, string receiver, string xSubject, string xPlainTextContent, string xHtmlContent, string senderTitle, string receiverTitle)
@@ -31,8 +145,5 @@ namespace Lead2Change.Web.Ui.Controllers
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);
         }
-
-
     }
 }
-

@@ -1,4 +1,5 @@
 ﻿using Lead2Change.Data.Contexts;
+using Lead2Change.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,12 +13,12 @@ namespace Lead2Change.Repositories.Identity
     {
         public UserRepository(AppDbContext appDbContext) : base(appDbContext) { }
 
-        public async Task<IdentityUser> GetUserById(Guid id)
+        public async Task<AspNetUsers> GetUserById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IdentityUser> GetUserByUserName(string userName)
+        public async Task<AspNetUsers> GetUserByUserName(string userName)
         {
             throw new NotImplementedException();
         }

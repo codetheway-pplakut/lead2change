@@ -31,6 +31,12 @@
     <Compile Remove="Migrations\20210715142814_Inactive.Designer.cs" />
     <Compile Remove="Migrations\20210715143327_ActiveToggle.cs" />
     <Compile Remove="Migrations\20210715143327_ActiveToggle.Designer.cs" />
+    <Compile Remove="Migrations\20210721161950_CoachId.cs" />
+    <Compile Remove="Migrations\20210721161950_CoachId.Designer.cs" />
+    <Compile Remove="Migrations\20210721192841_CoachId.cs" />
+    <Compile Remove="Migrations\20210721192841_CoachId.Designer.cs" />
+    <Compile Remove="Migrations\20210722143643_test.cs" />
+    <Compile Remove="Migrations\20210722143643_test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

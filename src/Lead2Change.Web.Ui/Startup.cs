@@ -7,14 +7,14 @@ using Lead2Change.Services.Answers;
 using Lead2Change.Services.Questions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Lead2Change.Domain.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,7 +38,7 @@ namespace Lead2Change.Web.Ui
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<ICareerDeclarationService, CareerDeclarationService>();
             services.AddScoped<IGoalsService, GoalsService>();
@@ -61,10 +61,9 @@ namespace Lead2Change.Web.Ui
                         Configuration.GetConnectionString("DefaultConnection")));
             }
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<AppDbContext>();
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddIdentity<AspNetUsers, AspNetRoles>(options => {
+                options.SignIn.RequireConfirmedAccount = true;
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -97,6 +96,11 @@ namespace Lead2Change.Web.Ui
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+
+            services.AddSingleton<IEmailSender, EmailSender>();
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
