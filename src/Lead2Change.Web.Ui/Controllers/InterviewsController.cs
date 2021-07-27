@@ -90,18 +90,16 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Step 1: Update interview if needed
+                // Update interview
+                await _interviewsService.Update(new Interview
+                {
+                    Id = model.Id,
+                    InterviewName = model.InterviewName
+                });
+            
                 List<QuestionInInterview> questionInInterviews = await _interviewsService.GetInterviewAndQuestions(model.Id);
                 model.AddedQuestions = questionInInterviews.Select(questionInInterview => questionInInterview.Question).ToList();
-                if (!((await GetInterviewName(model.Id)).Equals(model.InterviewName)))
-                {
-                    await _interviewsService.Update(new Interview
-                    {
-                        Id = model.Id,
-                        InterviewName = model.InterviewName
-                    });
-                }
-            
+
                 // Step 2: Create and Add Question
                 if (!String.IsNullOrEmpty(model.QuestionText))
                 {
