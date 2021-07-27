@@ -33,7 +33,7 @@
                         {
                             <li class="nav-item">
                                 @Html.ActionLink("Student", "Details", "Students", new { studentId = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
-                                
+
                             </li>
                             <li class="nav-item">
                                 @Html.ActionLink("Goals", "Index", "Goals", new { studentID = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
@@ -48,7 +48,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="InactiveIndex">Inactive Students</a>
                             </li>
@@ -56,7 +56,14 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
                             </li>
-                        }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Interviews" asp-action="Index">Interviews</a>
+                            </li>
+                            <li class="nav-item">
+                             <a class="nav-link text-dark" asp-area="" asp-controller="Questions" asp-action="Index">Questions</a>
+                             </li>
+
+                          }
                     </ul>
                 </div>
             </div>

@@ -19,7 +19,7 @@ namespace Lead2Change.Repositories.Interviews
         }
         public async Task<List<Interview>> GetInterviews()
         {
-            return await this.AppDbContext.Interviews.ToListAsync();
+            return await this.AppDbContext.Interviews.Include(i => i.QuestionInInterviews).ToListAsync();
         }
         
         public async Task<Interview> GetInterview(Guid id)

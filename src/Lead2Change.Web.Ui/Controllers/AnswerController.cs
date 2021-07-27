@@ -50,12 +50,14 @@ namespace Lead2Change.Web.Ui.Controllers
         {
            
             var result = await _interviewsService.GetInterviewAndQuestions(id);
+            
             AnswerQuestionViewModel answer = new AnswerQuestionViewModel()
             {
                 Id = id,
                 QuestionInInterviews = result,
-                InterviewName = result.FirstOrDefault().Interview.InterviewName,
-                InterviewId = result.FirstOrDefault().Interview.Id,
+                InterviewName = (await _interviewsService.GetInterview(id)).InterviewName,
+
+            InterviewId = result.FirstOrDefault().Interview.Id,
             };
             return View(answer);
         }
