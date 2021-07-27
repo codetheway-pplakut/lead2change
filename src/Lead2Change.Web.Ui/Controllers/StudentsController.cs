@@ -121,7 +121,7 @@ namespace Lead2Change.Web.Ui.Controllers
             // Check if user owns a student
             if (user.StudentId != Guid.Empty)
             {
-                return Error("400: Bad Request");
+                return RedirectToAction("Details", new { studentId = user.StudentId });
             }
 
             return View(new RegistrationViewModel());
