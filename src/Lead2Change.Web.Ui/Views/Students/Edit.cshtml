@@ -500,26 +500,39 @@
                 <input asp-for="SupportNeeded" class="form-control" value=@Model.SupportNeeded />
                 <span asp-validation-for="SupportNeeded" class="text-danger"></span>
             </div>
+
             <h3>Signatures</h3>
-            <div class="form-group">
-                <label asp-for="StudentSignature" class="control-label">Student Signature:</label>
-                <input asp-for="StudentSignature" class="form-control" value=@Model.StudentSignature required />
-                <span asp-validation-for="StudentSignature" class="text-danger"></span>
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <label asp-for="StudentSignature" class="control-label">Student Signature:</label>
+                        <input asp-for="StudentSignature" class="form-control" value=@Model.StudentSignature required />
+                        <span asp-validation-for="StudentSignature" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label asp-for="StudentSignatureDate" class="control-label">Date:</label>
+                        <input asp-for="StudentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
+                        <span asp-validation-for="StudentSignatureDate" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="StudentSignatureDate" class="control-label">Date:</label>
-                <input asp-for="StudentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
-                <span asp-validation-for="StudentSignatureDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ParentSignature" class="control-label">Parent Signature:</label>
-                <input asp-for="ParentSignature" class="form-control" value=@Model.ParentSignature required />
-                <span asp-validation-for="ParentSignature" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ParentSignatureDate" class="control-label">Date:</label>
-                <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
-                <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <label asp-for="ParentSignature" class="control-label">Parent Signature:</label>
+                        <input asp-for="ParentSignature" class="form-control" value=@Model.ParentSignature required />
+                        <span asp-validation-for="ParentSignature" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label asp-for="ParentSignatureDate" class="control-label">Date:</label>
+                        <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
+                        <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Active" class="control-label">Is this student active?</label>
