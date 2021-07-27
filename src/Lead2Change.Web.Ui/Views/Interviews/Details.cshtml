@@ -17,10 +17,6 @@
             <td><b>Interview Title</b> </td>
             <td>@Model.InterviewName</td>
         </tr>
-        <tr>
-            <td><b>How many Questions are there? [Testing]</b> </td>
-            <td>@Model.QuestionInInterviews.Count</td>
-        </tr>
         @if (Model.QuestionInInterviews != null)
         {
             @foreach (QuestionInInterview questionInInterview in Model.QuestionInInterviews)

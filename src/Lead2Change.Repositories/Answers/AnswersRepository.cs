@@ -29,8 +29,11 @@ namespace Lead2Change.Repositories.Answers
         }
         public async Task<Answer> Delete(Answer model)
         {
-            model.IsArchived = true;
-            AppDbContext.Answers.Update(model);
+            //Commenting out Archiving Implementation
+
+            //model.IsArchived = true;
+            //AppDbContext.Answers.Update(model);
+            AppDbContext.Answers.Remove(model);
             await AppDbContext.SaveChangesAsync();
             return model;
         }
@@ -40,7 +43,9 @@ namespace Lead2Change.Repositories.Answers
         }
         public async Task<Answer> Update(Answer model)
         {
-            model.IsArchived = true;
+            //Commenting out Archiving Implementation
+
+           // model.IsArchived = true;
             var result = AppDbContext.Answers.Update(model);
             await AppDbContext.SaveChangesAsync();
             return result.Entity;
