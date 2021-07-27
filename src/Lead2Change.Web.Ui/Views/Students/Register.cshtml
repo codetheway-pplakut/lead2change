@@ -72,7 +72,8 @@
                 <div class="col-sm-1">
                     <div class="form-group">
                         <label asp-for="StudentState" class="control-label">State:</label>
-                        <select asp-for="StudentState" class="form-control" required>
+                        <select asp-for="StudentState" class="form-control" placeholder="" required>
+                            <option selected>Select A Choice</option>
                             <option value="Alabama">AL</option>
                             <option value="Alaska">AK</option>
                             <option value="Arizona">AZ</option>
@@ -225,7 +226,8 @@
                 <div class="col-sm-1">
                     <div class="form-group">
                         <label asp-for="ParentState" class="control-label">State:</label>
-                        <select asp-for="ParentState" class="form-control" required>
+                        <select asp-for="ParentState" class="form-control" placeholder="" required>
+                            <option selected>Select A Choice</option>
                             <option value="Alabama">AL</option>
                             <option value="Alaska">AK</option>
                             <option value="rizona">AZ</option>
@@ -327,6 +329,7 @@
             <div class="form-group">
                 <label asp-for="PlanAfterHighSchool" class="control-label">Plan After High School:</label>
                 <select asp-for="PlanAfterHighSchool" class="form-control" required>
+                    <option selected>Select A Choice</option>
                     <option value="College">College</option>
                     <option value="Trade School">Trade School</option>
                     <option value="Armed Forces">Armed Forces</option>
