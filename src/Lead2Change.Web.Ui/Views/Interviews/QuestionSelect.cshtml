@@ -1,4 +1,4 @@
-﻿@model Lead2Change.Domain.ViewModels.InterviewQuestionCreateViewModel
+﻿@model Lead2Change.Domain.ViewModels.InterviewWithQuestionsViewModel
 @using Lead2Change.Domain.Models;
 
 @* ViewData["Title"] = "Question Select";
@@ -34,7 +34,7 @@
     </table>
     <div class="row">
         <div class="col-sm-12">
-            <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("Create","Interviews", new { interviewId = Model.Id })'">Back To List</button>
+            <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("Edit","Interviews", new { id = Model.Id })'">Back To List</button>
 
         </div>
     </div>

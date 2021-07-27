@@ -9,9 +9,9 @@ namespace Lead2Change.Domain.ViewModels
      * This class is used to contain the added information needed by the page which creates both an interview and its questions
      * 
      */
-    public class InterviewQuestionCreateViewModel
+    public class InterviewWithQuestionsViewModel
     {
-        public InterviewQuestionCreateViewModel()
+        public InterviewWithQuestionsViewModel()
         {
             AddedQuestions = new List<Question>();
         }
