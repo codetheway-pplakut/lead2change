@@ -40,7 +40,17 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Register()
         {
-            return View(new RegistrationViewModel());
+            return View(new RegistrationViewModel()
+            {
+                // This changes the initial date displayed in the chooser
+                StudentDateOfBirth = DateTime.Today,
+                PACTTestDate = DateTime.Today,
+                PSATTestDate = DateTime.Today,
+                SATTestDate = DateTime.Today,
+                ACTTestDate = DateTime.Today,
+                StudentSignatureDate = DateTime.Today,
+                ParentSignatureDate = DateTime.Today,
+            }) ;
         }
 
         public async Task<IActionResult> Details(Guid id)
