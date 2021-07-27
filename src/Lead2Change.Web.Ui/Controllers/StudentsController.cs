@@ -131,6 +131,12 @@ namespace Lead2Change.Web.Ui.Controllers
                 return Error("401: Unauthorized");
             }
 
+            // Redirect to Register if Guid is empty
+            if (studentId == Guid.Empty)
+            {
+                return RedirectToAction("Register");
+            }
+
             // Check Permissions
             /*
              *  Students: Allowed only if it is them
@@ -152,12 +158,6 @@ namespace Lead2Change.Web.Ui.Controllers
                 {
                     return Error("403: Forbidden");
                 }
-            }
-
-            // Redirect to Register if Guid is empty
-            if (studentId == Guid.Empty)
-            {
-                return RedirectToAction("Register");
             }
 
             // Find Student
