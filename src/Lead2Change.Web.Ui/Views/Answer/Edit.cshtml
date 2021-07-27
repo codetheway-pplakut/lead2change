@@ -19,7 +19,7 @@
     </div>
     <div class="form-group">
         <b><label asp-for="@Model.AnswerString" class="control-label"></label></b>
-        <input asp-for="@Model.AnswerString" class="form-control" value=@Model.AnswerString />
+        <input asp-for="@Model.AnswerString" class="form-control" value=@Model.AnswerString required />
         <span asp-validation-for="@Model.AnswerString" class="text-danger"></span>
     </div>
 
@@ -29,5 +29,5 @@
     </div>
 </form>
 <div align="center">
-    <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("Index","Answer")'">Back To List</button>
+    <button class="btn btn-back"><a asp-action="Index" asp-route-interviewID=@Model.InterviewId>Back to List</a></button>
 </div>
