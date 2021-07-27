@@ -20,3 +20,9 @@
 /src/Lead2Change.Web.Ui/Lead2Change.Web.Ui.csproj.user
 /src/Lead2Change.Web.Ui/appsettings.json
 
+/src/Lead2Change.Web.Ui/bin/Release/netcoreapp3.1
+/src/Lead2Change.Web.Ui/.config/dotnet-tools.json
+/src/Lead2Change.Services/bin/Release/netcoreapp3.1
+/src/Lead2Change.Repositories/bin/Release/netcoreapp3.1
+/src/Lead2Change.Domain/bin/Release/netcoreapp3.1
+/src/Lead2Change.Data/bin/Release/netcoreapp3.1
