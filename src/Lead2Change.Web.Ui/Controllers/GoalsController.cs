@@ -11,6 +11,7 @@ using Lead2Change.Domain.Models;
 using Lead2Change.Services.Identity;
 using Microsoft.AspNetCore.Identity;
 
+// TODO: Add auth
 namespace Lead2Change.Web.Ui.Controllers
 {
     public class GoalsController : _BaseController
@@ -67,7 +68,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
             if (goal == null)
             {
-                return RedirectToAction("Register");
+                return RedirectToAction("Create");
             }
 
             if (!await CanEditStudent(goal.StudentId))

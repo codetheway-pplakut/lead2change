@@ -36,7 +36,7 @@
                                 
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Goals" asp-action="Details">Goals</a>
+                                @Html.ActionLink("Goals", "Index", "Goals", new { studentID = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
                             </li>
                             <li class="nav-item">
                                 @Html.ActionLink("Career", "Details", "CareerDeclaration", new { studentId = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
