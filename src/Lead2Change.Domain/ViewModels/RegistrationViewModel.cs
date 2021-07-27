@@ -73,5 +73,8 @@ namespace Lead2Change.Domain.ViewModels
         public Guid? CoachId { get; set; }
         public String CoachName { get; set; }
         public bool Active { get; set; }
+        public string OldStudentEmail { get; set; }
+        public string OldParentEmail { get; set; }
+
     }
 }

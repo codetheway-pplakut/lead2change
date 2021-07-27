@@ -75,5 +75,6 @@ namespace Lead2Change.Domain.ViewModels
         public DateTime ParentSignatureDate { get; set; }
         public CareerDeclaration CareerDeclaration { get; set; }
         public List<Goal> Goals { get; set; }
+        public bool Active { get; set; }
     }
 }
