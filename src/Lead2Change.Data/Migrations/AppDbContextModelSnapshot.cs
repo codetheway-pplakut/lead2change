@@ -241,6 +241,29 @@ namespace Lead2Change.Data.Migrations
                     b.ToTable("CareerDeclarations");
                 });
 
+            modelBuilder.Entity("Lead2Change.Domain.Models.Coach", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoachEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoachFirstName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoachLastName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CoachPhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Coaches");
+                });
+
             modelBuilder.Entity("Lead2Change.Domain.Models.Goal", b =>
                 {
                     b.Property<Guid>("Id")
@@ -312,6 +335,9 @@ namespace Lead2Change.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CareerPathList")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("CoachId")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("CollegeApplicationStatus")
@@ -477,6 +503,8 @@ namespace Lead2Change.Data.Migrations
 
                     b.HasIndex("CareerDeclarationId1");
 
+                    b.HasIndex("CoachId");
+
                     b.ToTable("Students");
                 });
 
@@ -545,6 +573,10 @@ namespace Lead2Change.Data.Migrations
                     b.HasOne("Lead2Change.Domain.Models.CareerDeclaration", "CareerDeclaration")
                         .WithMany()
                         .HasForeignKey("CareerDeclarationId1");
+
+                    b.HasOne("Lead2Change.Domain.Models.Coach", null)
+                        .WithMany("Students")
+                        .HasForeignKey("CoachId");
                 });
 #pragma warning restore 612, 618
         }

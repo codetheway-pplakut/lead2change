@@ -35,6 +35,7 @@ namespace Lead2Change.Data.Contexts
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<CareerDeclaration> CareerDeclarations { get; set; }
         public virtual DbSet<Goal> Goals { get; set; }
+        public virtual DbSet<Coach> Coaches { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

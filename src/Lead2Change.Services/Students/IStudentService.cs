@@ -9,7 +9,6 @@ namespace Lead2Change.Services.Students
 {
     public interface IStudentService
     {
-
         public Task<List<Student>> GetStudents();
         public Task<List<Student>> GetActiveStudents();
         public Task<List<Student>> GetInactiveStudents();
