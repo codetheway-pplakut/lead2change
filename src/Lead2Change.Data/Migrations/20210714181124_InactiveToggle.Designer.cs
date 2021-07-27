@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lead2Change.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210630194949_CareerDeclarationId")]
-    partial class CareerDeclarationId
+    [Migration("20210714181124_InactiveToggle")]
+    partial class InactiveToggle
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -292,6 +292,9 @@ namespace Lead2Change.Data.Migrations
                     b.Property<bool>("Accepted")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
 
@@ -357,6 +360,15 @@ namespace Lead2Change.Data.Migrations
 
                     b.Property<int>("PACTTestScore")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("PSATTestDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PSATTestScore")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ParentApartmentNumber")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ParentCellPhone")
                         .HasColumnType("TEXT");
@@ -442,7 +454,13 @@ namespace Lead2Change.Data.Migrations
                     b.Property<DateTime>("StudentSignatureDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("StudentState")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("StudentZipCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SupportNeeded")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ThirdChoiceCollege")

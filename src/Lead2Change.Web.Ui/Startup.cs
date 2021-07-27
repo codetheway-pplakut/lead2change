@@ -20,6 +20,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Lead2Change.Services.Interviews;
 using Lead2Change.Services.QuestionInInterviews;
+using Lead2Change.Services.Coaches;
 
 namespace Lead2Change.Web.Ui
 {
@@ -41,6 +42,7 @@ namespace Lead2Change.Web.Ui
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<ICareerDeclarationService, CareerDeclarationService>();
             services.AddScoped<IGoalsService, GoalsService>();
+            services.AddScoped<ICoachService, CoachService>();
             services.AddScoped<IInterviewService, InterviewService>();
             services.AddScoped<IQuestionsService, QuestionsService>();
             services.AddScoped<IAnswersService, AnswersService>();

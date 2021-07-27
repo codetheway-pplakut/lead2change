@@ -167,3 +167,7 @@ thead.blueStyle {
     height:8em;
 }
 
+
+.hidden {
+    display: none;
+}

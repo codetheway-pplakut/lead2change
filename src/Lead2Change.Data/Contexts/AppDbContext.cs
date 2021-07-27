@@ -38,6 +38,7 @@ namespace Lead2Change.Data.Contexts
 
         public virtual DbSet<Goal> Goals { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Coach> Coaches { get; set; }
 
         public virtual DbSet<QuestionInInterview> QuestionInInterviews { get; set; }
 
