@@ -65,7 +65,6 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Register(InterviewQuestionCreateViewModel model, String submitButton)
         {
-            Guid yes = model.Id;
             if (ModelState.IsValid)
             {
                 // Step 1: Update/Create interview if needed
@@ -80,7 +79,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     Interview interview = await _interviewsService.Create(new Interview { InterviewName = (String.IsNullOrEmpty(model.InterviewName)) ? "Untitled" : model.InterviewName });
                     // Update the viewModel's ID
                     model.Id = interview.Id;
-                    yes = interview.Id;
+                   
                 }
                 
                 else
@@ -88,7 +87,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     // Get the interview's information in the database
                     List<QuestionInInterview> questionInInterviews = await _interviewsService.GetInterviewAndQuestions(model.Id);
                     Interview interview = new Interview {
-                        Id = yes,
+                        Id = model.Id,
                         InterviewName = questionInInterviews.FirstOrDefault().Interview.InterviewName
                     };
                     model.AddedQuestions = questionInInterviews.Select(questionInInterview => questionInInterview.Question).ToList();

@@ -31,6 +31,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 result.Add(new AnswersViewModel()
                 {
                     AnswerString = answer.AnswerString,
+                    QuestionString = answer.QuestionString,
                     Id = answer.Id,
                     StudentId = answer.StudentId,
                     QuestionId = answer.QuestionId,
@@ -71,6 +72,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     Answer answer = new Answer()
                     {
                         AnswerString = model.Answers[i].AnswerString,
+                        QuestionString = questions[i].Question.QuestionString,
                         InterviewId = model.InterviewId,
                         StudentId = model.StudentId,
                         QuestionId = questions[i].QuestionId,
@@ -92,6 +94,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 Answer answer = new Answer()
                 {
                     AnswerString = model.AnswerString,
+                    QuestionString = model.QuestionString,
                     Id = model.Id,
                     StudentId = model.StudentId,
                     QuestionId = model.QuestionId,
@@ -113,6 +116,7 @@ namespace Lead2Change.Web.Ui.Controllers
             AnswersViewModel answer = new AnswersViewModel()
             {
                 AnswerString = result.AnswerString,
+                QuestionString = result.QuestionString,
                 Id = id,
                 StudentId = result.StudentId,
                 QuestionId = result.QuestionId,
