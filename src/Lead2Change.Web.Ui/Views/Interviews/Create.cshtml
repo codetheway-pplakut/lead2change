@@ -23,14 +23,14 @@
            
             <div class="form-group col-sm-12">
                 <b><label asp-for="InterviewName" class="control-label">Interview Name</label></b>
-                <input asp-for="InterviewName" class="form-control" />
+                <input asp-for="InterviewName" class="form-control" required/>
                 <span asp-validation-for="InterviewName" class="text-danger"></span>
             </div>
             <div class="form-group col-sm-12">
-                <b><label asp-for="QuestionText" class="control-label">Add a Question</label></b>
+                <b><label asp-for="QuestionText" class="control-label" >Add a Question</label></b>
                 
                 @Html.TextAreaFor(m => m.QuestionText, new { @class = "form-control"})
-                <span asp-validation-for="QuestionText" class="text-danger"></span>
+                <span asp-validation-for="QuestionText" class="text-danger" ></span>
             </div>
             <div class="form-group col-sm-12">
                 <div class="row">

@@ -31,7 +31,7 @@
 
 
             <div class="form-group">
-                <textarea asp-for="@Model.Answers[j].AnswerString" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Your Answer"></textarea>
+                <textarea asp-for="@Model.Answers[j].AnswerString" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Your Answer" required></textarea>
                 <span asp-validation-for="@Model.Answers[j].AnswerString" class="text-danger" required></span>
             </div>
         }
