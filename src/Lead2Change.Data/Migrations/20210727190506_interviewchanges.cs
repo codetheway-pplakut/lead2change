@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Lead2Change.Data.Migrations
 {
-    public partial class InterviewsAndQuestions : Migration
+    public partial class interviewchanges : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,10 @@ namespace Lead2Change.Data.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     AnswerString = table.Column<string>(nullable: true),
                     StudentId = table.Column<Guid>(nullable: false),
-                    QuestionId = table.Column<Guid>(nullable: false)
+                    QuestionId = table.Column<Guid>(nullable: false),
+                    QuestionString = table.Column<string>(nullable: true),
+                    InterviewId = table.Column<Guid>(nullable: false),
+                    IsArchived = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,7 +28,8 @@ namespace Lead2Change.Data.Migrations
                 name: "Interviews",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false)
+                    Id = table.Column<Guid>(nullable: false),
+                    InterviewName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -37,11 +41,19 @@ namespace Lead2Change.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    QuestionString = table.Column<string>(nullable: true)
+                    QuestionString = table.Column<string>(nullable: true),
+                    IsArchived = table.Column<bool>(nullable: false),
+                    InterviewId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Questions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Questions_Interviews_InterviewId",
+                        column: x => x.InterviewId,
+                        principalTable: "Interviews",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,6 +85,11 @@ namespace Lead2Change.Data.Migrations
                 name: "IX_QuestionInInterviews_QuestionId",
                 table: "QuestionInInterviews",
                 column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Questions_InterviewId",
+                table: "Questions",
+                column: "InterviewId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -84,10 +101,10 @@ namespace Lead2Change.Data.Migrations
                 name: "QuestionInInterviews");
 
             migrationBuilder.DropTable(
-                name: "Interviews");
+                name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "Questions");
+                name: "Interviews");
         }
     }
 }
