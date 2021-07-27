@@ -8,21 +8,25 @@
         <label asp-for="@Model.Id" class="control-label"></label>
         <input asp-for="@Model.Id" class="form-control" value=@Model.Id />
     </div>
-    
+
     <div class="form-group, d-none" display="none">
         <label asp-for="@Model.InterviewId" class="control-label"></label>
         <input asp-for="@Model.InterviewId" class="form-control" value=@Model.InterviewId />
+    </div>
+    <div class="form-group, d-none" display="none">
+        <label asp-for="@Model.QuestionString" class="control-label"></label>
+        <input asp-for="@Model.QuestionString" class="form-control" value=@Model.QuestionString />
     </div>
     <div class="form-group">
         <b><label asp-for="@Model.AnswerString" class="control-label"></label></b>
         <input asp-for="@Model.AnswerString" class="form-control" value=@Model.AnswerString />
         <span asp-validation-for="@Model.AnswerString" class="text-danger"></span>
-</div>
+    </div>
 
-        <br />
-        <div class="form-group">
-            <input type="submit" value="Submit" class="btn btn-submit" />
-        </div>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-submit" />
+    </div>
 </form>
 <div align="center">
     <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("Index","Answer")'">Back To List</button>
