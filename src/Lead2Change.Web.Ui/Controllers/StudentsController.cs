@@ -283,6 +283,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentSignatureDate = student.StudentSignatureDate,
                 ParentSignature = student.ParentSignature,
                 ParentSignatureDate = student.ParentSignatureDate,
+                CoachId = student.CoachId,
                 Active = student.Active
             };
             return View(list);
@@ -359,6 +360,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         StudentSignatureDate = model.StudentSignatureDate,
                         ParentSignature = model.ParentSignature,
                         ParentSignatureDate = model.ParentSignatureDate,
+                        CoachId = model.CoachId,
                         Active = model.Active
                     };
                     var student = await _studentService.Update(list);
