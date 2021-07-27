@@ -66,7 +66,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 // Update the viewModel's ID
                 model.Id = interview.Id;
                 // After the model is created, the update method handles the rest of the funcionality
-                return await Update(model, submitButton);
+                return await Update(model, submitButton, true);
             }
             return RedirectToAction("Create");
         }
@@ -86,16 +86,19 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(newModel);
         }
 
-        public async Task<IActionResult> Update(InterviewWithQuestionsViewModel model, String submitButton)
+        public async Task<IActionResult> Update(InterviewWithQuestionsViewModel model, String submitButton, bool fromCreate = false)
         {
             if (ModelState.IsValid)
             {
-                // Update interview
-                await _interviewsService.Update(new Interview
+                if (!fromCreate)
                 {
-                    Id = model.Id,
-                    InterviewName = model.InterviewName
-                });
+                    await _interviewsService.Update(new Interview
+                    {
+                        Id = model.Id,
+                        InterviewName = model.InterviewName
+                    });
+                }
+                
             
                 List<QuestionInInterview> questionInInterviews = await _interviewsService.GetInterviewAndQuestions(model.Id);
                 model.AddedQuestions = questionInInterviews.Select(questionInInterview => questionInInterview.Question).ToList();

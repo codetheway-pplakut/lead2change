@@ -18,6 +18,7 @@ namespace Lead2Change.Services.Interviews
         public Task<List<Interview>> GetInterviews();
         public Task<Interview> Delete(Interview interview);
         public Task<List<QuestionInInterview>> GetInterviewAndQuestions(Guid interviewId);
+        public Task Save();
 
 
 

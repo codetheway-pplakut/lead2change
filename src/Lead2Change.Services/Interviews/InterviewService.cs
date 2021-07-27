@@ -45,6 +45,11 @@ namespace Lead2Change.Services.Interviews
         {
             return await this._interviewRepository.GetInterviewAndQuestions(interviewId);
         }
+
+        public async Task Save()
+        {
+            await _interviewRepository.Save();
+        }
         
     }
 }
