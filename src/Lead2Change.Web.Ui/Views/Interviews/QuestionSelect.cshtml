@@ -1,0 +1,41 @@
+﻿@model Lead2Change.Domain.ViewModels.InterviewWithQuestionsViewModel
+@using Lead2Change.Domain.Models;
+
+@* ViewData["Title"] = "Question Select";
+*@
+<div class="container-fluid">
+
+    <table class="table table-striped pt-2">
+        <thead class="thead blueStyle">
+            <tr>
+
+                <th>
+                    Question
+                </th>
+                <th>
+                    Select
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.UnselectedQuestions != null)
+            {
+                @foreach (Question question in Model.UnselectedQuestions)
+                {
+                    <tr>
+                        <td>@question.QuestionString</td>
+                        <td>
+                            <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("SelectQuestion","Interviews", new { questionId = question.Id, interviewId = Model.Id })'">Add Question</button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-sm-12">
+            <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("Edit","Interviews", new { id = Model.Id })'">Back To List</button>
+
+        </div>
+    </div>
+</div>

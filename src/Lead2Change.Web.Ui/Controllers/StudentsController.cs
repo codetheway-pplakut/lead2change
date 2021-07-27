@@ -6,8 +6,8 @@ using Lead2Change.Domain.Models;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Lead2Change.Web.Ui.Models;
-using Lead2Change.Domain.Constants;
+using Lead2Change.Web.Ui.Models;
+using Lead2Change.Domain.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Lead2Change.Services.Coaches;
 
@@ -26,29 +26,29 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Redirect("/Identity/Account/Login");
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Redirect("/Identity/Account/Login");
             }
 
-            if (User.IsInRole(StringConstants.RoleNameStudent))
-            {
-                return Error("403: You are not authorized to view this page.");
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                return Error("403: You are not authorized to view this page.");
             }
 
             var user = await UserManager.GetUserAsync(User);
 
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                // StudentId being used as assosiation to coach
-
-                // TODO: Replace to use list of students in coach model
-                // return View(await _studentService.GetStudentsByCoachId(user.StudentId));
-                return Error("Coach access of index is not currently functioning");
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                // StudentId being used as assosiation to coach
+
+                // TODO: Replace to use list of students in coach model
+                // return View(await _studentService.GetStudentsByCoachId(user.StudentId));
+                return Error("Coach access of index is not currently functioning");
             }
-            else if (User.IsInRole(StringConstants.RoleNameAdmin))
-            {
-                return View(await _studentService.GetActiveStudents());
+            else if (User.IsInRole(StringConstants.RoleNameAdmin))
+            {
+                return View(await _studentService.GetActiveStudents());
             }
 
             return View();
@@ -56,39 +56,39 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> InactiveIndex()
         {
-            if (User.IsInRole(StringConstants.RoleNameAdmin))
-            {
-                return View(await _studentService.GetInactiveStudents());
-            }
+            if (User.IsInRole(StringConstants.RoleNameAdmin))
+            {
+                return View(await _studentService.GetInactiveStudents());
+            }
             return Error("403: You are not authorized to view this page.");
         }
 
         public async Task<IActionResult> Delete(Guid id)
         {
             // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
             }
 
             // Check Permissions
-            /*
-             *  Students: Not Allowed
-             *  Coach: Not Allowed
-             *  Admin: Allowed
+            /*
+             *  Students: Not Allowed
+             *  Coach: Not Allowed
+             *  Admin: Allowed
              */
-            if (!User.IsInRole(StringConstants.RoleNameAdmin))
-            {
-                return Error("403: Forbidden");
+            if (!User.IsInRole(StringConstants.RoleNameAdmin))
+            {
+                return Error("403: Forbidden");
             }
 
             // Find Student
             var student = await _studentService.GetStudent(id);
 
             // Check for bad id or student
-            if (id == null || student == null)
-            {
-                return Error("400: Bad Request");
+            if (id == null || student == null)
+            {
+                return Error("400: Bad Request");
             }
 
             // Delete Student
@@ -99,78 +99,78 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Register()
         {
             // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
-            }
-
-            // Check Permissions
-            /*
-             *  Students: Allowed
-             *  Coach: Not Allowed
-             *  Admin: Allowed
-             */
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
-
-            // Find user
-            var user = await UserManager.GetUserAsync(User);
-
-            // Check if user owns a student
-            if (user.StudentId != Guid.Empty)
-            {
-                return RedirectToAction("Details", new { studentId = user.StudentId });
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            // Check Permissions
+            /*
+             *  Students: Allowed
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: Forbidden");
+            }
+
+            // Find user
+            var user = await UserManager.GetUserAsync(User);
+
+            // Check if user owns a student
+            if (user.StudentId != Guid.Empty)
+            {
+                return RedirectToAction("Details", new { studentId = user.StudentId });
             }
 
             return View(new RegistrationViewModel());
         }
 
         public async Task<IActionResult> Details(Guid studentId)
-        {
-            // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
+        {
+            // Check SignedIn
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            // Redirect to Register if Guid is empty
+            if (studentId == Guid.Empty)
+            {
+                return RedirectToAction("Register");
+            }
+
+            // Check Permissions
+            /*
+             *  Students: Allowed only if it is them
+             *  Coach: Allowed only if student is owned by coach
+             *  Admin: Allowed
+             */
+            // TODO: Error only if coach does not own the student
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: Forbidden");
             }
-
-            // Redirect to Register if Guid is empty
-            if (studentId == Guid.Empty)
-            {
-                return RedirectToAction("Register");
-            }
-
-            // Check Permissions
-            /*
-             *  Students: Allowed only if it is them
-             *  Coach: Allowed only if student is owned by coach
-             *  Admin: Allowed
-             */
-            // TODO: Error only if coach does not own the student
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
-            else if (User.IsInRole(StringConstants.RoleNameStudent))
-            {
-                // Find user
-                var user = await UserManager.GetUserAsync(User);
-
-                // Check that studentId is the AssociatedId of the user
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
-                {
-                    return Error("403: Forbidden");
-                }
-            }
-
-            // Find Student
-            var student = await _studentService.GetStudent(studentId);
-
-            // Check for bad student
-            if (student == null)
-            {
-                return Error("400: Bad Request");
+            else if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                // Find user
+                var user = await UserManager.GetUserAsync(User);
+
+                // Check that studentId is the AssociatedId of the user
+                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+                {
+                    return Error("403: Forbidden");
+                }
+            }
+
+            // Find Student
+            var student = await _studentService.GetStudent(studentId);
+
+            // Check for bad student
+            if (student == null)
+            {
+                return Error("400: Bad Request");
             }
             
             //check for null
@@ -222,39 +222,39 @@ namespace Lead2Change.Web.Ui.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Register(RegistrationViewModel viewModel)
-        {
-            // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
-            }
-
-            // Check Permissions
-            /*
-             *  Students: Allowed
-             *  Coach: Not Allowed
-             *  Admin: Allowed
-             */
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
-
-            // Find User
-            var user = await UserManager.GetUserAsync(User);
-
-            if (
-                // Check if the user is null
-                user == null ||
-                // Check if user already has a student assosiation
-                user.StudentId != Guid.Empty ||
-                // Check for bad viewModel
-                !ModelState.IsValid ||
-                // Check the length of the first name
-                viewModel.StudentFirstName.Length <= 0
-                )
-            {
-                return Error("400: Bad Request");
+        {
+            // Check SignedIn
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            // Check Permissions
+            /*
+             *  Students: Allowed
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: Forbidden");
+            }
+
+            // Find User
+            var user = await UserManager.GetUserAsync(User);
+
+            if (
+                // Check if the user is null
+                user == null ||
+                // Check if user already has a student assosiation
+                user.StudentId != Guid.Empty ||
+                // Check for bad viewModel
+                !ModelState.IsValid ||
+                // Check the length of the first name
+                viewModel.StudentFirstName.Length <= 0
+                )
+            {
+                return Error("400: Bad Request");
             }
 
             // Create model
@@ -298,9 +298,9 @@ namespace Lead2Change.Web.Ui.Controllers
             var student = await _studentService.Create(model);
 
             // Registers a relation in user to the student if their role is student
-            if (User.IsInRole(StringConstants.RoleNameStudent))
-            {
-                user.StudentId = student.Id;
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                user.StudentId = student.Id;
                 await UserManager.UpdateAsync(user);
             }
             
@@ -314,41 +314,41 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Edit(Guid studentId)
         {
-            // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
-            }
-
-            // Check Permissions
-            /*
-             *  Students: Allowed if owned by user
-             *  Coach: Not Allowed
-             *  Admin: Allowed
-             */
-            if (User.IsInRole(StringConstants.RoleNameStudent))
-            {
-                // Find user
-                var user = await UserManager.GetUserAsync(User);
-
-                // Check that studentId is the AssociatedId of the user
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
-                {
-                    return Error("403: Forbidden");
-                }
-            }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
-
-            // Find student
-            var student = await _studentService.GetStudent(studentId);
-
-            // Check for bad student
-            if (student == null || studentId == Guid.Empty)
-            {
-                return Error("400: Bad Request");
+            // Check SignedIn
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            // Check Permissions
+            /*
+             *  Students: Allowed if owned by user
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                // Find user
+                var user = await UserManager.GetUserAsync(User);
+
+                // Check that studentId is the AssociatedId of the user
+                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+                {
+                    return Error("403: Forbidden");
+                }
+            }
+            else if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: Forbidden");
+            }
+
+            // Find student
+            var student = await _studentService.GetStudent(studentId);
+
+            // Check for bad student
+            if (student == null || studentId == Guid.Empty)
+            {
+                return Error("400: Bad Request");
             }
 
             RegistrationViewModel viewModel = new RegistrationViewModel()
@@ -366,6 +366,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentHomePhone = student.StudentHomePhone,
                 StudentCellPhone = student.StudentCellPhone,
                 StudentEmail = student.StudentEmail,
+                OldStudentEmail = student.StudentEmail,
                 StudentCareerPath = student.StudentCareerPath,
                 StudentCareerInterest = student.StudentCareerInterest,
                 //Parent Info
@@ -379,6 +380,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 ParentHomePhone = student.ParentHomePhone,
                 ParentCellPhone = student.ParentCellPhone,
                 ParentEmail = student.ParentEmail,
+                OldParentEmail = student.ParentEmail,
                 //Guidance Counselor Info
                 KnowGuidanceCounselor = student.KnowGuidanceCounselor,
                 GuidanceCounselorName = student.GuidanceCounselorName,
@@ -424,38 +426,38 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Update(RegistrationViewModel viewModel)
         {
-            // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
-            }
-
-            // Check Permissions
-            /*
-             *  Students: Allowed if owned by user
-             *  Coach: Not Allowed
-             *  Admin: Allowed
-             */
-            if (User.IsInRole(StringConstants.RoleNameStudent))
-            {
-                // Find user
-                var user = await UserManager.GetUserAsync(User);
-
-                // Check that studentId is the AssociatedId of the user
-                if (user.StudentId == Guid.Empty || user.StudentId != viewModel.Id)
-                {
-                    return Error("403: Forbidden");
-                }
-            }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
-
+            // Check SignedIn
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            // Check Permissions
+            /*
+             *  Students: Allowed if owned by user
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                // Find user
+                var user = await UserManager.GetUserAsync(User);
+
+                // Check that studentId is the AssociatedId of the user
+                if (user.StudentId == Guid.Empty || user.StudentId != viewModel.Id)
+                {
+                    return Error("403: Forbidden");
+                }
+            }
+            else if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: Forbidden");
+            }
+
             if (
                 // Check for bad model state
-                !ModelState.IsValid ||
-                // Check first name length
+                !ModelState.IsValid ||
+                // Check first name length
                 viewModel.StudentFirstName.Length <= 0
                 )
             {
@@ -499,6 +501,16 @@ namespace Lead2Change.Web.Ui.Controllers
             };
 
             var student = await _studentService.Update(model);
+            /*if (model.StudentEmail != model.OldStudentEmail)
+            {
+                model.OldStudentEmail = model.StudentEmail;
+                await Email("1joel.kuriakose@gmail.com", model.StudentEmail, "Lead2Change Update Confirmation: Your student email has been changed to this email", "Your email has been updated in the Lead2Change database!", "Your email has been updated in the Lead2Change database!", "Lead2Change", model.StudentFirstName + " " + model.StudentLastName);
+            }
+            if (model.ParentEmail != model.OldParentEmail)
+            {
+                await Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Update Confirmation: Your parent email has been changed to this email", "Your email has been updated in the Lead2Change database!", "Your email has been updated in the Lead2Change database!", "Lead2Change", model.ParentFirstName + " " + model.ParentLastName);
+                model.OldParentEmail = model.ParentEmail;
+            }*/
 
             return RedirectToAction("Details", new { studentId = student.Id });
         }
