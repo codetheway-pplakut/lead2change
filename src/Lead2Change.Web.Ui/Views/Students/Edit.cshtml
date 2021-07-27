@@ -533,9 +533,10 @@
                 <span asp-validation-for="Active" class="text-danger"></span>
             </div>
 
-
-
-
+            <div class="form-group hidden" display="none">
+                <label asp-for="CoachId" class="control-label"></label>
+                <input asp-for="CoachId" class="form-control" value=@Model.CoachId />
+            </div>
             <div class="form-group hidden" display="none">
                 <label asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" class="form-control" value=@Model.Id />
