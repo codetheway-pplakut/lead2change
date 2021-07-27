@@ -48,7 +48,7 @@ namespace Lead2Change.Web.Ui.Controllers
             }
             else if (User.IsInRole(StringConstants.RoleNameAdmin))
             {
-                return View(await _studentService.GetStudents());
+                return View(await _studentService.GetActiveStudents());
             }
 
             return View();
@@ -56,7 +56,11 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> InactiveIndex()
         {
-            return View(await _studentService.GetInactiveStudents());
+            if (User.IsInRole(StringConstants.RoleNameAdmin))
+            {
+                return View(await _studentService.GetInactiveStudents());
+            }
+            return Error("403: You are not authorized to view this page.");
         }
 
         public async Task<IActionResult> Delete(Guid id)
@@ -286,7 +290,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 GuidanceCounselorName = viewModel.GuidanceCounselorName,
                 MeetWithGuidanceCounselor = viewModel.MeetWithGuidanceCounselor,
                 HowOftenMeetWithGuidanceCounselor = viewModel.HowOftenMeetWithGuidanceCounselor,
-                DiscussWithGuidanceCounselor = viewModel.DiscussWithGuidanceCounselor
+                DiscussWithGuidanceCounselor = viewModel.DiscussWithGuidanceCounselor,
+                Active = true,
             };
             
             // Add model
