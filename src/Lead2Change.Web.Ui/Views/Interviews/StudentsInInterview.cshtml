@@ -1,4 +1,4 @@
-﻿@model List<Lead2Change.Domain.ViewModels.StudentInterview>
+﻿@model Lead2Change.Domain.ViewModels.StudentInterview
 @* ViewData["Title"] = "Question Select";
 *@
 <div class="container-fluid">
@@ -14,30 +14,28 @@
                 </th>
             </tr>
         </thead>
-        @foreach (var item in Model)
-        {
-            <tr>
-                @for (int j = 0; j < item.Students.Count; j++)
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Students[j].StudentLastName), @Html.DisplayFor(modelItem => item.Students[j].StudentLastName)
-                    </td>
-                }
+
+        <tr>
+            @foreach (var item in Model.Students)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentLastName)
+                </td>
                 <td>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new { studentID = item.StudentAnswer.StudentId, interviewID = item.StudentAnswer.InterviewId})'" />
+                            <input type="button" class="btn btn-block orangeBtn" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new { ID = item.Id })'" />
 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { studentID = item.StudentAnswer.StudentId })'" />
+                            <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { ID = item.Id })'" />
 
                         </div>
                     </div>
                 </td>
-            </tr>
-        }
+            }
+        </tr>
     </table>
 </div>
