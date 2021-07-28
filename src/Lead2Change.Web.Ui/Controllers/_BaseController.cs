@@ -24,17 +24,13 @@ namespace Lead2Change.Web.Ui.Controllers
             RoleManager = roleManager;
             UserManager = userManager;
             SignInManager = signInManager;
-            CreateDefaultRoles().Wait();
-            CreateNewUser("student@test.com", "Testtest@123", StringConstants.RoleNameStudent).Wait();
-            CreateNewUser("coach@test.com", "Testtest@123", StringConstants.RoleNameCoach).Wait();
-            CreateNewUser("admin@test.com", "Testtest@123", StringConstants.RoleNameAdmin).Wait();
         }
 
         /// <summary>
         /// This is an example of how to create roles
         /// </summary>
         /// <returns></returns>
-        private async Task CreateDefaultRoles()
+        protected async Task CreateDefaultRoles()
         {
             var hasAdmin = await RoleManager.FindByNameAsync(StringConstants.RoleNameAdmin);
 
@@ -71,7 +67,7 @@ namespace Lead2Change.Web.Ui.Controllers
         /// </summary>
         /// <param name = "email"></param>
         /// <returns></returns>
-        public async Task CreateNewUser(string email, string password, string roleName, bool confirm = true)
+        protected async Task CreateNewUser(string email, string password, string roleName, bool confirm = true)
         {
             var identityUser = new AspNetUsers()
             {
@@ -83,7 +79,7 @@ namespace Lead2Change.Web.Ui.Controllers
             if (confirm)
             {
                 var token = await UserManager.GenerateEmailConfirmationTokenAsync(identityUser);
-                _ = UserManager.ConfirmEmailAsync(identityUser, token);
+                var confirmationEmail = await UserManager.ConfirmEmailAsync(identityUser, token);
             }
 
             if (result.Succeeded)
