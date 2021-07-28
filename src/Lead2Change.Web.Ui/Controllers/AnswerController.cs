@@ -21,22 +21,25 @@ namespace Lead2Change.Web.Ui.Controllers
             this.AnswersService = answersService;
             this._interviewsService = interviewsService;
         }
-        public async Task<IActionResult> Index(Guid interviewID)
+        public async Task<IActionResult> Index(Guid interviewID, Guid studentId)
         {
           
             List<AnswersViewModel> result = new List<AnswersViewModel>();
             List<Answer> answers = await AnswersService.GetAnswers(interviewID);
             foreach (Answer answer in answers)
             {
-                result.Add(new AnswersViewModel()
+                if (answer.StudentId == studentId)
                 {
-                    AnswerString = answer.AnswerString,
-                    QuestionString = answer.QuestionString,
-                    Id = answer.Id,
-                    StudentId = answer.StudentId,
-                    QuestionId = answer.QuestionId,
-                    InterviewId = answer.InterviewId,
-                });
+                    result.Add(new AnswersViewModel()
+                    {
+                        AnswerString = answer.AnswerString,
+                        QuestionString = answer.QuestionString,
+                        Id = answer.Id,
+                        StudentId = studentId,
+                        QuestionId = answer.QuestionId,
+                        InterviewId = answer.InterviewId,
+                    });
+                }
             }
             return View(result);
      
@@ -83,7 +86,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     var result = await AnswersService.AnswerQuestion(answer);
                     
                 }
-                return RedirectToAction("Index", new { interviewID = model.InterviewId });
+                return RedirectToAction("Index", new { interviewID = model.InterviewId, studentId = model.StudentId });
 
 
             }

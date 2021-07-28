@@ -9,7 +9,7 @@
             <h2 class="GoalHeadingFont"><strong>Answers</strong></h2>
         </div>
     </div>
- 
+
     <table class="table table-striped pt-2"
         <thead class="thead blueStyle">
             <tr>
@@ -30,7 +30,7 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.QuestionString)
-            
+
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AnswerString)
@@ -62,4 +62,9 @@
             <input type="button" class="btn btn-primary" value="Your Interviews" onclick="location.href='@Url.Action("Index","Interviews")'" />
         </div>
     </div>
+</div>
+
+
+<div align="center">
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("StudentsInInterviews","Interviews", new { interviewID = Model.FirstOrDefault().InterviewId, studentID = Model.FirstOrDefault().StudentId })'">Back To List</button>
 </div>

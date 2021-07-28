@@ -1,4 +1,4 @@
-﻿@model Lead2Change.Domain.ViewModels.StudentInterview
+﻿@model Lead2Change.Domain.ViewModels.StudentInterviewViewModel
 @* ViewData["Title"] = "Question Select";
 *@
 <div class="container-fluid">
@@ -14,28 +14,31 @@
                 </th>
             </tr>
         </thead>
-
-        <tr>
-            @foreach (var item in Model.Students)
-            {
+        @for (int i = 0; i < Model.Students.Count; i++)
+        {
+            <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentLastName)
+                    @Html.DisplayFor(modelItem => Model.Students[i].StudentLastName), @Html.DisplayFor(modelItem => Model.Students[i].StudentFirstName)
                 </td>
                 <td>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new { ID = item.Id })'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=Model.StudentAnswer[i].InterviewId, studentID=Model.StudentAnswer[i].StudentId})'" />
 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { ID = item.Id })'" />
+                            <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { interviewID=Model.StudentAnswer[i].InterviewId, studentId=Model.StudentAnswer[i].StudentId })'" />
 
                         </div>
                     </div>
                 </td>
-            }
-        </tr>
+            </tr>
+        }
     </table>
+</div>
+
+<div align="center">
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Interviews")'">Back To List</button>
 </div>

@@ -28,6 +28,7 @@
         <input type="submit" value="Submit" class="btn btn-submit" />
     </div>
 </form>
+
 <div align="center">
-    <button class="btn btn-back"><a asp-action="Index" asp-route-interviewID=@Model.InterviewId>Back to List</a></button>
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Answers", new { interviewID = Model.InterviewId, studentId = Model.StudentId })'">Back To List</button>
 </div>

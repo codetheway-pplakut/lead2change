@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Lead2Change.Domain.ViewModels
 {
-    public class StudentInterview
+    public class StudentInterviewViewModel
     {
         public List<Student> Students { get; set; }
-        public AnswerQuestionViewModel StudentAnswer { get; set; }
+        public List<AnswerQuestionViewModel> StudentAnswer { get; set; }
     }
 }
