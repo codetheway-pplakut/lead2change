@@ -69,7 +69,7 @@ namespace Lead2Change.Web.Ui.Controllers
         /// 
         /// This is used for creating a user on the backend, programmatically
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name = "email"></param>
         /// <returns></returns>
         public async Task CreateNewUser(string email, string password, string roleName, bool confirm = true)
         {
@@ -130,6 +130,20 @@ namespace Lead2Change.Web.Ui.Controllers
         protected ViewResult Error(ErrorViewModel e)
         {
             return View("Error", e);
+        }
+
+        protected async Task Email(string sender, string receiver, string xSubject, string xPlainTextContent, string xHtmlContent, string senderTitle, string receiverTitle)
+        {
+            var apiKey = "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";
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress(sender, senderTitle);
+            var subject = xSubject;
+
+            var to = new EmailAddress(receiver, receiverTitle);
+            var plainTextContent = xPlainTextContent;
+            var htmlContent = xHtmlContent;
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync(msg);
         }
     }
 }

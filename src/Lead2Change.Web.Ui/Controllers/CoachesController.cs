@@ -6,37 +6,46 @@ using Lead2Change.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Lead2Change.Domain.Constants;
+using Microsoft.AspNetCore.Identity;
+using Lead2Change.Domain.Constants;
+
+using Lead2Change.Services.Students;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
     public class CoachesController : _BaseController
     {
         ICoachService _coachService;
-
-        public CoachesController(IUserService identityService, ICoachService coachService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
+        IStudentService _studentService;
+        public CoachesController(IUserService identityService, ICoachService coachService, IStudentService studentService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
         {
             _coachService = coachService;
+            _studentService = studentService;
         }
 
         public async Task<IActionResult> Delete(Guid id)
-        {
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
             }
 
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: You are not authorized to view this page.");
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: You are not authorized to view this page.");
             }
 
-            var coach = await _coachService.GetCoach(id);
+            var coach = await _coachService.GetCoach(id);
+
+            if (id == Guid.Empty || coach == null)
+            {
+                return Error("400: Bad Request");
+            }
 
-            if (id == Guid.Empty || coach == null)
+            coach.Students = await _studentService.GetCoachStudents(id);
+            foreach(var item in coach.Students)
             {
-                return Error("400: Bad Request");
+                item.CoachId = null;
             }
 
             await _coachService.Delete(coach);
@@ -44,15 +53,15 @@ namespace Lead2Change.Web.Ui.Controllers
         }
 
         public async Task<IActionResult> Create()
-        {
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
             }
 
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: You are not authorized to view this page.");
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: You are not authorized to view this page.");
             }
 
             return View(new CoachViewModel());
@@ -62,33 +71,40 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             var coachescontainer = await _coachService.GetCoach(id);
 
-            if (id == Guid.Empty || coachescontainer == null)
-            {
-                return Error("400: Bad Request");
+            if (id == Guid.Empty || coachescontainer == null)
+            {
+                return Error("400: Bad Request");
             }
 
-            CoachViewModel a = new CoachViewModel()
+            CoachViewModel model = new CoachViewModel();
+
+            if(coachescontainer != null)
             {
-                Id = coachescontainer.Id,
-                CoachFirstName = coachescontainer.CoachFirstName,
-                CoachLastName = coachescontainer.CoachLastName,
-                CoachEmail = coachescontainer.CoachEmail,
-                CoachPhoneNumber = coachescontainer.CoachPhoneNumber
-            };
-            return View(a);
+                model.Id = coachescontainer.Id;
+                model.CoachFirstName = coachescontainer.CoachFirstName;
+                model.CoachLastName = coachescontainer.CoachLastName;
+                model.CoachEmail = coachescontainer.CoachEmail;
+                model.CoachPhoneNumber = coachescontainer.CoachPhoneNumber;
+                model.Students = new List<Student>();
+            }
+
+            model.Students = await _studentService.GetCoachStudents(id);
+
+            
+            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CoachViewModel model)
-        {
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
             }
 
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: You are not authorized to view this page.");
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: You are not authorized to view this page.");
             }
 
             if (ModelState.IsValid)
@@ -97,11 +113,11 @@ namespace Lead2Change.Web.Ui.Controllers
                 {
                     Coach coach = new Coach()
                     {
-                        Students = new List<Student>(),
                         CoachFirstName = model.CoachFirstName,
                         CoachLastName = model.CoachLastName,
                         CoachEmail = model.CoachEmail,
-                        CoachPhoneNumber = model.CoachPhoneNumber
+                        CoachPhoneNumber = model.CoachPhoneNumber,
+                        Students = new List<Student>()
                     };
                     var abc = await _coachService.Create(coach);
                 }
@@ -110,36 +126,36 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(model);
         }
         public async Task<IActionResult> Index()
-        {
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
             }
 
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: You are not authorized to view this page.");
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: You are not authorized to view this page.");
             }
 
             return View(await _coachService.GetCoaches());
         }
         public async Task<IActionResult> Edit(Guid id)
-        {
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
             }
 
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: You are not authorized to view this page.");
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: You are not authorized to view this page.");
             }
 
-            var coach = await _coachService.GetCoach(id);
-
-            if (id == Guid.Empty || coach == null)
-            {
-                return Error("400: Bad Request");
+            var coach = await _coachService.GetCoach(id);
+
+            if (id == Guid.Empty || coach == null)
+            {
+                return Error("400: Bad Request");
             }
 
             CoachViewModel list = new CoachViewModel()
@@ -154,15 +170,15 @@ namespace Lead2Change.Web.Ui.Controllers
         }
 
         public async Task<IActionResult> Update(Coach model)
-        {
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
             }
 
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: You are not authorized to view this page.");
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: You are not authorized to view this page.");
             }
 
             if (ModelState.IsValid)
@@ -175,14 +191,37 @@ namespace Lead2Change.Web.Ui.Controllers
                         CoachFirstName = model.CoachFirstName,
                         CoachLastName = model.CoachLastName,
                         CoachEmail = model.CoachEmail,
-                        CoachPhoneNumber = model.CoachPhoneNumber,
-
+                        CoachPhoneNumber = model.CoachPhoneNumber
                     };
                     var student = await _coachService.Update(list);
                 }
                 return RedirectToAction("Index");
             }
             return View(model);
+        }
+        public async Task<IActionResult> AssignStudent(Guid studentId, Guid coachId)
+        {
+            var coach = await _coachService.GetCoach(coachId); //check coach exists
+            var student = await _studentService.GetStudent(studentId);
+
+            student.CoachId = coachId;
+   
+            var student1 = await _studentService.Update(student);
+            return RedirectToAction("Index");
+        }
+        //Need to add "AddStudent" method to Service
+        //Change above method^^^
+        //Change StudentService to change the CoachId
+
+        public async Task<IActionResult> AssignStudentIndex(Guid id)
+        {
+            Coach tempCoach = await _coachService.GetCoach(id);
+            AssignStudentViewModel assignStudentViewModel = new AssignStudentViewModel()
+            {
+                UnassignedStudents = await _studentService.GetUnassignedStudents(),
+                CurrentCoach = tempCoach
+            };
+            return View(assignStudentViewModel);
         }
     }
 
