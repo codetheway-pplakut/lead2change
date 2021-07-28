@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Lead2Change.Domain.Constants;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
@@ -21,19 +22,51 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Delete(Guid id)
         {
-            var student = await _coachService.GetCoach(id);
-            await _coachService.Delete(student);
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: You are not authorized to view this page.");
+            }
+
+            var coach = await _coachService.GetCoach(id);
+
+            if (id == Guid.Empty || coach == null)
+            {
+                return Error("400: Bad Request");
+            }
+
+            await _coachService.Delete(coach);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Create()
         {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: You are not authorized to view this page.");
+            }
+
             return View(new CoachViewModel());
         }
 
         public async Task<IActionResult> Details(Guid id)
         {
             var coachescontainer = await _coachService.GetCoach(id);
+
+            if (id == Guid.Empty || coachescontainer == null)
+            {
+                return Error("400: Bad Request");
+            }
+
             CoachViewModel a = new CoachViewModel()
             {
                 Id = coachescontainer.Id,
@@ -48,6 +81,16 @@ namespace Lead2Change.Web.Ui.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CoachViewModel model)
         {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: You are not authorized to view this page.");
+            }
+
             if (ModelState.IsValid)
             {
                 if (ModelState.IsValid)
@@ -68,11 +111,37 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: You are not authorized to view this page.");
+            }
+
             return View(await _coachService.GetCoaches());
         }
         public async Task<IActionResult> Edit(Guid id)
         {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: You are not authorized to view this page.");
+            }
+
             var coach = await _coachService.GetCoach(id);
+
+            if (id == Guid.Empty || coach == null)
+            {
+                return Error("400: Bad Request");
+            }
+
             CoachViewModel list = new CoachViewModel()
             {
                 Id = coach.Id,
@@ -86,6 +155,16 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Update(Coach model)
         {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return Error("403: You are not authorized to view this page.");
+            }
+
             if (ModelState.IsValid)
             {
                 if (ModelState.IsValid)

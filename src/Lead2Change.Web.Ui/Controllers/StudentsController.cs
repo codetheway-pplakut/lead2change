@@ -86,7 +86,7 @@ namespace Lead2Change.Web.Ui.Controllers
             var student = await _studentService.GetStudent(id);
 
             // Check for bad id or student
-            if (id == null || student == null)
+            if (id == Guid.Empty || student == null)
             {
                 return Error("400: Bad Request");
             }
