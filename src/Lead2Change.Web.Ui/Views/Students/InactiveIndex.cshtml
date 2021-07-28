@@ -29,7 +29,9 @@
                         @Html.DisplayFor(modelItem => item.StudentFirstName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.StudentDateOfBirth)
+                        @*@Html.DisplayFor(modelItem => item.StudentDateOfBirth.ToString("d"))*@
+                        @*@Model.modelItem => item.StudentDateOfBirth.ToString("d")*@
+                        @Convert.ToDateTime(item.StudentDateOfBirth).ToString("MM/dd/yyyy")
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.StudentEmail)
