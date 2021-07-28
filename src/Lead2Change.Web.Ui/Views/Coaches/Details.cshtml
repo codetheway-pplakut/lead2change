@@ -36,8 +36,31 @@
                     @Html.DisplayFor(modelItem => item.StudentCellPhone)
                 </td>
                 <td>
-                    @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
+                    <div>
+                    <div>
+                        @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
+                    </div>
+                    <div>
+                        @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
+                    </div>
+                    <div>
+                        @Html.ActionLink("Student Goals", "Index", "Goals", new { studentID = item.Id })
+                    </div>
+                    @if (item.CareerDeclarationId == Guid.Empty)
+                    {
+                        <div>
+                            @Html.ActionLink("Add Student Career", "Create", "CareerDeclaration", new { studentId = item.Id })
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            @Html.ActionLink("View Student Career", "Details", "CareerDeclaration", new { studentId = item.Id })
+                        </div>
+                    }
+                    </div>
                 </td>
+
             </tr>
         }
     </tbody>
