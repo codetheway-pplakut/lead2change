@@ -192,16 +192,16 @@ namespace Lead2Change.Web.Ui.Controllers
             });
             return RedirectToAction("QuestionSelect", new { id = interviewId });
         }
-        public async Task<IActionResult> StudentsInInterview(Guid interviewId)
+        public async Task<IActionResult> StudentsInInterview(Guid Id)
         {
             List<Student> students = await _studentService.GetActiveStudents();
-            var result = await _interviewsService.GetInterviewAndQuestions(interviewId);
+            var result = await _interviewsService.GetInterviewAndQuestions(Id);
             AnswerQuestionViewModel answer = new AnswerQuestionViewModel()
             {
                 QuestionInInterviews = result,
                 InterviewName = (await _interviewsService.GetInterview(result.FirstOrDefault().Interview.Id)).InterviewName,
                 InterviewId = result.FirstOrDefault().Interview.Id,
-            }; 
+            };
             StudentInterview student = new StudentInterview()
             {
                 Students = students,            
