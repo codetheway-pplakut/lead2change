@@ -4,9 +4,9 @@
 
 @* ViewData["Title"] = "Edit";
 *@
-<div class="row">
+<div class="row blueHeader full-width mb-sm-3">
     <div class="col-sm-12">
-        <h2 class="GoalHeadingFont"><strong>Create an Interview</strong></h2>
+        <h1 class="text-center"><strong>EDIT</strong></h1>
     </div>
 </div>
 <!--Input form for Interview + Question Creation-->
@@ -73,7 +73,7 @@
                         @foreach (Question question in Model.AddedQuestions)
                         {
                         <tr>
-                            <td>@question.QuestionString</td>
+                            <td class="text-center">@question.QuestionString</td>
                             <td>
                                 <button type="button" class="btn btn-outline-dark btn-lg btn-block" onclick="location.href='@Url.Action("RemoveQuestion","Interviews", new {interviewId = Model.Id, questionId = question.Id  })'">Remove</button>
                             </td>

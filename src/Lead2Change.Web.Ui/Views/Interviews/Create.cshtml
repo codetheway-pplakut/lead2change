@@ -4,13 +4,14 @@
 
 @* ViewData["Title"] = "Create";
 *@
-<div class="row">
-    <div class="col-sm-12">
-        <h2 class="GoalHeadingFont"><strong>Create an Interview</strong></h2>
-    </div>
-</div>
+
 <!--Input form for Interview + Question Creation-->
 <div class="container-fluid">
+    <div class="row blueHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>CREATE AN INTERVIEW</strong></h1>
+        </div>
+    </div>
     <form asp-action="Register">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -18,19 +19,19 @@
             <div class="form-group col-sm-12 d-none">
                 <input asp-for="Id" class="form-control" />
             </div>
-            
-            
-           
+
+
+
             <div class="form-group col-sm-12">
                 <b><label asp-for="InterviewName" class="control-label">Interview Name</label></b>
-                <input asp-for="InterviewName" class="form-control" required/>
+                <input asp-for="InterviewName" class="form-control" required />
                 <span asp-validation-for="InterviewName" class="text-danger"></span>
             </div>
             <div class="form-group col-sm-12">
-                <b><label asp-for="QuestionText" class="control-label" >Add a Question</label></b>
-                
-                @Html.TextAreaFor(m => m.QuestionText, new { @class = "form-control"})
-                <span asp-validation-for="QuestionText" class="text-danger" ></span>
+                <b><label asp-for="QuestionText" class="control-label">Add a Question</label></b>
+
+                @Html.TextAreaFor(m => m.QuestionText, new { @class = "form-control" })
+                <span asp-validation-for="QuestionText" class="text-danger"></span>
             </div>
             <div class="form-group col-sm-12">
                 <div class="row">
@@ -39,10 +40,10 @@
                         <button type="submit" name="submitButton" value="addQuestion" class="btn btn-lg btn-block orangeBtn">Add Question</button>
                     </div>
                     <div class="col-sm-6">
-                        <button type="submit" name ="submitButton" value="selectQuestion" class="btn btn-lg btn-block orangeBtn">Select an Existing Question</button>
+                        <button type="submit" name="submitButton" value="selectQuestion" class="btn btn-lg btn-block orangeBtn">Select an Existing Question</button>
                     </div>
                 </div>
-                
+
             </div>
             <br />
             <div class="form-group col-sm-12">
@@ -56,8 +57,8 @@
             </div>
         </div>
     </form>
-    
-   
+
+
     <div class="col-sm-6 text-center">
         <button class="btn btn-outline-dark btn-lg btn-block" name="Back" onclick="location.href='@Url.Action("Index","Interviews")'">Back To List</button>
     </div>
