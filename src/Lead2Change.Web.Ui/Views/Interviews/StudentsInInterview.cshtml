@@ -27,7 +27,7 @@
                 <td>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {studentId=item.StudentId, interviewId=item.InterviewId})'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=item.InterviewId, studentID=item.StudentId})'" />
 
                         </div>
                     </div>
