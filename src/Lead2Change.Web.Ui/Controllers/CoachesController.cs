@@ -15,7 +15,7 @@ namespace Lead2Change.Web.Ui.Controllers
     {
         ICoachService _coachService;
         IStudentService _studentService;
-        public CoachesController(IIdentityService identityService, ICoachService coachService, IStudentService studentService) : base(identityService)
+        public CoachesController(IUserService identityService, ICoachService coachService, IStudentService studentService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
         {
             _coachService = coachService;
             _studentService = studentService;
