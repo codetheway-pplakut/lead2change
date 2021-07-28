@@ -1,4 +1,4 @@
-﻿@model Lead2Change.Domain.ViewModels.StudentInterview
+﻿@model Lead2Change.Domain.ViewModels.StudentInterviewViewModel
 @* ViewData["Title"] = "Question Select";
 *@
 <div class="container-fluid">
@@ -21,16 +21,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentLastName)
                 </td>
+            }
+            @foreach (var item in Model.StudentAnswer)
+            {
                 <td>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new { ID = item.Id })'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {studentId=item.StudentId, interviewId=item.InterviewId})'" />
 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { ID = item.Id })'" />
+                            <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { studentId=item.StudentId })'" />
 
                         </div>
                     </div>

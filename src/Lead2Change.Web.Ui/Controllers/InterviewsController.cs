@@ -195,17 +195,23 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> StudentsInInterview(Guid Id)
         {
             List<Student> students = await _studentService.GetActiveStudents();
+            List<AnswerQuestionViewModel> answerQuestion = new List<AnswerQuestionViewModel>();
             var result = await _interviewsService.GetInterviewAndQuestions(Id);
-            AnswerQuestionViewModel answer = new AnswerQuestionViewModel()
+            foreach (Student studenti in students)
             {
-                QuestionInInterviews = result,
-                InterviewName = (await _interviewsService.GetInterview(result.FirstOrDefault().Interview.Id)).InterviewName,
-                InterviewId = result.FirstOrDefault().Interview.Id,
-            };
-            StudentInterview student = new StudentInterview()
+                answerQuestion.Add(new AnswerQuestionViewModel()
+                {
+                    StudentId=studenti.Id,
+                    QuestionInInterviews = result,
+                    InterviewName = (await _interviewsService.GetInterview(result.FirstOrDefault().Interview.Id)).InterviewName,
+                    InterviewId = result.FirstOrDefault().Interview.Id,
+                });
+            }
+
+            StudentInterviewViewModel student = new StudentInterviewViewModel()
             {
                 Students = students,            
-                StudentAnswer = answer,
+                StudentAnswer = answerQuestion
             };
             return View(student);
             
