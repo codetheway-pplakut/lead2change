@@ -1,4 +1,8 @@
 ﻿@using Lead2Change.Domain.Constants;
+@using Microsoft.AspNetCore.Identity
+@using Lead2Change.Domain.Models
+@inject SignInManager<AspNetUsers> SignInManager
+@inject UserManager<AspNetUsers> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,16 +29,41 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="InactiveIndex">Inactive Students</a>
-                        </li>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole(StringConstants.RoleNameStudent))
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Student", "Details", "Students", new { studentId = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
-                        </li>
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Goals", "Index", "Goals", new { studentID = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Career", "Details", "CareerDeclaration", new { studentId = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
+                            </li>
+                        }
+
+                        @if (SignInManager.IsSignedIn(User) && (User.IsInRole(StringConstants.RoleNameCoach) || User.IsInRole(StringConstants.RoleNameAdmin)))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="InactiveIndex">Inactive Students</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Interviews" asp-action="Index">Interviews</a>
+                            </li>
+                            <li class="nav-item">
+                             <a class="nav-link text-dark" asp-area="" asp-controller="Questions" asp-action="Index">Questions</a>
+                             </li>
+
+                          }
                     </ul>
                 </div>
             </div>

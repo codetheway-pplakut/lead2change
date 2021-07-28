@@ -4,12 +4,14 @@ using Lead2Change.Domain.ViewModels;
 using Lead2Change.Services.CareerDeclarationService;
 using Lead2Change.Services.Identity;
 using Lead2Change.Services.Students;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+// TODO: Add auth to controller
 namespace Lead2Change.Web.Ui.Controllers
 {
     public class CareerDeclarationController : _BaseController
@@ -17,7 +19,7 @@ namespace Lead2Change.Web.Ui.Controllers
         private ICareerDeclarationService _service;
         private IStudentService _studentService;
 
-        public CareerDeclarationController(IIdentityService identityService, ICareerDeclarationService careerDeclarationService, IStudentService studentService) : base(identityService)
+        public CareerDeclarationController(IUserService identityService, ICareerDeclarationService careerDeclarationService, IStudentService studentService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
         {
             _service = careerDeclarationService;
             _studentService = studentService;
@@ -29,7 +31,20 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Create(Guid studentId)
         {
+
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                var user = await UserManager.GetUserAsync(User);
+                studentId = user.StudentId;
+            }
+
             var student = await _studentService.GetStudent(studentId);
+
+            if (studentId == Guid.Empty || student == null)
+            {
+                return Error("400: Bad Request");
+            }
+
             if (!_studentService.HasCareerAssosiation(student))
             {
                 CareerDeclarationViewModel careerDeclarationViewModel = new CareerDeclarationViewModel()
@@ -38,7 +53,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 };
                 return View(careerDeclarationViewModel);
             }
-            return RedirectToAction("Index", "Students");
+            return RedirectToAction("Details");
         }
         [HttpPost]
         public async Task<IActionResult> Register(CareerDeclarationViewModel model)
@@ -99,23 +114,33 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Details(Guid id)
+        public async Task<IActionResult> Details(Guid studentId)
         {
-            var careerDeclaration = await _service.GetCareerDeclaration(id);
-            if (careerDeclaration != null)
+            var student = await _studentService.GetStudent(studentId);
+
+            if (student == null)
             {
-                CareerDeclarationViewModel careerDeclarationViewModel = new CareerDeclarationViewModel()
-                {
-                    Id = careerDeclaration.Id,
-                    StudentId = careerDeclaration.StudentId,
-                    CollegeBound = careerDeclaration.CollegeBound,
-                    CareerCluster = (CareerCluster)careerDeclaration.CareerCluster,
-                    SpecificCareer = careerDeclaration.SpecificCareer,
-                    TechnicalCollegeBound = careerDeclaration.TechnicalCollegeBound,
-                };
-                return View(careerDeclarationViewModel);
+                return Error("400: Bad Request");
             }
-            return RedirectToAction("Index", "Students");
+
+            var careerDeclaration = await _service.GetCareerDeclaration(student.CareerDeclarationId);
+
+            if (careerDeclaration == null)
+            {
+                return RedirectToAction("Create");
+            }
+
+            CareerDeclarationViewModel careerDeclarationViewModel = new CareerDeclarationViewModel()
+            {
+                Id = careerDeclaration.Id,
+                StudentId = careerDeclaration.StudentId,
+                CollegeBound = careerDeclaration.CollegeBound,
+                CareerCluster = (CareerCluster)careerDeclaration.CareerCluster,
+                SpecificCareer = careerDeclaration.SpecificCareer,
+                TechnicalCollegeBound = careerDeclaration.TechnicalCollegeBound,
+            };
+
+            return View(careerDeclarationViewModel);
         }
 
         public async Task<IActionResult> Delete(Guid id)

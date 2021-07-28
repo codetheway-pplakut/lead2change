@@ -32,7 +32,7 @@ namespace Lead2Change.Domain.ViewModels
         public string ParentZipCode { get; set; }
         public string ParentHomePhone { get; set; }
         public string ParentCellPhone { get; set; }
-        public string ParentEmail { get; set; }
+        public string ParentEmail { get; set; }       
         public bool KnowGuidanceCounselor { get; set; }
         public string GuidanceCounselorName { get; set; }
         public bool MeetWithGuidanceCounselor { get; set; }
@@ -73,5 +73,8 @@ namespace Lead2Change.Domain.ViewModels
         public Guid? CoachId { get; set; }
         public String CoachName { get; set; }
         public bool Active { get; set; }
+        public string OldStudentEmail { get; set; }
+        public string OldParentEmail { get; set; }
+
     }
 }

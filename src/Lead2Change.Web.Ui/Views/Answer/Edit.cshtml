@@ -1,0 +1,33 @@
+﻿@model Lead2Change.Domain.ViewModels.AnswersViewModel;
+@*
+    ViewData["Title"] = "Edit";
+*@
+<form asp-action="Update" class="calibri">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group, d-none" display="none">
+        <label asp-for="@Model.Id" class="control-label"></label>
+        <input asp-for="@Model.Id" class="form-control" value=@Model.Id />
+    </div>
+
+    <div class="form-group, d-none" display="none">
+        <label asp-for="@Model.InterviewId" class="control-label"></label>
+        <input asp-for="@Model.InterviewId" class="form-control" value=@Model.InterviewId />
+    </div>
+    <div class="form-group, d-none" display="none">
+        <label asp-for="@Model.QuestionString" class="control-label"></label>
+        <input asp-for="@Model.QuestionString" class="form-control" value=@Model.QuestionString />
+    </div>
+    <div class="form-group">
+        <b><label asp-for="@Model.AnswerString" class="control-label"></label></b>
+        <input asp-for="@Model.AnswerString" class="form-control" value=@Model.AnswerString required />
+        <span asp-validation-for="@Model.AnswerString" class="text-danger"></span>
+    </div>
+
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-submit" />
+    </div>
+</form>
+<div align="center">
+    <button class="btn btn-back"><a asp-action="Index" asp-route-interviewID=@Model.InterviewId>Back to List</a></button>
+</div>
