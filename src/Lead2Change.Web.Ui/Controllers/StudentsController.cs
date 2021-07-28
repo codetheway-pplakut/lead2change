@@ -425,7 +425,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 return Error("400: Bad Request");
             }
 
-            RegistrationViewModel viewModel = new RegistrationViewModel()
+            EditViewModel viewModel = new EditViewModel()
             {
                 Id = student.Id,
                 //General Student Info
