@@ -86,7 +86,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     var result = await AnswersService.AnswerQuestion(answer);
                     
                 }
-                return RedirectToAction("Index", new { interviewID = model.InterviewId });
+                return RedirectToAction("Index", new { interviewID = model.InterviewId, studentId = model.StudentId });
 
 
             }
