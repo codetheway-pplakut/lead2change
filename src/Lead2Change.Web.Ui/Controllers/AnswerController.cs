@@ -21,7 +21,7 @@ namespace Lead2Change.Web.Ui.Controllers
             this.AnswersService = answersService;
             this._interviewsService = interviewsService;
         }
-        public async Task<IActionResult> Index(Guid interviewID)
+        public async Task<IActionResult> Index(Guid interviewID, Guid studentId)
         {
           
             List<AnswersViewModel> result = new List<AnswersViewModel>();
@@ -33,7 +33,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     AnswerString = answer.AnswerString,
                     QuestionString = answer.QuestionString,
                     Id = answer.Id,
-                    StudentId = answer.StudentId,
+                    StudentId = studentId,
                     QuestionId = answer.QuestionId,
                     InterviewId = answer.InterviewId,
                 });
