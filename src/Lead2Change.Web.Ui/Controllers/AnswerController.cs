@@ -28,15 +28,18 @@ namespace Lead2Change.Web.Ui.Controllers
             List<Answer> answers = await AnswersService.GetAnswers(interviewID);
             foreach (Answer answer in answers)
             {
-                result.Add(new AnswersViewModel()
+                if (answer.StudentId == studentId)
                 {
-                    AnswerString = answer.AnswerString,
-                    QuestionString = answer.QuestionString,
-                    Id = answer.Id,
-                    StudentId = studentId,
-                    QuestionId = answer.QuestionId,
-                    InterviewId = answer.InterviewId,
-                });
+                    result.Add(new AnswersViewModel()
+                    {
+                        AnswerString = answer.AnswerString,
+                        QuestionString = answer.QuestionString,
+                        Id = answer.Id,
+                        StudentId = studentId,
+                        QuestionId = answer.QuestionId,
+                        InterviewId = answer.InterviewId,
+                    });
+                }
             }
             return View(result);
      
