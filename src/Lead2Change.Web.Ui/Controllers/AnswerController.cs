@@ -46,7 +46,7 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(new AnswersViewModel());
           
         }
-        public async Task<IActionResult> AnswerQuestion(Guid id)
+        public async Task<IActionResult> AnswerQuestion(Guid id, Guid studentID)
         {
            
             var result = await _interviewsService.GetInterviewAndQuestions(id);
@@ -54,6 +54,7 @@ namespace Lead2Change.Web.Ui.Controllers
             AnswerQuestionViewModel answer = new AnswerQuestionViewModel()
             {
                 Id = id,
+                StudentId = studentID,
                 QuestionInInterviews = result,
                 InterviewName = (await _interviewsService.GetInterview(id)).InterviewName,
 
