@@ -53,7 +53,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 };
                 return View(careerDeclarationViewModel);
             }
-            return RedirectToAction("Details");
+            return RedirectToAction("Details", new { studentId = student.Id });
         }
         [HttpPost]
         public async Task<IActionResult> Register(CareerDeclarationViewModel model)
