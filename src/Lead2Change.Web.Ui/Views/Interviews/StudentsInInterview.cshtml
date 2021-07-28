@@ -1,4 +1,4 @@
-﻿@model Lead2Change.Domain.ViewModels.StudentInterview
+﻿@model List<Lead2Change.Domain.ViewModels.StudentInterview>
 @* ViewData["Title"] = "Question Select";
 *@
 <div class="container-fluid">
@@ -15,33 +15,31 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Students)
-            {
-                <tr>
+            <tr>
+                @foreach (var item in Model)
+                {
+                    @for (int j = 0; j < item.Students.Count; j++)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Students[j].StudentLastName), @Html.DisplayFor(modelItem => item.Students[j].StudentFirstName)
+                        </td>
+                    }
                     <td>
-                        @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
-                    </td>
-                    <td>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <input type="button" class="btn btn-block orangeBtn" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {studentID = item.Id})'" />
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new { studentID = item.StudentAnswer.StudentId, interviewID = item.StudentAnswer.InterviewId})'" />
 
-                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new {studentID = item.Id})'" />
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { studentID = item.StudentAnswer.StudentId})'" />
 
-                                </div>
                             </div>
+                        </div>
                     </td>
-                </tr>
-            }
+                }
+            </tr>
         </tbody>
     </table>
-    <div class="row">
-        <div class="col-sm-12">
-
-        </div>
-    </div>
 </div>

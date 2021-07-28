@@ -9,6 +9,7 @@ using Lead2Change.Domain.Models;
 using Lead2Change.Services.Questions;
 using Lead2Change.Services.QuestionInInterviews;
 using Lead2Change.Services.Students;
+using Lead2Change.Services.Answers;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
@@ -194,24 +195,18 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> StudentsInInterview(Guid interviewId)
         {
             List<Student> students = await _studentService.GetActiveStudents();
-            /*
-            var result = await _interviewsService.GetInterviewAndQuestions(interviewId)
+            var result = await _interviewsService.GetInterviewAndQuestions(interviewId);
             AnswerQuestionViewModel answer = new AnswerQuestionViewModel()
             {
-                Id = ,
                 QuestionInInterviews = result,
-                InterviewName = (await _interviewsService.GetInterview(id)).InterviewName,
-
+                InterviewName = (await _interviewsService.GetInterview(result.FirstOrDefault().Interview.Id)).InterviewName,
                 InterviewId = result.FirstOrDefault().Interview.Id,
-            };
-            */
+            }; 
             StudentInterview student = new StudentInterview()
             {
-                Students = students,
-             
+                Students = students,            
+                StudentAnswer = answer,
             };
-                
-       
             return View(student);
             
         }
