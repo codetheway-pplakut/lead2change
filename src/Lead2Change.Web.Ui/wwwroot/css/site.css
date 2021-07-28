@@ -171,3 +171,7 @@ thead.blueStyle {
 .hidden {
     display: none;
 }
+.fixedTable {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
