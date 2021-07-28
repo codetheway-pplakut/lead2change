@@ -69,7 +69,7 @@ namespace Lead2Change.Web.Ui.Controllers
         /// 
         /// This is used for creating a user on the backend, programmatically
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name = "email"></param>
         /// <returns></returns>
         public async Task CreateNewUser(string email, string password, string roleName, bool confirm = true)
         {
@@ -105,7 +105,7 @@ namespace Lead2Change.Web.Ui.Controllers
             }
         }
 
-        public async Task<bool> CanEditStudent(Guid studentId)
+        protected async Task<bool> CanEditStudent(Guid studentId)
         {
             if (SignInManager.IsSignedIn(User))
             {
@@ -127,12 +127,12 @@ namespace Lead2Change.Web.Ui.Controllers
             return false;
         }
 
-        public ViewResult Error(ErrorViewModel e)
+        protected ViewResult Error(ErrorViewModel e)
         {
             return View("Error", e);
         }
 
-        public async Task Email(string sender, string receiver, string xSubject, string xPlainTextContent, string xHtmlContent, string senderTitle, string receiverTitle)
+        protected async Task Email(string sender, string receiver, string xSubject, string xPlainTextContent, string xHtmlContent, string senderTitle, string receiverTitle)
         {
             var apiKey = "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";
             var client = new SendGridClient(apiKey);
