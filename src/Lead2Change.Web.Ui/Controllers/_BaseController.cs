@@ -79,7 +79,7 @@ namespace Lead2Change.Web.Ui.Controllers
             if (confirm)
             {
                 var token = await UserManager.GenerateEmailConfirmationTokenAsync(identityUser);
-                _ = UserManager.ConfirmEmailAsync(identityUser, token);
+                var confirmationEmail = await UserManager.ConfirmEmailAsync(identityUser, token);
             }
 
             if (result.Succeeded)
