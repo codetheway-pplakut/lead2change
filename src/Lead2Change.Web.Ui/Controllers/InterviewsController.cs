@@ -8,6 +8,7 @@ using Lead2Change.Domain.ViewModels;
 using Lead2Change.Domain.Models;
 using Lead2Change.Services.Questions;
 using Lead2Change.Services.QuestionInInterviews;
+using Lead2Change.Services.Students;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
@@ -16,12 +17,14 @@ namespace Lead2Change.Web.Ui.Controllers
         private IInterviewService _interviewsService;
         private IQuestionsService _questionService;
         private IQuestionInInterviewService _questionInInterviewService;
+        private IStudentService _studentService;
 
-        public InterviewsController(IInterviewService interviewsService, IQuestionsService questionService, IQuestionInInterviewService questionInInterviewService)
+        public InterviewsController(IInterviewService interviewsService, IQuestionsService questionService, IQuestionInInterviewService questionInInterviewService, IStudentService studentService)
         {
             this._interviewsService = interviewsService;
             this._questionService = questionService;
             this._questionInInterviewService = questionInInterviewService;
+            this._studentService = studentService;
         }
         public async Task<IActionResult> Index()
         {
@@ -187,6 +190,30 @@ namespace Lead2Change.Web.Ui.Controllers
                 Order = (await _interviewsService.GetInterviewAndQuestions(interviewId)).Count + 1
             });
             return RedirectToAction("QuestionSelect", new { id = interviewId });
+        }
+        public async Task<IActionResult> StudentsInInterview(Guid interviewId)
+        {
+            List<Student> students = await _studentService.GetActiveStudents();
+            /*
+            var result = await _interviewsService.GetInterviewAndQuestions(interviewId)
+            AnswerQuestionViewModel answer = new AnswerQuestionViewModel()
+            {
+                Id = ,
+                QuestionInInterviews = result,
+                InterviewName = (await _interviewsService.GetInterview(id)).InterviewName,
+
+                InterviewId = result.FirstOrDefault().Interview.Id,
+            };
+            */
+            StudentInterview student = new StudentInterview()
+            {
+                Students = students,
+             
+            };
+                
+       
+            return View(student);
+            
         }
 
         private async Task<String> GetInterviewName(Guid id)

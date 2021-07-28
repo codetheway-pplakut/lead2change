@@ -1,0 +1,47 @@
+﻿@model Lead2Change.Domain.ViewModels.StudentInterview
+@* ViewData["Title"] = "Question Select";
+*@
+<div class="container-fluid">
+
+    <table class="table table-striped pt-2">
+        <thead class="thead blueStyle">
+            <tr>
+                <th>
+                    Student
+                </th>
+                <th>
+                    Interview Form
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Students)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                    </td>
+                    <td>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="button" class="btn btn-block orangeBtn" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {studentID = item.Id})'" />
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new {studentID = item.Id})'" />
+
+                                </div>
+                            </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-sm-12">
+
+        </div>
+    </div>
+</div>

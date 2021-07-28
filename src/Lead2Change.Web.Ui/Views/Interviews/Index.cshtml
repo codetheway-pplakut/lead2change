@@ -47,12 +47,9 @@
 
                         </div>
                     </div>
-                    @if (item.QuestionInInterviews.Count > 0)
-                    {
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new { id = item.Id })'" />
-
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Student Interview" onclick="location.href='@Url.Action("StudentsInInterview","Interviews", new { id = item.Id })'" />
                         </div>
                     </div>
                     }
