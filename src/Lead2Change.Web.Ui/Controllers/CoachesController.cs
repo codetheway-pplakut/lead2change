@@ -144,6 +144,13 @@ namespace Lead2Change.Web.Ui.Controllers
             };
             return View(assignStudentViewModel);
         }
+        public async Task<IActionResult> UnassignStudent(Guid studentId)
+        {
+            var student = await _studentService.GetStudent(studentId);
+            student.CoachId = null;
+            var student1 = await _studentService.Update(student);
+            return RedirectToAction("Index");
+        }
     }
 
 }

@@ -284,12 +284,24 @@ namespace Lead2Change.Web.Ui.Controllers
             }
             
             //check for null
+            //Caclculate age:
             var coachcontainer = new Coach();
             if (student.CoachId.HasValue)
             {
                 coachcontainer = await _coachService.GetCoach(student.CoachId.Value);
             }
-
+            var age = DateTime.Now.Year - student.StudentDateOfBirth.Year;
+            if(DateTime.Now.Month < student.StudentDateOfBirth.Month)
+            {
+                age--;
+            }
+            if(DateTime.Now.Month == student.StudentDateOfBirth.Month)
+            {
+                if(DateTime.Now.Day < student.StudentDateOfBirth.Day)
+                {
+                    age--;
+                }
+            }
             // Create a new viewModel
             RegistrationViewModel viewModel = new RegistrationViewModel()
             {
@@ -297,6 +309,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentFirstName = student.StudentFirstName,
                 StudentLastName = student.StudentLastName,
                 StudentDateOfBirth = student.StudentDateOfBirth,
+                Age = age,
+                //using calculated age above
                 StudentAddress = student.StudentAddress,
                 StudentApartmentNumber = student.StudentApartmentNumber,
                 StudentCity = student.StudentCity,
