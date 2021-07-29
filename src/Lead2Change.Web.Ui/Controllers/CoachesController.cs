@@ -6,8 +6,10 @@ using Lead2Change.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
+
 using Lead2Change.Services.Students;
+using Lead2Change.Domain.Constants;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
@@ -63,6 +65,15 @@ namespace Lead2Change.Web.Ui.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CoachViewModel model)
         {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+            if (User.IsInRole(StringConstants.RoleNameCoach) || User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                return Error("403: Forbidden");
+            }
+
             if (ModelState.IsValid)
             {
                 if (ModelState.IsValid)
