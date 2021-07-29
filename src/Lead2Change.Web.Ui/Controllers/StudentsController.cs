@@ -76,9 +76,9 @@ namespace Lead2Change.Web.Ui.Controllers
             var student = await _studentService.GetStudent(id);
 
             // Check for bad id or student
-            if (id == null || student == null)
-            {
-                return Error("400: Bad Request");
+            if (id == Guid.Empty || student == null)
+            {
+                return Error("400: Bad Request");
             }
 
             // Delete Student
@@ -168,12 +168,24 @@ namespace Lead2Change.Web.Ui.Controllers
             }
             
             //check for null
+            //Caclculate age:
             var coachcontainer = new Coach();
             if (student.CoachId.HasValue)
             {
                 coachcontainer = await _coachService.GetCoach(student.CoachId.Value);
             }
-
+            var age = DateTime.Now.Year - student.StudentDateOfBirth.Year;
+            if(DateTime.Now.Month < student.StudentDateOfBirth.Month)
+            {
+                age--;
+            }
+            if(DateTime.Now.Month == student.StudentDateOfBirth.Month)
+            {
+                if(DateTime.Now.Day < student.StudentDateOfBirth.Day)
+                {
+                    age--;
+                }
+            }
             // Create a new viewModel
             RegistrationViewModel viewModel = new RegistrationViewModel()
             {
@@ -181,6 +193,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentFirstName = student.StudentFirstName,
                 StudentLastName = student.StudentLastName,
                 StudentDateOfBirth = student.StudentDateOfBirth,
+                Age = age,
+                //using calculated age above
                 StudentAddress = student.StudentAddress,
                 StudentApartmentNumber = student.StudentApartmentNumber,
                 StudentCity = student.StudentCity,
@@ -359,9 +373,9 @@ namespace Lead2Change.Web.Ui.Controllers
                 await UserManager.UpdateAsync(user);
             }
             
-            await Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
-            await Email("1joel.kuriakose@gmail.com", "joeljk2003@gmail.com", "Lead2Change Student Registration Confirmation: A new student has been registered", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", "Lead2Change Student Registration", "Lead2Change");
-            await Email("1joel.kuriakose@gmail.com", model.StudentEmail, "Lead2Change Registration Confirmation: You are registered", "Congrats, you have sucessfully registered for Lead2Change!", "Congrats, you have sucessfully registered for Lead2Change!", "Lead2Change Student Registration", model.StudentFirstName + " " + model.StudentLastName);
+            await EmailSender.Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
+            await EmailSender.Email("1joel.kuriakose@gmail.com", "joeljk2003@gmail.com", "Lead2Change Student Registration Confirmation: A new student has been registered", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", "Lead2Change Student Registration", "Lead2Change");
+            await EmailSender.Email("1joel.kuriakose@gmail.com", model.StudentEmail, "Lead2Change Registration Confirmation: You are registered", "Congrats, you have sucessfully registered for Lead2Change!", "Congrats, you have sucessfully registered for Lead2Change!", "Lead2Change Student Registration", model.StudentFirstName + " " + model.StudentLastName);
 
             return RedirectToAction("Details", new { studentId = student.Id });
         }

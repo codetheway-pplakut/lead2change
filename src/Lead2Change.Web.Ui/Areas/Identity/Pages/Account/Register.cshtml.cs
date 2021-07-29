@@ -82,7 +82,7 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _userManager.AddToRoleAsync(user, StringConstants.RoleNameStudent);
+                    await _userManager.AddToRoleAsync(user, StringConstants.RoleNameCoach);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

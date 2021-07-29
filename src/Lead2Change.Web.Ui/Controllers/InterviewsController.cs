@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
- using Lead2Change.Services.Interviews;
+using Lead2Change.Services.Interviews;
 using Lead2Change.Domain.ViewModels;
 using Lead2Change.Domain.Models;
 using Lead2Change.Services.Questions;
@@ -23,6 +23,7 @@ namespace Lead2Change.Web.Ui.Controllers
             this._questionService = questionService;
             this._questionInInterviewService = questionInInterviewService;
         }
+
         public async Task<IActionResult> Index()
         {
             List<InterviewViewModel> result = new List<InterviewViewModel>();
@@ -37,7 +38,6 @@ namespace Lead2Change.Web.Ui.Controllers
                 });
             }
             return View(result);
-
         }
 
         public async Task<IActionResult> Delete(Guid id)

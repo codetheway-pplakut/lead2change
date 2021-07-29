@@ -15,9 +15,6 @@ using Microsoft.Extensions.Hosting;
 using System;
 using Lead2Change.Domain.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Lead2Change.Services.Interviews;
 using Lead2Change.Services.QuestionInInterviews;
 using Lead2Change.Services.Coaches;
@@ -97,7 +94,7 @@ namespace Lead2Change.Web.Ui
                 options.SlidingExpiration = true;
             });
 
-            services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
