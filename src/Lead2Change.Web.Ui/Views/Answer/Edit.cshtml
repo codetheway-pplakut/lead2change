@@ -8,7 +8,10 @@
         <label asp-for="@Model.Id" class="control-label"></label>
         <input asp-for="@Model.Id" class="form-control" value=@Model.Id />
     </div>
-
+    <div class="form-group, d-none" display="none">
+        <label asp-for="@Model.StudentId" class="control-label"></label>
+        <input asp-for="@Model.StudentId" class="form-control" value=@Model.StudentId />
+    </div>
     <div class="form-group, d-none" display="none">
         <label asp-for="@Model.InterviewId" class="control-label"></label>
         <input asp-for="@Model.InterviewId" class="form-control" value=@Model.InterviewId />
