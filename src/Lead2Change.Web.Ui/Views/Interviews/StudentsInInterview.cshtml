@@ -3,13 +3,15 @@
 *@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-9">
 
             <h2 class="GoalHeadingFont">Student Interview For @Model.StudentAnswer[0].InterviewName</h2>
         </div>
+        <div class="col-sm-3 pt-3 pb-0">
+            <input type="text" id="interviewSearch" onkeyup="search()" placeholder="Search for names..">
+        </div>
     </div>
-  
-    <table class="table table-striped pt-2">
+    <table class="table table-striped pt-2" id="interviewStudentTable">
         <thead class="thead blueStyle">
             <tr>
                 <th>
@@ -29,7 +31,7 @@
                 <td>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=Model.StudentAnswer[i].InterviewId, studentID=Model.StudentAnswer[i].StudentId})'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Interview" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=Model.StudentAnswer[i].InterviewId, studentID=Model.StudentAnswer[i].StudentId})'" />
 
                         </div>
                     </div>
