@@ -17,5 +17,7 @@ namespace Lead2Change.Domain.ViewModels
         public string QuestionString { get; set; }
        public Guid InterviewId { get; set; }
         public bool IsArchived { get; set; }
+        public string StudentName { get; set; }
+        public string InterviewName { get; set; }
     }
 }

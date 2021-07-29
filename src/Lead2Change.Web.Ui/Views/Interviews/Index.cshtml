@@ -4,9 +4,9 @@
 *@
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row blueHeader full-width mb-sm-3">
         <div class="col-sm-12">
-            <h2 class="GoalHeadingFont"><strong>Your Interviews</strong></h2>
+            <h1 class="text-center"><strong>YOUR INTERVIEWS</strong></h1>
         </div>
     </div>
     <table class="table table-striped pt-2">
@@ -47,15 +47,11 @@
 
                         </div>
                     </div>
-                    @if (item.QuestionInInterviews.Count > 0)
-                    {
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new { id = item.Id })'" />
-
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Student Interview" onclick="location.href='@Url.Action("StudentsInInterview","Interviews", new { Id = item.Id })'" />
                         </div>
-                    </div>
-                    }
+                    </div>                 
                 </td>
             </tr>
         }
