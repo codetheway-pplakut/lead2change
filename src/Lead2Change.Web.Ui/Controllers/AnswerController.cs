@@ -126,11 +126,11 @@ namespace Lead2Change.Web.Ui.Controllers
             }
             return View("Create", model);
         }
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id, Guid studentID)
         {
             var answer = await AnswersService.GetAnswer(id);
             await AnswersService.Delete(answer);
-            return RedirectToAction("Index", new { interviewID = answer.InterviewId });
+            return RedirectToAction("Index", new { interviewID = answer.InterviewId, studentID=answer.StudentId });
         }
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -151,7 +151,7 @@ namespace Lead2Change.Web.Ui.Controllers
             if (ModelState.IsValid)
             {
                 var Answer = await AnswersService.Update(model);
-                return RedirectToAction("Index", new { interviewID = model.InterviewId });
+                return RedirectToAction("Index", new { interviewID = model.InterviewId, studentID = model.StudentId });
             }
 
             return View(model);

@@ -8,7 +8,10 @@
         <label asp-for="@Model.Id" class="control-label"></label>
         <input asp-for="@Model.Id" class="form-control" value=@Model.Id />
     </div>
-
+    <div class="form-group, d-none" display="none">
+        <label asp-for="@Model.StudentId" class="control-label"></label>
+        <input asp-for="@Model.StudentId" class="form-control" value=@Model.StudentId />
+    </div>
     <div class="form-group, d-none" display="none">
         <label asp-for="@Model.InterviewId" class="control-label"></label>
         <input asp-for="@Model.InterviewId" class="form-control" value=@Model.InterviewId />
@@ -27,7 +30,7 @@
     <div class="form-group">
         <input type="submit" value="Submit" class="btn btn-submit" />
     </div>
-    <div align="center">
-        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Answers", new {interviewID=Model.InterviewId, studentId=Model.StudentId})'">Back To List</button>
-    </div>
 </form>
+<div align="center">
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Answer", new {interviewID=Model.InterviewId, studentId=Model.StudentId})'">Back To List</button>
+</div>
