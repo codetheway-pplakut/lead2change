@@ -837,5 +837,62 @@ namespace Lead2Change.Web.Ui.Controllers
 
             return RedirectToAction("Details", new { studentId = student.Id });
         }
+        public async Task<IActionResult> InterestForm()
+        {
+            // Check SignedIn
+            if (!SignInManager.IsSignedIn(User))
+
+            {
+
+                return Error("401: Unauthorized");
+
+            }
+
+
+
+            // Check Permissions
+
+            /*
+
+             *  Students: Allowed
+
+             *  Coach: Not Allowed
+
+             *  Admin: Allowed
+
+             */
+
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+
+                return Error("403: Forbidden");
+
+            }
+
+
+
+            // Find user
+
+            var user = await UserManager.GetUserAsync(User);
+
+
+
+            // Check if user owns a student
+
+            if (user.StudentId != Guid.Empty)
+
+            {
+
+                return RedirectToAction("Details", new { studentId = user.StudentId });
+
+            }
+
+            return View(new StudentInterestFormViewModel()
+            {
+                // This changes the initial date displayed in the chooser
+                StudentDateOfBirth = DateTime.Today,
+            });
+        }
     }
 }
