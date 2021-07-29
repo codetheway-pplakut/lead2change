@@ -62,14 +62,14 @@
                         <span asp-validation-for="StudentCity" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label asp-for="StudentZipCode" class="control-label">Zip Code:</label>
                         <input asp-for="StudentZipCode" class="form-control" value=@Model.StudentZipCode required />
                         <span asp-validation-for="StudentZipCode" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label asp-for="StudentState" class="control-label">State:</label>
                         <select asp-for="StudentState" class="form-control" required>
@@ -215,14 +215,14 @@
                         <span asp-validation-for="ParentCity" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label asp-for="ParentZipCode" class="control-label">Zip Code:</label>
                         <input asp-for="ParentZipCode" class="form-control" value=@Model.ParentZipCode required />
                         <span asp-validation-for="ParentZipCode" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label asp-for="ParentState" class="control-label">State:</label>
                         <select asp-for="ParentState" class="form-control" required>
@@ -298,20 +298,24 @@
             </div>
 
             <h3>Guidance Counselor Information</h3>
-            <div class="form-group">
-                <input asp-for="KnowGuidanceCounselor" class="form-check-input me-1" type="checkbox" id="checkboxTest" oninput="showHideClass('conditionalQuestion')" />
-                <label asp-for="KnowGuidanceCounselor" class="control-label">I know my guidance counselor.</label>
-                <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
+            <div class="row">
+                <div class="form-group">
+                    <input asp-for="KnowGuidanceCounselor" class="form-check-input me-1" type="checkbox" id="checkboxTest" oninput="showHideClass('conditionalQuestion')" />
+                    <label asp-for="KnowGuidanceCounselor" class="control-label">I know my guidance counselor.</label>
+                    <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group conditionalQuestion">
                 <label asp-for="GuidanceCounselorName" class="control-label">Guidance Counselor Name:</label>
                 <input asp-for="GuidanceCounselorName" class="form-control" value=@Model.GuidanceCounselorName />
                 <span asp-validation-for="GuidanceCounselorName" class="text-danger"></span>
             </div>
-            <div class="form-group conditionalQuestion">
-                <input asp-for="MeetWithGuidanceCounselor" class="form-check-input me-1" type="checkbox" />
-                <label asp-for="MeetWithGuidanceCounselor" class="control-label">I meet with my guidance counselor.</label>
-                <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
+            <div class="row">
+                <div class="form-group conditionalQuestion">
+                    <input asp-for="MeetWithGuidanceCounselor" class="form-check-input me-1" type="checkbox" />
+                    <label asp-for="MeetWithGuidanceCounselor" class="control-label">I meet with my guidance counselor.</label>
+                    <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group conditionalQuestion">
                 <label asp-for="HowOftenMeetWithGuidanceCounselor" class="control-label">How often?</label>
@@ -344,10 +348,12 @@
                 <input asp-for="CollegesList" class="form-control" value=@Model.CollegesList />
                 <span asp-validation-for="CollegesList" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input asp-for="CollegeEssayStatus" class="form-check-input me-1" type="checkbox" />
-                <label asp-for="CollegeEssayStatus" class="control-label">I have begun work on my college essay.</label>
-                <span asp-validation-for="CollegeEssayStatus" class="text-danger"></span>
+            <div class="row">
+                <div class="form-group">
+                    <input asp-for="CollegeEssayStatus" class="form-check-input me-1" type="checkbox" />
+                    <label asp-for="CollegeEssayStatus" class="control-label">I have begun work on my college essay.</label>
+                    <span asp-validation-for="CollegeEssayStatus" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
                 <input asp-for="CollegeEssayHelp" class="form-check-input me-1" type="checkbox" />
@@ -500,26 +506,39 @@
                 <input asp-for="SupportNeeded" class="form-control" value=@Model.SupportNeeded />
                 <span asp-validation-for="SupportNeeded" class="text-danger"></span>
             </div>
+
             <h3>Signatures</h3>
-            <div class="form-group">
-                <label asp-for="StudentSignature" class="control-label">Student Signature:</label>
-                <input asp-for="StudentSignature" class="form-control" value=@Model.StudentSignature required />
-                <span asp-validation-for="StudentSignature" class="text-danger"></span>
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <label asp-for="StudentSignature" class="control-label">Student Signature:</label>
+                        <input asp-for="StudentSignature" class="form-control" value=@Model.StudentSignature required />
+                        <span asp-validation-for="StudentSignature" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label asp-for="StudentSignatureDate" class="control-label">Date:</label>
+                        <input asp-for="StudentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
+                        <span asp-validation-for="StudentSignatureDate" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="StudentSignatureDate" class="control-label">Date:</label>
-                <input asp-for="StudentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
-                <span asp-validation-for="StudentSignatureDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ParentSignature" class="control-label">Parent Signature:</label>
-                <input asp-for="ParentSignature" class="form-control" value=@Model.ParentSignature required />
-                <span asp-validation-for="ParentSignature" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ParentSignatureDate" class="control-label">Date:</label>
-                <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
-                <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <label asp-for="ParentSignature" class="control-label">Parent Signature:</label>
+                        <input asp-for="ParentSignature" class="form-control" value=@Model.ParentSignature required />
+                        <span asp-validation-for="ParentSignature" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label asp-for="ParentSignatureDate" class="control-label">Date:</label>
+                        <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
+                        <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Active" class="control-label">Is this student active?</label>
@@ -527,21 +546,22 @@
                 <span asp-validation-for="Active" class="text-danger"></span>
             </div>
 
-
-
-
+            <div class="form-group hidden" display="none">
+                <label asp-for="CoachId" class="control-label"></label>
+                <input asp-for="CoachId" class="form-control" value=@Model.CoachId />
+            </div>
             <div class="form-group hidden" display="none">
                 <label asp-for="Id" class="control-label"></label>
                 <input asp-for="Id" class="form-control" value=@Model.Id />
             </div>
-            <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-primary" />
+            <div class="form-group" align="center">
+                <input type="submit" value="Submit" class="btn btn-submit" />
             </div>
         </form>
     </div>
 
     <div>
-        <a asp-action="Index">Back to List</a>
+        <button class="btn btn-back"><a asp-action="Index">Back to Student List</a></button>
     </div>
 </div>
 

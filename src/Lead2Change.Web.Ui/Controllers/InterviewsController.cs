@@ -75,7 +75,6 @@ namespace Lead2Change.Web.Ui.Controllers
             return RedirectToAction("Create");
         }
 
-    
 
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -87,7 +86,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 InterviewName = await GetInterviewName(id),
                 UnselectedQuestions = await _questionService.GetAllExcept(id)
             };
-            return View(newModel);
+            return View("Edit", newModel);
         }
 
         public async Task<IActionResult> Update(InterviewWithQuestionsViewModel model, String submitButton, bool fromCreate = false)
@@ -217,6 +216,15 @@ namespace Lead2Change.Web.Ui.Controllers
             
         }
 
+        public async Task<IActionResult> RemoveQuestion(Guid interviewId, Guid questionId)
+        {
+            await _questionInInterviewService.Delete(new QuestionInInterview()
+            {
+                InterviewId = interviewId,
+                QuestionId = questionId
+            });
+            return await Edit(interviewId);
+        }
         private async Task<String> GetInterviewName(Guid id)
         {
             return (await _interviewsService.GetInterview(id)).InterviewName;

@@ -6,11 +6,11 @@
 <h1>Edit</h1>
 <form asp-action="Update">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div id="hidden" class="form-group" display="none">
+    <div class="form-group hidden" display="none">
         <label asp-for="Id" class="control-label"></label>
         <input asp-for="Id" class="form-control" value=@Model.Id />
     </div>
-    <div id="hidden" class="form-group">
+    <div class="form-group hidden">
         <label asp-for="StudentId" class="control-label"></label>
         <input asp-for="StudentId" class="form-control" value=@Model.StudentId />
         <span asp-validation-for="StudentId" class="text-danger"></span>
@@ -27,12 +27,12 @@
     </div>
     <div class="form-group row">
         <label asp-for="CollegeBound" class="control-label col-md-3">Student is College Bound</label>
-        <input asp-for="CollegeBound" class="form-control col-md-9" value=@Model.CollegeBound />
+        <input asp-for="CollegeBound" class="form-control col-md-9" />
         <span asp-validation-for="CollegeBound" class="text-danger"></span>
     </div>
     <div class="form-group row">
         <label asp-for="TechnicalCollegeBound" class="control-label col-md-3">Student is Technical College Bound</label>
-        <input asp-for="TechnicalCollegeBound" class="form-control col-md-9" value=@Model.TechnicalCollegeBound>
+        <input asp-for="TechnicalCollegeBound" class="form-control col-md-9" >
         <span asp-validation-for="TechnicalCollegeBound" class="text-danger"> </span>
     </div>
 

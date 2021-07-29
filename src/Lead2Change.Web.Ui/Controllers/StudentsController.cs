@@ -6,8 +6,10 @@ using Lead2Change.Domain.Models;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Lead2Change.Web.Ui.Models;
-using Lead2Change.Domain.Constants;
+using Lead2Change.Web.Ui.Models;
+
+using Lead2Change.Domain.Constants;
+
 using Microsoft.AspNetCore.Authorization;
 using Lead2Change.Services.Coaches;
 
@@ -26,29 +28,45 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Redirect("/Identity/Account/Login");
+            if (!SignInManager.IsSignedIn(User))
+
+            {
+
+                return Redirect("/Identity/Account/Login");
+
             }
 
-            if (User.IsInRole(StringConstants.RoleNameStudent))
-            {
-                return Error("403: You are not authorized to view this page.");
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+
+            {
+
+                return Error("403: You are not authorized to view this page.");
+
             }
 
             var user = await UserManager.GetUserAsync(User);
 
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                // StudentId being used as assosiation to coach
-
-                // TODO: Replace to use list of students in coach model
-                // return View(await _studentService.GetStudentsByCoachId(user.StudentId));
-                return Error("Coach access of index is not currently functioning");
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+
+                // StudentId being used as assosiation to coach
+
+
+
+                // TODO: Replace to use list of students in coach model
+
+                // return View(await _studentService.GetStudentsByCoachId(user.StudentId));
+
+                return Error("Coach access of index is not currently functioning");
+
             }
-            else if (User.IsInRole(StringConstants.RoleNameAdmin))
-            {
-                return View(await _studentService.GetActiveStudents());
+            else if (User.IsInRole(StringConstants.RoleNameAdmin))
+
+            {
+
+                return View(await _studentService.GetActiveStudents());
+
             }
 
             return View();
@@ -56,39 +74,56 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> InactiveIndex()
         {
-            if (User.IsInRole(StringConstants.RoleNameAdmin))
-            {
-                return View(await _studentService.GetInactiveStudents());
-            }
+            if (User.IsInRole(StringConstants.RoleNameAdmin))
+
+            {
+
+                return View(await _studentService.GetInactiveStudents());
+
+            }
+
             return Error("403: You are not authorized to view this page.");
         }
 
         public async Task<IActionResult> Delete(Guid id)
         {
             // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
+            if (!SignInManager.IsSignedIn(User))
+
+            {
+
+                return Error("401: Unauthorized");
+
             }
 
             // Check Permissions
-            /*
-             *  Students: Not Allowed
-             *  Coach: Not Allowed
-             *  Admin: Allowed
+            /*
+
+             *  Students: Not Allowed
+
+             *  Coach: Not Allowed
+
+             *  Admin: Allowed
+
              */
-            if (!User.IsInRole(StringConstants.RoleNameAdmin))
-            {
-                return Error("403: Forbidden");
+            if (!User.IsInRole(StringConstants.RoleNameAdmin))
+
+            {
+
+                return Error("403: Forbidden");
+
             }
 
             // Find Student
             var student = await _studentService.GetStudent(id);
 
             // Check for bad id or student
-            if (id == null || student == null)
-            {
-                return Error("400: Bad Request");
+            if (id == null || student == null)
+
+            {
+
+                return Error("400: Bad Request");
+
             }
 
             // Delete Student
@@ -99,87 +134,174 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Register()
         {
             // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
-            }
-
-            // Check Permissions
-            /*
-             *  Students: Allowed
-             *  Coach: Not Allowed
-             *  Admin: Allowed
-             */
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
-
-            // Find user
-            var user = await UserManager.GetUserAsync(User);
-
-            // Check if user owns a student
-            if (user.StudentId != Guid.Empty)
-            {
-                return RedirectToAction("Details", new { studentId = user.StudentId });
+            if (!SignInManager.IsSignedIn(User))
+
+            {
+
+                return Error("401: Unauthorized");
+
             }
 
-            return View(new RegistrationViewModel());
+
+
+            // Check Permissions
+
+            /*
+
+             *  Students: Allowed
+
+             *  Coach: Not Allowed
+
+             *  Admin: Allowed
+
+             */
+
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+
+                return Error("403: Forbidden");
+
+            }
+
+
+
+            // Find user
+
+            var user = await UserManager.GetUserAsync(User);
+
+
+
+            // Check if user owns a student
+
+            if (user.StudentId != Guid.Empty)
+
+            {
+
+                return RedirectToAction("Details", new { studentId = user.StudentId });
+
+            }
+
+            return View(new RegistrationViewModel()
+            {
+                // This changes the initial date displayed in the chooser
+                StudentDateOfBirth = DateTime.Today,
+                PACTTestDate = DateTime.Today,
+                PSATTestDate = DateTime.Today,
+                SATTestDate = DateTime.Today,
+                ACTTestDate = DateTime.Today,
+                StudentSignatureDate = DateTime.Today,
+                ParentSignatureDate = DateTime.Today,
+            }) ;
         }
 
         public async Task<IActionResult> Details(Guid studentId)
-        {
-            // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
-            }
-
-            // Redirect to Register if Guid is empty
-            if (studentId == Guid.Empty)
-            {
-                return RedirectToAction("Register");
-            }
-
-            // Check Permissions
-            /*
-             *  Students: Allowed only if it is them
-             *  Coach: Allowed only if student is owned by coach
-             *  Admin: Allowed
-             */
-            // TODO: Error only if coach does not own the student
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
+        {
+
+            // Check SignedIn
+
+            if (!SignInManager.IsSignedIn(User))
+
+            {
+
+                return Error("401: Unauthorized");
+
             }
-            else if (User.IsInRole(StringConstants.RoleNameStudent))
-            {
-                // Find user
-                var user = await UserManager.GetUserAsync(User);
-
-                // Check that studentId is the AssociatedId of the user
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
-                {
-                    return Error("403: Forbidden");
-                }
-            }
-
-            // Find Student
-            var student = await _studentService.GetStudent(studentId);
-
-            // Check for bad student
-            if (student == null)
-            {
-                return Error("400: Bad Request");
+
+
+
+            // Redirect to Register if Guid is empty
+
+            if (studentId == Guid.Empty)
+
+            {
+
+                return RedirectToAction("Register");
+
+            }
+
+
+
+            // Check Permissions
+
+            /*
+
+             *  Students: Allowed only if it is them
+
+             *  Coach: Allowed only if student is owned by coach
+
+             *  Admin: Allowed
+
+             */
+
+            // TODO: Error only if coach does not own the student
+
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+
+                return Error("403: Forbidden");
+
+            }
+            else if (User.IsInRole(StringConstants.RoleNameStudent))
+
+            {
+
+                // Find user
+
+                var user = await UserManager.GetUserAsync(User);
+
+
+
+                // Check that studentId is the AssociatedId of the user
+
+                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+
+                {
+
+                    return Error("403: Forbidden");
+
+                }
+
+            }
+
+
+
+            // Find Student
+
+            var student = await _studentService.GetStudent(studentId);
+
+
+
+            // Check for bad student
+
+            if (student == null)
+
+            {
+
+                return Error("400: Bad Request");
+
             }
             
             //check for null
+            //Caclculate age:
             var coachcontainer = new Coach();
             if (student.CoachId.HasValue)
             {
                 coachcontainer = await _coachService.GetCoach(student.CoachId.Value);
             }
-
+            var age = DateTime.Now.Year - student.StudentDateOfBirth.Year;
+            if(DateTime.Now.Month < student.StudentDateOfBirth.Month)
+            {
+                age--;
+            }
+            if(DateTime.Now.Month == student.StudentDateOfBirth.Month)
+            {
+                if(DateTime.Now.Day < student.StudentDateOfBirth.Day)
+                {
+                    age--;
+                }
+            }
             // Create a new viewModel
             RegistrationViewModel viewModel = new RegistrationViewModel()
             {
@@ -187,6 +309,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentFirstName = student.StudentFirstName,
                 StudentLastName = student.StudentLastName,
                 StudentDateOfBirth = student.StudentDateOfBirth,
+                Age = age,
+                //using calculated age above
                 StudentAddress = student.StudentAddress,
                 StudentApartmentNumber = student.StudentApartmentNumber,
                 StudentCity = student.StudentCity,
@@ -214,7 +338,40 @@ namespace Lead2Change.Web.Ui.Controllers
                 GuidanceCounselorName = student.GuidanceCounselorName,
                 MeetWithGuidanceCounselor = student.MeetWithGuidanceCounselor,
                 HowOftenMeetWithGuidanceCounselor = student.HowOftenMeetWithGuidanceCounselor,
-                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor
+                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor,
+                PlanAfterHighSchool = student.PlanAfterHighSchool,
+                CollegeApplicationStatus = student.CollegeApplicationStatus,
+                CollegesList = student.CollegesList,
+                CollegeEssayStatus = student.CollegeEssayStatus,
+                CollegeEssayHelp = student.CollegeEssayHelp,
+                FirstChoiceCollege = student.FirstChoiceCollege,
+                SecondChoiceCollege = student.SecondChoiceCollege,
+                ThirdChoiceCollege = student.ThirdChoiceCollege,
+                TradeSchoolStatus = student.TradeSchoolStatus,
+                TradeSchoolsList = student.TradeSchoolsList,
+                ArmedForcesStatus = student.ArmedForcesStatus,
+                ArmedForcesBranch = student.ArmedForcesBranch,
+                WorkStatus = student.WorkStatus,
+                CareerPathList = student.CareerPathList,
+                OtherPlans = student.OtherPlans,
+                PACTTestDate = student.PACTTestDate,
+                PACTTestScore = student.PACTTestScore,
+                PSATTestDate = student.PSATTestDate,
+                PSATTestScore = student.PSATTestScore,
+                SATTestDate = student.SATTestDate,
+                SATTestScore = student.SATTestScore,
+                ACTTestDate = student.ACTTestDate,
+                ACTTestScore = student.ACTTestScore,
+                PrepClassRequired = student.PrepClassRequired,
+                AssistanceForForms = student.AssistanceForForms,
+                FinancialAidProcessComplete = student.FinancialAidProcessComplete,
+                SupportNeeded = student.SupportNeeded,
+                StudentSignature = student.StudentSignature,
+                StudentSignatureDate = student.StudentSignatureDate,
+                ParentSignature = student.ParentSignature,
+                ParentSignatureDate = student.ParentSignatureDate,
+                CoachId = student.CoachId,
+                Active = student.Active
             };
 
             return View(viewModel);
@@ -222,39 +379,72 @@ namespace Lead2Change.Web.Ui.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Register(RegistrationViewModel viewModel)
-        {
-            // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
-            }
-
-            // Check Permissions
-            /*
-             *  Students: Allowed
-             *  Coach: Not Allowed
-             *  Admin: Allowed
-             */
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
-
-            // Find User
-            var user = await UserManager.GetUserAsync(User);
-
-            if (
-                // Check if the user is null
-                user == null ||
-                // Check if user already has a student assosiation
-                user.StudentId != Guid.Empty ||
-                // Check for bad viewModel
-                !ModelState.IsValid ||
-                // Check the length of the first name
-                viewModel.StudentFirstName.Length <= 0
-                )
-            {
-                return Error("400: Bad Request");
+        {
+
+            // Check SignedIn
+
+            if (!SignInManager.IsSignedIn(User))
+
+            {
+
+                return Error("401: Unauthorized");
+
+            }
+
+
+
+            // Check Permissions
+
+            /*
+
+             *  Students: Allowed
+
+             *  Coach: Not Allowed
+
+             *  Admin: Allowed
+
+             */
+
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+
+                return Error("403: Forbidden");
+
+            }
+
+
+
+            // Find User
+
+            var user = await UserManager.GetUserAsync(User);
+
+
+
+            if (
+
+                // Check if the user is null
+
+                user == null ||
+
+                // Check if user already has a student assosiation
+
+                user.StudentId != Guid.Empty ||
+
+                // Check for bad viewModel
+
+                !ModelState.IsValid ||
+
+                // Check the length of the first name
+
+                viewModel.StudentFirstName.Length <= 0
+
+                )
+
+            {
+
+                return Error("400: Bad Request");
+
             }
 
             // Create model
@@ -291,6 +481,37 @@ namespace Lead2Change.Web.Ui.Controllers
                 MeetWithGuidanceCounselor = viewModel.MeetWithGuidanceCounselor,
                 HowOftenMeetWithGuidanceCounselor = viewModel.HowOftenMeetWithGuidanceCounselor,
                 DiscussWithGuidanceCounselor = viewModel.DiscussWithGuidanceCounselor,
+                PlanAfterHighSchool = viewModel.PlanAfterHighSchool,
+                CollegeApplicationStatus = viewModel.CollegeApplicationStatus,
+                CollegesList = viewModel.CollegesList,
+                CollegeEssayStatus = viewModel.CollegeEssayStatus,
+                CollegeEssayHelp = viewModel.CollegeEssayHelp,
+                FirstChoiceCollege = viewModel.FirstChoiceCollege,
+                SecondChoiceCollege = viewModel.SecondChoiceCollege,
+                ThirdChoiceCollege = viewModel.ThirdChoiceCollege,
+                TradeSchoolStatus = viewModel.TradeSchoolStatus,
+                TradeSchoolsList = viewModel.TradeSchoolsList,
+                ArmedForcesStatus = viewModel.ArmedForcesStatus,
+                ArmedForcesBranch = viewModel.ArmedForcesBranch,
+                WorkStatus = viewModel.WorkStatus,
+                CareerPathList = viewModel.CareerPathList,
+                OtherPlans = viewModel.OtherPlans,
+                PACTTestDate = viewModel.PACTTestDate,
+                PACTTestScore = viewModel.PACTTestScore,
+                PSATTestDate = viewModel.PSATTestDate,
+                PSATTestScore = viewModel.PSATTestScore,
+                SATTestDate = viewModel.SATTestDate,
+                SATTestScore = viewModel.SATTestScore,
+                ACTTestDate = viewModel.ACTTestDate,
+                ACTTestScore = viewModel.ACTTestScore,
+                PrepClassRequired = viewModel.PrepClassRequired,
+                AssistanceForForms = viewModel.AssistanceForForms,
+                FinancialAidProcessComplete = viewModel.FinancialAidProcessComplete,
+                SupportNeeded = viewModel.SupportNeeded,
+                StudentSignature = viewModel.StudentSignature,
+                StudentSignatureDate = viewModel.StudentSignatureDate,
+                ParentSignature = viewModel.ParentSignature,
+                ParentSignatureDate = viewModel.ParentSignatureDate,
                 Active = true,
             };
             
@@ -298,9 +519,12 @@ namespace Lead2Change.Web.Ui.Controllers
             var student = await _studentService.Create(model);
 
             // Registers a relation in user to the student if their role is student
-            if (User.IsInRole(StringConstants.RoleNameStudent))
-            {
-                user.StudentId = student.Id;
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+
+            {
+
+                user.StudentId = student.Id;
+
                 await UserManager.UpdateAsync(user);
             }
             
@@ -308,50 +532,85 @@ namespace Lead2Change.Web.Ui.Controllers
             await Email("1joel.kuriakose@gmail.com", "joeljk2003@gmail.com", "Lead2Change Student Registration Confirmation: A new student has been registered", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", "Lead2Change Student Registration", "Lead2Change");
             await Email("1joel.kuriakose@gmail.com", model.StudentEmail, "Lead2Change Registration Confirmation: You are registered", "Congrats, you have sucessfully registered for Lead2Change!", "Congrats, you have sucessfully registered for Lead2Change!", "Lead2Change Student Registration", model.StudentFirstName + " " + model.StudentLastName);
 
-            return RedirectToAction("Details");
+            return RedirectToAction("Details", new { studentId = student.Id });
         }
 
 
         public async Task<IActionResult> Edit(Guid studentId)
         {
-            // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
-            }
-
-            // Check Permissions
-            /*
-             *  Students: Allowed if owned by user
-             *  Coach: Not Allowed
-             *  Admin: Allowed
-             */
-            if (User.IsInRole(StringConstants.RoleNameStudent))
-            {
-                // Find user
-                var user = await UserManager.GetUserAsync(User);
-
-                // Check that studentId is the AssociatedId of the user
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
-                {
-                    return Error("403: Forbidden");
-                }
-            }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
-
-            // Find student
-            var student = await _studentService.GetStudent(studentId);
-
-            // Check for bad student
-            if (student == null || studentId == Guid.Empty)
-            {
-                return Error("400: Bad Request");
+            // Check SignedIn
+
+            if (!SignInManager.IsSignedIn(User))
+
+            {
+
+                return Error("401: Unauthorized");
+
             }
 
-            RegistrationViewModel viewModel = new RegistrationViewModel()
+
+
+            // Check Permissions
+
+            /*
+
+             *  Students: Allowed if owned by user
+
+             *  Coach: Not Allowed
+
+             *  Admin: Allowed
+
+             */
+
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+
+            {
+
+                // Find user
+
+                var user = await UserManager.GetUserAsync(User);
+
+
+
+                // Check that studentId is the AssociatedId of the user
+
+                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+
+                {
+
+                    return Error("403: Forbidden");
+
+                }
+
+            }
+
+            else if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+
+                return Error("403: Forbidden");
+
+            }
+
+
+
+            // Find student
+
+            var student = await _studentService.GetStudent(studentId);
+
+
+
+            // Check for bad student
+
+            if (student == null || studentId == Guid.Empty)
+
+            {
+
+                return Error("400: Bad Request");
+
+            }
+
+            EditViewModel viewModel = new EditViewModel()
             {
                 Id = student.Id,
                 //General Student Info
@@ -418,6 +677,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentSignatureDate = student.StudentSignatureDate,
                 ParentSignature = student.ParentSignature,
                 ParentSignatureDate = student.ParentSignatureDate,
+                CoachId = student.CoachId,
                 Active = student.Active
             };
 
@@ -426,38 +686,68 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Update(RegistrationViewModel viewModel)
         {
-            // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
-            }
-
-            // Check Permissions
-            /*
-             *  Students: Allowed if owned by user
-             *  Coach: Not Allowed
-             *  Admin: Allowed
-             */
-            if (User.IsInRole(StringConstants.RoleNameStudent))
-            {
-                // Find user
-                var user = await UserManager.GetUserAsync(User);
-
-                // Check that studentId is the AssociatedId of the user
-                if (user.StudentId == Guid.Empty || user.StudentId != viewModel.Id)
-                {
-                    return Error("403: Forbidden");
-                }
-            }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
-
+            // Check SignedIn
+
+            if (!SignInManager.IsSignedIn(User))
+
+            {
+
+                return Error("401: Unauthorized");
+
+            }
+
+
+
+            // Check Permissions
+
+            /*
+
+             *  Students: Allowed if owned by user
+
+             *  Coach: Not Allowed
+
+             *  Admin: Allowed
+
+             */
+
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+
+            {
+
+                // Find user
+
+                var user = await UserManager.GetUserAsync(User);
+
+
+
+                // Check that studentId is the AssociatedId of the user
+
+                if (user.StudentId == Guid.Empty || user.StudentId != viewModel.Id)
+
+                {
+
+                    return Error("403: Forbidden");
+
+                }
+
+            }
+
+            else if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+
+                return Error("403: Forbidden");
+
+            }
+
+
+
             if (
                 // Check for bad model state
-                !ModelState.IsValid ||
-                // Check first name length
+                !ModelState.IsValid ||
+
+                // Check first name length
+
                 viewModel.StudentFirstName.Length <= 0
                 )
             {
@@ -497,7 +787,40 @@ namespace Lead2Change.Web.Ui.Controllers
                 GuidanceCounselorName = viewModel.GuidanceCounselorName,
                 MeetWithGuidanceCounselor = viewModel.MeetWithGuidanceCounselor,
                 HowOftenMeetWithGuidanceCounselor = viewModel.HowOftenMeetWithGuidanceCounselor,
-                DiscussWithGuidanceCounselor = viewModel.DiscussWithGuidanceCounselor
+                DiscussWithGuidanceCounselor = viewModel.DiscussWithGuidanceCounselor,
+                PlanAfterHighSchool = viewModel.PlanAfterHighSchool,
+                CollegeApplicationStatus = viewModel.CollegeApplicationStatus,
+                CollegesList = viewModel.CollegesList,
+                CollegeEssayStatus = viewModel.CollegeEssayStatus,
+                CollegeEssayHelp = viewModel.CollegeEssayHelp,
+                FirstChoiceCollege = viewModel.FirstChoiceCollege,
+                SecondChoiceCollege = viewModel.SecondChoiceCollege,
+                ThirdChoiceCollege = viewModel.ThirdChoiceCollege,
+                TradeSchoolStatus = viewModel.TradeSchoolStatus,
+                TradeSchoolsList = viewModel.TradeSchoolsList,
+                ArmedForcesStatus = viewModel.ArmedForcesStatus,
+                ArmedForcesBranch = viewModel.ArmedForcesBranch,
+                WorkStatus = viewModel.WorkStatus,
+                CareerPathList = viewModel.CareerPathList,
+                OtherPlans = viewModel.OtherPlans,
+                PACTTestDate = viewModel.PACTTestDate,
+                PACTTestScore = viewModel.PACTTestScore,
+                PSATTestDate = viewModel.PSATTestDate,
+                PSATTestScore = viewModel.PSATTestScore,
+                SATTestDate = viewModel.SATTestDate,
+                SATTestScore = viewModel.SATTestScore,
+                ACTTestDate = viewModel.ACTTestDate,
+                ACTTestScore = viewModel.ACTTestScore,
+                PrepClassRequired = viewModel.PrepClassRequired,
+                AssistanceForForms = viewModel.AssistanceForForms,
+                FinancialAidProcessComplete = viewModel.FinancialAidProcessComplete,
+                SupportNeeded = viewModel.SupportNeeded,
+                StudentSignature = viewModel.StudentSignature,
+                StudentSignatureDate = viewModel.StudentSignatureDate,
+                ParentSignature = viewModel.ParentSignature,
+                ParentSignatureDate = viewModel.ParentSignatureDate,
+                CoachId = viewModel.CoachId,
+                Active = viewModel.Active
             };
 
             var student = await _studentService.Update(model);

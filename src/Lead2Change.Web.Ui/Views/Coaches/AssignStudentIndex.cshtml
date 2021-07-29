@@ -1,0 +1,41 @@
+﻿@model Lead2Change.Domain.ViewModels.AssignStudentViewModel
+
+@{
+    ViewData["Title"] = "Assign A Student";
+}
+<h1>Assign a Student</h1>
+<table class="table table-striped pt-2" id="myTable">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Options</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        
+        @foreach (var item in Model.UnassignedStudents)
+
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentEmail)
+                </td>
+                <td>
+                    <div>
+                        <div>
+                            @Html.ActionLink("Assign Student", "AssignStudent", new { studentId = item.Id, coachId = Model.CurrentCoach.Id})
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
