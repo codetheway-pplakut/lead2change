@@ -38,7 +38,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
             var user = await UserManager.GetUserAsync(User);
 
-            if (!inactive && User.IsInRole(StringConstants.RoleNameCoach))
+            if (User.IsInRole(StringConstants.RoleNameCoach))
             {
                 // StudentId being used as assosiation to coach
                 // TODO: Replace to use list of students in coach model
