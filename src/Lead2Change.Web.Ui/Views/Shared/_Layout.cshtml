@@ -15,9 +15,9 @@
 </head>
 <body onload="checkerShowHide('conditionalQuestion')">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color: #1e202d">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Lead2Change.Web.Ui</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img id="navbarLogo" src="~/Images/Lead2ChangeLogo.png" /></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -26,41 +26,41 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole(StringConstants.RoleNameStudent))
                         {
                             <li class="nav-item">
-                                @Html.ActionLink("Student", "Details", "Students", new { studentId = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
+                                @Html.ActionLink("Student", "Details", "Students", new { studentId = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-light" })
 
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Goals", "Index", "Goals", new { studentID = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
+                                @Html.ActionLink("Goals", "Index", "Goals", new { studentID = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-light" })
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Career", "Details", "CareerDeclaration", new { studentId = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
+                                @Html.ActionLink("Career", "Details", "CareerDeclaration", new { studentId = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-light" })
                             </li>
                         }
 
                         @if (SignInManager.IsSignedIn(User) && (User.IsInRole(StringConstants.RoleNameCoach) || User.IsInRole(StringConstants.RoleNameAdmin)))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="InactiveIndex">Inactive Students</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Students" asp-action="InactiveIndex">Inactive Students</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Interviews" asp-action="Index">Interviews</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Interviews" asp-action="Index">Interviews</a>
                             </li>
                             <li class="nav-item">
-                             <a class="nav-link text-dark" asp-area="" asp-controller="Questions" asp-action="Index">Questions</a>
+                             <a class="nav-link text-light" asp-area="" asp-controller="Questions" asp-action="Index">Questions</a>
                              </li>
 
                           }

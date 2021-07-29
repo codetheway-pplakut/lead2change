@@ -171,3 +171,33 @@ thead.blueStyle {
 .hidden {
     display: none;
 }
+.fixedTable {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+.blueHeader {
+    background-color: #004cbb;
+    color: white;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+.orangeHeader {
+    background-color: #ff7c00;
+    color: white;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+.full-width {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+#navbarLogo{
+    width: 50%;
+    height: auto;
+    display:block;
+}
+
