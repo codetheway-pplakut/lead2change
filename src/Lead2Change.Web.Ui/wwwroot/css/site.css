@@ -195,4 +195,9 @@ thead.blueStyle {
     margin-left: -50vw;
     margin-right: -50vw;
 }
+#navbarLogo{
+    width: 50%;
+    height: auto;
+    display:block;
+}
 
