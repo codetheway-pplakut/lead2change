@@ -30,7 +30,7 @@
     <div class="form-group">
         <input type="submit" value="Submit" class="btn btn-submit" />
     </div>
-    <div align="center">
-        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Answers", new {interviewID=Model.InterviewId, studentId=Model.StudentId})'">Back To List</button>
-    </div>
 </form>
+<div align="center">
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Answer", new {interviewID=Model.InterviewId, studentId=Model.StudentId})'">Back To List</button>
+</div>
