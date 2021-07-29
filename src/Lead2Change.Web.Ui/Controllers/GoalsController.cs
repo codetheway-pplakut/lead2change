@@ -1,5 +1,6 @@
 ﻿using Lead2Change.Web.Ui.Models;
 using Lead2Change.Services.Goals;
+using Lead2Change.Services.Students;
 using Microsoft.AspNetCore.Mvc;
 using Lead2Change.Domain.ViewModels;
 using System;
@@ -17,9 +18,11 @@ namespace Lead2Change.Web.Ui.Controllers
     public class GoalsController : _BaseController
     {
         private IGoalsService GoalsService;
-        public GoalsController(IUserService identityService, IGoalsService goalsService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
+        private IStudentService StudentService;
+        public GoalsController(IUserService identityService, IGoalsService goalsService, IStudentService studentService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(identityService, roleManager, userManager, signInManager)
         {
             this.GoalsService = goalsService;
+            this.StudentService = studentService;
         }
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -137,6 +140,8 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             List<GoalViewModel> result = new List<GoalViewModel>();
             List<Goal> goals = await GoalsService.GetGoals(studentID);
+            var student1 = await StudentService.GetStudent(studentID);
+
             foreach (Goal goal in goals)
             {
                 result.Add(new GoalViewModel()
@@ -155,7 +160,8 @@ namespace Lead2Change.Web.Ui.Controllers
 
             return View(new GoalsAndIDViewModel(studentID)
             {
-                GoalModels = result
+                GoalModels = result,
+                Name = student1.StudentFirstName
             }) ;
         
         }
