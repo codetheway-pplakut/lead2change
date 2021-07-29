@@ -32,14 +32,14 @@
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole(StringConstants.RoleNameStudent))
                         {
                             <li class="nav-item">
-                                @Html.ActionLink("Student", "Details", "Students", new { studentId = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
+                                @Html.ActionLink("Student", "Details", "Students", new { studentId = UserManager.GetUserAsync(User).Result.AssociatedId }, new { @class = "nav-link text-dark" })
 
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Goals", "Index", "Goals", new { studentID = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
+                                @Html.ActionLink("Goals", "Index", "Goals", new { studentID = UserManager.GetUserAsync(User).Result.AssociatedId }, new { @class = "nav-link text-dark" })
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Career", "Details", "CareerDeclaration", new { studentId = UserManager.GetUserAsync(User).Result.StudentId }, new { @class = "nav-link text-dark" })
+                                @Html.ActionLink("Career", "Details", "CareerDeclaration", new { studentId = UserManager.GetUserAsync(User).Result.AssociatedId }, new { @class = "nav-link text-dark" })
                             </li>
                         }
 

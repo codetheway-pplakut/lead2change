@@ -35,7 +35,7 @@ namespace Lead2Change.Web.Ui.Controllers
             if (User.IsInRole(StringConstants.RoleNameStudent))
             {
                 var user = await UserManager.GetUserAsync(User);
-                studentId = user.StudentId;
+                studentId = user.AssociatedId;
             }
 
             var student = await _studentService.GetStudent(studentId);

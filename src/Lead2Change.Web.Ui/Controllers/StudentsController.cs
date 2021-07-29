@@ -26,32 +26,15 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Redirect("/Identity/Account/Login");
-            }
+            if (!SignInManager.IsSignedIn(User))            {                return Redirect("/Identity/Account/Login?returnUrl=/Students");            }
 
-            if (User.IsInRole(StringConstants.RoleNameStudent))
-            {
-                return Error("403: You are not authorized to view this page.");
-            }
+            if (User.IsInRole(StringConstants.RoleNameStudent))            {                return Error("403: You are not authorized to view this page.");            }
 
             var user = await UserManager.GetUserAsync(User);
+            if (User.IsInRole(StringConstants.RoleNameCoach))            {                if (user.AssociatedId != Guid.Empty)                    return View(await _studentService.GetCoachStudents(user.AssociatedId));                else                    return RedirectToAction("Create", "Coaches");            }
+            else if (User.IsInRole(StringConstants.RoleNameAdmin))            {                return View(await _studentService.GetActiveStudents());            }
 
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                // StudentId being used as assosiation to coach
-
-                // TODO: Replace to use list of students in coach model
-                // return View(await _studentService.GetStudentsByCoachId(user.StudentId));
-                return Error("Coach access of index is not currently functioning");
-            }
-            else if (User.IsInRole(StringConstants.RoleNameAdmin))
-            {
-                return View(await _studentService.GetActiveStudents());
-            }
-
-            return View();
+            return Error("400: Bad Request");
         }
 
         public async Task<IActionResult> InactiveIndex()
@@ -119,9 +102,9 @@ namespace Lead2Change.Web.Ui.Controllers
             var user = await UserManager.GetUserAsync(User);
 
             // Check if user owns a student
-            if (user.StudentId != Guid.Empty)
+            if (user.AssociatedId != Guid.Empty)
             {
-                return RedirectToAction("Details", new { studentId = user.StudentId });
+                return RedirectToAction("Details", new { studentId = user.AssociatedId });
             }
 
             return View(new RegistrationViewModel()
@@ -168,7 +151,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 var user = await UserManager.GetUserAsync(User);
 
                 // Check that studentId is the AssociatedId of the user
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+                if (user.AssociatedId == Guid.Empty || user.AssociatedId != studentId)
                 {
                     return Error("403: Forbidden");
                 }
@@ -304,7 +287,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 // Check if the user is null
                 user == null ||
                 // Check if user already has a student assosiation
-                user.StudentId != Guid.Empty ||
+                user.AssociatedId != Guid.Empty ||
                 // Check for bad viewModel
                 !ModelState.IsValid ||
                 // Check the length of the first name
@@ -388,7 +371,7 @@ namespace Lead2Change.Web.Ui.Controllers
             // Registers a relation in user to the student if their role is student
             if (User.IsInRole(StringConstants.RoleNameStudent))
             {
-                user.StudentId = student.Id;
+                user.AssociatedId = student.Id;
                 await UserManager.UpdateAsync(user);
             }
             
@@ -420,7 +403,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 var user = await UserManager.GetUserAsync(User);
 
                 // Check that studentId is the AssociatedId of the user
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+                if (user.AssociatedId == Guid.Empty || user.AssociatedId != studentId)
                 {
                     return Error("403: Forbidden");
                 }
@@ -533,7 +516,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 var user = await UserManager.GetUserAsync(User);
 
                 // Check that studentId is the AssociatedId of the user
-                if (user.StudentId == Guid.Empty || user.StudentId != viewModel.Id)
+                if (user.AssociatedId == Guid.Empty || user.AssociatedId != viewModel.Id)
                 {
                     return Error("403: Forbidden");
                 }
