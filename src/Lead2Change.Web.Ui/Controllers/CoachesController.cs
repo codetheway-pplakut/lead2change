@@ -1,4 +1,4 @@
-﻿using Lead2Change.Domain.ViewModels;
+using Lead2Change.Domain.ViewModels;
 using Lead2Change.Services.Identity;
 using Lead2Change.Services.Coaches;
 using Microsoft.AspNetCore.Mvc;
@@ -7,10 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Lead2Change.Domain.Constants;
-
-using Lead2Change.Services.Students;
+
 using Lead2Change.Domain.Constants;
+using Lead2Change.Services.Students;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
