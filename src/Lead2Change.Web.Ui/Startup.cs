@@ -19,6 +19,8 @@ using Lead2Change.Services.Interviews;
 using Lead2Change.Services.QuestionInInterviews;
 using Lead2Change.Services.Coaches;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Threading.Tasks;
+using Lead2Change.Domain.Constants;
 
 namespace Lead2Change.Web.Ui
 {
@@ -130,6 +132,82 @@ namespace Lead2Change.Web.Ui
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            SeedTestUsers(app);
+        }
+
+        public void SeedTestUsers(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var userManager = serviceScope.ServiceProvider.GetService<UserManager<AspNetUsers>>();
+                var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<AspNetRoles>>();
+                CreateDefaultRoles(roleManager).Wait();
+                CreateNewUser(userManager, "student@test.com", "Testtest@123", StringConstants.RoleNameStudent).Wait();
+                CreateNewUser(userManager, "coach@test.com", "Testtest@123", StringConstants.RoleNameCoach).Wait();
+                CreateNewUser(userManager, "admin@test.com", "Testtest@123", StringConstants.RoleNameAdmin).Wait();
+            }
+        }
+
+        public static async Task CreateDefaultRoles(RoleManager<AspNetRoles> roleManager)
+        {
+            var hasAdmin = await roleManager.FindByNameAsync(StringConstants.RoleNameAdmin);
+            if (hasAdmin == null)
+                await roleManager.CreateAsync(new AspNetRoles()
+                {
+                    Name = StringConstants.RoleNameAdmin,
+                    NormalizedName = StringConstants.RoleNameAdmin
+                });
+
+            var hasCoach = await roleManager.FindByNameAsync(StringConstants.RoleNameCoach);
+            if (hasCoach == null)
+                await roleManager.CreateAsync(new AspNetRoles()
+                {
+                    Name = StringConstants.RoleNameCoach,
+                    NormalizedName = StringConstants.RoleNameCoach
+                });
+
+            var hasStudent = await roleManager.FindByNameAsync(StringConstants.RoleNameStudent);
+            if (hasStudent == null)
+                await roleManager.CreateAsync(new AspNetRoles()
+                {
+                    Name = StringConstants.RoleNameStudent,
+                    NormalizedName = StringConstants.RoleNameStudent
+                });
+        }
+
+        public static async Task CreateNewUser(UserManager<AspNetUsers> userManager, string email, string password, string roleName, bool confirm = true)
+        {
+            var identityUser = new AspNetUsers()
+            {
+                UserName = email,
+                Email = email
+            };
+
+            var result = await userManager.CreateAsync(identityUser, password);
+            if (confirm)
+            {
+                var token = await userManager.GenerateEmailConfirmationTokenAsync(identityUser);
+                await userManager.ConfirmEmailAsync(identityUser, token);
+            }
+
+            if (result.Succeeded)
+            {
+                var user = await userManager.FindByEmailAsync(email);
+
+                if (user != null)
+                {
+                    var role = await userManager.AddToRoleAsync(user, roleName);
+                }
+                else
+                {
+                    //Do something because the user does not exist
+                }
+            }
+            else
+            {
+                //Do something because the user could not be created
+            }
         }
     }
 }
