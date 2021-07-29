@@ -33,7 +33,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label asp-for="StudentEmail" class="control-label">Email:</label>
-                        <input asp-for="StudentEmail" class="form-control" value=@Model.StudentEmail required />
+                        <input asp-for="StudentEmail" class="form-control" value=@Model.StudentEmail type="email" required />
                         <span asp-validation-for="StudentEmail" class="text-danger"></span>
                     </div>
                 </div>
