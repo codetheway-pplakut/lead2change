@@ -894,5 +894,108 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentDateOfBirth = DateTime.Today,
             });
         }
+        public async Task<IActionResult> RegisterInterest(StudentInterestFormViewModel viewModel)
+        {
+
+            // Check SignedIn
+
+            if (!SignInManager.IsSignedIn(User))
+
+            {
+
+                return Error("401: Unauthorized");
+
+            }
+
+
+
+            // Check Permissions
+
+            /*
+
+             *  Students: Allowed
+
+             *  Coach: Not Allowed
+
+             *  Admin: Allowed
+
+             */
+
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+
+                return Error("403: Forbidden");
+
+            }
+
+
+
+            // Find User
+
+            var user = await UserManager.GetUserAsync(User);
+
+
+
+            if (
+
+                // Check if the user is null
+
+                user == null ||
+
+                // Check if user already has a student assosiation
+
+                user.StudentId != Guid.Empty ||
+
+                // Check for bad viewModel
+
+                !ModelState.IsValid ||
+
+                // Check the length of the first name
+
+                viewModel.StudentFirstName.Length <= 0
+
+                )
+
+            {
+
+                return Error("400: Bad Request");
+
+            }
+
+            // Create model
+            Student model = new Student()
+            {
+                Id = viewModel.Id,
+                StudentFirstName = viewModel.StudentFirstName,
+                StudentLastName = viewModel.StudentLastName,
+                StudentDateOfBirth = viewModel.StudentDateOfBirth,
+                StudentCellPhone = viewModel.StudentCellPhone,
+                StudentEmail = viewModel.StudentEmail,
+            };
+
+            // Add model
+            var student = await _studentService.Create(model);
+
+            // Registers a relation in user to the student if their role is student
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+
+            {
+
+                user.StudentId = student.Id;
+
+                await UserManager.UpdateAsync(user);
+            }
+
+            await Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
+            await Email("1joel.kuriakose@gmail.com", "joeljk2003@gmail.com", "Lead2Change Student Registration Confirmation: A new student has been registered", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", "Lead2Change Student Registration", "Lead2Change");
+            await Email("1joel.kuriakose@gmail.com", model.StudentEmail, "Lead2Change Registration Confirmation: You are registered", "Congrats, you have sucessfully registered for Lead2Change!", "Congrats, you have sucessfully registered for Lead2Change!", "Lead2Change Student Registration", model.StudentFirstName + " " + model.StudentLastName);
+
+            return RedirectToAction("ThankYou");
+        }
+        public async Task<IActionResult> ThankYou()
+        {
+            return View();
+        }
     }
 }
