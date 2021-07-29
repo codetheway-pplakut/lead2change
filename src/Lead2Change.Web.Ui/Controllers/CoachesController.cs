@@ -1,4 +1,4 @@
-﻿using Lead2Change.Domain.ViewModels;
+using Lead2Change.Domain.ViewModels;
 using Lead2Change.Services.Identity;
 using Lead2Change.Services.Coaches;
 using Microsoft.AspNetCore.Mvc;
