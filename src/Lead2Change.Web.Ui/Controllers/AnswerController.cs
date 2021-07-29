@@ -8,6 +8,19 @@ using Lead2Change.Domain.ViewModels;
 using Lead2Change.Domain.Models;
 using Lead2Change.Services.Interviews;
 using Lead2Change.Services.Students;
+using Lead2Change.Web.Ui.Models;
+using Lead2Change.Services.Goals;
+using Lead2Change.Services.Students;
+using Microsoft.AspNetCore.Mvc;
+using Lead2Change.Domain.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+using Lead2Change.Domain.Models;
+using Lead2Change.Services.Identity;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace Lead2Change.Web.Ui.Controllers
@@ -28,6 +41,7 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Index(Guid interviewID, Guid studentId)
         {
+            var student1 = await _studentService.GetStudent(studentId);
 
             List<AnswersViewModel> result = new List<AnswersViewModel>();
             List<Answer> answers = await AnswersService.GetAnswers(interviewID);
@@ -45,7 +59,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
 
                         InterviewId = answer.InterviewId,
-                        StudentName = answer.StudentName,
+                        StudentName = student1.StudentFirstName,
                         InterviewName = (await _interviewsService.GetInterview(interviewID)).InterviewName,
                     });
                 }
