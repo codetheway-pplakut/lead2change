@@ -475,6 +475,7 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(viewModel);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Update(RegistrationViewModel viewModel)
         {
             // Check SignedIn
@@ -499,76 +500,80 @@ namespace Lead2Change.Web.Ui.Controllers
                 return Error("400: Bad Request");
             }
 
-            Student model = new Student()
-            {
-                Id = viewModel.Id,
-                //General Student Info
-                StudentFirstName = viewModel.StudentFirstName,
-                StudentLastName = viewModel.StudentLastName,
-                StudentDateOfBirth = viewModel.StudentDateOfBirth,
-                StudentAddress = viewModel.StudentAddress,
-                StudentApartmentNumber = viewModel.StudentApartmentNumber,
-                StudentCity = viewModel.StudentCity,
-                StudentState = viewModel.StudentState,
-                StudentZipCode = viewModel.StudentZipCode,
-                StudentHomePhone = viewModel.StudentHomePhone,
-                StudentCellPhone = viewModel.StudentCellPhone,
-                StudentEmail = viewModel.StudentEmail,
-                StudentCareerPath = viewModel.StudentCareerPath,
-                StudentCareerInterest = viewModel.StudentCareerInterest,
-                //Parent Info
-                ParentFirstName = viewModel.ParentFirstName,
-                ParentLastName = viewModel.ParentLastName,
-                Address = viewModel.Address,
-                ParentApartmentNumber = viewModel.ParentApartmentNumber,
-                ParentCity = viewModel.ParentCity,
-                ParentState = viewModel.ParentState,
-                ParentZipCode = viewModel.ParentZipCode,
-                ParentHomePhone = viewModel.ParentHomePhone,
-                ParentCellPhone = viewModel.ParentCellPhone,
-                ParentEmail = viewModel.ParentEmail,
-                //Guidance Counselor Info
-                KnowGuidanceCounselor = viewModel.KnowGuidanceCounselor,
-                GuidanceCounselorName = viewModel.GuidanceCounselorName,
-                MeetWithGuidanceCounselor = viewModel.MeetWithGuidanceCounselor,
-                HowOftenMeetWithGuidanceCounselor = viewModel.HowOftenMeetWithGuidanceCounselor,
-                DiscussWithGuidanceCounselor = viewModel.DiscussWithGuidanceCounselor,
-                PlanAfterHighSchool = viewModel.PlanAfterHighSchool,
-                CollegeApplicationStatus = viewModel.CollegeApplicationStatus,
-                CollegesList = viewModel.CollegesList,
-                CollegeEssayStatus = viewModel.CollegeEssayStatus,
-                CollegeEssayHelp = viewModel.CollegeEssayHelp,
-                FirstChoiceCollege = viewModel.FirstChoiceCollege,
-                SecondChoiceCollege = viewModel.SecondChoiceCollege,
-                ThirdChoiceCollege = viewModel.ThirdChoiceCollege,
-                TradeSchoolStatus = viewModel.TradeSchoolStatus,
-                TradeSchoolsList = viewModel.TradeSchoolsList,
-                ArmedForcesStatus = viewModel.ArmedForcesStatus,
-                ArmedForcesBranch = viewModel.ArmedForcesBranch,
-                WorkStatus = viewModel.WorkStatus,
-                CareerPathList = viewModel.CareerPathList,
-                OtherPlans = viewModel.OtherPlans,
-                PACTTestDate = viewModel.PACTTestDate,
-                PACTTestScore = viewModel.PACTTestScore,
-                PSATTestDate = viewModel.PSATTestDate,
-                PSATTestScore = viewModel.PSATTestScore,
-                SATTestDate = viewModel.SATTestDate,
-                SATTestScore = viewModel.SATTestScore,
-                ACTTestDate = viewModel.ACTTestDate,
-                ACTTestScore = viewModel.ACTTestScore,
-                PrepClassRequired = viewModel.PrepClassRequired,
-                AssistanceForForms = viewModel.AssistanceForForms,
-                FinancialAidProcessComplete = viewModel.FinancialAidProcessComplete,
-                SupportNeeded = viewModel.SupportNeeded,
-                StudentSignature = viewModel.StudentSignature,
-                StudentSignatureDate = viewModel.StudentSignatureDate,
-                ParentSignature = viewModel.ParentSignature,
-                ParentSignatureDate = viewModel.ParentSignatureDate,
-                CoachId = viewModel.CoachId,
-                Active = viewModel.Active
-            };
+            var student = await _studentService.GetStudent(viewModel.Id);
 
-            var student = await _studentService.Update(model);
+            // Check for bad student
+            if (student == null)
+            {
+                return Error("400: Bad Request");
+            }
+
+            //General Student Info
+            student.StudentFirstName = viewModel.StudentFirstName;
+            student.StudentLastName = viewModel.StudentLastName;
+            student.StudentDateOfBirth = viewModel.StudentDateOfBirth;
+            student.StudentAddress = viewModel.StudentAddress;
+            student.StudentApartmentNumber = viewModel.StudentApartmentNumber;
+            student.StudentCity = viewModel.StudentCity;
+            student.StudentState = viewModel.StudentState;
+            student.StudentZipCode = viewModel.StudentZipCode;
+            student.StudentHomePhone = viewModel.StudentHomePhone;
+            student.StudentCellPhone = viewModel.StudentCellPhone;
+            student.StudentEmail = viewModel.StudentEmail;
+            student.StudentCareerPath = viewModel.StudentCareerPath;
+            student.StudentCareerInterest = viewModel.StudentCareerInterest;
+            //Parent Info
+            student.ParentFirstName = viewModel.ParentFirstName;
+            student.ParentLastName = viewModel.ParentLastName;
+            student.Address = viewModel.Address;
+            student.ParentApartmentNumber = viewModel.ParentApartmentNumber;
+            student.ParentCity = viewModel.ParentCity;
+            student.ParentState = viewModel.ParentState;
+            student.ParentZipCode = viewModel.ParentZipCode;
+            student.ParentHomePhone = viewModel.ParentHomePhone;
+            student.ParentCellPhone = viewModel.ParentCellPhone;
+            student.ParentEmail = viewModel.ParentEmail;
+            //Guidance Counselor Info
+            student.KnowGuidanceCounselor = viewModel.KnowGuidanceCounselor;
+            student.GuidanceCounselorName = viewModel.GuidanceCounselorName;
+            student.MeetWithGuidanceCounselor = viewModel.MeetWithGuidanceCounselor;
+            student.HowOftenMeetWithGuidanceCounselor = viewModel.HowOftenMeetWithGuidanceCounselor;
+            student.DiscussWithGuidanceCounselor = viewModel.DiscussWithGuidanceCounselor;
+            student.PlanAfterHighSchool = viewModel.PlanAfterHighSchool;
+            student.CollegeApplicationStatus = viewModel.CollegeApplicationStatus;
+            student.CollegesList = viewModel.CollegesList;
+            student.CollegeEssayStatus = viewModel.CollegeEssayStatus;
+            student.CollegeEssayHelp = viewModel.CollegeEssayHelp;
+            student.FirstChoiceCollege = viewModel.FirstChoiceCollege;
+            student.SecondChoiceCollege = viewModel.SecondChoiceCollege;
+            student.ThirdChoiceCollege = viewModel.ThirdChoiceCollege;
+            student.TradeSchoolStatus = viewModel.TradeSchoolStatus;
+            student.TradeSchoolsList = viewModel.TradeSchoolsList;
+            student.ArmedForcesStatus = viewModel.ArmedForcesStatus;
+            student.ArmedForcesBranch = viewModel.ArmedForcesBranch;
+            student.WorkStatus = viewModel.WorkStatus;
+            student.CareerPathList = viewModel.CareerPathList;
+            student.OtherPlans = viewModel.OtherPlans;
+            student.PACTTestDate = viewModel.PACTTestDate;
+            student.PACTTestScore = viewModel.PACTTestScore;
+            student.PSATTestDate = viewModel.PSATTestDate;
+            student.PSATTestScore = viewModel.PSATTestScore;
+            student.SATTestDate = viewModel.SATTestDate;
+            student.SATTestScore = viewModel.SATTestScore;
+            student.ACTTestDate = viewModel.ACTTestDate;
+            student.ACTTestScore = viewModel.ACTTestScore;
+            student.PrepClassRequired = viewModel.PrepClassRequired;
+            student.AssistanceForForms = viewModel.AssistanceForForms;
+            student.FinancialAidProcessComplete = viewModel.FinancialAidProcessComplete;
+            student.SupportNeeded = viewModel.SupportNeeded;
+            student.StudentSignature = viewModel.StudentSignature;
+            student.StudentSignatureDate = viewModel.StudentSignatureDate;
+            student.ParentSignature = viewModel.ParentSignature;
+            student.ParentSignatureDate = viewModel.ParentSignatureDate;
+
+            student.Active = viewModel.Active;
+
+            await _studentService.Update(student);
             /*if (model.StudentEmail != model.OldStudentEmail)
             {
                 model.OldStudentEmail = model.StudentEmail;
