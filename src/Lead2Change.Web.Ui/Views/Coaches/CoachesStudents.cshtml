@@ -1,0 +1,128 @@
+﻿@model Lead2Change.Domain.ViewModels.CoachViewModel
+@*
+    ViewData["Title"] = "CoachesStudents";
+*@
+<h1>Your Students</h1>
+<table class="table table-striped pt-2" id="myTable">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Options</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Students)
+
+        {
+
+
+@if (item.Accepted) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentCellPhone)
+                </td>
+                <td>
+                    <div>
+                        <div>
+                            @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
+                        </div>
+                        <div>
+                            @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
+                        </div>
+                        <div>
+                            @Html.ActionLink("Student Goals", "Index", "Goals", new { studentID = item.Id })
+                        </div>
+                        @if (item.CareerDeclarationId == Guid.Empty)
+                        {
+                            <div>
+                                @Html.ActionLink("Add Student Career", "Create", "CareerDeclaration", new { studentId = item.Id })
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                @Html.ActionLink("View Student Career", "Details", "CareerDeclaration", new { studentId = item.Id })
+                            </div>
+                        }
+                    </div>
+                </td>
+
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<h1>Students Applying</h1>
+<table class="table table-striped pt-2" id="myTable">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Options</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Students)
+
+        {
+
+
+@if(item.Accepted == false){ 
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentCellPhone)
+                </td>
+                <td>
+                    <div>
+                        <div>
+                            @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
+                        </div>
+                        <div>
+                            @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
+                        </div>
+                        <div>
+                            @Html.ActionLink("Student Goals", "Index", "Goals", new { studentID = item.Id })
+                        </div>
+                        @if (item.CareerDeclarationId == Guid.Empty)
+                        {
+                            <div>
+                                @Html.ActionLink("Add Student Career", "Create", "CareerDeclaration", new { studentId = item.Id })
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                @Html.ActionLink("View Student Career", "Details", "CareerDeclaration", new { studentId = item.Id })
+                            </div>
+                        }
+                    </div>
+                </td>
+
+            </tr>
+        }
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
