@@ -15,6 +15,11 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Lead2Change.Domain.Models;
 using Lead2Change.Domain.Constants;
+using Lead2Change.Domain.ViewModels;
+using Lead2Change.Services.Identity;
+using Lead2Change.Services.Students;
+using Lead2Change.Web.Ui.Models;
+using Lead2Change.Services.Coaches;
 
 namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
 {
@@ -64,10 +69,17 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (_signInManager.IsSignedIn(User))
+            {
+                return Redirect("~/");
+            }
+
+            return Page();
+
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
