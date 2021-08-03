@@ -9,15 +9,11 @@
             <h1 class="text-center"><strong>COACH DETAILS</strong></h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            
-        </div>
-    </div>
+
     <div class="card text-dark bg-light mb-3">
         <div class="card-header">
-            <div class="row">
-                <h2>Coach Information</h2>
+            <div class="row px-sm-3">
+                <h3>Coach Information</h3>
                 <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#coachInfo" aria-expanded="false" aria-controls="coachInfo">
                     <img src="~/Images/UpDownIcon.png" class="smallIcon"/>
                 </button>
@@ -36,7 +32,7 @@
         </div>
     </div>
     <table class="table table-striped shadow-lg pt-2" id="myTable">
-        <thead>
+        <thead class="blueStyle">
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
@@ -62,25 +58,25 @@
                     <td>
                         <div>
                             <div>
-                                @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
+                                <button class="btn  btn-block orangeBtn mb-sm-2" onclick="location.href='@Url.Action("UnassignStudent","Coaches", new { studentId= item.Id })'">Unassign</button>
                             </div>
                             <div>
-                                @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
+                                <button class="btn  btn-block orangeBtn mb-sm-2" onclick="location.href='@Url.Action("Details","Students", new { studentId= item.Id })'">Details</button>
                             </div>
                             <div>
-                                @Html.ActionLink("Student Goals", "Index", "Goals", new { studentID = item.Id })
+                                <button class="btn  btn-block orangeBtn mb-sm-2" onclick="location.href='@Url.Action("Index","Goals", new { studentId= item.Id })'">Goals</button>
                             </div>
                             @if (item.CareerDeclarationId == Guid.Empty)
                             {
-                                <div>
-                                    @Html.ActionLink("Add Student Career", "Create", "CareerDeclaration", new { studentId = item.Id })
-                                </div>
+                        <div>
+                            <button class="btn btn-block orangeBtn mb-sm-2" onclick="location.href='@Url.Action("Create","CareerDeclaration", new { studentId= item.Id })'">Add Student Career</button>
+                        </div>
                             }
                             else
                             {
-                                <div>
-                                    @Html.ActionLink("View Student Career", "Details", "CareerDeclaration", new { studentId = item.Id })
-                                </div>
+                        <div>
+                            <button class="btn btn-block orangeBtn mb-sm-2" onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId= item.Id })'">View Student Career</button>
+                        </div>
                             }
                         </div>
                     </td>
@@ -91,6 +87,6 @@
     </table>
 
     <div>
-        <a asp-action="Index">Back to List</a>
+        <button class="btn btn-outline-dark btn-lg" onclick="location.href='@Url.Action("Index","Coaches")'">Back To List</button>
     </div>
 </div>
