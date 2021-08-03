@@ -61,7 +61,12 @@
 
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Interviews" onclick="location.href='@Url.Action("Index","Interviews", new { studentID = item.Id })'" />
 
+                </div>
+            </div>
 
 
             <div class="row">
@@ -71,12 +76,7 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Delete" onclick="location.href='@Url.Action("Delete","Students", new { id = item.Id })'" />
 
-                </div>
-            </div>
 
             @if (item.CareerDeclarationId == Guid.Empty)
             {
@@ -94,6 +94,12 @@
 
             </div>
         </div>}
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Delete" onclick="location.href='@Url.Action("Delete","Students", new { id = item.Id })'" />
+
+                </div>
+            </div>
         </div>
     </td>
 </tr>
