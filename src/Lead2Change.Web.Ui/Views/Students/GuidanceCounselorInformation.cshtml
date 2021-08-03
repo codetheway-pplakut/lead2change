@@ -1,0 +1,63 @@
+﻿@model Lead2Change.Domain.ViewModels.EditViewModel
+@*
+    ViewData["Title"] = "GuidanceCounselorInformation";
+*@
+@{
+}
+<div class="container-fluid">
+    <div align="center">
+        <h1>Guidance Counselor Information</h1>
+    </div>
+    <form>
+        <div class="calibri">
+            <div class="row">
+                <div class="form-group">
+                    <input asp-for="KnowGuidanceCounselor" class="form-check-input me-1" type="checkbox" id="checkboxTest" oninput="showHideClass('conditionalQuestion')" />
+                    <label asp-for="KnowGuidanceCounselor" class="control-label">I know my guidance counselor.</label>
+                    <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group conditionalQuestion">
+                <label asp-for="GuidanceCounselorName" class="control-label">Guidance Counselor Name:</label>
+                <input asp-for="GuidanceCounselorName" class="form-control" value=@Model.GuidanceCounselorName />
+                <span asp-validation-for="GuidanceCounselorName" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="form-group conditionalQuestion">
+                    <input asp-for="MeetWithGuidanceCounselor" class="form-check-input me-1" type="checkbox" />
+                    <label asp-for="MeetWithGuidanceCounselor" class="control-label">I meet with my guidance counselor.</label>
+                    <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group conditionalQuestion">
+                <label asp-for="HowOftenMeetWithGuidanceCounselor" class="control-label">How often?</label>
+                <input asp-for="HowOftenMeetWithGuidanceCounselor" class="form-control" value=@Model.HowOftenMeetWithGuidanceCounselor />
+                <span asp-validation-for="HowOftenMeetWithGuidanceCounselor" class="text-danger"></span>
+            </div>
+            <div class="form-group conditionalQuestion">
+                <label asp-for="DiscussWithGuidanceCounselor" class="control-label">If you meet with your guidance counselor, what do you discuss with them?</label>
+                <input asp-for="DiscussWithGuidanceCounselor" class="form-control" value=@Model.DiscussWithGuidanceCounselor />
+                <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group hidden" display="none">
+            <label asp-for="CoachId" class="control-label"></label>
+            <input asp-for="CoachId" class="form-control" value=@Model.CoachId />
+        </div>
+        <div class="form-group hidden" display="none">
+            <label asp-for="Id" class="control-label"></label>
+            <input asp-for="Id" class="form-control" value=@Model.Id />
+        </div>
+        <div class="form-group" align="center">
+            <input type="submit" value="Submit" class="btn btn-submit" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <button class="btn btn-back">@Html.ActionLink("Back to Edit", "Edit", new { studentId = Model.Id })</button>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

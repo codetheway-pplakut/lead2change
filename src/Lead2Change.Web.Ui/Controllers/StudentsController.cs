@@ -997,7 +997,182 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> StudentInformationEdit(Guid studentId)
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+            // Check Permissions
+            /*
+             *  Students: Allowed if owned by user
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                // Find user
+                var user = await UserManager.GetUserAsync(User);
+                // Check that studentId is the AssociatedId of the user
 
+                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+
+                {
+                    return Error("403: Forbidden");
+                }
+            }
+            else if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+                return Error("403: Forbidden");
+            }
+            // Find student
+            var student = await _studentService.GetStudent(studentId);
+            // Check for bad student
+
+            if (student == null || studentId == Guid.Empty)
+
+            {
+                return Error("400: Bad Request");
+            }
+            EditViewModel viewModel = new EditViewModel()
+            {
+                Id = student.Id,
+                //General Student Info
+                StudentFirstName = student.StudentFirstName,
+                StudentLastName = student.StudentLastName,
+                StudentDateOfBirth = student.StudentDateOfBirth,
+                StudentAddress = student.StudentAddress,
+                StudentApartmentNumber = student.StudentApartmentNumber,
+                StudentCity = student.StudentCity,
+                StudentState = student.StudentState,
+                StudentZipCode = student.StudentZipCode,
+                StudentHomePhone = student.StudentHomePhone,
+                StudentCellPhone = student.StudentCellPhone,
+                StudentEmail = student.StudentEmail,
+                OldStudentEmail = student.StudentEmail,
+                StudentCareerPath = student.StudentCareerPath,
+                StudentCareerInterest = student.StudentCareerInterest,
+                CoachId = student.CoachId,
+
+                Active = student.Active
+            };
+
+            return View(viewModel);
+        }
+        public async Task<IActionResult> ParentInformationEdit(Guid studentId)
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+            // Check Permissions
+            /*
+             *  Students: Allowed if owned by user
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                // Find user
+                var user = await UserManager.GetUserAsync(User);
+                // Check that studentId is the AssociatedId of the user
+
+                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+
+                {
+                    return Error("403: Forbidden");
+                }
+            }
+            else if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+                return Error("403: Forbidden");
+            }
+            // Find student
+            var student = await _studentService.GetStudent(studentId);
+            // Check for bad student
+
+            if (student == null || studentId == Guid.Empty)
+
+            {
+                return Error("400: Bad Request");
+            }
+            EditViewModel viewModel = new EditViewModel()
+            {
+                Id = student.Id,
+                //General Student Info
+                //Parent Info
+                ParentFirstName = student.ParentFirstName,
+                ParentLastName = student.ParentLastName,
+                Address = student.Address,
+                ParentApartmentNumber = student.ParentApartmentNumber,
+                ParentCity = student.ParentCity,
+                ParentState = student.ParentState,
+                ParentZipCode = student.ParentZipCode,
+                ParentHomePhone = student.ParentHomePhone,
+                ParentCellPhone = student.ParentCellPhone,
+                ParentEmail = student.ParentEmail,
+                CoachId = student.CoachId,
+                Active = student.Active
+            };
+
+            return View(viewModel);
+        }
+        public async Task<IActionResult> GuidanceCounselorInformation(Guid studentId)
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+            // Check Permissions
+            /*
+             *  Students: Allowed if owned by user
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                // Find user
+                var user = await UserManager.GetUserAsync(User);
+                // Check that studentId is the AssociatedId of the user
+
+                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+
+                {
+                    return Error("403: Forbidden");
+                }
+            }
+            else if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+                return Error("403: Forbidden");
+            }
+            // Find student
+            var student = await _studentService.GetStudent(studentId);
+            // Check for bad student
+
+            if (student == null || studentId == Guid.Empty)
+
+            {
+                return Error("400: Bad Request");
+            }
+            EditViewModel viewModel = new EditViewModel()
+            {
+                Id = student.Id,
+                //General Student Info
+                //Parent Info
+                KnowGuidanceCounselor = student.KnowGuidanceCounselor,
+                GuidanceCounselorName = student.GuidanceCounselorName,
+                MeetWithGuidanceCounselor = student.MeetWithGuidanceCounselor,
+                HowOftenMeetWithGuidanceCounselor = student.HowOftenMeetWithGuidanceCounselor,
+                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor,
+                CoachId = student.CoachId,
+                Active = student.Active
+            };
+
+            return View(viewModel);
+        }
         public async Task<IActionResult> ApplyingStudentsIndex()
         {
             if (User.IsInRole(StringConstants.RoleNameAdmin))
@@ -1020,3 +1195,5 @@ namespace Lead2Change.Web.Ui.Controllers
         }
     }
 }
+
+       

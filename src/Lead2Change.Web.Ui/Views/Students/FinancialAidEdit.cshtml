@@ -1,0 +1,50 @@
+﻿@model Lead2Change.Domain.ViewModels.EditViewModel
+@*
+    ViewData["Title"] = "Financial Aid Informaton Edit";
+*@
+@{
+}
+<div class="container-fluid">
+    <div align="center">
+        <h1>Edit Student Information</h1>
+        <hr />
+    </div>
+    <form>
+        <div class="calibri">
+            <h1>Financial Aid Information</h1>
+            <div class="form-group">
+                <input asp-for="FinancialAidProcessComplete" class="form-check-input me-1" type="checkbox" />
+                <label asp-for="FinancialAidProcessComplete" class="control-label">I have already completed the financial aid process.</label>
+                <span asp-validation-for="FinancialAidProcessComplete" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="AssistanceForForms" class="form-check-input me-1" type="checkbox" />
+                <label asp-for="AssistanceForForms" class="control-label">I need assistance filling out my FAFSA/Financial aid forms.</label>
+                <span asp-validation-for="AssistanceForForms" class="text-danger"></span>
+            </div>
+            <h4>What support is needed for you most while in this program?</h4>
+            <div class="form-group">
+                <input asp-for="SupportNeeded" class="form-control" value=@Model.SupportNeeded />
+                <span asp-validation-for="SupportNeeded" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group hidden" display="none">
+            <label asp-for="CoachId" class="control-label"></label>
+            <input asp-for="CoachId" class="form-control" value=@Model.CoachId />
+        </div>
+        <div class="form-group hidden" display="none">
+            <label asp-for="Id" class="control-label"></label>
+            <input asp-for="Id" class="form-control" value=@Model.Id />
+        </div>
+        <div class="form-group" align="center">
+            <input type="submit" value="Submit" class="btn btn-submit" />
+        </div>
+    </form>
+    <div>
+        <button class="btn btn-back"><a asp-action="Index">Back to Student List</a></button>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
