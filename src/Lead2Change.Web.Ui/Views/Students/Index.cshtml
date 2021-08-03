@@ -3,11 +3,14 @@
     ViewData["Title"] = "Index";
 *@
 
-<div class="container">
-    <h1>Students</h1>
-
+<div class="container-fluid">
+    <div class="row blueHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>STUDENTS</strong></h1>
+        </div>
+    </div>
     <table class="table table-striped pt-2" id="myTable">
-        <thead>
+        <thead class="thead blueStyle">
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Date Of Birth</th>
@@ -21,68 +24,87 @@
         <tbody>
             @if (Model != null)
             {
-                @foreach (var item in Model)
-                {
+@foreach (var item in Model)
+{
 
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
-                    </td>
-                    <td>
-                        @*@Html.DisplayFor(modelItem => item.StudentDateOfBirth.ToString("d"))*@
-                        @*@Model.modelItem => item.StudentDateOfBirth.ToString("d")*@
-                        @Convert.ToDateTime(item.StudentDateOfBirth).ToString("MM/dd/yyyy")
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StudentEmail)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ParentLastName), @Html.DisplayFor(modelItem => item.ParentFirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ParentEmail)
-                    </td>
-                    <td>
-                            <div>
-                                <div>
-                                    @Html.ActionLink("Edit", "Edit", new { studentId = item.Id })
-                                </div>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.StudentDateOfBirth.ToString("d"))*@
+        @*@Model.modelItem => item.StudentDateOfBirth.ToString("d")*@
+        @Convert.ToDateTime(item.StudentDateOfBirth).ToString("MM/dd/yyyy")
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StudentEmail)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ParentLastName), @Html.DisplayFor(modelItem => item.ParentFirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ParentEmail)
+    </td>
+    <td>
+        <div>
 
-                                <div>
-                                    @Html.ActionLink("Details", "Details", new { studentId = item.Id })
-                                </div>
-                            
-                                <div>
-                                    @Html.ActionLink("Goals", "Index", "Goals", new { studentID = item.Id })
-                                </div>
-                                
-                                <div>
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                </div>
-                            
-                                @if (item.CareerDeclarationId == Guid.Empty)
-                                {
-                                    <div>
-                                        @Html.ActionLink("Add Career", "Create", "CareerDeclaration", new { studentId = item.Id })
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div>
-                                        @Html.ActionLink("View Career", "Details", "CareerDeclaration", new { studentId = item.Id })
-                                    </div>
-                                }
-                            </div>
-                        </td>
-                    </tr>
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Students", new { studentId = item.Id })'" />
 
-                }
-            }
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Students", new { studentId = item.Id })'" />
+
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Goals" onclick="location.href='@Url.Action("Index","Goals", new { studentID = item.Id })'" />
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Delete" onclick="location.href='@Url.Action("Delete","Students", new { id = item.Id })'" />
+
+                </div>
+            </div>
+
+            @if (item.CareerDeclarationId == Guid.Empty)
+            {
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Add Career" onclick="location.href='@Url.Action("Create","CareerDeclaration", new { studentId = item.Id })'" />
+
+            </div>
+        </div> }
+    else
+    {
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="View Career" onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId = item.Id })'" />
+
+            </div>
+        </div>}
+        </div>
+    </td>
+</tr>
+           }}
         </tbody>
     </table>
 
 
-    <div>
-        <a asp-action="Register"><b>Add new student.</b></a>
+    <div class="row">
+        <div class="col-sm-12 pb-sm-2">
+            <input type="button" class="btn btn-primary" value="Add a New Student" onclick="location.href='@Url.Action("Register","Students")'" />
+        </div>
     </div>
 </div>
