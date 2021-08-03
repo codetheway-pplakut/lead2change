@@ -997,5 +997,18 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> ApplyingStudentsIndex()
+        {
+            if (User.IsInRole(StringConstants.RoleNameAdmin))
+
+            {
+
+                return View(await _studentService.GetApplyingStudents());
+
+            }
+
+            return Error("403: You are not authorized to view this page.");
+        }
     }
 }

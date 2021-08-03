@@ -72,5 +72,10 @@ namespace Lead2Change.Repositories.Students
             var students = await AppDbContext.Students.Where(i => i.CoachId == coachId).ToListAsync();
             return students;
         }
+        public async Task<List<Student>> GetApplyingStudents()
+        {
+            var students = await AppDbContext.Students.Where(i => (i.ParentFirstName == null) && (i.StudentState == null)).ToListAsync();
+            return students;
+        }
     }
 }
