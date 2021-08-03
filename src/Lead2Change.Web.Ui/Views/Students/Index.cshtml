@@ -63,13 +63,65 @@
                     </td>
                     </tr>
 
-                }
-            }
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Students", new { studentId = item.Id })'" />
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Interviews" onclick="location.href='@Url.Action("Index","Interviews", new { studentID = item.Id })'" />
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Goals" onclick="location.href='@Url.Action("Index","Goals", new { studentID = item.Id })'" />
+
+                </div>
+            </div>
+
+
+
+            @if (item.CareerDeclarationId == Guid.Empty)
+            {
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Add Career" onclick="location.href='@Url.Action("Create","CareerDeclaration", new { studentId = item.Id })'" />
+
+            </div>
+        </div> }
+    else
+    {
+        <div class="row">
+            <div class="col-sm-12">
+                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="View Career" onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId = item.Id })'" />
+
+            </div>
+        </div>}
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Delete" onclick="location.href='@Url.Action("Delete","Students", new { id = item.Id })'" />
+
+                </div>
+            </div>
+        </div>
+    </td>
+</tr>
+           }}
         </tbody>
     </table>
 
 
-    <div>
-        <a asp-action="Register"><b>Add new student.</b></a>
+    <div class="row">
+        <div class="col-sm-12 pb-sm-2">
+            <input type="button" class="btn btn-primary" value="Add a New Student" onclick="location.href='@Url.Action("Register","Students")'" />
+        </div>
     </div>
 </div>

@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-sm-12">
 
-                <h2 class="GoalHeadingFont">Student Answers for @Model[0].InterviewName</h2>
+                <h2 class="GoalHeadingFont">@Model[0].StudentName's Answers for @Model[0].InterviewName</h2>
                
             </div>
         </div>
@@ -82,4 +82,5 @@
                 <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("StudentsInInterview", "Interviews", new { Id = Model[0].InterviewId })'">Back To List</button>
             </div>
         }
+        
     </div>
