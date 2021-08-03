@@ -967,6 +967,7 @@ namespace Lead2Change.Web.Ui.Controllers
             Student model = new Student()
             {
                 Id = viewModel.Id,
+                Active = true,
                 StudentFirstName = viewModel.StudentFirstName,
                 StudentLastName = viewModel.StudentLastName,
                 StudentDateOfBirth = viewModel.StudentDateOfBirth,
