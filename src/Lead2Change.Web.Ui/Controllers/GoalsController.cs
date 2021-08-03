@@ -11,10 +11,12 @@ using System.Threading.Tasks;
 using Lead2Change.Domain.Models;
 using Lead2Change.Services.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Lead2Change.Domain.Constants;
 
-// TODO: Add auth
 namespace Lead2Change.Web.Ui.Controllers
 {
+    [Authorize(Roles = StringConstants.RoleNameAdmin + "," + StringConstants.RoleNameCoach)]
     public class GoalsController : _BaseController
     {
         private IGoalsService GoalsService;
@@ -65,6 +67,7 @@ namespace Lead2Change.Web.Ui.Controllers
             }
             return View(model);
         }
+
         public async Task<IActionResult> Details(Guid id)
         {
             var goal = await GoalsService.GetGoal(id);

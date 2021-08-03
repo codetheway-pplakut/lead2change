@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Lead2Change.Domain.Constants;
 using Lead2Change.Services.Students;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
+    [Authorize(Roles = StringConstants.RoleNameAdmin + "," + StringConstants.RoleNameCoach)]
     public class CoachesController : _BaseController
     {
         ICoachService _coachService;
@@ -23,40 +25,17 @@ namespace Lead2Change.Web.Ui.Controllers
             _studentService = studentService;
         }
 
+        [Authorize(Roles = StringConstants.RoleNameAdmin)]
         public async Task<IActionResult> Index()
         {
-            if (!SignInManager.IsSignedIn(User))
-
-            {
-                return Error("401: Unauthorized");
-            }
-
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-
-            {
-                return Error("403: You are not authorized to view this page.");
-            }
-
             return View(await _coachService.GetCoaches());
         }
 
+        [Authorize(Roles = StringConstants.RoleNameAdmin)]
         public async Task<IActionResult> Delete(Guid id)
         {
-            if (!SignInManager.IsSignedIn(User))
-
-            {
-                return Error("401: Unauthorized");
-            }
-
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-
-            {
-                return Error("403: You are not authorized to view this page.");
-            }
-
             var coach = await _coachService.GetCoach(id);
             if (id == Guid.Empty || coach == null)
-
             {
                 return Error("400: Bad Request");
             }
@@ -99,18 +78,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Edit(Guid id)
         {
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Error("401: Unauthorized");
-            }
-
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: You are not authorized to view this page.");
-            }
-
             var coach = await _coachService.GetCoach(id);
-
 
             if (id == Guid.Empty || coach == null)
             {
@@ -130,11 +98,6 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Create()
         {
-            if (!SignInManager.IsSignedIn(User))
-            {
-                return Redirect("/Identity/Account/Login?returnUrl=/Coaches/Create");
-            }
-
             var user = await UserManager.GetUserAsync(User);
             if (User.IsInRole(StringConstants.RoleNameCoach) && user.AssociatedId != Guid.Empty)
             {
@@ -174,7 +137,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     if(User.IsInRole(StringConstants.RoleNameCoach))
                     {
                         user.AssociatedId = result.Id;
-                        _coachService.Update(result);
+                        await _coachService.Update(result);
                         return RedirectToAction("Index", "Students");
                     }
                 }

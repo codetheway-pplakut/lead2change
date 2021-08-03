@@ -4,6 +4,7 @@ using Lead2Change.Domain.ViewModels;
 using Lead2Change.Services.CareerDeclarationService;
 using Lead2Change.Services.Identity;
 using Lead2Change.Services.Students;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 // TODO: Add auth to controller
 namespace Lead2Change.Web.Ui.Controllers
 {
+    [Authorize(Roles = StringConstants.RoleNameAdmin + "," + StringConstants.RoleNameCoach)]
     public class CareerDeclarationController : _BaseController
     {
         private ICareerDeclarationService _service;
