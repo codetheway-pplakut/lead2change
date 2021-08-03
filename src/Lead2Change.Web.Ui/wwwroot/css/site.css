@@ -14,7 +14,7 @@ a {
 
 .btn-primary {
     color: #fff;
-    background-color: #004cbb;
+    background-color: #2656A5;
     border-color: #0043a6;
 }
 
@@ -125,7 +125,7 @@ body {
 
 /* Basic Styling for Goal Index Page */
 thead.blueStyle {
-    background-color: #004cbb;
+    background-color: #2656A5;
     color: white;
 }
 
@@ -176,7 +176,7 @@ thead.blueStyle {
     word-wrap: break-word;
 }
 .blueHeader {
-    background-color: #004cbb;
+    background-color: #2656A5;
     color: white;
     padding-top: 2em;
     padding-bottom: 2em;
@@ -199,5 +199,15 @@ thead.blueStyle {
     width: 50%;
     height: auto;
     display:block;
+}
+
+body {
+    background-color: #F5F5F5;
+}
+.offWhiteBackground {
+    background-color: #F5F5F5;
+}
+table{
+    background-color: white;
 }
 
