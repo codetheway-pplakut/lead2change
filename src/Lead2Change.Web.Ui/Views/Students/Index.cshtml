@@ -43,37 +43,24 @@
                         @Html.DisplayFor(modelItem => item.ParentEmail)
                     </td>
                     <td>
-                            <div>
-                                <div>
-                                    @Html.ActionLink("Edit", "Edit", new { studentId = item.Id })
-                                </div>
-
-                                <div>
-                                    @Html.ActionLink("Details", "Details", new { studentId = item.Id })
-                                </div>
-                            
-                                <div>
-                                    @Html.ActionLink("Goals", "Index", "Goals", new { studentID = item.Id })
-                                </div>
-                                
-                                <div>
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                </div>
-                            
+                        <div class="dropdown">
+                            <button class="btn  btn-block orangeBtn mb-sm-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Edit","Students", new { studentId= item.Id })'">Edit</button>
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","Students", new { studentId= item.Id })'">Details</button>
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index","Goals", new { studentId= item.Id })'">Student Goals</button>
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Delete","Students", new { id= item.Id })'">Delete</button>
                                 @if (item.CareerDeclarationId == Guid.Empty)
                                 {
-                                    <div>
-                                        @Html.ActionLink("Add Career", "Create", "CareerDeclaration", new { studentId = item.Id })
-                                    </div>
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Create","CareerDeclaration", new { studentId= item.Id })'">Add Career</button>
                                 }
                                 else
                                 {
-                                    <div>
-                                        @Html.ActionLink("View Career", "Details", "CareerDeclaration", new { studentId = item.Id })
-                                    </div>
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId= item.Id })'">View Career</button>
                                 }
                             </div>
-                        </td>
+                        </div>
+                    </td>
                     </tr>
 
                 }
