@@ -109,7 +109,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         QuestionId = questions[i].QuestionId,
                         
                         InterviewName = (await _interviewsService.GetInterview(model.InterviewId)).InterviewName,
-                        StudentName = students[i].StudentFirstName + " " + students[i].StudentLastName,
+                        
                     };
                     var result = await AnswersService.AnswerQuestion(answer);
                     
