@@ -11,7 +11,7 @@
     </div>
 
     <table class="table table-striped shadow-lg pt-2" id="myTable">
-        <thead>
+        <thead class="blueStyle">
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
@@ -32,11 +32,7 @@
                         @Html.DisplayFor(modelItem => item.StudentEmail)
                     </td>
                     <td>
-                        <div>
-                            <div>
-                                @Html.ActionLink("Assign Student", "AssignStudent", new { studentId = item.Id, coachId = Model.CurrentCoach.Id })
-                            </div>
-                        </div>
+                                <button class="btn btn-block orangeBtn" onclick="location.href='@Url.Action("AssignStudent", "Coaches", new { studentId = item.Id, coachId = Model.CurrentCoach.Id })'">Assign Student</button>
                     </td>
                 </tr>
             }
