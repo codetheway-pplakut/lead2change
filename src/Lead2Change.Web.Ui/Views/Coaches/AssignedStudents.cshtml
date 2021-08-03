@@ -1,25 +1,13 @@
 ﻿@model Lead2Change.Domain.ViewModels.CoachViewModel
 @using Microsoft.AspNetCore.Identity
 @using Lead2Change.Domain.Models
-@inject SignInManager<AspNetUsers> SignInManager
-@inject UserManager<AspNetUsers> UserManager
 @*
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Assigned Students";
+
 *@
+@{
 
-<h1>Details</h1>
-
-<p>First Name:  @Model.CoachFirstName</p>
-<p>Last Name:  @Model.CoachLastName</p>
-<p>Email:  @Model.CoachEmail</p>
-<p>Phone Number:  @Model.CoachPhoneNumber</p>
-@if(SignInManager.IsSignedIn(User) && User.IsInRole("Coach"))
- {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="AssignedStudents"> Assigned Students</a>
-    </li>    
- } 
-
+}
 <table class="table table-striped pt-2" id="myTable">
     <thead>
         <tr>
@@ -32,7 +20,7 @@
 
     <tbody>
         @foreach (var item in Model.Students)
-
+            
         {
             <tr>
                 <td>

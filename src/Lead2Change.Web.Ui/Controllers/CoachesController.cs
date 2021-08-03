@@ -30,6 +30,11 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             return View(await _coachService.GetCoaches());
         }
+        public async Task<IActionResult> AssignedIndex()
+        {
+            return View(await _coachService.GetCoaches());
+        }
+
 
         [Authorize(Roles = StringConstants.RoleNameAdmin)]
         public async Task<IActionResult> Delete(Guid id)
@@ -75,6 +80,32 @@ namespace Lead2Change.Web.Ui.Controllers
 
             return View(model);
         }
+        public async Task<IActionResult> AssignedStudents(Guid id)
+        {
+            var coachescontainer = await _coachService.GetCoach(id);
+
+            if (id == Guid.Empty || coachescontainer == null)
+            {
+                return Error("400: Bad Request");
+            }
+
+            CoachViewModel model = new CoachViewModel();
+
+            if (coachescontainer != null)
+            {
+                model.Id = coachescontainer.Id;
+                model.CoachFirstName = coachescontainer.CoachFirstName;
+                model.CoachLastName = coachescontainer.CoachLastName;
+                model.CoachEmail = coachescontainer.CoachEmail;
+                model.CoachPhoneNumber = coachescontainer.CoachPhoneNumber;
+                model.Students = new List<Student>();
+            }
+
+            model.Students = await _studentService.GetCoachStudents(id);
+
+            return View(model);
+        }
+
 
         public async Task<IActionResult> Edit(Guid id)
         {
