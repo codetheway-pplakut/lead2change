@@ -4,11 +4,16 @@
     ViewData["Title"] = "Register";
 }
 <div class="container-fluid">
-    <div align="center">
-        <h1>Student Intake Form</h1>
-        <p>Please enter the corresponding information into the fields below</p>
-        <hr />
+    <div class="row blueHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>STUDENT INTAKE FORM</strong></h1>
+        </div>
     </div>
+    <div align="center">
+        <p>Please enter the corresponding information into the fields below</p>
+    </div>
+    <hr />
+
     <div class="calibri">
         <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -545,7 +550,7 @@
     </div>
 
     <div>
-        <button class="btn btn-back"><a asp-action="Index">Back to Student List</a></button>
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students")'">Back To Student List</button>
     </div>
 </div>
 @section Scripts {
