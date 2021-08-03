@@ -8,10 +8,12 @@ using Lead2Change.Domain.ViewModels;
 using Lead2Change.Domain.Models;
 using Lead2Change.Services.Interviews;
 using Lead2Change.Services.Students;
-
+using Microsoft.AspNetCore.Authorization;
+using Lead2Change.Domain.Constants;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
+    [Authorize(Roles = StringConstants.RoleNameAdmin + "," + StringConstants.RoleNameCoach)]
     public class AnswerController : Controller
     {
 

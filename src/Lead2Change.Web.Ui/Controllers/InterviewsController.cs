@@ -10,9 +10,12 @@ using Lead2Change.Services.Questions;
 using Lead2Change.Services.QuestionInInterviews;
 using Lead2Change.Services.Students;
 using Lead2Change.Services.Answers;
+using Microsoft.AspNetCore.Authorization;
+using Lead2Change.Domain.Constants;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
+    [Authorize(Roles = StringConstants.RoleNameAdmin + "," + StringConstants.RoleNameCoach)]
     public class InterviewsController : Controller
     {
         private IInterviewService _interviewsService;
