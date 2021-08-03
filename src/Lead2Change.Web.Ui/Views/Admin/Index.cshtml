@@ -20,27 +20,28 @@
         <tbody>
             @if (Model != null)
             {
-@foreach (var item in Model)
-{
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
 
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.UserName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Email)
-    </td>
+                        <td>
+                            <div>
 
-    <td>
-        <div>
+                                <div>
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                </div>
 
-            <div>
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </div>
-
-        </div>
-    </td>
-</tr>                }            }
+                            </div>
+                        </td>
+                    </tr>
+                }            
+            }
         </tbody>
     </table>
 
