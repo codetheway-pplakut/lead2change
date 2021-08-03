@@ -56,10 +56,6 @@
                                 <div>
                                     @Html.ActionLink("Goals", "Index", "Goals", new { studentID = item.Id })
                                 </div>
-                                
-                                <div>
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                </div>
                             
                                 @if (item.CareerDeclarationId == Guid.Empty)
                                 {
