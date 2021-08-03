@@ -3,69 +3,94 @@
     ViewData["Title"] = "Details";
 *@
 
-<h1>Details</h1>
-
-<p>First Name:  @Model.CoachFirstName</p>
-<p>Last Name:  @Model.CoachLastName</p>
-<p>Email:  @Model.CoachEmail</p>
-<p>Phone Number:  @Model.CoachPhoneNumber</p>
-
-
-<table class="table table-striped shadow-lg pt-2" id="myTable">
-    <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Options</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var item in Model.Students)
-
-        {
+<div class="container-fluid">
+    <div class="row blueHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>COACH DETAILS</strong></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            
+        </div>
+    </div>
+    <div class="card text-dark bg-light mb-3">
+        <div class="card-header">
+            <div class="row">
+                <h2>Coach Information</h2>
+                <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#coachInfo" aria-expanded="false" aria-controls="coachInfo">
+                    <img src="~/Images/UpDownIcon.png" class="smallIcon"/>
+                </button>
+            </div>
+        </div>
+            <ul class="list-group list-group-flush collapse" id="coachInfo">
+                <li class="list-group-item">First Name:  @Model.CoachFirstName</li>
+                <li class="list-group-item">Last Name:  @Model.CoachLastName</li>
+                <li class="list-group-item">Email: @Model.CoachEmail</li>
+                <li class="list-group-item">Phone Number:  @Model.CoachPhoneNumber</li>
+            </ul>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+           <h3>Assigned Students</h3>
+        </div>
+    </div>
+    <table class="table table-striped shadow-lg pt-2" id="myTable">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentEmail)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentCellPhone)
-                </td>
-                <td>
-                    <div>
-                    <div>
-                        @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
-                    </div>
-                    <div>
-                        @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
-                    </div>
-                    <div>
-                        @Html.ActionLink("Student Goals", "Index", "Goals", new { studentID = item.Id })
-                    </div>
-                    @if (item.CareerDeclarationId == Guid.Empty)
-                    {
-                        <div>
-                            @Html.ActionLink("Add Student Career", "Create", "CareerDeclaration", new { studentId = item.Id })
-                        </div>
-                    }
-                    else
-                    {
-                        <div>
-                            @Html.ActionLink("View Student Career", "Details", "CareerDeclaration", new { studentId = item.Id })
-                        </div>
-                    }
-                    </div>
-                </td>
-
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Options</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+        <tbody>
+            @foreach (var item in Model.Students)
+
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentCellPhone)
+                    </td>
+                    <td>
+                        <div>
+                            <div>
+                                @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
+                            </div>
+                            <div>
+                                @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
+                            </div>
+                            <div>
+                                @Html.ActionLink("Student Goals", "Index", "Goals", new { studentID = item.Id })
+                            </div>
+                            @if (item.CareerDeclarationId == Guid.Empty)
+                            {
+                                <div>
+                                    @Html.ActionLink("Add Student Career", "Create", "CareerDeclaration", new { studentId = item.Id })
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    @Html.ActionLink("View Student Career", "Details", "CareerDeclaration", new { studentId = item.Id })
+                                </div>
+                            }
+                        </div>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 </div>
