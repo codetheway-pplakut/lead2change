@@ -4,8 +4,13 @@
 *@
 
 <div class="container">
-
-    <table class="table sortable" id="myTable">
+    <div class="row">
+        <div class="col-sm-10"><h1 class="tableLinks">Inactive Students</h1></div>
+        <div class="col-sm-2">
+            <input type="text" id="myInput" onkeyup="searchFilter()" placeholder="Search for items.." class="tableInput" align="right">
+        </div>
+    </div>
+    <table class="table" id="myTable">
         <thead>
             <tr>
                 <th scope="col">Last Name</th>
@@ -72,9 +77,9 @@
                                     @Html.ActionLink("View Career", "Details", "CareerDeclaration", new { studentId = item.Id })
                                 </div>
                             }
-                            
 
-                            
+
+
                         </div>
                     </td>
                 </tr>
