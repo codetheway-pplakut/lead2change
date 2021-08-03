@@ -48,5 +48,5 @@
     <input type="button" class="btn btn-primary" value="Edit Career" onclick="location.href='@Url.Action("Edit", "CareerDeclaration", new { id = Model.Id })'" />
 </div>
 <div align="center">
-    <button class="btn btn-back">@Html.ActionLink("Back to List", "Index", "Students")</button>
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students")'">Back To List</button>
 </div>
