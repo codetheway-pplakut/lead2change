@@ -62,7 +62,7 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            returnUrl = returnUrl ?? Url.Content("/Students/Index");
+            returnUrl = returnUrl ?? Url.Content("~/Coaches/AssignStudentIndex");
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -71,10 +71,10 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
 
             ReturnUrl = returnUrl;
         }
-
+        
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("/Students/Index");
+            returnUrl = returnUrl ?? Url.Content("~/Coaches/AssignStudentIndex");
 
             if (ModelState.IsValid)
             {
