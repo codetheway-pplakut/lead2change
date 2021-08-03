@@ -1010,5 +1010,13 @@ namespace Lead2Change.Web.Ui.Controllers
 
             return Error("403: You are not authorized to view this page.");
         }
+        public async Task<IActionResult> AcceptStudent(Guid studentId)
+        {
+            var student = await _studentService.GetStudent(studentId);
+            student.Accepted = true;
+            student.Active = true;
+            var student1 = await _studentService.Update(student);
+            return RedirectToAction("ApplyingStudentsIndex");
+        }
     }
 }
