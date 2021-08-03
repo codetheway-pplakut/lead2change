@@ -744,11 +744,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
             if (
                 // Check for bad model state
-                !ModelState.IsValid ||
-
-                // Check first name length
-
-                viewModel.StudentFirstName.Length <= 0
+                !ModelState.IsValid
                 )
             {
                 return Error("400: Bad Request");
@@ -1053,8 +1049,56 @@ namespace Lead2Change.Web.Ui.Controllers
                 OldStudentEmail = student.StudentEmail,
                 StudentCareerPath = student.StudentCareerPath,
                 StudentCareerInterest = student.StudentCareerInterest,
+                //Parent Info
+                ParentFirstName = student.ParentFirstName,
+                ParentLastName = student.ParentLastName,
+                Address = student.Address,
+                ParentApartmentNumber = student.ParentApartmentNumber,
+                ParentCity = student.ParentCity,
+                ParentState = student.ParentState,
+                ParentZipCode = student.ParentZipCode,
+                ParentHomePhone = student.ParentHomePhone,
+                ParentCellPhone = student.ParentCellPhone,
+                ParentEmail = student.ParentEmail,
+                OldParentEmail = student.ParentEmail,
+                //Guidance Counselor Info
+                KnowGuidanceCounselor = student.KnowGuidanceCounselor,
+                GuidanceCounselorName = student.GuidanceCounselorName,
+                MeetWithGuidanceCounselor = student.MeetWithGuidanceCounselor,
+                HowOftenMeetWithGuidanceCounselor = student.HowOftenMeetWithGuidanceCounselor,
+                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor,
+                PlanAfterHighSchool = student.PlanAfterHighSchool,
+                CollegeApplicationStatus = student.CollegeApplicationStatus,
+                CollegesList = student.CollegesList,
+                CollegeEssayStatus = student.CollegeEssayStatus,
+                CollegeEssayHelp = student.CollegeEssayHelp,
+                FirstChoiceCollege = student.FirstChoiceCollege,
+                SecondChoiceCollege = student.SecondChoiceCollege,
+                ThirdChoiceCollege = student.ThirdChoiceCollege,
+                TradeSchoolStatus = student.TradeSchoolStatus,
+                TradeSchoolsList = student.TradeSchoolsList,
+                ArmedForcesStatus = student.ArmedForcesStatus,
+                ArmedForcesBranch = student.ArmedForcesBranch,
+                WorkStatus = student.WorkStatus,
+                CareerPathList = student.CareerPathList,
+                OtherPlans = student.OtherPlans,
+                PACTTestDate = student.PACTTestDate,
+                PACTTestScore = student.PACTTestScore,
+                PSATTestDate = student.PSATTestDate,
+                PSATTestScore = student.PSATTestScore,
+                SATTestDate = student.SATTestDate,
+                SATTestScore = student.SATTestScore,
+                ACTTestDate = student.ACTTestDate,
+                ACTTestScore = student.ACTTestScore,
+                PrepClassRequired = student.PrepClassRequired,
+                AssistanceForForms = student.AssistanceForForms,
+                FinancialAidProcessComplete = student.FinancialAidProcessComplete,
+                SupportNeeded = student.SupportNeeded,
+                StudentSignature = student.StudentSignature,
+                StudentSignatureDate = student.StudentSignatureDate,
+                ParentSignature = student.ParentSignature,
+                ParentSignatureDate = student.ParentSignatureDate,
                 CoachId = student.CoachId,
-
                 Active = student.Active
             };
 
@@ -1102,6 +1146,20 @@ namespace Lead2Change.Web.Ui.Controllers
             {
                 Id = student.Id,
                 //General Student Info
+                StudentFirstName = student.StudentFirstName,
+                StudentLastName = student.StudentLastName,
+                StudentDateOfBirth = student.StudentDateOfBirth,
+                StudentAddress = student.StudentAddress,
+                StudentApartmentNumber = student.StudentApartmentNumber,
+                StudentCity = student.StudentCity,
+                StudentState = student.StudentState,
+                StudentZipCode = student.StudentZipCode,
+                StudentHomePhone = student.StudentHomePhone,
+                StudentCellPhone = student.StudentCellPhone,
+                StudentEmail = student.StudentEmail,
+                OldStudentEmail = student.StudentEmail,
+                StudentCareerPath = student.StudentCareerPath,
+                StudentCareerInterest = student.StudentCareerInterest,
                 //Parent Info
                 ParentFirstName = student.ParentFirstName,
                 ParentLastName = student.ParentLastName,
@@ -1113,6 +1171,44 @@ namespace Lead2Change.Web.Ui.Controllers
                 ParentHomePhone = student.ParentHomePhone,
                 ParentCellPhone = student.ParentCellPhone,
                 ParentEmail = student.ParentEmail,
+                OldParentEmail = student.ParentEmail,
+                //Guidance Counselor Info
+                KnowGuidanceCounselor = student.KnowGuidanceCounselor,
+                GuidanceCounselorName = student.GuidanceCounselorName,
+                MeetWithGuidanceCounselor = student.MeetWithGuidanceCounselor,
+                HowOftenMeetWithGuidanceCounselor = student.HowOftenMeetWithGuidanceCounselor,
+                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor,
+                PlanAfterHighSchool = student.PlanAfterHighSchool,
+                CollegeApplicationStatus = student.CollegeApplicationStatus,
+                CollegesList = student.CollegesList,
+                CollegeEssayStatus = student.CollegeEssayStatus,
+                CollegeEssayHelp = student.CollegeEssayHelp,
+                FirstChoiceCollege = student.FirstChoiceCollege,
+                SecondChoiceCollege = student.SecondChoiceCollege,
+                ThirdChoiceCollege = student.ThirdChoiceCollege,
+                TradeSchoolStatus = student.TradeSchoolStatus,
+                TradeSchoolsList = student.TradeSchoolsList,
+                ArmedForcesStatus = student.ArmedForcesStatus,
+                ArmedForcesBranch = student.ArmedForcesBranch,
+                WorkStatus = student.WorkStatus,
+                CareerPathList = student.CareerPathList,
+                OtherPlans = student.OtherPlans,
+                PACTTestDate = student.PACTTestDate,
+                PACTTestScore = student.PACTTestScore,
+                PSATTestDate = student.PSATTestDate,
+                PSATTestScore = student.PSATTestScore,
+                SATTestDate = student.SATTestDate,
+                SATTestScore = student.SATTestScore,
+                ACTTestDate = student.ACTTestDate,
+                ACTTestScore = student.ACTTestScore,
+                PrepClassRequired = student.PrepClassRequired,
+                AssistanceForForms = student.AssistanceForForms,
+                FinancialAidProcessComplete = student.FinancialAidProcessComplete,
+                SupportNeeded = student.SupportNeeded,
+                StudentSignature = student.StudentSignature,
+                StudentSignatureDate = student.StudentSignatureDate,
+                ParentSignature = student.ParentSignature,
+                ParentSignatureDate = student.ParentSignatureDate,
                 CoachId = student.CoachId,
                 Active = student.Active
             };
@@ -1161,12 +1257,514 @@ namespace Lead2Change.Web.Ui.Controllers
             {
                 Id = student.Id,
                 //General Student Info
+                StudentFirstName = student.StudentFirstName,
+                StudentLastName = student.StudentLastName,
+                StudentDateOfBirth = student.StudentDateOfBirth,
+                StudentAddress = student.StudentAddress,
+                StudentApartmentNumber = student.StudentApartmentNumber,
+                StudentCity = student.StudentCity,
+                StudentState = student.StudentState,
+                StudentZipCode = student.StudentZipCode,
+                StudentHomePhone = student.StudentHomePhone,
+                StudentCellPhone = student.StudentCellPhone,
+                StudentEmail = student.StudentEmail,
+                OldStudentEmail = student.StudentEmail,
+                StudentCareerPath = student.StudentCareerPath,
+                StudentCareerInterest = student.StudentCareerInterest,
                 //Parent Info
+                ParentFirstName = student.ParentFirstName,
+                ParentLastName = student.ParentLastName,
+                Address = student.Address,
+                ParentApartmentNumber = student.ParentApartmentNumber,
+                ParentCity = student.ParentCity,
+                ParentState = student.ParentState,
+                ParentZipCode = student.ParentZipCode,
+                ParentHomePhone = student.ParentHomePhone,
+                ParentCellPhone = student.ParentCellPhone,
+                ParentEmail = student.ParentEmail,
+                OldParentEmail = student.ParentEmail,
+                //Guidance Counselor Info
                 KnowGuidanceCounselor = student.KnowGuidanceCounselor,
                 GuidanceCounselorName = student.GuidanceCounselorName,
                 MeetWithGuidanceCounselor = student.MeetWithGuidanceCounselor,
                 HowOftenMeetWithGuidanceCounselor = student.HowOftenMeetWithGuidanceCounselor,
                 DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor,
+                PlanAfterHighSchool = student.PlanAfterHighSchool,
+                CollegeApplicationStatus = student.CollegeApplicationStatus,
+                CollegesList = student.CollegesList,
+                CollegeEssayStatus = student.CollegeEssayStatus,
+                CollegeEssayHelp = student.CollegeEssayHelp,
+                FirstChoiceCollege = student.FirstChoiceCollege,
+                SecondChoiceCollege = student.SecondChoiceCollege,
+                ThirdChoiceCollege = student.ThirdChoiceCollege,
+                TradeSchoolStatus = student.TradeSchoolStatus,
+                TradeSchoolsList = student.TradeSchoolsList,
+                ArmedForcesStatus = student.ArmedForcesStatus,
+                ArmedForcesBranch = student.ArmedForcesBranch,
+                WorkStatus = student.WorkStatus,
+                CareerPathList = student.CareerPathList,
+                OtherPlans = student.OtherPlans,
+                PACTTestDate = student.PACTTestDate,
+                PACTTestScore = student.PACTTestScore,
+                PSATTestDate = student.PSATTestDate,
+                PSATTestScore = student.PSATTestScore,
+                SATTestDate = student.SATTestDate,
+                SATTestScore = student.SATTestScore,
+                ACTTestDate = student.ACTTestDate,
+                ACTTestScore = student.ACTTestScore,
+                PrepClassRequired = student.PrepClassRequired,
+                AssistanceForForms = student.AssistanceForForms,
+                FinancialAidProcessComplete = student.FinancialAidProcessComplete,
+                SupportNeeded = student.SupportNeeded,
+                StudentSignature = student.StudentSignature,
+                StudentSignatureDate = student.StudentSignatureDate,
+                ParentSignature = student.ParentSignature,
+                ParentSignatureDate = student.ParentSignatureDate,
+                CoachId = student.CoachId,
+                Active = student.Active
+            };
+
+            return View(viewModel);
+        }
+        public async Task<IActionResult> PostSecondaryEdit(Guid studentId)
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+            // Check Permissions
+            /*
+             *  Students: Allowed if owned by user
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                // Find user
+                var user = await UserManager.GetUserAsync(User);
+                // Check that studentId is the AssociatedId of the user
+
+                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+
+                {
+                    return Error("403: Forbidden");
+                }
+            }
+            else if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+                return Error("403: Forbidden");
+            }
+            // Find student
+            var student = await _studentService.GetStudent(studentId);
+            // Check for bad student
+
+            if (student == null || studentId == Guid.Empty)
+
+            {
+                return Error("400: Bad Request");
+            }
+            EditViewModel viewModel = new EditViewModel()
+            {
+                Id = student.Id,
+                //General Student Info
+                StudentFirstName = student.StudentFirstName,
+                StudentLastName = student.StudentLastName,
+                StudentDateOfBirth = student.StudentDateOfBirth,
+                StudentAddress = student.StudentAddress,
+                StudentApartmentNumber = student.StudentApartmentNumber,
+                StudentCity = student.StudentCity,
+                StudentState = student.StudentState,
+                StudentZipCode = student.StudentZipCode,
+                StudentHomePhone = student.StudentHomePhone,
+                StudentCellPhone = student.StudentCellPhone,
+                StudentEmail = student.StudentEmail,
+                OldStudentEmail = student.StudentEmail,
+                StudentCareerPath = student.StudentCareerPath,
+                StudentCareerInterest = student.StudentCareerInterest,
+                //Parent Info
+                ParentFirstName = student.ParentFirstName,
+                ParentLastName = student.ParentLastName,
+                Address = student.Address,
+                ParentApartmentNumber = student.ParentApartmentNumber,
+                ParentCity = student.ParentCity,
+                ParentState = student.ParentState,
+                ParentZipCode = student.ParentZipCode,
+                ParentHomePhone = student.ParentHomePhone,
+                ParentCellPhone = student.ParentCellPhone,
+                ParentEmail = student.ParentEmail,
+                OldParentEmail = student.ParentEmail,
+                //Guidance Counselor Info
+                KnowGuidanceCounselor = student.KnowGuidanceCounselor,
+                GuidanceCounselorName = student.GuidanceCounselorName,
+                MeetWithGuidanceCounselor = student.MeetWithGuidanceCounselor,
+                HowOftenMeetWithGuidanceCounselor = student.HowOftenMeetWithGuidanceCounselor,
+                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor,
+                PlanAfterHighSchool = student.PlanAfterHighSchool,
+                CollegeApplicationStatus = student.CollegeApplicationStatus,
+                CollegesList = student.CollegesList,
+                CollegeEssayStatus = student.CollegeEssayStatus,
+                CollegeEssayHelp = student.CollegeEssayHelp,
+                FirstChoiceCollege = student.FirstChoiceCollege,
+                SecondChoiceCollege = student.SecondChoiceCollege,
+                ThirdChoiceCollege = student.ThirdChoiceCollege,
+                TradeSchoolStatus = student.TradeSchoolStatus,
+                TradeSchoolsList = student.TradeSchoolsList,
+                ArmedForcesStatus = student.ArmedForcesStatus,
+                ArmedForcesBranch = student.ArmedForcesBranch,
+                WorkStatus = student.WorkStatus,
+                CareerPathList = student.CareerPathList,
+                OtherPlans = student.OtherPlans,
+                PACTTestDate = student.PACTTestDate,
+                PACTTestScore = student.PACTTestScore,
+                PSATTestDate = student.PSATTestDate,
+                PSATTestScore = student.PSATTestScore,
+                SATTestDate = student.SATTestDate,
+                SATTestScore = student.SATTestScore,
+                ACTTestDate = student.ACTTestDate,
+                ACTTestScore = student.ACTTestScore,
+                PrepClassRequired = student.PrepClassRequired,
+                AssistanceForForms = student.AssistanceForForms,
+                FinancialAidProcessComplete = student.FinancialAidProcessComplete,
+                SupportNeeded = student.SupportNeeded,
+                StudentSignature = student.StudentSignature,
+                StudentSignatureDate = student.StudentSignatureDate,
+                ParentSignature = student.ParentSignature,
+                ParentSignatureDate = student.ParentSignatureDate,
+                CoachId = student.CoachId,
+                Active = student.Active
+            };
+
+            return View(viewModel);
+        }
+        public async Task<IActionResult> CollegeEntranceExamEdit(Guid studentId)
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+            // Check Permissions
+            /*
+             *  Students: Allowed if owned by user
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                // Find user
+                var user = await UserManager.GetUserAsync(User);
+                // Check that studentId is the AssociatedId of the user
+
+                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+
+                {
+                    return Error("403: Forbidden");
+                }
+            }
+            else if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+                return Error("403: Forbidden");
+            }
+            // Find student
+            var student = await _studentService.GetStudent(studentId);
+            // Check for bad student
+
+            if (student == null || studentId == Guid.Empty)
+
+            {
+                return Error("400: Bad Request");
+            }
+            EditViewModel viewModel = new EditViewModel()
+            {
+                Id = student.Id,
+                //General Student Info
+                StudentFirstName = student.StudentFirstName,
+                StudentLastName = student.StudentLastName,
+                StudentDateOfBirth = student.StudentDateOfBirth,
+                StudentAddress = student.StudentAddress,
+                StudentApartmentNumber = student.StudentApartmentNumber,
+                StudentCity = student.StudentCity,
+                StudentState = student.StudentState,
+                StudentZipCode = student.StudentZipCode,
+                StudentHomePhone = student.StudentHomePhone,
+                StudentCellPhone = student.StudentCellPhone,
+                StudentEmail = student.StudentEmail,
+                OldStudentEmail = student.StudentEmail,
+                StudentCareerPath = student.StudentCareerPath,
+                StudentCareerInterest = student.StudentCareerInterest,
+                //Parent Info
+                ParentFirstName = student.ParentFirstName,
+                ParentLastName = student.ParentLastName,
+                Address = student.Address,
+                ParentApartmentNumber = student.ParentApartmentNumber,
+                ParentCity = student.ParentCity,
+                ParentState = student.ParentState,
+                ParentZipCode = student.ParentZipCode,
+                ParentHomePhone = student.ParentHomePhone,
+                ParentCellPhone = student.ParentCellPhone,
+                ParentEmail = student.ParentEmail,
+                OldParentEmail = student.ParentEmail,
+                //Guidance Counselor Info
+                KnowGuidanceCounselor = student.KnowGuidanceCounselor,
+                GuidanceCounselorName = student.GuidanceCounselorName,
+                MeetWithGuidanceCounselor = student.MeetWithGuidanceCounselor,
+                HowOftenMeetWithGuidanceCounselor = student.HowOftenMeetWithGuidanceCounselor,
+                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor,
+                PlanAfterHighSchool = student.PlanAfterHighSchool,
+                CollegeApplicationStatus = student.CollegeApplicationStatus,
+                CollegesList = student.CollegesList,
+                CollegeEssayStatus = student.CollegeEssayStatus,
+                CollegeEssayHelp = student.CollegeEssayHelp,
+                FirstChoiceCollege = student.FirstChoiceCollege,
+                SecondChoiceCollege = student.SecondChoiceCollege,
+                ThirdChoiceCollege = student.ThirdChoiceCollege,
+                TradeSchoolStatus = student.TradeSchoolStatus,
+                TradeSchoolsList = student.TradeSchoolsList,
+                ArmedForcesStatus = student.ArmedForcesStatus,
+                ArmedForcesBranch = student.ArmedForcesBranch,
+                WorkStatus = student.WorkStatus,
+                CareerPathList = student.CareerPathList,
+                OtherPlans = student.OtherPlans,
+                PACTTestDate = student.PACTTestDate,
+                PACTTestScore = student.PACTTestScore,
+                PSATTestDate = student.PSATTestDate,
+                PSATTestScore = student.PSATTestScore,
+                SATTestDate = student.SATTestDate,
+                SATTestScore = student.SATTestScore,
+                ACTTestDate = student.ACTTestDate,
+                ACTTestScore = student.ACTTestScore,
+                PrepClassRequired = student.PrepClassRequired,
+                AssistanceForForms = student.AssistanceForForms,
+                FinancialAidProcessComplete = student.FinancialAidProcessComplete,
+                SupportNeeded = student.SupportNeeded,
+                StudentSignature = student.StudentSignature,
+                StudentSignatureDate = student.StudentSignatureDate,
+                ParentSignature = student.ParentSignature,
+                ParentSignatureDate = student.ParentSignatureDate,
+                CoachId = student.CoachId,
+                Active = student.Active
+            };
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> FinancialAidEdit(Guid studentId)
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+            // Check Permissions
+            /*
+             *  Students: Allowed if owned by user
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                // Find user
+                var user = await UserManager.GetUserAsync(User);
+                // Check that studentId is the AssociatedId of the user
+
+                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+
+                {
+                    return Error("403: Forbidden");
+                }
+            }
+            else if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+                return Error("403: Forbidden");
+            }
+            // Find student
+            var student = await _studentService.GetStudent(studentId);
+            // Check for bad student
+
+            if (student == null || studentId == Guid.Empty)
+
+            {
+                return Error("400: Bad Request");
+            }
+            EditViewModel viewModel = new EditViewModel()
+            {
+                Id = student.Id,
+                //General Student Info
+                StudentFirstName = student.StudentFirstName,
+                StudentLastName = student.StudentLastName,
+                StudentDateOfBirth = student.StudentDateOfBirth,
+                StudentAddress = student.StudentAddress,
+                StudentApartmentNumber = student.StudentApartmentNumber,
+                StudentCity = student.StudentCity,
+                StudentState = student.StudentState,
+                StudentZipCode = student.StudentZipCode,
+                StudentHomePhone = student.StudentHomePhone,
+                StudentCellPhone = student.StudentCellPhone,
+                StudentEmail = student.StudentEmail,
+                OldStudentEmail = student.StudentEmail,
+                StudentCareerPath = student.StudentCareerPath,
+                StudentCareerInterest = student.StudentCareerInterest,
+                //Parent Info
+                ParentFirstName = student.ParentFirstName,
+                ParentLastName = student.ParentLastName,
+                Address = student.Address,
+                ParentApartmentNumber = student.ParentApartmentNumber,
+                ParentCity = student.ParentCity,
+                ParentState = student.ParentState,
+                ParentZipCode = student.ParentZipCode,
+                ParentHomePhone = student.ParentHomePhone,
+                ParentCellPhone = student.ParentCellPhone,
+                ParentEmail = student.ParentEmail,
+                OldParentEmail = student.ParentEmail,
+                //Guidance Counselor Info
+                KnowGuidanceCounselor = student.KnowGuidanceCounselor,
+                GuidanceCounselorName = student.GuidanceCounselorName,
+                MeetWithGuidanceCounselor = student.MeetWithGuidanceCounselor,
+                HowOftenMeetWithGuidanceCounselor = student.HowOftenMeetWithGuidanceCounselor,
+                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor,
+                PlanAfterHighSchool = student.PlanAfterHighSchool,
+                CollegeApplicationStatus = student.CollegeApplicationStatus,
+                CollegesList = student.CollegesList,
+                CollegeEssayStatus = student.CollegeEssayStatus,
+                CollegeEssayHelp = student.CollegeEssayHelp,
+                FirstChoiceCollege = student.FirstChoiceCollege,
+                SecondChoiceCollege = student.SecondChoiceCollege,
+                ThirdChoiceCollege = student.ThirdChoiceCollege,
+                TradeSchoolStatus = student.TradeSchoolStatus,
+                TradeSchoolsList = student.TradeSchoolsList,
+                ArmedForcesStatus = student.ArmedForcesStatus,
+                ArmedForcesBranch = student.ArmedForcesBranch,
+                WorkStatus = student.WorkStatus,
+                CareerPathList = student.CareerPathList,
+                OtherPlans = student.OtherPlans,
+                PACTTestDate = student.PACTTestDate,
+                PACTTestScore = student.PACTTestScore,
+                PSATTestDate = student.PSATTestDate,
+                PSATTestScore = student.PSATTestScore,
+                SATTestDate = student.SATTestDate,
+                SATTestScore = student.SATTestScore,
+                ACTTestDate = student.ACTTestDate,
+                ACTTestScore = student.ACTTestScore,
+                PrepClassRequired = student.PrepClassRequired,
+                AssistanceForForms = student.AssistanceForForms,
+                FinancialAidProcessComplete = student.FinancialAidProcessComplete,
+                SupportNeeded = student.SupportNeeded,
+                StudentSignature = student.StudentSignature,
+                StudentSignatureDate = student.StudentSignatureDate,
+                ParentSignature = student.ParentSignature,
+                ParentSignatureDate = student.ParentSignatureDate,
+                CoachId = student.CoachId,
+                Active = student.Active
+            };
+
+            return View(viewModel);
+        }
+        public async Task<IActionResult> SignatureEdit(Guid studentId)
+        {
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+            // Check Permissions
+            /*
+             *  Students: Allowed if owned by user
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (User.IsInRole(StringConstants.RoleNameStudent))
+            {
+                // Find user
+                var user = await UserManager.GetUserAsync(User);
+                // Check that studentId is the AssociatedId of the user
+
+                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+
+                {
+                    return Error("403: Forbidden");
+                }
+            }
+            else if (User.IsInRole(StringConstants.RoleNameCoach))
+
+            {
+                return Error("403: Forbidden");
+            }
+            // Find student
+            var student = await _studentService.GetStudent(studentId);
+            // Check for bad student
+
+            if (student == null || studentId == Guid.Empty)
+
+            {
+                return Error("400: Bad Request");
+            }
+            EditViewModel viewModel = new EditViewModel()
+            {
+                Id = student.Id,
+                //General Student Info
+                StudentFirstName = student.StudentFirstName,
+                StudentLastName = student.StudentLastName,
+                StudentDateOfBirth = student.StudentDateOfBirth,
+                StudentAddress = student.StudentAddress,
+                StudentApartmentNumber = student.StudentApartmentNumber,
+                StudentCity = student.StudentCity,
+                StudentState = student.StudentState,
+                StudentZipCode = student.StudentZipCode,
+                StudentHomePhone = student.StudentHomePhone,
+                StudentCellPhone = student.StudentCellPhone,
+                StudentEmail = student.StudentEmail,
+                OldStudentEmail = student.StudentEmail,
+                StudentCareerPath = student.StudentCareerPath,
+                StudentCareerInterest = student.StudentCareerInterest,
+                //Parent Info
+                ParentFirstName = student.ParentFirstName,
+                ParentLastName = student.ParentLastName,
+                Address = student.Address,
+                ParentApartmentNumber = student.ParentApartmentNumber,
+                ParentCity = student.ParentCity,
+                ParentState = student.ParentState,
+                ParentZipCode = student.ParentZipCode,
+                ParentHomePhone = student.ParentHomePhone,
+                ParentCellPhone = student.ParentCellPhone,
+                ParentEmail = student.ParentEmail,
+                OldParentEmail = student.ParentEmail,
+                //Guidance Counselor Info
+                KnowGuidanceCounselor = student.KnowGuidanceCounselor,
+                GuidanceCounselorName = student.GuidanceCounselorName,
+                MeetWithGuidanceCounselor = student.MeetWithGuidanceCounselor,
+                HowOftenMeetWithGuidanceCounselor = student.HowOftenMeetWithGuidanceCounselor,
+                DiscussWithGuidanceCounselor = student.DiscussWithGuidanceCounselor,
+                PlanAfterHighSchool = student.PlanAfterHighSchool,
+                CollegeApplicationStatus = student.CollegeApplicationStatus,
+                CollegesList = student.CollegesList,
+                CollegeEssayStatus = student.CollegeEssayStatus,
+                CollegeEssayHelp = student.CollegeEssayHelp,
+                FirstChoiceCollege = student.FirstChoiceCollege,
+                SecondChoiceCollege = student.SecondChoiceCollege,
+                ThirdChoiceCollege = student.ThirdChoiceCollege,
+                TradeSchoolStatus = student.TradeSchoolStatus,
+                TradeSchoolsList = student.TradeSchoolsList,
+                ArmedForcesStatus = student.ArmedForcesStatus,
+                ArmedForcesBranch = student.ArmedForcesBranch,
+                WorkStatus = student.WorkStatus,
+                CareerPathList = student.CareerPathList,
+                OtherPlans = student.OtherPlans,
+                PACTTestDate = student.PACTTestDate,
+                PACTTestScore = student.PACTTestScore,
+                PSATTestDate = student.PSATTestDate,
+                PSATTestScore = student.PSATTestScore,
+                SATTestDate = student.SATTestDate,
+                SATTestScore = student.SATTestScore,
+                ACTTestDate = student.ACTTestDate,
+                ACTTestScore = student.ACTTestScore,
+                PrepClassRequired = student.PrepClassRequired,
+                AssistanceForForms = student.AssistanceForForms,
+                FinancialAidProcessComplete = student.FinancialAidProcessComplete,
+                SupportNeeded = student.SupportNeeded,
+                StudentSignature = student.StudentSignature,
+                StudentSignatureDate = student.StudentSignatureDate,
+                ParentSignature = student.ParentSignature,
+                ParentSignatureDate = student.ParentSignatureDate,
                 CoachId = student.CoachId,
                 Active = student.Active
             };
