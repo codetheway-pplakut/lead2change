@@ -57,27 +57,22 @@
                     </td>
                     <td>
                         <div>
-                            <div>
-                                <button class="btn  btn-block orangeBtn mb-sm-2" onclick="location.href='@Url.Action("UnassignStudent","Coaches", new { studentId= item.Id })'">Unassign</button>
+                            <div class="dropdown">
+                                <button class="btn  btn-block orangeBtn mb-sm-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("UnassignStudent","Coaches", new { studentId= item.Id })'">Unassign Student</button>
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","Students", new { studentId= item.Id })'">Student Details</button>
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index","Goals", new { studentId= item.Id })'">Student Goals</button>
+                                    @if (item.CareerDeclarationId == Guid.Empty)
+                                    {
+                                        <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Create","CareerDeclaration", new { studentId= item.Id })'">Add Student Career</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId= item.Id })'">View Student Career</button>
+                                    }
+                                </div>
                             </div>
-                            <div>
-                                <button class="btn  btn-block orangeBtn mb-sm-2" onclick="location.href='@Url.Action("Details","Students", new { studentId= item.Id })'">Details</button>
-                            </div>
-                            <div>
-                                <button class="btn  btn-block orangeBtn mb-sm-2" onclick="location.href='@Url.Action("Index","Goals", new { studentId= item.Id })'">Goals</button>
-                            </div>
-                            @if (item.CareerDeclarationId == Guid.Empty)
-                            {
-                        <div>
-                            <button class="btn btn-block orangeBtn mb-sm-2" onclick="location.href='@Url.Action("Create","CareerDeclaration", new { studentId= item.Id })'">Add Student Career</button>
-                        </div>
-                            }
-                            else
-                            {
-                        <div>
-                            <button class="btn btn-block orangeBtn mb-sm-2" onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId= item.Id })'">View Student Career</button>
-                        </div>
-                            }
                         </div>
                     </td>
 
