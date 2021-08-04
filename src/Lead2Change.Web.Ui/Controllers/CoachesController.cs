@@ -53,6 +53,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 model.CoachEmail = coachescontainer.CoachEmail;
                 model.CoachPhoneNumber = coachescontainer.CoachPhoneNumber;
                 model.Students = new List<Student>();
+                model.Active = coachescontainer.Active;
             }
 
             model.Students = await _studentService.GetCoachStudents(id);
@@ -74,7 +75,8 @@ namespace Lead2Change.Web.Ui.Controllers
                         CoachLastName = model.CoachLastName,
                         CoachEmail = model.CoachEmail,
                         CoachPhoneNumber = model.CoachPhoneNumber,
-                        Students = new List<Student>()
+                        Students = new List<Student>(),
+                        Active = true
                     };
                     var abc = await _coachService.Create(coach);
                 }
@@ -96,6 +98,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 CoachLastName = coach.CoachLastName,
                 CoachPhoneNumber = coach.CoachPhoneNumber,
                 CoachEmail = coach.CoachEmail,
+                Active = coach.Active
             };
             return View(list);
         }
@@ -112,7 +115,8 @@ namespace Lead2Change.Web.Ui.Controllers
                         CoachFirstName = model.CoachFirstName,
                         CoachLastName = model.CoachLastName,
                         CoachEmail = model.CoachEmail,
-                        CoachPhoneNumber = model.CoachPhoneNumber
+                        CoachPhoneNumber = model.CoachPhoneNumber,
+                        Active = model.Active
                     };
                     var student = await _coachService.Update(list);
                 }
@@ -130,9 +134,6 @@ namespace Lead2Change.Web.Ui.Controllers
             var student1 = await _studentService.Update(student);
             return RedirectToAction("AssignStudentIndex", new { id = coach.Id });
         }
-        //Need to add "AddStudent" method to Service
-        //Change above method^^^
-        //Change StudentService to change the CoachId
 
         public async Task<IActionResult> AssignStudentIndex(Guid id)
         {
@@ -165,12 +166,27 @@ namespace Lead2Change.Web.Ui.Controllers
                 model.CoachEmail = coachescontainer.CoachEmail;
                 model.CoachPhoneNumber = coachescontainer.CoachPhoneNumber;
                 model.Students = new List<Student>();
+                model.Active = coachescontainer.Active;
             }
 
             model.Students = await _studentService.GetCoachStudents(id);
 
 
             return View(model);
+        }
+        public async Task<IActionResult> InactiveCoach(Guid coachId)
+        {
+            var coach = await _coachService.GetCoach(coachId);
+            coach.Active = false;
+            var coach1 = await _coachService.Update(coach);
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> ActiveCoach(Guid coachId)
+        {
+            var coach = await _coachService.GetCoach(coachId);
+            coach.Active = true;
+            var coach1 = await _coachService.Update(coach);
+            return RedirectToAction("Index");
         }
     }
 
