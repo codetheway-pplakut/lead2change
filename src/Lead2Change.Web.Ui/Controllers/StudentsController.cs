@@ -831,7 +831,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 model.OldParentEmail = model.ParentEmail;
             }*/
 
-            return RedirectToAction("Details", new { studentId = student.Id });
+            return RedirectToAction("Edit", new { studentId = student.Id });
         }
         public async Task<IActionResult> InterestForm()
         {
