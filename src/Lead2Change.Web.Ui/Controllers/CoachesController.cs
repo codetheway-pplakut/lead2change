@@ -147,9 +147,10 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> UnassignStudent(Guid studentId)
         {
             var student = await _studentService.GetStudent(studentId);
+            var tempCoachId = student.CoachId;
             student.CoachId = null;
             var student1 = await _studentService.Update(student);
-            return RedirectToAction("Index");
+            return RedirectToAction("CoachesStudents", new { id = tempCoachId });
         }
         public async Task<IActionResult> CoachesStudents(Guid id)
         {
