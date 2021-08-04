@@ -100,7 +100,11 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
             var isMSValid = ModelState.IsValid;
             if (ModelState.IsValid)
             {
-                if (_userManager.FindByEmailAsync(Input.Email) != null)
+                var userWithEmail = await _userManager.FindByEmailAsync(Input.Email);
+                if (userWithEmail == null)
+                {
+
+                } else
                 {
                     ModelState.AddModelError(string.Empty, "There is already a user registered with this email");
                     return Page();
@@ -116,7 +120,7 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                 var result1 = await _coachService.Create(coach);
                 if (User.IsInRole(StringConstants.RoleNameCoach))
                 {
-                    _coachService.Update(result1);
+                    await _coachService.Update(result1);
                     return RedirectToAction("Index", "Students");
                 }
 
@@ -140,10 +144,15 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
+                    code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+                    var result2 = await _userManager.ConfirmEmailAsync(user, code);
+                    if (result2.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Coaches");
+                    }
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+//                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
                     else
                     {
