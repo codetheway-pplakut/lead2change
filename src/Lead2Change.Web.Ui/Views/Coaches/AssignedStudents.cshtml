@@ -35,7 +35,7 @@
                 <td>
                     <div>
                         <div>
-                            @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
+                            @Html.ActionLink("Unassign Student", "UnassignStudent", "Coaches", new { studentId = item.Id })
                         </div>
                         <div>
                             @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
