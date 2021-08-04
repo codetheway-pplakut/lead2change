@@ -6,61 +6,39 @@
 }
 <div class="container-fluid">
     <div align="center">
-        <h1>Edit Page</h1>
-        <hr />
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("Student Information", "StudentInformationEdit", new { studentId = Model.Id })</button>
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("Parent Information", "ParentInformationEdit", new { studentId = Model.Id })</button>
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("Guidance Counselor Information", "GuidanceCounselorInformation", new { studentId = Model.Id })</button>
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("Post Secondary Information", "PostSecondaryEdit", new { studentId = Model.Id })</button>
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("College Entrance Exam Information", "CollegeEntranceExamEdit", new { studentId = Model.Id })</button>
-
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("Financial Aid Information", "FinancialAidEdit", new { studentId = Model.Id })</button>
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("Signature Information", "SignatureEdit", new { studentId = Model.Id })</button>
-            </div>
-        </div>
+        <h1>Signatures</h1>
     </div>
-    <hr />
     <form asp-action="UpDate">
-        <div class="form-group row">
-            
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-                <h4 align="center"><label asp-for="Active" class="control-label">Is this student active? (Check if yes)</label></h4>
-                <input asp-for="Active" class="form-control" type="checkbox" />
-                <span asp-validation-for="Active" class="text-danger"></span>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <label asp-for="StudentSignature" class="control-label">Student Signature:</label>
+                    <input asp-for="StudentSignature" class="form-control" value=@Model.StudentSignature required />
+                    <span asp-validation-for="StudentSignature" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label asp-for="StudentSignatureDate" class="control-label">Date:</label>
+                    <input asp-for="StudentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
+                    <span asp-validation-for="StudentSignatureDate" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <label asp-for="ParentSignature" class="control-label">Parent Signature:</label>
+                    <input asp-for="ParentSignature" class="form-control" value=@Model.ParentSignature required />
+                    <span asp-validation-for="ParentSignature" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label asp-for="ParentSignatureDate" class="control-label">Date:</label>
+                    <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
+                    <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
+                </div>
             </div>
         </div>
         <div class="form-group hidden">
@@ -558,40 +536,12 @@
                 <input asp-for="SupportNeeded" class="form-control" value=@Model.SupportNeeded />
                 <span asp-validation-for="SupportNeeded" class="text-danger"></span>
             </div>
-            <div class="row">
-                <div class="col-sm-9">
-                    <div class="form-group">
-                        <label asp-for="StudentSignature" class="control-label">Student Signature:</label>
-                        <input asp-for="StudentSignature" class="form-control" value=@Model.StudentSignature required />
-                        <span asp-validation-for="StudentSignature" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label asp-for="StudentSignatureDate" class="control-label">Date:</label>
-                        <input asp-for="StudentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
-                        <span asp-validation-for="StudentSignatureDate" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-9">
-                    <div class="form-group">
-                        <label asp-for="ParentSignature" class="control-label">Parent Signature:</label>
-                        <input asp-for="ParentSignature" class="form-control" value=@Model.ParentSignature required />
-                        <span asp-validation-for="ParentSignature" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label asp-for="ParentSignatureDate" class="control-label">Date:</label>
-                        <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
-                        <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
         </div>
-
+        <div class="form-group">
+            <label asp-for="Active" class="control-label">Is this student active?</label>
+            <input asp-for="Active" class="form-control" type="checkbox" />
+            <span asp-validation-for="Active" class="text-danger"></span>
+        </div>
         <div class="form-group hidden" display="none">
             <label asp-for="CoachId" class="control-label"></label>
             <input asp-for="CoachId" class="form-control" value=@Model.CoachId />
@@ -601,16 +551,15 @@
             <input asp-for="Id" class="form-control" value=@Model.Id />
         </div>
         <div class="form-group" align="center">
-            <input type="submit" value="Update Active Status" class="btn btn-submit" />
+            <input type="submit" value="Submit" class="btn btn-submit" />
         </div>
     </form>
 </div>
 
-    <div>
-        <button class="btn btn-back"><a asp-action="Index">Back to Student List</a></button>
-    </div>
+<div>
+    <button class="btn btn-back">@Html.ActionLink("Back to Edit", "Edit", new { studentId = Model.Id })</button>
+</div>
 
-
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
