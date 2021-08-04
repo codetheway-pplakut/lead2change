@@ -20,17 +20,17 @@
         </div>
         <div class="form-group row">
             <label asp-for="CollegeBound" class="control-label col-sm-3"><b>Are you College Bound?</b></label>
-            <input asp-for="CollegeBound" class="form-control col-sm-1" />
+            <input asp-for="CollegeBound" class="form-control col-sm-1"/>
             <span asp-validation-for="CollegeBound" class="text-danger"></span>
         </div>
         <div class="form-group row">
             <label asp-for="CareerCluster" class="control-label col-sm-3"><b>What is the career cluster that you are most interested in?</b></label>
-            @Html.DropDownListFor(m => m.CareerCluster, Model.CareerCluster.ToSelectList(), null, new { @class = "form-control col-sm-9" })
+            @Html.DropDownListFor(m => m.CareerCluster, Model.CareerCluster.ToSelectList(), null, new { @class = "form-control col-sm-8 ml-sm-4" })
             <span asp-validation-for="CareerCluster" class="text-danger"></span>
         </div>
         <div class="form-group row">
             <label asp-for="SpecificCareer" class="control-label col-sm-3"><b>What specific career would you like to pursue?</b></label>
-            <input asp-for="SpecificCareer" class="form-control col-sm-9" />
+            <input asp-for="SpecificCareer" class="form-control col-sm-8 ml-sm-4" />
             <span asp-validation-for="SpecificCareer" class="text-danger"></span>
         </div>
         <div class="form-group row">

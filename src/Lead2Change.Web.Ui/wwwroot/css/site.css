@@ -193,15 +193,3 @@ thead.blueStyle {
     height: auto;
     display:block;
 }
-
-#interviewSearch {
-    width: 100%; /* Full-width */
-    height: 50%;
-    padding: 12px 12px 12px 15px; /* Add some padding */
-    border: 1px solid #ddd; /* Add a grey border */
-    margin-bottom: 12px; /* Add some space below the input */
-}
-#interviewStudentTable {
-    border-collapse: collapse; /* Collapse borders */
-    width: 100%; /* Full-width */
-}
