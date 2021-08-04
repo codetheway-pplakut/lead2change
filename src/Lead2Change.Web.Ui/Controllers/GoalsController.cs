@@ -78,7 +78,6 @@ namespace Lead2Change.Web.Ui.Controllers
             {
                 return Error("403: Not authorized to view this student.");
             }
-
             GoalViewModel viewModel = new GoalViewModel()
             {
                 Id = id,

@@ -146,13 +146,6 @@ thead.blueStyle {
         color: white;
     }
 
-.btn-back {
-    color: #fff;
-    background-color: transparent;
-    border-color: #004cbb;
-    border-radius: 40px;
-}
-
 .btn-submit {
     color: #fff;
     background-color: #ff7c00;
