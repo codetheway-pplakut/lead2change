@@ -100,6 +100,11 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
             var isMSValid = ModelState.IsValid;
             if (ModelState.IsValid)
             {
+                if (_userManager.FindByEmailAsync(Input.Email) != null)
+                {
+                    ModelState.AddModelError(string.Empty, "There is already a user registered with this email");
+                    return Page();
+                }
                 Coach coach = new Coach()
                 {
                     CoachFirstName = Input.CoachFirstName,

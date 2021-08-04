@@ -73,12 +73,12 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (_signInManager.IsSignedIn(User))
+            if (_signInManager.IsSignedIn(User) && User.IsInRole(StringConstants.RoleNameAdmin) == true)
             {
-                return Redirect("~/");
+                return Page();
             }
 
-            return Page();
+            return Redirect("AccessDenied");
 
         }
 
