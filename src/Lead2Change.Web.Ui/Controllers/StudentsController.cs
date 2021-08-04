@@ -968,8 +968,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 StudentLastName = viewModel.StudentLastName,
                 StudentDateOfBirth = viewModel.StudentDateOfBirth,
                 StudentCellPhone = viewModel.StudentCellPhone,
-                StudentEmail = viewModel.StudentEmail,
-                Active = true,
+                StudentEmail = viewModel.StudentEmail
             };
 
             // Add model
