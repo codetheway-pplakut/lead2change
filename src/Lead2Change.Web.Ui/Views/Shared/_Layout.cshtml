@@ -46,34 +46,34 @@
                             @if (User.IsInRole(StringConstants.RoleNameCoach))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="AssignStudentIndex">Students</a>
+                                    <a class="nav-link " asp-area="" asp-controller="Coaches" asp-action="AssignStudentIndex">Students</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Interviews" asp-action="Index">Interviews</a>
+                                    <a class="nav-link " asp-area="" asp-controller="Interviews" asp-action="Index">Interviews</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Questions" asp-action="Index">Questions</a>
+                                    <a class="nav-link " asp-area="" asp-controller="Questions" asp-action="Index">Questions</a>
                                 </li>
                             }
                             @if (User.IsInRole(StringConstants.RoleNameAdmin))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
+                                    <a class="nav-link " asp-area="" asp-controller="Students" asp-action="Index">Active Students</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index" asp-route-inactive="true">Inactive Students</a>
+                                    <a class="nav-link " asp-area="" asp-controller="Students" asp-action="InactiveIndex" >Inactive Students</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Interviews" asp-action="Index">Interviews</a>
+                                    <a class="nav-link " asp-area="" asp-controller="Interviews" asp-action="Index">Interviews</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Questions" asp-action="Index">Questions</a>
+                                    <a class="nav-link " asp-area="" asp-controller="Questions" asp-action="Index">Questions</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin Index</a>
+                                    <a class="nav-link " asp-area="" asp-controller="Admin" asp-action="Index">Admin Index</a>
                                 </li>
                             }
                         }
