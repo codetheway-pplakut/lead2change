@@ -306,6 +306,8 @@ namespace Lead2Change.Web.Ui.Controllers
             RegistrationViewModel viewModel = new RegistrationViewModel()
             {
                 Id = student.Id,
+                isAccepted =student.Accepted,
+                isDeclined = student.Declined,
                 StudentFirstName = student.StudentFirstName,
                 StudentLastName = student.StudentLastName,
                 StudentDateOfBirth = student.StudentDateOfBirth,

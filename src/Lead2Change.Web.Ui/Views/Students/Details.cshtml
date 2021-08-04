@@ -180,7 +180,20 @@
         <li class="list-group-item">Support they need: @Model.SupportNeeded</li>
     </ul>
 </div>
-
+<div class="card text-dark bg-light mb-3">
+    <div class="card-header">
+        <div class="row px-sm-3">
+            <h3>Admin Details</h3>
+            <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#adminInfo" aria-expanded="false" aria-controls="adminInfo">
+                <img src="~/Images/UpDownIcon.png" class="smallIcon" />
+            </button>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush collapse" id="adminInfo">
+        <li class="list-group-item">Activity Status: @Model.Active</li>
+        <li class="list-group-item">Acceptance Status: @((Model.isAccepted) ? "Accepted" : (Model.isDeclined) ? "Declined" : "In Interest Phase")</li>
+    </ul>
+</div>
 <div class="card text-dark bg-light mb-3">
     <div class="card-header">
         <div class="row px-sm-3">
@@ -195,7 +208,6 @@
         <li class="list-group-item">Date Signed: @Convert.ToDateTime(Model.StudentSignatureDate).ToString("MM/dd/yyyy")</li>
         <li class="list-group-item">Parent Signature: @Model.ParentSignature</li>
         <li class="list-group-item">Date Signed: @Convert.ToDateTime(Model.ParentSignatureDate).ToString("MM/dd/yyyy")</li>
-        <li class="list-group-item">Activity Status: @Model.Active</li>
 
     </ul>
 </div>
