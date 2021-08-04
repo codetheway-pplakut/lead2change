@@ -41,11 +41,6 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="Active" class="control-label">Is this student active?</label>
-            <input asp-for="Active" class="form-control" type="checkbox" />
-            <span asp-validation-for="Active" class="text-danger"></span>
-        </div>
         <div class="form-group hidden">
             <h3>Student Information</h3>
             <div class="row">
@@ -541,6 +536,11 @@
                 <input asp-for="SupportNeeded" class="form-control" value=@Model.SupportNeeded />
                 <span asp-validation-for="SupportNeeded" class="text-danger"></span>
             </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Active" class="control-label">Is this student active?</label>
+            <input asp-for="Active" class="form-control" type="checkbox" />
+            <span asp-validation-for="Active" class="text-danger"></span>
         </div>
         <div class="form-group hidden" display="none">
             <label asp-for="CoachId" class="control-label"></label>
