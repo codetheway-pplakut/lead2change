@@ -134,9 +134,6 @@ namespace Lead2Change.Web.Ui.Controllers
             var student1 = await _studentService.Update(student);
             return RedirectToAction("AssignStudentIndex", new { id = coach.Id });
         }
-        //Need to add "AddStudent" method to Service
-        //Change above method^^^
-        //Change StudentService to change the CoachId
 
         public async Task<IActionResult> AssignStudentIndex(Guid id)
         {
@@ -176,6 +173,20 @@ namespace Lead2Change.Web.Ui.Controllers
 
 
             return View(model);
+        }
+        public async Task<IActionResult> InactiveCoach(Guid coachId)
+        {
+            var coach = await _coachService.GetCoach(coachId);
+            coach.Active = false;
+            var coach1 = await _coachService.Update(coach);
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> ActiveCoach(Guid coachId)
+        {
+            var coach = await _coachService.GetCoach(coachId);
+            coach.Active = true;
+            var coach1 = await _coachService.Update(coach);
+            return RedirectToAction("Index");
         }
     }
 
