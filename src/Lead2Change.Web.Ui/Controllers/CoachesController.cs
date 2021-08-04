@@ -128,7 +128,7 @@ namespace Lead2Change.Web.Ui.Controllers
             student.CoachId = coachId;
    
             var student1 = await _studentService.Update(student);
-            return RedirectToAction("Index");
+            return RedirectToAction("AssignStudentIndex", new { id = coach.Id });
         }
         //Need to add "AddStudent" method to Service
         //Change above method^^^

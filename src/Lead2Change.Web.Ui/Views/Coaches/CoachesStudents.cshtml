@@ -79,7 +79,7 @@
         {
 
 
-@if(item.Accepted == false){ 
+@if(item.Accepted == false && item.Declined == false){ 
 
             <tr>
                 <td>
@@ -100,20 +100,11 @@
                             @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
                         </div>
                         <div>
-                            @Html.ActionLink("Student Goals", "Index", "Goals", new { studentID = item.Id })
+                            @Html.ActionLink("Accept Student", "AcceptStudent", "Students", new { studentID = item.Id })
                         </div>
-                        @if (item.CareerDeclarationId == Guid.Empty)
-                        {
-                            <div>
-                                @Html.ActionLink("Add Student Career", "Create", "CareerDeclaration", new { studentId = item.Id })
-                            </div>
-                        }
-                        else
-                        {
-                            <div>
-                                @Html.ActionLink("View Student Career", "Details", "CareerDeclaration", new { studentId = item.Id })
-                            </div>
-                        }
+                        <div>
+                            @Html.ActionLink("Decline Student", "DeclineStudent", "Students", new { studentID = item.Id })
+                        </div>
                     </div>
                 </td>
 

@@ -1015,9 +1015,15 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             var student = await _studentService.GetStudent(studentId);
             student.Accepted = true;
-            student.Active = true;
             var student1 = await _studentService.Update(student);
-            return RedirectToAction("ApplyingStudentsIndex");
+            return RedirectToAction("CoachesStudents", "Coaches", new { id = student.CoachId });
+        }
+        public async Task<IActionResult> DeclineStudent(Guid studentId)
+        {
+            var student = await _studentService.GetStudent(studentId);
+            student.Declined = true;
+            var student1 = await _studentService.Update(student);
+            return RedirectToAction("CoachesStudents", "Coaches", new { id = student.CoachId });
         }
     }
 }
