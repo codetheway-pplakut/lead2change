@@ -31,12 +31,15 @@
 
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { interviewID=Model.StudentAnswer[i].InterviewId, studentId=Model.StudentAnswer[i].StudentId })'" />
+                    @if (Model.StudentAnswer[i].QuestionInInterviews.Count > 0)
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { interviewID = Model.StudentAnswer[i].InterviewId, studentId = Model.StudentAnswer[i].StudentId })'" />
 
+                            </div>
                         </div>
-                    </div>
+                    }
                 </td>
             </tr>
         }

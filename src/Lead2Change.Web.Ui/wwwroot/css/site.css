@@ -193,3 +193,47 @@ thead.blueStyle {
     height: auto;
     display:block;
 }
+
+/*Searchbar Styling*/
+.searchbar {
+    width: 100%;
+    max-width: 300px;
+    display: inline-flex;
+}
+
+.searchbar__input {
+    flex-grow: 1;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #0071BB;
+    border-radius: 5px 0 0 5px;
+    background: #f4faf9;
+    transition: background 0.25s, box-shadow 0.25s;
+}
+
+.searchbar__input:focus {
+        background: white;
+        box-shadow: 0 0 2px #004cbb;
+}
+
+.searchbar__input::placeholder {
+        color: #004cbb;
+}
+
+.searchbar__button {
+    width: 40px;
+    background: #0071BB;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.searchbar__button:active {
+        box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.25);
+}
