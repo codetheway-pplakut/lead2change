@@ -2,13 +2,24 @@
 @* ViewData["Title"] = "Question Select";
 *@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
+    @if (Model.StudentAnswer.Count > 0)
+    {
+        <div class="row">
+            <div class="col-sm-12">
 
-            <h2 class="GoalHeadingFont">Student Interview For @Model.StudentAnswer[0].InterviewName</h2>
+                <h2 class="GoalHeadingFont">Student Interviews For @Model.StudentAnswer[0].InterviewName</h2>
+            </div>
         </div>
-    </div>
-  
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-sm-12">
+
+                <h2 class="GoalHeadingFont">Student Interviews</h2>
+            </div>
+        </div>
+    }
     <table class="table table-striped pt-2">
         <thead class="thead blueStyle">
             <tr>
@@ -33,12 +44,15 @@
 
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { interviewID=Model.StudentAnswer[i].InterviewId, studentId=Model.StudentAnswer[i].StudentId })'" />
+                    @if (Model.StudentAnswer[i].QuestionInInterviews.Count > 0)
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { interviewID = Model.StudentAnswer[i].InterviewId, studentId = Model.StudentAnswer[i].StudentId })'" />
 
+                            </div>
                         </div>
-                    </div>
+                    }
                 </td>
             </tr>
         }

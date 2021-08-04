@@ -3,9 +3,13 @@
     ViewData["Title"] = "Index";
 *@
 
-<div class="container">
-    <h1>Students</h1>
-
+<div class="container">      
+    <div class="row">
+        <div class="col-sm-10"><h1 class="tableLinks">Students</h1></div>
+        <div class="col-sm-2">
+            <input type="text" id="myInput" onkeyup="searchFilter()" placeholder="Search for items.." class="tableInput" align="right">
+        </div>
+    </div>
     <table class="table table-striped pt-2" id="myTable">
         <thead>
             <tr>
@@ -24,25 +28,25 @@
                 @foreach (var item in Model)
                 {
 
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
-                    </td>
-                    <td>
-                        @*@Html.DisplayFor(modelItem => item.StudentDateOfBirth.ToString("d"))*@
-                        @*@Model.modelItem => item.StudentDateOfBirth.ToString("d")*@
-                        @Convert.ToDateTime(item.StudentDateOfBirth).ToString("MM/dd/yyyy")
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StudentEmail)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ParentLastName), @Html.DisplayFor(modelItem => item.ParentFirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ParentEmail)
-                    </td>
-                    <td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.StudentDateOfBirth.ToString("d"))*@
+                            @*@Model.modelItem => item.StudentDateOfBirth.ToString("d")*@
+                            @Convert.ToDateTime(item.StudentDateOfBirth).ToString("MM/dd/yyyy")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StudentEmail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ParentLastName), @Html.DisplayFor(modelItem => item.ParentFirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ParentEmail)
+                        </td>
+                        <td>
                             <div>
                                 <div>
                                     @Html.ActionLink("Edit", "Edit", new { studentId = item.Id })
@@ -51,15 +55,15 @@
                                 <div>
                                     @Html.ActionLink("Details", "Details", new { studentId = item.Id })
                                 </div>
-                            
+
                                 <div>
                                     @Html.ActionLink("Goals", "Index", "Goals", new { studentID = item.Id })
                                 </div>
-                                
+
                                 <div>
                                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                                 </div>
-                            
+
                                 @if (item.CareerDeclarationId == Guid.Empty)
                                 {
                                     <div>

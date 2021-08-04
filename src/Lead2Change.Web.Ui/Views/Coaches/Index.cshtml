@@ -6,7 +6,12 @@
 }
 
 <div class="container">
-    <h1>Coaches</h1>
+    <div class="row">
+        <div class="col-sm-10"><h1 class="tableLinks">Coaches</h1></div>
+        <div class="col-sm-2">
+            <input type="text" id="myInput" onkeyup="searchFilter()" placeholder="Search for items.." class="tableInput" align="right">
+        </div>
+    </div>    
 
     <table class="table table-striped pt-2" id="myTable">
         <thead>

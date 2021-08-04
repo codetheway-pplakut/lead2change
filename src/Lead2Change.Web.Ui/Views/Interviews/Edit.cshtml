@@ -72,13 +72,16 @@
                     {
                         @foreach (Question question in Model.AddedQuestions)
                         {
-                        <tr>
-                            <td class="text-center">@question.QuestionString</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-dark btn-lg btn-block" onclick="location.href='@Url.Action("RemoveQuestion","Interviews", new {interviewId = Model.Id, questionId = question.Id  })'">Remove</button>
-                            </td>
-                        </tr>
-                        }
+                           
+                           
+                                <tr>
+                                    <td class="text-center">@question.QuestionString</td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-dark btn-lg btn-block" onclick="location.href='@Url.Action("RemoveQuestion", "Interviews", new { interviewId = Model.Id, questionId = question.Id })'">Remove</button>
+                                    </td>
+                                </tr>
+                                
+                            }
                     }
                 </tbody>
             </table>
