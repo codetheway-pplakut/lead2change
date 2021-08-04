@@ -7,16 +7,15 @@ namespace Lead2Change.Services.Identity
 {
     public class EmailSender : IEmailSender
     {
-        public const string DefaultSender = "joeljk2003@gmail.com";
+        public const string DefaultSender = "test@example.com";
         public const string DefaultSenderTitle = "Lead2Change Student Registration";
 
-        private const string _apiKey = "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";
-        private static SendGridClient _client = new SendGridClient(_apiKey);
+        private const string _apiKey = "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";
 
         public async Task<Response> SendEmailAsync(string email, string subject, string htmlMessage, string sender, string senderTitle)
         {
-            return await Email(email,
-                sender,
+            return await Email(sender,
+                email,
                 subject,
                 htmlMessage,
                 htmlMessage,
@@ -30,12 +29,14 @@ namespace Lead2Change.Services.Identity
 
         public static async Task<Response> Email(string sender, string receiver, string xSubject, string xPlainTextContent, string xHtmlContent, string senderTitle, string receiverTitle)
         {
+            var client = new SendGridClient(_apiKey);
             var from = new EmailAddress(sender, senderTitle);
             var subject = xSubject;
 
             var to = new EmailAddress(receiver, receiverTitle);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, xPlainTextContent, xHtmlContent);
-            return await _client.SendEmailAsync(msg);
+            var result = await client.SendEmailAsync(msg);
+            return result;
         }
     }
 }

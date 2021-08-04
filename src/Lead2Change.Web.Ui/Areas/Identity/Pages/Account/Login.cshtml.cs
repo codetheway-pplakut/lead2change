@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Lead2Change.Domain.Models;
+using Lead2Change.Domain.Constants;
 
 namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
 {
@@ -62,7 +63,7 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            returnUrl = returnUrl ?? Url.Content("~/Coaches/AssignStudentIndex");
+            returnUrl = returnUrl ?? Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -74,8 +75,6 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
         
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/Coaches/AssignStudentIndex");
-
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -84,6 +83,11 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    returnUrl = returnUrl ?? 
+                        ((await _userManager.GetRolesAsync(user)).Contains(StringConstants.RoleNameCoach) 
+                        ? Url.Content("~/Coaches/AssignStudentIndex") 
+                        : Url.Content("~/"));
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
