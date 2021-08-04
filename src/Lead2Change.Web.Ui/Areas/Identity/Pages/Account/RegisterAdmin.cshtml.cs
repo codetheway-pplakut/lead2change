@@ -24,14 +24,14 @@ using Lead2Change.Services.Coaches;
 namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
 {
     [Authorize(Roles = StringConstants.RoleNameAdmin)]
-    public class AdminRegisterModel : PageModel
+    public class RegisterAdmin : PageModel
     {
         private readonly SignInManager<AspNetUsers> _signInManager;
         private readonly UserManager<AspNetUsers> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        public AdminRegisterModel(
+        public RegisterAdmin(
             UserManager<AspNetUsers> userManager,
             SignInManager<AspNetUsers> signInManager,
             ILogger<RegisterModel> logger,
@@ -69,12 +69,10 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
-        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)

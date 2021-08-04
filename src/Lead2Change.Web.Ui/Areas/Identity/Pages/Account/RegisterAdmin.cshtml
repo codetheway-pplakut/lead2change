@@ -1,5 +1,5 @@
 ﻿@page
-@model RegisterModel
+@model RegisterAdmin
 @{
     ViewData["Title"] = "Register";
 }
@@ -26,6 +26,9 @@
                 <label asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div>
+                <p style="color: red">NOTE: You will be creating another admin that can log in immediately, with the power to create and delete other admins, including you! Make sure you want to do this.</p>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
