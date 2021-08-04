@@ -46,7 +46,6 @@ namespace Lead2Change.Web.Ui.Controllers
             List<AnswersViewModel> result = new List<AnswersViewModel>();
             List<Answer> answers = await AnswersService.GetAnswers(interviewID);
             var interview1 = await _interviewsService.GetInterview(interviewID);
-            var student1 = await _studentService.GetStudent(studentId);
             foreach (Answer answer in answers)
             {
                 if (answer.StudentId == studentId)
