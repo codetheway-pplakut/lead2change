@@ -4,10 +4,9 @@
 *@
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row blueHeader full-width mb-sm-3">
         <div class="col-sm-12">
-
-            <h2 class="GoalHeadingFont">@Model.InterviewName</h2>
+            <h1 class="text-center"><strong>@Model.InterviewName.ToUpper()</strong></h1>
         </div>
     </div>
     <form asp-action="RegisterAnswerQuestion" class="calibri">
@@ -39,7 +38,7 @@
             </div>
         }
         <div class="form-group">
-            <input type="submit" value="Submit" class="btn btn-submit" />
+            <input type="submit" value="Submit" class="btn btn-primary" />
         </div>
     </form>
     <div align="center">
