@@ -16,7 +16,7 @@
 @if(SignInManager.IsSignedIn(User) && User.IsInRole("Coach"))
  {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="AssignedStudents"> Assigned Students</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="CoachesStudents">Assigned Students</a>
     </li>    
  } 
 

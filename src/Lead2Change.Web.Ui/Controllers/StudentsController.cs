@@ -41,10 +41,13 @@ namespace Lead2Change.Web.Ui.Controllers
             var user = await UserManager.GetUserAsync(User);
             if (User.IsInRole(StringConstants.RoleNameCoach))
             {
-                if (user.AssociatedId != Guid.Empty)
+                /*if (user.AssociatedId != Guid.Empty)
                     return View(await _studentService.GetCoachStudents(user.AssociatedId));
                 else
                     return RedirectToAction("Create", "Coaches");
+                */
+                //above is commented out because coaches should be viewing their students through the separate CoachesStudents
+                return Error("403: You are not authorized to view this page.");
             }
             else if (User.IsInRole(StringConstants.RoleNameAdmin))
             {
@@ -97,7 +100,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
             // Delete Student
             await _studentService.Delete(student);
-            return RedirectToAction("Index");
+            return RedirectToAction("InactiveIndex");//should only be able to delete from here
         }
 
         public async Task<IActionResult> Register()
@@ -162,9 +165,14 @@ namespace Lead2Change.Web.Ui.Controllers
              *  Admin: Allowed
              */
             // TODO: Error only if coach does not own the student
+
+            // Find Student
+            var student = await _studentService.GetStudent(studentId);
+
             if (User.IsInRole(StringConstants.RoleNameCoach))
             {
-                return Error("403: Forbidden");
+                var user = await UserManager.GetUserAsync(User);
+                if(student.CoachId!=user.AssociatedId) return Error("403: Forbidden");
             }
             else if (User.IsInRole(StringConstants.RoleNameStudent))
             {
@@ -178,8 +186,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 }
             }
 
-            // Find Student
-            var student = await _studentService.GetStudent(studentId);
+            
 
             // Check for bad student
             if (student == null)

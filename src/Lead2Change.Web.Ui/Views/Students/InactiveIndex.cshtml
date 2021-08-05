@@ -5,7 +5,7 @@
 *@
 
 <div class="container">
-    <h1>Students</h1>
+    <h1>Inactive Students</h1>
 
     <table class="table sortable table-striped pt-2" id="myTable">
         <thead>
@@ -80,6 +80,6 @@
     @if (User.IsInRole(StringConstants.RoleNameAdmin))
     {
 <div>
-    <a asp-action="Register"><b>Add new student.</b></a>
+    <a asp-action="InterestForm"><b>Register a new student</b></a>
 </div>}
 </div>

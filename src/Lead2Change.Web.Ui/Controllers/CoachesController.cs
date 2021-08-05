@@ -81,34 +81,6 @@ namespace Lead2Change.Web.Ui.Controllers
 
             return View(model);
         }
-        public async Task<IActionResult> AssignedStudents(Guid id)
-        {
-            var user = await UserManager.GetUserAsync(User);
-            if (id == Guid.Empty) id = user.AssociatedId;
-            var coachescontainer = await _coachService.GetCoach(id);
-
-            if (id == Guid.Empty || coachescontainer == null)
-            {
-                return Error("400: Bad Request");
-            }
-
-            CoachViewModel model = new CoachViewModel();
-
-            if (coachescontainer != null)
-            {
-                model.Id = coachescontainer.Id;
-                model.CoachFirstName = coachescontainer.CoachFirstName;
-                model.CoachLastName = coachescontainer.CoachLastName;
-                model.CoachEmail = coachescontainer.CoachEmail;
-                model.CoachPhoneNumber = coachescontainer.CoachPhoneNumber;
-                model.Students = new List<Student>();
-            }
-
-            model.Students = await _studentService.GetCoachStudents(id);
-
-            return View(model);
-        }
-
 
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -167,10 +139,10 @@ namespace Lead2Change.Web.Ui.Controllers
                         CoachEmail = model.CoachEmail,
                         CoachPhoneNumber = model.CoachPhoneNumber,
                         Students = new List<Student>(),
-                        Active = model.Active
+                        Active = true
                     };
                     var result = await _coachService.Create(coach);
-                    if(User.IsInRole(StringConstants.RoleNameCoach))
+                    if (User.IsInRole(StringConstants.RoleNameCoach))
                     {
                         user.AssociatedId = result.Id;
                         await _coachService.Update(result);
@@ -240,19 +212,25 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> CoachesStudents(Guid id)
         {
+            var user = await UserManager.GetUserAsync(User);
+            if (id == Guid.Empty) id = user.AssociatedId;
+
             CoachViewModel model = new CoachViewModel();
             var coachescontainer = await _coachService.GetCoach(id); //check for coachescontainer=null, and all other fields
 
-            if (coachescontainer != null)
+            if (id == Guid.Empty || coachescontainer == null)
             {
-                model.Id = coachescontainer.Id;
-                model.CoachFirstName = coachescontainer.CoachFirstName;
-                model.CoachLastName = coachescontainer.CoachLastName;
-                model.CoachEmail = coachescontainer.CoachEmail;
-                model.CoachPhoneNumber = coachescontainer.CoachPhoneNumber;
-                model.Students = new List<Student>();
-                model.Active = coachescontainer.Active;
+                return Error("400: Bad Request");
             }
+
+            model.Id = coachescontainer.Id;
+            model.CoachFirstName = coachescontainer.CoachFirstName;
+            model.CoachLastName = coachescontainer.CoachLastName;
+            model.CoachEmail = coachescontainer.CoachEmail;
+            model.CoachPhoneNumber = coachescontainer.CoachPhoneNumber;
+            model.Students = new List<Student>();
+            model.Active = coachescontainer.Active;
+
 
             model.Students = await _studentService.GetCoachStudents(id);
 
