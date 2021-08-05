@@ -141,7 +141,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 ACTTestDate = DateTime.Today,
                 StudentSignatureDate = DateTime.Today,
                 ParentSignatureDate = DateTime.Today,
-            }) ;
+            });
         }
 
         public async Task<IActionResult> Details(Guid studentId)
@@ -172,7 +172,7 @@ namespace Lead2Change.Web.Ui.Controllers
             if (User.IsInRole(StringConstants.RoleNameCoach))
             {
                 var user = await UserManager.GetUserAsync(User);
-                if(student.CoachId!=user.AssociatedId) return Error("403: Forbidden");
+                if (student.CoachId != user.AssociatedId) return Error("403: Forbidden");
             }
             else if (User.IsInRole(StringConstants.RoleNameStudent))
             {
@@ -186,14 +186,14 @@ namespace Lead2Change.Web.Ui.Controllers
                 }
             }
 
-            
+
 
             // Check for bad student
             if (student == null)
             {
                 return Error("400: Bad Request");
             }
-            
+
             //check for null
             //Caclculate age:
             var coachcontainer = new Coach();
@@ -202,13 +202,13 @@ namespace Lead2Change.Web.Ui.Controllers
                 coachcontainer = await _coachService.GetCoach(student.CoachId.Value);
             }
             var age = DateTime.Now.Year - student.StudentDateOfBirth.Year;
-            if(DateTime.Now.Month < student.StudentDateOfBirth.Month)
+            if (DateTime.Now.Month < student.StudentDateOfBirth.Month)
             {
                 age--;
             }
-            if(DateTime.Now.Month == student.StudentDateOfBirth.Month)
+            if (DateTime.Now.Month == student.StudentDateOfBirth.Month)
             {
-                if(DateTime.Now.Day < student.StudentDateOfBirth.Day)
+                if (DateTime.Now.Day < student.StudentDateOfBirth.Day)
                 {
                     age--;
                 }
@@ -391,7 +391,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 ParentSignatureDate = viewModel.ParentSignatureDate,
                 Active = true,
             };
-            
+
             // Add model
             var student = await _studentService.Create(model);
 
@@ -401,7 +401,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 user.AssociatedId = student.Id;
                 await UserManager.UpdateAsync(user);
             }
-            
+
             await EmailSender.Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
             await EmailSender.Email("1joel.kuriakose@gmail.com", "joeljk2003@gmail.com", "Lead2Change Student Registration Confirmation: A new student has been registered", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", "Lead2Change Student Registration", "Lead2Change");
             await EmailSender.Email("1joel.kuriakose@gmail.com", model.StudentEmail, "Lead2Change Registration Confirmation: You are registered", "Congrats, you have sucessfully registered for Lead2Change!", "Congrats, you have sucessfully registered for Lead2Change!", "Lead2Change Student Registration", model.StudentFirstName + " " + model.StudentLastName);
@@ -653,13 +653,13 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> InterestForm()
         {
             // Check SignedIn
-            if (!SignInManager.IsSignedIn(User))
+            /*    if (!SignInManager.IsSignedIn(User))
 
-            {
+                {
 
-                return Error("401: Unauthorized");
+                    return Error("401: Unauthorized");
 
-            }
+                } */
 
 
 
@@ -692,15 +692,17 @@ namespace Lead2Change.Web.Ui.Controllers
 
 
             // Check if user owns a student
-
-            if (user.AssociatedId != Guid.Empty)
-
+            if (user != null)
             {
 
-                return RedirectToAction("Details", new { studentId = user.AssociatedId });
+                if (user.AssociatedId != Guid.Empty)
 
+                {
+
+                    return RedirectToAction("Details", new { studentId = user.AssociatedId });
+
+                }
             }
-
             return View(new StudentInterestFormViewModel()
             {
                 // This changes the initial date displayed in the chooser
@@ -1618,4 +1620,3 @@ namespace Lead2Change.Web.Ui.Controllers
     }
 }
 
-       
