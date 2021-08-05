@@ -37,9 +37,12 @@
                         <td>
                             <div>
 
-                                <div>
+                                @if (Model.Count > 1)
+                                {
+                                    <div>
                                     <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href='@Url.Action("Delete","Admin", new { id = item.Id })'" />
-                                </div>
+                                    </div>
+                                }
 
                             </div>
                         </td>
