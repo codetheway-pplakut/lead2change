@@ -12,7 +12,7 @@
     </div>
     <div class="row">
         <div class="col-sm-3 searchbar ml-auto">
-            <input type="text" id="myInput" onkeyup="searchFilter()" placeholder="Search for items.." class="tableInput searchbar__input" align="right">
+            <input type="text" id="myInput" onkeyup="searchFilter()" placeholder="Search for students.." class="tableInput searchbar__input" align="right">
             <button type="button" class="searchbar__button">
                 <i class="material-icons">search</i>
             </button>
@@ -55,8 +55,5 @@
             </tr>
         }
     </table>
-</div>
-
-<div align="center">
-    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Interviews")'">Back To List</button>
+    <button class="btn btn-outline-dark btn-lg" onclick="location.href='@Url.Action("Index","Interviews")'">Back To List</button>
 </div>
