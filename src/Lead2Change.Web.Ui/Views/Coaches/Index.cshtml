@@ -59,6 +59,7 @@
                                     <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("AssignStudentIndex","Coaches", new { id= item.Id })'">Assign Student</button>
                                     <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("CoachesStudents","Coaches", new { id= item.Id })'">View Coach's Students</button>
                                     <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","Coaches", new { id= item.Id })'">Details</button>
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Unactivate","Coaches", new { id= item.Id })'">Deactivate Coach</button>
                                     <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Delete","Coaches", new { id= item.Id })'">Delete</button>
                                 </div>
                             </div>
