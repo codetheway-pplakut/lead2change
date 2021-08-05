@@ -2,7 +2,12 @@
 @*
     ViewData["Title"] = "CoachesStudents";
 *@
-<h1>Your Students</h1>
+<div class="row blueHeader full-width mb-sm-3">
+    <div class="col-sm-12">
+        <h1 class="text-center"><strong>YOUR STUDENTS</strong></h1>
+    </div>
+</div>
+
 <table class="table table-striped pt-2" id="myTable">
     <thead>
         <tr>
@@ -19,44 +24,45 @@
         {
 
 
-@if (item.Accepted) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentEmail)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentCellPhone)
-                </td>
-                <td>
-                    <div>
+            @if (item.Accepted)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentCellPhone)
+                    </td>
+                    <td>
                         <div>
-                            @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
-                        </div>
-                        <div>
-                            @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
-                        </div>
-                        <div>
-                            @Html.ActionLink("Student Goals", "Index", "Goals", new { studentID = item.Id })
-                        </div>
-                        @if (item.CareerDeclarationId == Guid.Empty)
-                        {
                             <div>
-                                @Html.ActionLink("Add Student Career", "Create", "CareerDeclaration", new { studentId = item.Id })
+                                @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
                             </div>
-                        }
-                        else
-                        {
                             <div>
-                                @Html.ActionLink("View Student Career", "Details", "CareerDeclaration", new { studentId = item.Id })
+                                @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
                             </div>
-                        }
-                    </div>
-                </td>
+                            <div>
+                                @Html.ActionLink("Student Goals", "Index", "Goals", new { studentID = item.Id })
+                            </div>
+                            @if (item.CareerDeclarationId == Guid.Empty)
+                            {
+                                <div>
+                                    @Html.ActionLink("Add Student Career", "Create", "CareerDeclaration", new { studentId = item.Id })
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    @Html.ActionLink("View Student Career", "Details", "CareerDeclaration", new { studentId = item.Id })
+                                </div>
+                            }
+                        </div>
+                    </td>
 
-            </tr>
+                </tr>
             }
         }
     </tbody>
@@ -79,37 +85,38 @@
         {
 
 
-@if(item.Accepted == false && item.Declined == false){ 
+            @if (item.Accepted == false && item.Declined == false)
+            {
 
-            <tr>
-                <td>
-                    @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentEmail)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentCellPhone)
-                </td>
-                <td>
-                    <div>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentCellPhone)
+                    </td>
+                    <td>
                         <div>
-                            @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
+                            <div>
+                                @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
+                            </div>
+                            <div>
+                                @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
+                            </div>
+                            <div>
+                                @Html.ActionLink("Accept Student", "AcceptStudent", "Students", new { studentID = item.Id })
+                            </div>
+                            <div>
+                                @Html.ActionLink("Decline Student", "DeclineStudent", "Students", new { studentID = item.Id })
+                            </div>
                         </div>
-                        <div>
-                            @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
-                        </div>
-                        <div>
-                            @Html.ActionLink("Accept Student", "AcceptStudent", "Students", new { studentID = item.Id })
-                        </div>
-                        <div>
-                            @Html.ActionLink("Decline Student", "DeclineStudent", "Students", new { studentID = item.Id })
-                        </div>
-                    </div>
-                </td>
+                    </td>
 
-            </tr>
-        }
+                </tr>
+            }
         }
     </tbody>
 </table>

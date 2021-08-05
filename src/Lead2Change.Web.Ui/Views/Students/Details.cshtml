@@ -2,332 +2,218 @@
 @*
     ViewData["Title"] = "Details";
 *@
-<h1>Details</h1>
-
-<h3>Basic Student Information</h3>
-<p><b>First Name:</b> @Model.StudentFirstName</p>
-<p><b>Last Name:</b> @Model.StudentLastName</p>
-<p><b>Date of Birth:</b> @Convert.ToDateTime(Model.StudentDateOfBirth).ToString("MM/dd/yyyy")</p>
-<p><b>Age:</b> @Model.Age</p>
-<p><b>Cell Phone:</b> @Model.StudentCellPhone</p>
-<p><b>Email:</b> @Model.StudentEmail</p>
-<p><b>Coach:</b> @Model.CoachName</p>
-
-<h3>Other Information</h3>
-@if (Model.StudentAddress != null)
-{
-    <p>Address: @Model.StudentAddress</p>
-}
-@if (Model.StudentApartmentNumber != null)
-{
-    <p>Apartment Number: @Model.StudentApartmentNumber</p>
-}
-@if (Model.StudentCity != null)
-{
-    <p>City: @Model.StudentCity</p>
-}
-@if (Model.StudentState != null)
-{
-    <p>State: @Model.StudentState</p>
-}
-@if (Model.StudentZipCode != null)
-{
-    <p>Zip Code: @Model.StudentZipCode</p>
-}
-@if (Model.StudentHomePhone != null)
-{
-    <p>Home Phone: @Model.StudentHomePhone</p>
-}
-@if (Model.StudentCareerInterest != null)
-{
-    <p>Career Path: @Model.StudentCareerPath</p>
-}
-@if (Model.StudentCareerInterest != null)
-{
-    <p>Career Interest: @Model.StudentCareerInterest</p>
-}
-
-<h3>Parent Info</h3>
-@if (Model.ParentFirstName != null)
-{
-    <p>First Name:  @Model.ParentFirstName</p>
-}
-@if (Model.ParentLastName != null)
-{
-    <p>Last Name: @Model.ParentLastName</p>
-}
-@if (Model.Address != null)
-{
-    <p>Address: @Model.Address</p>
-}
-@if (Model.ParentApartmentNumber != null)
-{
-    <p>Apartment Number: @Model.ParentApartmentNumber</p>
-}
-@if (Model.ParentCity != null)
-{
-    <p>City: @Model.ParentCity</p>
-}
-@if (Model.ParentState != null)
-{
-    <p>State: @Model.ParentState</p>
-}
-@if (Model.ParentZipCode != null)
-{
-    <p>Zip Code: @Model.ParentZipCode</p>
-}
-@if (Model.ParentHomePhone != null)
-{
-    <p>Home Phone: @Model.ParentHomePhone</p>
-}
-@if (Model.ParentCellPhone != null)
-{
-    <p>Cell Phone: @Model.ParentCellPhone</p>
-}
-@if (Model.ParentEmail != null)
-{
-    <p>Parent Email: @Model.ParentEmail</p>
-}
-
-<h3>Guidance Counselor Info</h3>
-@if (Model.KnowGuidanceCounselor)
-{
-    <div>
-        <p>I know my guidance counselor: Yes</p>
+<div class="row blueHeader full-width mb-sm-3">
+    <div class="col-sm-12">
+        <h1 class="text-center"><strong>STUDENT DETAILS</strong></h1>
     </div>
-}
-else
-{
-    <div>
-        <p>I know my guidance counselor: No</p>
-    </div>
-}
-@if (Model.GuidanceCounselorName != null)
-{
-    <p>Guidance Counselor Name: @Model.GuidanceCounselorName</p>
-}
-@if (Model.MeetWithGuidanceCounselor)
-{
-    <div>
-        <p>I meet with my guidance counselor: Yes</p>
-    </div>
-}
-else
-{
-    <div>
-        <p>I meet with my guidance counselor: No</p>
-    </div>
-}
-@if (Model.HowOftenMeetWithGuidanceCounselor != null)
-{
-    <p>How often they meet with their guidance counselor: @Model.HowOftenMeetWithGuidanceCounselor</p>
-}
-@if (Model.DiscussWithGuidanceCounselor != null)
-{
-    <p>What they have discussed with their guidance counselor: @Model.DiscussWithGuidanceCounselor</p>
-}
-
-<h3>Post-Secondary Plan</h3>
-@if (Model.PlanAfterHighSchool != null)
-{
-    <p>Their plan after high school: @Model.PlanAfterHighSchool</p>
-}
-@if (@Model.CollegeApplicationStatus)
-{
-    <div>
-        <p>I have applied to college: Yes</p>
-    </div>
-}
-else
-{
-    <div>
-        <p>I have applied to college: No</p>
-    </div>
-}
-@if (Model.CollegesList != null)
-{
-    <p>Colleges they have applied to/plan to apply to: @Model.CollegesList</p>
-}
-@if (@Model.CollegeEssayStatus)
-{
-    <div>
-        <p>I have begun work on my college essay: Yes</p>
-    </div>
-}
-else
-{
-    <div>
-        <p>I have begun work on my college essay: No</p>
-    </div>
-}
-@if (@Model.CollegeEssayHelp)
-{
-    <div>
-        <p>I need help writing my college essay: Yes</p>
-    </div>
-}
-else
-{
-    <div>
-        <p>I need help writing my college essay: No</p>
-    </div>
-}
-@if (Model.FirstChoiceCollege != null)
-{
-    <p>First choice college(s): @Model.FirstChoiceCollege</p>
-}
-@if (Model.SecondChoiceCollege != null)
-{
-    <p>Second choice college(s) @Model.SecondChoiceCollege</p>
-}
-@if (Model.ThirdChoiceCollege != null)
-{
-    <p>Third choice college(s): @Model.ThirdChoiceCollege</p>
-}
-@if (@Model.TradeSchoolStatus)
-{
-    <div>
-        <p>I have already applied to a trade school: Yes</p>
-    </div>
-}
-else
-{
-    <div>
-        <p>I have already applied to a trade school: No</p>
-    </div>
-}
-@if (Model.TradeSchoolsList != null)
-{
-    <p>Trade schools they have applied/plan to apply to: @Model.TradeSchoolsList</p>
-}
-@if (@Model.ArmedForcesStatus)
-{
-    <div>
-        <p>I have already applied to the armed forces: Yes</p>
-    </div>
-}
-else
-{
-    <div>
-        <p>I have already applied to the armed forces: No</p>
-    </div>
-}
-@if (Model.ArmedForcesBranch != null)
-{
-    <p>Branches they have applied to/plan to apply to: @Model.ArmedForcesBranch</p>
-}
-@if (@Model.WorkStatus)
-{
-    <div>
-        <p>I plan to go directly into the workforce after high school: Yes</p>
-    </div>
-}
-else
-{
-    <div>
-        <p>I plan to go directly into the workforce after high school: No</p>
-    </div>
-}
-@if (Model.CareerPathList != null)
-{
-    <p>Career paths they are interested in pursuing: @Model.CareerPathList</p>
-}
-@if (Model.OtherPlans != null)
-{
-    <p>Plans for after high school: @Model.OtherPlans</p>
-}
-
-<h3>College Entrance Exam Information</h3>
-
-@if (Model.PACTTestScore > 0 && Model.PACTTestScore <= 35)
-{
-    <p>Date of PACT: @Convert.ToDateTime(Model.PACTTestDate).ToString("MM/dd/yyyy")</p>
-    <p>PACT Score: @Model.PACTTestScore</p>
-}
-@if (Model.PSATTestScore >= 320 && Model.PSATTestScore <= 1520)
-{
-    <p>Date of PSAT: @Convert.ToDateTime(Model.PSATTestDate).ToString("MM/dd/yyyy")</p>
-    <p>PSAT Score: @Model.PSATTestScore</p>
-}
-@if (Model.SATTestScore >= 400 && Model.SATTestScore <= 1600)
-{
-    <p>Date of SAT: @Convert.ToDateTime(Model.SATTestDate).ToString("MM/dd/yyyy")</p>
-    <p>SAT Score: @Model.SATTestScore</p>
-}
-
-@if (Model.ACTTestScore >= 1 && Model.ACTTestScore <= 36)
-{
-    <p>Date of ACT: @Convert.ToDateTime(Model.ACTTestDate).ToString("MM/dd/yyyy")</p>
-    <p>ACT Score: @Model.ACTTestScore</p>
-}
-@if (@Model.PrepClassRequired)
-{
-    <div>
-        <p>I need a prep class: Yes</p>
-    </div>
-}
-else
-{
-    <div>
-        <p>I need a prep class: No</p>
-    </div>
-}
-<h3>Financial Aid Information</h3>
-@if (@Model.FinancialAidProcessComplete)
-{
-    <div>
-        <p>I have already completed the financial aid process: Yes</p>
-    </div>
-}
-else
-{
-    <div>
-        <p>I have already completed the financial aid process: No</p>
-    </div>
-}
-@if (@Model.AssistanceForForms)
-{
-    <div>
-        <p>I need assistance filling out my FAFSA/Financial aid forms: Yes</p>
-    </div>
-}
-else
-{
-    <div>
-        <p>I need assistance filling out my FAFSA/Financial aid forms: No</p>
-    </div>
-}
-@if (Model.SupportNeeded != null)
-{
-    <p>Support they need: @Model.SupportNeeded</p>
-}
-
-<h3>Signatures</h3>
-@if (Model.StudentSignature != null)
-{
-    <p>Student Signature: @Model.StudentSignature</p>
-    <p>Date Signed: @Convert.ToDateTime(Model.StudentSignatureDate).ToString("MM/dd/yyyy")</p>
-}
-else
-{
-    <p>Student Signature: Unsigned</p>
-}
-
-@if (Model.ParentSignature != null)
-{
-    <p>Parent Signature: @Model.ParentSignature</p>
-    <p>Date Signed: @Convert.ToDateTime(Model.ParentSignatureDate).ToString("MM/dd/yyyy")</p>
-}
-else
-{
-    <p>Parent Signature: Unsigned</p>
-}
-
-<p>Activity Status: @Model.Active</p>
-
-
-
-@*<p> @Model.</p>*@<p></p>
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
+
+<div class="card text-dark bg-light mb-3">
+    <div class="card-header">
+        <div class="row px-sm-3">
+            <h3>Basic Student Information</h3>
+            <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#basicStudentInfo" aria-expanded="false" aria-controls="coachInfo">
+                <img src="~/Images/UpDownIcon.png" class="smallIcon" />
+            </button>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush collapse" id="basicStudentInfo">
+        <li class="list-group-item"><b>First Name:</b> @Model.StudentFirstName</li>
+        <li class="list-group-item"><b>Last Name:</b> @Model.StudentLastName</li>
+        <li class="list-group-item"><b>Date of Birth:</b> @Convert.ToDateTime(Model.StudentDateOfBirth).ToString("MM/dd/yyyy")</li>
+        <li class="list-group-item"><b>Age:</b> @Model.Age</li>
+        <li class="list-group-item"><b>Cell Phone:</b> @Model.StudentCellPhone</li>
+        <li class="list-group-item"><b>Email:</b> @Model.StudentEmail</li>
+        <li class="list-group-item"><b>Coach:</b> @Model.CoachName</li>
+    </ul>
+</div>
+
+<div class="card text-dark bg-light mb-3">
+    <div class="card-header">
+        <div class="row px-sm-3">
+            <h3>Other Information</h3>
+            <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#otherInformation" aria-expanded="false" aria-controls="otherInformation">
+                <img src="~/Images/UpDownIcon.png" class="smallIcon" />
+            </button>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush collapse" id="otherInformation">
+        <li class="list-group-item">Address: @Model.StudentAddress</li>
+        <li class="list-group-item">Apartment Number: @Model.StudentApartmentNumber</li>
+        <li class="list-group-item">City: @Model.StudentCity</li>
+        <li class="list-group-item">State: @Model.StudentState</li>
+        <li class="list-group-item">Zip Code: @Model.StudentZipCode</li>
+        <li class="list-group-item">Career Interest: @Model.StudentCareerInterest</li>
+    </ul>
+</div>
+
+<div class="card text-dark bg-light mb-3">
+    <div class="card-header">
+        <div class="row px-sm-3">
+            <h3>Parent Info</h3>
+            <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#parentInfo" aria-expanded="false" aria-controls="parentInfo">
+                <img src="~/Images/UpDownIcon.png" class="smallIcon" />
+            </button>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush collapse" id="parentInfo">
+        <li class="list-group-item">First Name:  @Model.ParentFirstName</li>
+        <li class="list-group-item">Last Name: @Model.ParentLastName</li>
+        <li class="list-group-item">Address: @Model.Address</li>
+        <li class="list-group-item">Parent Apartment Number: @Model.ParentApartmentNumber</li>
+        <li class="list-group-item">City: @Model.ParentCity</li>
+        <li class="list-group-item">State: @Model.ParentState</li>
+        <li class="list-group-item">Zip Code: @Model.ParentZipCode</li>
+        <li class="list-group-item">Home Phone: @Model.ParentHomePhone</li>
+        <li class="list-group-item">Cell Phone: @Model.ParentCellPhone</li>
+        <li class="list-group-item">Parent Email: @Model.ParentEmail</li>
+
+    </ul>
+</div>
+
+<div class="card text-dark bg-light mb-3">
+    <div class="card-header">
+        <div class="row px-sm-3">
+            <h3>Guidance Counselor Info</h3>
+            <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#counselorInfo" aria-expanded="false" aria-controls="counselorInfo">
+                <img src="~/Images/UpDownIcon.png" class="smallIcon" />
+            </button>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush collapse" id="counselorInfo">
+        @if (Model.KnowGuidanceCounselor)
+        {
+            <li class="list-group-item">I know my guidance counselor: Yes</li>
+            <li class="list-group-item">Guidance Counselor Name: @Model.GuidanceCounselorName</li>
+            <li class="list-group-item">I meet with my guidance counselor: @(Model.MeetWithGuidanceCounselor ? "Yes" : "No")</li>
+            @if (Model.MeetWithGuidanceCounselor)
+            {
+                <li class="list-group-item">How often they meet with their guidance counselor: @Model.HowOftenMeetWithGuidanceCounselor</li>
+            }
+            <li class="list-group-item">What they have discussed with their guidance counselor: @Model.DiscussWithGuidanceCounselor</li>
+
+        }
+        else
+        {
+            <li class="list-group-item">I know my guidance counselor: No</li>
+        }
+
+    </ul>
+</div>
+
+<div class="card text-dark bg-light mb-3">
+    <div class="card-header">
+        <div class="row px-sm-3">
+            <h3>Post-Secondary Plan</h3>
+            <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#postSecondaryPlan" aria-expanded="false" aria-controls="postSecondaryPlan">
+                <img src="~/Images/UpDownIcon.png" class="smallIcon" />
+            </button>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush collapse" id="postSecondaryPlan">
+        <li class="list-group-item">Their plan after high school: @Model.PlanAfterHighSchool</li>
+        @switch (Model.PlanAfterHighSchool)
+        {
+            case "College":
+                <li class="list-group-item">I have applied to college: @(Model.CollegeApplicationStatus ? "Yes" : "No")</li>
+                <li class="list-group-item">Colleges they have applied to/plan to apply to: @Model.CollegesList</li>
+                <li class="list-group-item">I have begun work on my college essay: @(Model.CollegeEssayStatus ? "Yes" : "No")</li>
+                <li class="list-group-item">I need help writing my college essay: @(Model.CollegeEssayHelp ? "Yes" : "No")</li>
+                <li class="list-group-item">First choice college(s): @Model.FirstChoiceCollege</li>
+                <li class="list-group-item">Second choice college(s) @Model.SecondChoiceCollege</li>
+                <li class="list-group-item">Third choice college(s): @Model.ThirdChoiceCollege</li>
+                break;
+            case "Trade School":
+                <li class="list-group-item">I have already applied to a trade school: @(Model.TradeSchoolStatus ? "Yes" : "No")</li>
+                <li class="list-group-item">Trade schools they have applied/plan to apply to: @Model.TradeSchoolsList</li>
+                break;
+            case "Armed Forces":
+                <li class="list-group-item">I have already applied to the armed forces: @(Model.ArmedForcesStatus ? "Yes" : "No")</li>
+                <li class="list-group-item">Branches they have applied to/plan to apply to: @Model.ArmedForcesBranch</li>
+                break;
+            case "Work":
+                <li class="list-group-item">I plan to go directly into the workforce after high school: @(Model.WorkStatus ? "Yes" : "No")</li>
+                <li class="list-group-item">Career paths they are interested in pursuing: @Model.CareerPathList</li>
+                break;
+            case "Other":
+            default:
+                <li class="list-group-item">Plans for after high school: @Model.OtherPlans</li>
+                break;
+        }
+    </ul>
+</div>
+
+<div class="card text-dark bg-light mb-3">
+    <div class="card-header">
+        <div class="row px-sm-3">
+            <h3>College Entrance Exam Information</h3>
+            <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#examInfo" aria-expanded="false" aria-controls="examInfo">
+                <img src="~/Images/UpDownIcon.png" class="smallIcon" />
+            </button>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush collapse" id="examInfo">
+        <li class="list-group-item">Date of PACT: @Convert.ToDateTime(Model.PACTTestDate).ToString("MM/dd/yyyy")</li>
+        <li class="list-group-item">PACT Score: @Model.PACTTestScore</li>
+        <li class="list-group-item">Date of PSAT: @Convert.ToDateTime(Model.PSATTestDate).ToString("MM/dd/yyyy")</li>
+        <li class="list-group-item">PSAT Score: @Model.PSATTestScore</li>
+        <li class="list-group-item">Date of SAT: @Convert.ToDateTime(Model.SATTestDate).ToString("MM/dd/yyyy")</li>
+        <li class="list-group-item">SAT Score: @Model.SATTestScore</li>
+        <li class="list-group-item">Date of ACT: @Convert.ToDateTime(Model.ACTTestDate).ToString("MM/dd/yyyy")</li>
+        <li class="list-group-item">ACT Score: @Model.ACTTestScore</li>
+        <li class="list-group-item">I need a prep class: @(Model.PrepClassRequired ? "Yes" : "No")</li>
+    </ul>
+</div>
+
+<div class="card text-dark bg-light mb-3">
+    <div class="card-header">
+        <div class="row px-sm-3">
+            <h3>Financial Aid Information</h3>
+            <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#financeInfo" aria-expanded="false" aria-controls="financeInfo">
+                <img src="~/Images/UpDownIcon.png" class="smallIcon" />
+            </button>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush collapse" id="financeInfo">
+        <li class="list-group-item">I have already completed the financial aid process: @(Model.FinancialAidProcessComplete ? "Yes" : "No")</li>
+        <li class="list-group-item">I need assistance filling out my FAFSA/Financial aid forms: @(Model.AssistanceForForms ? "Yes" : "No")</li>
+        <li class="list-group-item">Support they need: @Model.SupportNeeded</li>
+    </ul>
+</div>
+<div class="card text-dark bg-light mb-3">
+    <div class="card-header">
+        <div class="row px-sm-3">
+            <h3>Admin Details</h3>
+            <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#adminInfo" aria-expanded="false" aria-controls="adminInfo">
+                <img src="~/Images/UpDownIcon.png" class="smallIcon" />
+            </button>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush collapse" id="adminInfo">
+        <li class="list-group-item">Activity Status: @Model.Active</li>
+        <li class="list-group-item">Acceptance Status: @((Model.isAccepted) ? "Accepted" : (Model.isDeclined) ? "Declined" : "In Interest Phase")</li>
+    </ul>
+</div>
+<div class="card text-dark bg-light mb-3">
+    <div class="card-header">
+        <div class="row px-sm-3">
+            <h3>Signatures</h3>
+            <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#signatureInfo" aria-expanded="false" aria-controls="signatureInfo">
+                <img src="~/Images/UpDownIcon.png" class="smallIcon" />
+            </button>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush collapse" id="signatureInfo">
+        <li class="list-group-item">Student Signature: @Model.StudentSignature</li>
+        <li class="list-group-item">Date Signed: @Convert.ToDateTime(Model.StudentSignatureDate).ToString("MM/dd/yyyy")</li>
+        <li class="list-group-item">Parent Signature: @Model.ParentSignature</li>
+        <li class="list-group-item">Date Signed: @Convert.ToDateTime(Model.ParentSignatureDate).ToString("MM/dd/yyyy")</li>
+
+    </ul>
+</div>
+
+@*<p> @Model.</p>*@
+
+<button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students")'">Back To Student List</button>
+
+

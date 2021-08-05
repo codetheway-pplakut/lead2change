@@ -8,8 +8,22 @@ using Lead2Change.Domain.ViewModels;
 using Lead2Change.Domain.Models;
 using Lead2Change.Services.Interviews;
 using Lead2Change.Services.Students;
+using Lead2Change.Web.Ui.Models;
+using Lead2Change.Services.Goals;
+using Lead2Change.Services.Students;
+using Microsoft.AspNetCore.Mvc;
+using Lead2Change.Domain.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Lead2Change.Domain.Constants;
+
+using Lead2Change.Domain.Models;
+using Lead2Change.Services.Identity;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace Lead2Change.Web.Ui.Controllers
 {
@@ -30,9 +44,11 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Index(Guid interviewID, Guid studentId)
         {
+            var student1 = await _studentService.GetStudent(studentId);
 
             List<AnswersViewModel> result = new List<AnswersViewModel>();
             List<Answer> answers = await AnswersService.GetAnswers(interviewID);
+            var interview1 = await _interviewsService.GetInterview(interviewID);
             foreach (Answer answer in answers)
             {
                 if (answer.StudentId == studentId)
@@ -47,13 +63,18 @@ namespace Lead2Change.Web.Ui.Controllers
 
 
                         InterviewId = answer.InterviewId,
-                        StudentName = answer.StudentName,
+                        StudentName = student1.StudentFirstName,
                         InterviewName = (await _interviewsService.GetInterview(interviewID)).InterviewName,
                     });
                 }
             }
-            return View(result);
-     
+            return View(new StudentInterviewAndIDViewModel(interviewID)
+            {
+                AnswerModels = result,
+                InterviewName = interview1.InterviewName,
+                StudentName = student1.StudentFirstName,
+            }) ;
+
         }
         public async Task<IActionResult> Create()
         {
@@ -97,7 +118,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         QuestionId = questions[i].QuestionId,
                         
                         InterviewName = (await _interviewsService.GetInterview(model.InterviewId)).InterviewName,
-                        StudentName = students[i].StudentFirstName + " " + students[i].StudentLastName,
+                        
                     };
                     var result = await AnswersService.AnswerQuestion(answer);
                     
