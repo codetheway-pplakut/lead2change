@@ -4,11 +4,24 @@
     ViewData["Title"] = "Index";
 *@
 
-<div class="container">
-    <h1>Inactive Students</h1>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <table class="table sortable table-striped pt-2" id="myTable">
-        <thead>
+<div class="container">
+    <div class="row blueHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>INACTIVE STUDENTS</strong></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 searchbar ml-auto">
+            <input type="text" id="myInput" onkeyup="searchFilter()" placeholder="Search for items.." class="tableInput searchbar__input" align="right">
+            <button type="button" class="searchbar__button">
+                <i class="material-icons">search</i>
+            </button>
+        </div>
+    </div>
+    <table class="table table-striped shadow-lg pt-2" id="myTable">
+        <thead class="blueStyle">
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Date Of Birth</th>

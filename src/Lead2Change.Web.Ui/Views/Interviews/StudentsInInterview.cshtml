@@ -1,15 +1,24 @@
 ﻿@model Lead2Change.Domain.ViewModels.StudentInterviewViewModel
 @* ViewData["Title"] = "Question Select";
 *@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
 
-            <h2 class="GoalHeadingFont">Student Interview For @Model.StudentAnswer[0].InterviewName</h2>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="container-fluid">
+    <div class="row blueHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>STUDENT INTERVIEW FOR @Model.StudentAnswer[0].InterviewName.ToUpper()</strong></h1>
         </div>
     </div>
-  
-    <table class="table table-striped pt-2">
+    <div class="row">
+        <div class="col-sm-3 searchbar ml-auto">
+            <input type="text" id="myInput" onkeyup="searchFilter()" placeholder="Search for items.." class="tableInput searchbar__input" align="right">
+            <button type="button" class="searchbar__button">
+                <i class="material-icons">search</i>
+            </button>
+        </div>
+    </div>
+    <table class="table table-striped pt-2 shadow-lg" id="myTable">
         <thead class="thead blueStyle">
             <tr>
                 <th>
@@ -29,16 +38,19 @@
                 <td>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=Model.StudentAnswer[i].InterviewId, studentID=Model.StudentAnswer[i].StudentId})'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Interview" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=Model.StudentAnswer[i].InterviewId, studentID=Model.StudentAnswer[i].StudentId})'" />
 
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { interviewID=Model.StudentAnswer[i].InterviewId, studentId=Model.StudentAnswer[i].StudentId })'" />
+                    @if (Model.StudentAnswer[i].QuestionInInterviews.Count > 0)
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { interviewID = Model.StudentAnswer[i].InterviewId, studentId = Model.StudentAnswer[i].StudentId })'" />
 
+                            </div>
                         </div>
-                    </div>
+                    }
                 </td>
             </tr>
         }

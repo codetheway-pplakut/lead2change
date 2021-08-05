@@ -9,7 +9,7 @@
             <h1 class="text-center"><strong>YOUR INTERVIEWS</strong></h1>
         </div>
     </div>
-    <table class="table table-striped pt-2">
+    <table class="table table-striped shadow-lg pt-2">
         <thead class="thead blueStyle">
             <tr>
                 <th>
@@ -47,11 +47,23 @@
 
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Student Interview" onclick="location.href='@Url.Action("StudentsInInterview","Interviews", new { Id = item.Id })'" />
+                    @if (item.QuestionInInterviews.Count > 0 && item.StudentId == Guid.Empty)
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Student Interview" onclick="location.href='@Url.Action("StudentsInInterview", "Interviews", new { Id = item.Id })'" />
+                            </div>
                         </div>
-                    </div>                 
+                    }
+                    else if (item.QuestionInInterviews.Count > 0)
+                    {
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer Interview" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=item.QuestionInInterviews.FirstOrDefault().InterviewId, studentID=item.StudentId})'" />
+                            </div>
+                        </div>
+                    }
                 </td>
             </tr>
         }

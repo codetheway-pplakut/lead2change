@@ -30,8 +30,7 @@ namespace Lead2Change.Web.Ui.Controllers
             this._questionInInterviewService = questionInInterviewService;
             this._studentService = studentService;
         }
-
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Guid studentID)
         {
             List<InterviewViewModel> result = new List<InterviewViewModel>();
             List<Interview> interviews = await _interviewsService.GetInterviews();
@@ -41,8 +40,9 @@ namespace Lead2Change.Web.Ui.Controllers
                 {
                     InterviewName = interview.InterviewName,
                     Id = interview.Id,
-                    QuestionInInterviews = interview.QuestionInInterviews
-                });
+                    QuestionInInterviews = interview.QuestionInInterviews,
+                    StudentId = studentID,
+                }) ;
             }
             return View(result);
         }
