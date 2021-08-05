@@ -70,10 +70,14 @@
             <input type="button" class="btn btn-primary" value="Create a Goal" onclick="location.href='@Url.Action("Create","Goals", new {studentID = Model.StudentID })'" />
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            @Html.ActionLink("Back To Students", "Index", "Students")
+    <br />
+    @if (Model.isStudentActive)
+    {
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index", "Students")'">Back To Students</button>
+    }
+    else
+    {
 
-        </div>
-    </div>
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex", "Students")'">Back To Inactive Students</button>
+    }
 </div>

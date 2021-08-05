@@ -8,7 +8,7 @@
             <h1 class="text-center"><strong>CAREER DETAILS</strong></h1>
         </div>
     </div>
-   
+
 </div>
 <style>
     tr:nth-child(1) {
@@ -49,6 +49,15 @@
 <div class="row col-sm-6">
     <input type="button" class="btn btn-primary" value="Edit Career" onclick="location.href='@Url.Action("Edit", "CareerDeclaration", new { id = Model.Id })'" />
 </div>
-<div align="center">
-    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students")'">Back To List</button>
-</div>
+@if (Model.isStudentActive)
+{
+    <div align="center">
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index", "Students")'">Back To Students</button>
+    </div>
+}
+else
+{
+    <div align="center">
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex", "Students")'">Back To Inactive Students</button>
+    </div>
+}
