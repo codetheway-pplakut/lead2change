@@ -2,24 +2,11 @@
 @* ViewData["Title"] = "Question Select";
 *@
 <div class="container-fluid">
-    @if (Model.StudentAnswer.Count > 0)
-    {
-        <div class="row">
-            <div class="col-sm-12">
-
-                <h2 class="GoalHeadingFont">Student Interviews For @Model.StudentAnswer[0].InterviewName</h2>
-            </div>
+    <div class="row">
+        <div class="col-sm-9">
+            <h2 class="GoalHeadingFont">Student Interview For @Model.StudentAnswer[0].InterviewName</h2>
         </div>
-    }
-    else
-    {
-        <div class="row">
-            <div class="col-sm-12">
-
-                <h2 class="GoalHeadingFont">Student Interviews</h2>
-            </div>
-        </div>
-    }
+    </div>
     <table class="table table-striped pt-2">
         <thead class="thead blueStyle">
             <tr>
@@ -40,7 +27,7 @@
                 <td>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=Model.StudentAnswer[i].InterviewId, studentID=Model.StudentAnswer[i].StudentId})'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Interview" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=Model.StudentAnswer[i].InterviewId, studentID=Model.StudentAnswer[i].StudentId})'" />
 
                         </div>
                     </div>
