@@ -27,7 +27,6 @@ namespace Lead2Change.Web.Ui.Controllers
         }
 
         public async Task<IActionResult> Index(int pageNumber = 0, int pageSize = 10)
-        public async Task<IActionResult> Index(bool inactive = false)
         {
             if (!SignInManager.IsSignedIn(User))
             {

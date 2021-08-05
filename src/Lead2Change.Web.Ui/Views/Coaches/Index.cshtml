@@ -33,27 +33,28 @@
 
             {
                 @if (item.Active)
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modeItem => item.CoachLastName), @Html.DisplayFor(modelItem => item.CoachFirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CoachEmail)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CoachPhoneNumber)
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn  btn-block orangeBtn mb-sm-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
-                            <div class="dropdown-menu">
-                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Edit","Coaches", new { id= item.Id })'">Edit</button>
-                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("AssignStudentIndex","Coaches", new { id= item.Id })'">Assign Student</button>
-                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","Coaches", new { id= item.Id })'">Details</button>
-                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Delete","Coaches", new { id= item.Id })'">Delete</button>
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modeItem => item.CoachLastName), @Html.DisplayFor(modelItem => item.CoachFirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CoachEmail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CoachPhoneNumber)
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn  btn-block orangeBtn mb-sm-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Edit","Coaches", new { id= item.Id })'">Edit</button>
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("AssignStudentIndex","Coaches", new { id= item.Id })'">Assign Student</button>
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","Coaches", new { id= item.Id })'">Details</button>
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Delete","Coaches", new { id= item.Id })'">Delete</button>
 
+                                </div>
                             </div>
-                        </div>
                         </td>
                     </tr>
                 }
