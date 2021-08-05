@@ -68,6 +68,7 @@
                 <th scope="col">Parent Last Name</th>
                 <th scope="col">Parent First Name</th>
                 <th scope="col">Parent Email</th>
+                <th scope="col">Options</th>
             </tr>
         </thead>
 
@@ -98,41 +99,30 @@
                     </td>
                     <td>
                         <div>
-                            <div>
-                                @Html.ActionLink("Edit", "Edit", new { studentId = item.Id })
-                            </div>
 
-                            <div>
-                                @Html.ActionLink("Details", "Details", new { studentId = item.Id })
-                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Students", new { studentId = item.Id })'" />
 
-                            <div>
-                                @Html.ActionLink("Goals", "Index", "Goals", new { studentID = item.Id })
-                            </div>
-
-                            <div>
-                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                            </div>
-                            @if (item.CareerDeclarationId == Guid.Empty)
-                            {
-                                <div>
-                                    @Html.ActionLink("Add Career", "Create", "CareerDeclaration", new { studentId = item.Id })
                                 </div>
-                            }
-                            else
-                            {
-                                <div>
-                                    @Html.ActionLink("View Career", "Details", "CareerDeclaration", new { studentId = item.Id })
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Students", new { studentId = item.Id })'" />
+
                                 </div>
-                            }
+                            </div>
 
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Delete" onclick="location.href='@Url.Action("Delete","Students", new { id = item.Id })'" />
 
-
+                                </div>
+                            </div>
                         </div>
                     </td>
-                </tr>
-
-            }
+                </tr>}
         </tbody>
     </table>
 </div>

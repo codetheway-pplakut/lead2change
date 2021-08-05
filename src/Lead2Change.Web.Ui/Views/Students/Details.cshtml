@@ -2,7 +2,12 @@
 @*
     ViewData["Title"] = "Details";
 *@
-<h1>Details</h1>
+<div class="row blueHeader full-width mb-sm-3">
+    <div class="col-sm-12">
+        <h1 class="text-center"><strong>Details</strong></h1>
+    </div>
+</div>
+
 
 <h3>Basic Student Information</h3>
 <p><b>First Name:</b> @Model.StudentFirstName</p>
@@ -205,6 +210,7 @@ else
 
 
 @*<p> @Model.</p>*@
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students")'">Back To Student List</button>
+
+

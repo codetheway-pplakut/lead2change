@@ -28,6 +28,12 @@ function checkerShowHide(id1) {
     }
 }
 
+function checkBoxCheck() {
+    if (checkBox.checked) {
+
+    }
+}
+
 $(".hide").click(function () {
     $("knowCounselor").hide();
 })
