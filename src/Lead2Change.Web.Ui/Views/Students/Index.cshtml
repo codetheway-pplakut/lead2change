@@ -1,11 +1,12 @@
-﻿@model List<Lead2Change.Domain.Models.Student>
+﻿@using Lead2Change.Domain.Constants
+@model List<Lead2Change.Domain.Models.Student>
 @*
     ViewData["Title"] = "Index";
 *@
 
-<head><link rel="icon" href="http://example.com/favicon.png"></head>
+
 <div class="container">
-    <h1>Students</h1>
+    <h1>Active Students</h1>
 
     <table class="table table-striped pt-2" id="myTable">
         <thead>
@@ -25,25 +26,25 @@
                 @foreach (var item in Model)
                 {
 
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
-                    </td>
-                    <td>
-                        @*@Html.DisplayFor(modelItem => item.StudentDateOfBirth.ToString("d"))*@
-                        @*@Model.modelItem => item.StudentDateOfBirth.ToString("d")*@
-                        @Convert.ToDateTime(item.StudentDateOfBirth).ToString("MM/dd/yyyy")
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StudentEmail)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ParentLastName), @Html.DisplayFor(modelItem => item.ParentFirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ParentEmail)
-                    </td>
-                    <td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.StudentDateOfBirth.ToString("d"))*@
+                            @*@Model.modelItem => item.StudentDateOfBirth.ToString("d")*@
+                            @Convert.ToDateTime(item.StudentDateOfBirth).ToString("MM/dd/yyyy")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StudentEmail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ParentLastName), @Html.DisplayFor(modelItem => item.ParentFirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ParentEmail)
+                        </td>
+                        <td>
                             <div>
                                 <div>
                                     @Html.ActionLink("Edit", "Edit", new { studentId = item.Id })
@@ -52,11 +53,11 @@
                                 <div>
                                     @Html.ActionLink("Details", "Details", new { studentId = item.Id })
                                 </div>
-                            
+
                                 <div>
                                     @Html.ActionLink("Goals", "Index", "Goals", new { studentID = item.Id })
                                 </div>
-                            
+
                                 @if (item.CareerDeclarationId == Guid.Empty)
                                 {
                                     <div>
@@ -78,8 +79,9 @@
         </tbody>
     </table>
 
-
-    <div>
-        <button class="btn btn-submit"> @Html.ActionLink("Register a New Student", "InterestForm")</button>
-    </div>
+    @if (User.IsInRole(StringConstants.RoleNameAdmin))
+    {
+        <div>
+            <a asp-action="InterestForm"><b>Register a new student</b></a>
+        </div>}
 </div>

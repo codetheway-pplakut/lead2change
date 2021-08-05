@@ -30,19 +30,59 @@
             <b><label asp-for="SEL" class="control-label"></label></b>
             <div class="list-group">
                 <label class="list-group-item" style="border: none">
-                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Self-Awareness" /> Self-Awareness - What assets do you bring to a team environment?
+                    @if (Model.SELDisplay.Contains("Self-Awareness"))
+                    {
+                        <input class="form-check-input me-1" name="SEL" type="checkbox" value="Self-Awareness" checked />
+                    }
+                    else
+                    {
+                        <input class="form-check-input me-1" name="SEL" type="checkbox" value="Self-Awareness" />
+                    }
+                    Self-Awareness - What assets do you bring to a team environment?
                 </label>
                 <label class="list-group-item" style="border: none">
-                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Self-Management" /> Self-Management - When your class is discussing a topic and you disagree with someone else, what are your reactions?
+                    @if (Model.SELDisplay.Contains("Self-Management"))
+                    {
+                        <input class="form-check-input me-1" name="SEL" type="checkbox" value="Self-Management" checked />
+                    }
+                    else
+                    {
+                       <input class="form-check-input me-1" name="SEL" type="checkbox" value="Self-Management" />
+                    }
+                    Self-Management - When your class is discussing a topic and you disagree with someone else, what are your reactions?
                 </label>
                 <label class="list-group-item" style="border: none">
-                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Social-Awareness" /> Social-Awareness - What is the single problem affecting the people of your community the most? How do you know?
+                    @if (Model.SELDisplay.Contains("Social-Awareness"))
+                    {
+                        <input class="form-check-input me-1" name="SEL" type="checkbox" value="Social-Awareness" checked />
+                    }
+                    else
+                    {
+                        <input class="form-check-input me-1" name="SEL" type="checkbox" value="Social-Awareness" />
+                    }
+                    Social-Awareness - What is the single problem affecting the people of your community the most? How do you know?
                 </label>
                 <label class="list-group-item" style="border: none">
-                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Relationship-Skills" /> Relationship-Skills - What are some examples of productive and effective relationships while working in a team?
+                    @if (Model.SELDisplay.Contains("Relationship-Skills"))
+                    {
+                        <input class="form-check-input me-1" name="SEL" type="checkbox" value="Relationship-Skills" checked />
+                    }
+                    else
+                    {
+                        <input class="form-check-input me-1" name="SEL" type="checkbox" value="Relationship-Skills" />
+                    }
+                    Relationship-Skills - What are some examples of productive and effective relationships while working in a team?
                 </label>
                 <label class="list-group-item" style="border: none">
-                    <input class="form-check-input me-1" name="SEL" type="checkbox" value="Responsible Decision-Making" /> Responsible Decision-Making - If you had a million dollars to address a problem/need within our community, what would you do? Who would you think about first?
+                    @if (Model.SELDisplay.Contains("Responsible Decision-Making"))
+                    {
+                        <input class="form-check-input me-1" name="SEL" type="checkbox" value="Responsible Decision-Making" checked />
+                    }
+                    else
+                    {
+                        <input class="form-check-input me-1" name="SEL" type="checkbox" value="Responsible Decision-Making" />
+                    }
+                    Responsible Decision-Making - If you had a million dollars to address a problem/need within our community, what would you do? Who would you think about first?
                 </label>
             </div>
         </div>

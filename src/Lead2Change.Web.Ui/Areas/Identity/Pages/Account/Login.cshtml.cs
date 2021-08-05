@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Lead2Change.Domain.Models;
+using Lead2Change.Domain.Constants;
 
 namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
 {
@@ -71,11 +72,9 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
 
             ReturnUrl = returnUrl;
         }
-
+        
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
-
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -84,6 +83,11 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    returnUrl = returnUrl ?? 
+                        ((await _userManager.GetRolesAsync(user)).Contains(StringConstants.RoleNameCoach) 
+                        ? Url.Content("~/Coaches/CoachesStudents") 
+                        : Url.Content("~/"));
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

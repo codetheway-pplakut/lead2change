@@ -1,4 +1,8 @@
 ﻿@model Lead2Change.Domain.ViewModels.CoachViewModel
+@using Microsoft.AspNetCore.Identity
+@using Lead2Change.Domain.Models
+@inject SignInManager<AspNetUsers> SignInManager
+@inject UserManager<AspNetUsers> UserManager
 @*
     ViewData["Title"] = "Details";
 *@
@@ -9,6 +13,12 @@
 <p>Last Name:  @Model.CoachLastName</p>
 <p>Email:  @Model.CoachEmail</p>
 <p>Phone Number:  @Model.CoachPhoneNumber</p>
+@if(SignInManager.IsSignedIn(User) && User.IsInRole("Coach"))
+ {
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="CoachesStudents">Assigned Students</a>
+    </li>    
+ } 
 
 
 <div>

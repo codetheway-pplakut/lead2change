@@ -633,7 +633,7 @@ namespace Lead2Change.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<Guid>("StudentId")
+                    b.Property<Guid>("AssociatedId")
                         .HasColumnType("TEXT");
 
                     b.HasDiscriminator().HasValue("AspNetUsers");
