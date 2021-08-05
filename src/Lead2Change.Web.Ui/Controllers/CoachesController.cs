@@ -83,6 +83,8 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> AssignedStudents(Guid id)
         {
+            var user = await UserManager.GetUserAsync(User);
+            if (id == Guid.Empty) id = user.AssociatedId;
             var coachescontainer = await _coachService.GetCoach(id);
 
             if (id == Guid.Empty || coachescontainer == null)
@@ -164,7 +166,7 @@ namespace Lead2Change.Web.Ui.Controllers
                         CoachLastName = model.CoachLastName,
                         CoachEmail = model.CoachEmail,
                         CoachPhoneNumber = model.CoachPhoneNumber,
-                        Students = new List<Student>()
+                        Students = new List<Student>(),
                         Active = model.Active
                     };
                     var result = await _coachService.Create(coach);
@@ -179,6 +181,28 @@ namespace Lead2Change.Web.Ui.Controllers
                 return RedirectToAction("Index");
             }
 
+            return View(model);
+        }
+
+        public async Task<IActionResult> Update(Coach model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (ModelState.IsValid)
+                {
+                    Coach list = new Coach()
+                    {
+                        Id = model.Id,
+                        CoachFirstName = model.CoachFirstName,
+                        CoachLastName = model.CoachLastName,
+                        CoachEmail = model.CoachEmail,
+                        CoachPhoneNumber = model.CoachPhoneNumber,
+                        Active = model.Active
+                    };
+                    var student = await _coachService.Update(list);
+                }
+                return RedirectToAction("Index");
+            }
             return View(model);
         }
 

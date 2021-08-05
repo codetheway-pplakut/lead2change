@@ -686,11 +686,11 @@ namespace Lead2Change.Web.Ui.Controllers
 
             // Check if user owns a student
 
-            if (user.StudentId != Guid.Empty)
+            if (user.AssociatedId != Guid.Empty)
 
             {
 
-                return RedirectToAction("Details", new { studentId = user.StudentId });
+                return RedirectToAction("Details", new { studentId = user.AssociatedId });
 
             }
 
@@ -751,7 +751,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
                 // Check if user already has a student assosiation
 
-                user.StudentId != Guid.Empty ||
+                user.AssociatedId != Guid.Empty ||
 
                 // Check for bad viewModel
 
@@ -789,7 +789,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
             {
 
-                user.StudentId = student.Id;
+                user.AssociatedId = student.Id;
 
                 await UserManager.UpdateAsync(user);
             }
@@ -822,7 +822,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 var user = await UserManager.GetUserAsync(User);
                 // Check that studentId is the AssociatedId of the user
 
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+                if (user.AssociatedId == Guid.Empty || user.AssociatedId != studentId)
 
                 {
                     return Error("403: Forbidden");
@@ -933,7 +933,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 var user = await UserManager.GetUserAsync(User);
                 // Check that studentId is the AssociatedId of the user
 
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+                if (user.AssociatedId == Guid.Empty || user.AssociatedId != studentId)
 
                 {
                     return Error("403: Forbidden");
@@ -1044,7 +1044,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 var user = await UserManager.GetUserAsync(User);
                 // Check that studentId is the AssociatedId of the user
 
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+                if (user.AssociatedId == Guid.Empty || user.AssociatedId != studentId)
 
                 {
                     return Error("403: Forbidden");
@@ -1155,7 +1155,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 var user = await UserManager.GetUserAsync(User);
                 // Check that studentId is the AssociatedId of the user
 
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+                if (user.AssociatedId == Guid.Empty || user.AssociatedId != studentId)
 
                 {
                     return Error("403: Forbidden");
@@ -1266,7 +1266,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 var user = await UserManager.GetUserAsync(User);
                 // Check that studentId is the AssociatedId of the user
 
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+                if (user.AssociatedId == Guid.Empty || user.AssociatedId != studentId)
 
                 {
                     return Error("403: Forbidden");
@@ -1378,7 +1378,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 var user = await UserManager.GetUserAsync(User);
                 // Check that studentId is the AssociatedId of the user
 
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+                if (user.AssociatedId == Guid.Empty || user.AssociatedId != studentId)
 
                 {
                     return Error("403: Forbidden");
@@ -1489,7 +1489,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 var user = await UserManager.GetUserAsync(User);
                 // Check that studentId is the AssociatedId of the user
 
-                if (user.StudentId == Guid.Empty || user.StudentId != studentId)
+                if (user.AssociatedId == Guid.Empty || user.AssociatedId != studentId)
 
                 {
                     return Error("403: Forbidden");
