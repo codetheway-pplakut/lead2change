@@ -3,36 +3,42 @@
 @{
     ViewData["Title"] = "Unassigned Students";
 }
-<h1>Assigned Students</h1>
-<table class="table table-striped pt-2" id="myTable">
-    <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Options</th>
-        </tr>
-    </thead>
+<div class="container-fluid">
+    <div class="row blueHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>ASSIGN A STUDENT</strong></h1>
+        </div>
+    </div>
 
-    <tbody>
-        
-        @foreach (var item in Model.UnassignedStudents)
-
-        {
+    <table class="table table-striped shadow-lg pt-2" id="myTable">
+        <thead class="blueStyle">
             <tr>
-                <td>
-                    @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentEmail)
-                </td>
-                <td>
-                    <div>
-                        <div>
-                            @Html.ActionLink("Assign Student", "AssignStudent", new { studentId = item.Id, coachId = Model.CurrentCoach.Id})
-                        </div>
-                    </div>
-                </td>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Options</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model.UnassignedStudents)
+
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentEmail)
+                    </td>
+                    <td>
+                                <button class="btn btn-block orangeBtn" onclick="location.href='@Url.Action("AssignStudent", "Coaches", new { studentId = item.Id, coachId = Model.CurrentCoach.Id })'">Assign Student</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <button class="btn btn-outline-dark btn-lg" onclick="location.href='@Url.Action("Index","Coaches")'">Back To List</button>
+    </div>
+</div>

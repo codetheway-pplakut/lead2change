@@ -3,11 +3,14 @@
 @*
     ViewData["Title"] = "Create";
 *@
-
 <div class="container">
-
-    <h1>Create</h1>
-
+    <div class="row orangeHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>CAREER DECLARATION INTAKE FORM</strong></h1>
+        </div>
+    </div>
+    <p>Please enter the corresponding information into the fields below</p>
+    <hr />
     <form asp-action="Register">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group hidden">
@@ -16,35 +19,33 @@
             <span asp-validation-for="StudentId" class="text-danger"></span>
         </div>
         <div class="form-group row">
-            <label asp-for="CollegeBound" class="control-label col-md-3"></label>
-            <div class="col-md-9">
-                <input asp-for="CollegeBound" class="form-control" />
-            </div>
+            <label asp-for="CollegeBound" class="control-label col-sm-3"><b>Are you College Bound?</b></label>
+            <input asp-for="CollegeBound" class="form-control col-sm-1"/>
             <span asp-validation-for="CollegeBound" class="text-danger"></span>
         </div>
         <div class="form-group row">
-            <label asp-for="CareerCluster" class="control-label col-md-3"></label>
-            @Html.DropDownListFor(m => m.CareerCluster, Model.CareerCluster.ToSelectList(), null, new { @class = "form-control col-md-9" })
+            <label asp-for="CareerCluster" class="control-label col-sm-3"><b>What is the career cluster that you are most interested in?</b></label>
+            @Html.DropDownListFor(m => m.CareerCluster, Model.CareerCluster.ToSelectList(), null, new { @class = "form-control col-sm-8 ml-sm-4" })
             <span asp-validation-for="CareerCluster" class="text-danger"></span>
         </div>
         <div class="form-group row">
-            <label asp-for="SpecificCareer" class="control-label col-md-3"></label>
-            <input asp-for="SpecificCareer" class="form-control col-md-9" />
+            <label asp-for="SpecificCareer" class="control-label col-sm-3"><b>What specific career would you like to pursue?</b></label>
+            <input asp-for="SpecificCareer" class="form-control col-sm-8 ml-sm-4" />
             <span asp-validation-for="SpecificCareer" class="text-danger"></span>
         </div>
         <div class="form-group row">
-            <label asp-for="TechnicalCollegeBound" class="control-label col-md-3"></label>
-            <input asp-for="TechnicalCollegeBound" class="form-control col-md-9" />
+            <label asp-for="TechnicalCollegeBound" class="control-label col-sm-3"><b>Are you Technical College Bound?</b></label>
+            <input asp-for="TechnicalCollegeBound" class="form-control col-sm-1" />
             <span asp-validation-for="TechnicalCollegeBound" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <input type="submit" value="Create" class="btn btn-primary col-md-3" />
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-submit" />
         </div>
     </form>
 </div>
 
-<div>
-    @Html.ActionLink("Back to List", "InactiveIndex", "Students")
+<div align="center">
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students")'">Back To List</button>
 </div>
 
 @section Scripts {

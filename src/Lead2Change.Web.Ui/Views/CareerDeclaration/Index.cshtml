@@ -2,7 +2,12 @@
 @*
     ViewData["Title"] = "Index";
 *@
-<h1>Index</h1>
+<div class="row blueHeader full-width mb-sm-3">
+    <div class="col-sm-12">
+        <h1 class="text-center"><strong>CAREER INDEX</strong></h1>
+    </div>
+</div>
+
 <div>
     <table>
         <tr>
@@ -24,33 +29,33 @@
 <table>
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CollegeBound)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CareerCluster)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SpecificCareer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TechnicalCollegeBound)
-        </td>
-        <td>
-            <div>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CollegeBound)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CareerCluster)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecificCareer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TechnicalCollegeBound)
+            </td>
+            <td>
                 <div>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    <div>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    </div>
                 </div>
-            </div>
-            <div>
-                @Html.ActionLink("Details", "Details", new { studentId = item.StudentId })
-            </div>
-            <div>
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </div>
-        </td>
-    </tr>
+                <div>
+                    @Html.ActionLink("Details", "Details", new { studentId = item.StudentId })
+                </div>
+                <div>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </div>
+            </td>
+        </tr>
     }
 </table>
 <div>

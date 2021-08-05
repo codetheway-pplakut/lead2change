@@ -5,15 +5,19 @@
 *@
 
 <div class="container">
-    <h1>Admins</h1>
+    <div class="row blueHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>ADMINISTRATORS</strong></h1>
+        </div>
+    </div>
 
-    <table class="table table-striped pt-2" id="myTable">
-        <thead>
+    <table class="table table-striped shadow-lg pt-2" id="myTable">
+        <thead class="thead blueStyle">
             <tr>
                 <th scope="col">Userame</th>
 
                 <th scope="col">Email</th>
-
+                <th scope="col">Options</th>
             </tr>
         </thead>
 
@@ -36,20 +40,20 @@
                                 @if (Model.Count > 1)
                                 {
                                     <div>
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                    <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href='@Url.Action("Delete","Admin", new { id = item.Id })'" />
                                     </div>
                                 }
 
                             </div>
                         </td>
                     </tr>
-                }            
+                }
             }
         </tbody>
     </table>
 
-   
-<div>
-    <a asp-area="Identity" asp-page="/Account/RegisterAdmin"><b>Register New Admin</b></a>
-</div>
+
+    <div>
+        <a asp-area="Identity" asp-page="/Account/RegisterAdmin"><b>Register New Admin</b></a>
+    </div>
 </div>
