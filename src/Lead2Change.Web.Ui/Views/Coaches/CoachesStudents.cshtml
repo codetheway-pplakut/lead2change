@@ -107,6 +107,9 @@
                                 @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
                             </div>
                             <div>
+                                @Html.ActionLink("Conduct an Interview", "Index", "Interviews", new { studentId = item.Id })
+                            </div>
+                            <div>
                                 @Html.ActionLink("Eligible", "AcceptStudent", "Students", new { studentID = item.Id })
                             </div>
                             <div>
