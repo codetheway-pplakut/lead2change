@@ -20,14 +20,14 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label asp-for="CoachFirstName" class="control-label">First Name:</label></b>
-                    <input asp-for="CoachFirstName" class="form-control" value=@Model.CoachFirstName />
+                    <input asp-for="CoachFirstName" class="form-control" value=@Model.CoachFirstName required />
                     <span asp-validation-for="CoachFirstName" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label asp-for="CoachLastName" class="control-label">Last Name:</label></b>
-                    <input asp-for="CoachLastName" class="form-control" value=@Model.CoachLastName />
+                    <input asp-for="CoachLastName" class="form-control" value=@Model.CoachLastName required />
                     <span asp-validation-for="CoachLastName" class="text-danger"></span>
                 </div>
             </div>
@@ -36,7 +36,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label asp-for="CoachEmail" class="control-label">Email:</label></b>
-                    <input asp-for="CoachEmail" class="form-control" value=@Model.CoachEmail />
+                    <input asp-for="CoachEmail" class="form-control" value=@Model.CoachEmail required />
                     <span asp-validation-for="CoachEmail" class="text-danger"></span>
                 </div>
             </div>
@@ -45,15 +45,16 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label asp-for="CoachPhoneNumber" class="control-label">Phone Number</label></b>
-                    <input asp-for="CoachPhoneNumber" class="form-control" value=@Model.CoachPhoneNumber />
+                    <input asp-for="CoachPhoneNumber" class="form-control" value=@Model.CoachPhoneNumber required />
                     <span asp-validation-for="CoachPhoneNumber" class="text-danger"></span>
                 </div>
             </div>
         </div>
+        <hr />
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label asp-for="Active" class="control-label">Coach is active</label>
+                    <h4 align="center"><label asp-for="Active" class="control-label">Is this coach active? (Check if yes)</label></h4>
                     <input asp-for="Active" class="form-control" type="checkbox" />
                     <span asp-validation-for="Active" class="text-danger"></span>
                 </div>
