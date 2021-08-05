@@ -33,9 +33,12 @@
                         <td>
                             <div>
 
-                                <div>
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                </div>
+                                @if (Model.Count > 1)
+                                {
+                                    <div>
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                    </div>
+                                }
 
                             </div>
                         </td>
