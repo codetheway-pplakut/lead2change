@@ -19,5 +19,6 @@ namespace Lead2Change.Services.Students
         public bool HasCareerAssosiation(Student student);
         public Task<List<Student>> GetUnassignedStudents();
         public Task<List<Student>> GetCoachStudents(Guid coachId);
+        public Task<List<Student>> GetApplyingStudents();
     }
 }

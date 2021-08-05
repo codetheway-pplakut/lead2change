@@ -1,66 +1,43 @@
 ﻿@model Lead2Change.Domain.ViewModels.EditViewModel
 @*
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "GuidanceCounselorInformation";
 *@
 @{
 }
 <div class="container-fluid">
     <div align="center">
-        <h1>Edit Page</h1>
-        <hr />
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("Student Information", "StudentInformationEdit", new { studentId = Model.Id })</button>
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("Parent Information", "ParentInformationEdit", new { studentId = Model.Id })</button>
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("Guidance Counselor Information", "GuidanceCounselorInformation", new { studentId = Model.Id })</button>
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("Post Secondary Information", "PostSecondaryEdit", new { studentId = Model.Id })</button>
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("College Entrance Exam Information", "CollegeEntranceExamEdit", new { studentId = Model.Id })</button>
-
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("Financial Aid Information", "FinancialAidEdit", new { studentId = Model.Id })</button>
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-back">@Html.ActionLink("Signature Information", "SignatureEdit", new { studentId = Model.Id })</button>
-            </div>
-        </div>
+        <h1>Guidance Counselor Information</h1>
     </div>
-    <hr />
     <form asp-action="UpDate">
-        <div class="form-group row">
-            
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-                <h4 align="center"><label asp-for="Active" class="control-label">Is this student active? (Check if yes)</label></h4>
-                <input asp-for="Active" class="form-control" type="checkbox" />
-                <span asp-validation-for="Active" class="text-danger"></span>
+        <div class="calibri">
+            <div class="row">
+                <div class="form-group">
+                    <input asp-for="KnowGuidanceCounselor" class="form-check-input me-1" type="checkbox" id="checkboxTest" oninput="showHideClass('conditionalQuestion')" />
+                    <label asp-for="KnowGuidanceCounselor" class="control-label">I know my guidance counselor.</label>
+                    <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group conditionalQuestion">
+                <label asp-for="GuidanceCounselorName" class="control-label">Guidance Counselor Name:</label>
+                <input asp-for="GuidanceCounselorName" class="form-control" value=@Model.GuidanceCounselorName />
+                <span asp-validation-for="GuidanceCounselorName" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="form-group conditionalQuestion">
+                    <input asp-for="MeetWithGuidanceCounselor" class="form-check-input me-1" type="checkbox" />
+                    <label asp-for="MeetWithGuidanceCounselor" class="control-label">I meet with my guidance counselor.</label>
+                    <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group conditionalQuestion">
+                <label asp-for="HowOftenMeetWithGuidanceCounselor" class="control-label">How often?</label>
+                <input asp-for="HowOftenMeetWithGuidanceCounselor" class="form-control" value=@Model.HowOftenMeetWithGuidanceCounselor />
+                <span asp-validation-for="HowOftenMeetWithGuidanceCounselor" class="text-danger"></span>
+            </div>
+            <div class="form-group conditionalQuestion">
+                <label asp-for="DiscussWithGuidanceCounselor" class="control-label">If you meet with your guidance counselor, what do you discuss with them?</label>
+                <input asp-for="DiscussWithGuidanceCounselor" class="form-control" value=@Model.DiscussWithGuidanceCounselor />
+                <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group hidden">
@@ -348,37 +325,6 @@
                 <input asp-for="ParentEmail" class="form-control" value=@Model.ParentEmail type="email" required />
                 <span asp-validation-for="ParentEmail" class="text-danger"></span>
             </div>
-
-            <h3>Guidance Counselor Information</h3>
-            <div class="row">
-                <div class="form-group">
-                    <input asp-for="KnowGuidanceCounselor" class="form-check-input me-1" type="checkbox" id="checkboxTest" oninput="showHideClass('conditionalQuestion')" />
-                    <label asp-for="KnowGuidanceCounselor" class="control-label">I know my guidance counselor.</label>
-                    <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group conditionalQuestion">
-                <label asp-for="GuidanceCounselorName" class="control-label">Guidance Counselor Name:</label>
-                <input asp-for="GuidanceCounselorName" class="form-control" value=@Model.GuidanceCounselorName />
-                <span asp-validation-for="GuidanceCounselorName" class="text-danger"></span>
-            </div>
-            <div class="row">
-                <div class="form-group conditionalQuestion">
-                    <input asp-for="MeetWithGuidanceCounselor" class="form-check-input me-1" type="checkbox" />
-                    <label asp-for="MeetWithGuidanceCounselor" class="control-label">I meet with my guidance counselor.</label>
-                    <span asp-validation-for="MeetWithGuidanceCounselor" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group conditionalQuestion">
-                <label asp-for="HowOftenMeetWithGuidanceCounselor" class="control-label">How often?</label>
-                <input asp-for="HowOftenMeetWithGuidanceCounselor" class="form-control" value=@Model.HowOftenMeetWithGuidanceCounselor />
-                <span asp-validation-for="HowOftenMeetWithGuidanceCounselor" class="text-danger"></span>
-            </div>
-            <div class="form-group conditionalQuestion">
-                <label asp-for="DiscussWithGuidanceCounselor" class="control-label">If you meet with your guidance counselor, what do you discuss with them?</label>
-                <input asp-for="DiscussWithGuidanceCounselor" class="form-control" value=@Model.DiscussWithGuidanceCounselor />
-                <span asp-validation-for="DiscussWithGuidanceCounselor" class="text-danger"></span>
-            </div>
             <h3>Post-Secondary Plans</h3>
             <div class="form-group">
                 <label asp-for="PlanAfterHighSchool" class="control-label">Plan After High School:</label>
@@ -558,6 +504,8 @@
                 <input asp-for="SupportNeeded" class="form-control" value=@Model.SupportNeeded />
                 <span asp-validation-for="SupportNeeded" class="text-danger"></span>
             </div>
+
+            <h3>Signatures</h3>
             <div class="row">
                 <div class="col-sm-9">
                     <div class="form-group">
@@ -590,27 +538,31 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="form-group">
+                <label asp-for="Active" class="control-label">Is this student active?</label>
+                <input asp-for="Active" class="form-control" type="checkbox" />
+                <span asp-validation-for="Active" class="text-danger"></span>
+            </div>
 
-        <div class="form-group hidden" display="none">
-            <label asp-for="CoachId" class="control-label"></label>
-            <input asp-for="CoachId" class="form-control" value=@Model.CoachId />
-        </div>
-        <div class="form-group hidden" display="none">
-            <label asp-for="Id" class="control-label"></label>
-            <input asp-for="Id" class="form-control" value=@Model.Id />
+            <div class="form-group hidden" display="none">
+                <label asp-for="CoachId" class="control-label"></label>
+                <input asp-for="CoachId" class="form-control" value=@Model.CoachId />
+            </div>
+            <div class="form-group hidden" display="none">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" value=@Model.Id />
+            </div>
         </div>
         <div class="form-group" align="center">
-            <input type="submit" value="Update Active Status" class="btn btn-submit" />
+            <input type="submit" value="Submit" class="btn btn-submit" />
         </div>
     </form>
 </div>
 
-    <div>
-        <button class="btn btn-back"><a asp-action="Index">Back to Student List</a></button>
-    </div>
+<div>
+    <button class="btn btn-back">@Html.ActionLink("Back to Edit", "Edit", new { studentId = Model.Id })</button>
+</div>
 
-
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

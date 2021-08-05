@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
 *@
 
+<head><link rel="icon" href="http://example.com/favicon.png"></head>
 <div class="container">
     <h1>Students</h1>
 
@@ -56,10 +57,6 @@
                                 <div>
                                     @Html.ActionLink("Goals", "Index", "Goals", new { studentID = item.Id })
                                 </div>
-                                
-                                <div>
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                </div>
                             
                                 @if (item.CareerDeclarationId == Guid.Empty)
                                 {
@@ -82,10 +79,10 @@
         </tbody>
     </table>
 
-    @if (User.IsInRole(StringConstants.RoleNameAdmin))
+    @if (User.IsInRole(StringConstants.RoleNameAdmin))
     {
-        <div>
-            <a asp-action="Register"><b>Add new student.</b></a>
-        </div>
+    <div>
+        <button class="btn btn-submit"> @Html.ActionLink("Register a New Student", "InterestForm")</button>
+    </div>
     }
 </div>

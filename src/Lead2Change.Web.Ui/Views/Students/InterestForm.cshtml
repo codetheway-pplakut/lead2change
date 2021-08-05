@@ -1,0 +1,66 @@
+﻿@model Lead2Change.Domain.ViewModels.StudentInterestFormViewModel
+
+@{
+    ViewData["Title"] = "InterestForm";
+}
+<div class="container-fluid">
+    <div align="center">
+        <h1>Student Interest Form</h1>
+        <p>Please enter the corresponding information into the fields below</p>
+        <hr />
+    </div>
+    <div class="calibri">
+        <form asp-action="RegisterInterest">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="StudentFirstName" class="control-label">First Name:</label>
+                        <input asp-for="StudentFirstName" class="form-control" value=@Model.StudentFirstName required />
+                        <span asp-validation-for="StudentFirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="StudentLastName" class="control-label">Last Name:</label>
+                        <input asp-for="StudentLastName" class="form-control" value=@Model.StudentLastName required />
+                        <span asp-validation-for="StudentLastName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="StudentEmail" class="control-label">Email:</label>
+                        <input asp-for="StudentEmail" class="form-control" value=@Model.StudentEmail type="email" required />
+                        <span asp-validation-for="StudentEmail" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="StudentCellPhone" class="control-label">Phone Number</label>
+                        <input asp-for="StudentCellPhone" class="form-control" value=@Model.StudentCellPhone required />
+                        <span asp-validation-for="StudentCellPhone" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="StudentDateOfBirth" class="control-label">Date of Birth:</label>
+                        <input asp-for="StudentDateOfBirth" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" required />
+                        <span asp-validation-for="StudentDateOfBirth" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" align="center">
+                <input type="submit" value="Create" class="btn btn-submit" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -13,32 +13,84 @@
 <p><b>Email:</b> @Model.StudentEmail</p>
 <p><b>Coach:</b> @Model.CoachName</p>
 
-
 <h3>Other Information</h3>
-<p>Address: @Model.StudentAddress</p>
-<p>Apartment Number: @Model.StudentApartmentNumber</p>
-<p>City: @Model.StudentCity</p>
-<p>State: @Model.StudentState</p>
-<p>Zip Code: @Model.StudentZipCode</p>
-<p>Home Phone: @Model.StudentHomePhone</p>
-
-<p>Career Path: @Model.StudentCareerPath</p>
-<p>Career Interest: @Model.StudentCareerInterest</p>
+@if (Model.StudentAddress != null)
+{
+    <p>Address: @Model.StudentAddress</p>
+}
+@if (Model.StudentApartmentNumber != null)
+{
+    <p>Apartment Number: @Model.StudentApartmentNumber</p>
+}
+@if (Model.StudentCity != null)
+{
+    <p>City: @Model.StudentCity</p>
+}
+@if (Model.StudentState != null)
+{
+    <p>State: @Model.StudentState</p>
+}
+@if (Model.StudentZipCode != null)
+{
+    <p>Zip Code: @Model.StudentZipCode</p>
+}
+@if (Model.StudentHomePhone != null)
+{
+    <p>Home Phone: @Model.StudentHomePhone</p>
+}
+@if (Model.StudentCareerInterest != null)
+{
+    <p>Career Path: @Model.StudentCareerPath</p>
+}
+@if (Model.StudentCareerInterest != null)
+{
+    <p>Career Interest: @Model.StudentCareerInterest</p>
+}
 
 <h3>Parent Info</h3>
-<p>First Name:  @Model.ParentFirstName</p>
-<p>Last Name: @Model.ParentLastName</p>
-<p>Address: @Model.Address</p>
-<p>Parent Apartment Number: @Model.ParentApartmentNumber</p>
-<p>City: @Model.ParentCity</p>
-<p>State: @Model.ParentState</p>
-<p>Zip Code: @Model.ParentZipCode</p>
-<p>Home Phone: @Model.ParentHomePhone</p>
-<p>Cell Phone: @Model.ParentCellPhone</p>
-<p>Parent Email: @Model.ParentEmail</p>
+@if (Model.ParentFirstName != null)
+{
+    <p>First Name:  @Model.ParentFirstName</p>
+}
+@if (Model.ParentLastName != null)
+{
+    <p>Last Name: @Model.ParentLastName</p>
+}
+@if (Model.Address != null)
+{
+    <p>Address: @Model.Address</p>
+}
+@if (Model.ParentApartmentNumber != null)
+{
+    <p>Apartment Number: @Model.ParentApartmentNumber</p>
+}
+@if (Model.ParentCity != null)
+{
+    <p>City: @Model.ParentCity</p>
+}
+@if (Model.ParentState != null)
+{
+    <p>State: @Model.ParentState</p>
+}
+@if (Model.ParentZipCode != null)
+{
+    <p>Zip Code: @Model.ParentZipCode</p>
+}
+@if (Model.ParentHomePhone != null)
+{
+    <p>Home Phone: @Model.ParentHomePhone</p>
+}
+@if (Model.ParentCellPhone != null)
+{
+    <p>Cell Phone: @Model.ParentCellPhone</p>
+}
+@if (Model.ParentEmail != null)
+{
+    <p>Parent Email: @Model.ParentEmail</p>
+}
 
 <h3>Guidance Counselor Info</h3>
-@if (@Model.KnowGuidanceCounselor)
+@if (Model.KnowGuidanceCounselor)
 {
     <div>
         <p>I know my guidance counselor: Yes</p>
@@ -50,8 +102,11 @@ else
         <p>I know my guidance counselor: No</p>
     </div>
 }
-<p>Guidance Counselor Name: @Model.GuidanceCounselorName</p>
-@if (@Model.MeetWithGuidanceCounselor)
+@if (Model.GuidanceCounselorName != null)
+{
+    <p>Guidance Counselor Name: @Model.GuidanceCounselorName</p>
+}
+@if (Model.MeetWithGuidanceCounselor)
 {
     <div>
         <p>I meet with my guidance counselor: Yes</p>
@@ -63,11 +118,20 @@ else
         <p>I meet with my guidance counselor: No</p>
     </div>
 }
-<p>How often they meet with their guidance counselor: @Model.HowOftenMeetWithGuidanceCounselor</p>
-<p>What they have discussed with their guidance counselor: @Model.DiscussWithGuidanceCounselor</p>
+@if (Model.HowOftenMeetWithGuidanceCounselor != null)
+{
+    <p>How often they meet with their guidance counselor: @Model.HowOftenMeetWithGuidanceCounselor</p>
+}
+@if (Model.DiscussWithGuidanceCounselor != null)
+{
+    <p>What they have discussed with their guidance counselor: @Model.DiscussWithGuidanceCounselor</p>
+}
 
 <h3>Post-Secondary Plan</h3>
-<p>Their plan after high school: @Model.PlanAfterHighSchool</p>
+@if (Model.PlanAfterHighSchool != null)
+{
+    <p>Their plan after high school: @Model.PlanAfterHighSchool</p>
+}
 @if (@Model.CollegeApplicationStatus)
 {
     <div>
@@ -80,7 +144,10 @@ else
         <p>I have applied to college: No</p>
     </div>
 }
-<p>Colleges they have applied to/plan to apply to: @Model.CollegesList</p>
+@if (Model.CollegesList != null)
+{
+    <p>Colleges they have applied to/plan to apply to: @Model.CollegesList</p>
+}
 @if (@Model.CollegeEssayStatus)
 {
     <div>
@@ -105,9 +172,18 @@ else
         <p>I need help writing my college essay: No</p>
     </div>
 }
-<p>First choice college(s): @Model.FirstChoiceCollege</p>
-<p>Second choice college(s) @Model.SecondChoiceCollege</p>
-<p>Third choice college(s): @Model.ThirdChoiceCollege</p>
+@if (Model.FirstChoiceCollege != null)
+{
+    <p>First choice college(s): @Model.FirstChoiceCollege</p>
+}
+@if (Model.SecondChoiceCollege != null)
+{
+    <p>Second choice college(s) @Model.SecondChoiceCollege</p>
+}
+@if (Model.ThirdChoiceCollege != null)
+{
+    <p>Third choice college(s): @Model.ThirdChoiceCollege</p>
+}
 @if (@Model.TradeSchoolStatus)
 {
     <div>
@@ -120,7 +196,10 @@ else
         <p>I have already applied to a trade school: No</p>
     </div>
 }
-<p>Trade schools they have applied/plan to apply to: @Model.TradeSchoolsList</p>
+@if (Model.TradeSchoolsList != null)
+{
+    <p>Trade schools they have applied/plan to apply to: @Model.TradeSchoolsList</p>
+}
 @if (@Model.ArmedForcesStatus)
 {
     <div>
@@ -133,7 +212,10 @@ else
         <p>I have already applied to the armed forces: No</p>
     </div>
 }
-<p>Branches they have applied to/plan to apply to: @Model.ArmedForcesBranch</p>
+@if (Model.ArmedForcesBranch != null)
+{
+    <p>Branches they have applied to/plan to apply to: @Model.ArmedForcesBranch</p>
+}
 @if (@Model.WorkStatus)
 {
     <div>
@@ -146,17 +228,38 @@ else
         <p>I plan to go directly into the workforce after high school: No</p>
     </div>
 }
-<p>Career paths they are interested in pursuing: @Model.CareerPathList</p>
-<p>Plans for after high school: @Model.OtherPlans</p>
+@if (Model.CareerPathList != null)
+{
+    <p>Career paths they are interested in pursuing: @Model.CareerPathList</p>
+}
+@if (Model.OtherPlans != null)
+{
+    <p>Plans for after high school: @Model.OtherPlans</p>
+}
+
 <h3>College Entrance Exam Information</h3>
-<p>Date of PACT: @Convert.ToDateTime(Model.PACTTestDate).ToString("MM/dd/yyyy")</p>
-<p>PACT Score: @Model.PACTTestScore</p>
-<p>Date of PSAT: @Convert.ToDateTime(Model.PSATTestDate).ToString("MM/dd/yyyy")</p>
-<p>PSAT Score: @Model.PSATTestScore</p>
-<p>Date of SAT: @Convert.ToDateTime(Model.SATTestDate).ToString("MM/dd/yyyy")</p>
-<p>SAT Score: @Model.SATTestScore</p>
-<p>Date of ACT: @Convert.ToDateTime(Model.ACTTestDate).ToString("MM/dd/yyyy")</p>
-<p>ACT Score: @Model.ACTTestScore</p>
+
+@if (Model.PACTTestScore > 0 && Model.PACTTestScore <= 35)
+{
+    <p>Date of PACT: @Convert.ToDateTime(Model.PACTTestDate).ToString("MM/dd/yyyy")</p>
+    <p>PACT Score: @Model.PACTTestScore</p>
+}
+@if (Model.PSATTestScore >= 320 && Model.PSATTestScore <= 1520)
+{
+    <p>Date of PSAT: @Convert.ToDateTime(Model.PSATTestDate).ToString("MM/dd/yyyy")</p>
+    <p>PSAT Score: @Model.PSATTestScore</p>
+}
+@if (Model.SATTestScore >= 400 && Model.SATTestScore <= 1600)
+{
+    <p>Date of SAT: @Convert.ToDateTime(Model.SATTestDate).ToString("MM/dd/yyyy")</p>
+    <p>SAT Score: @Model.SATTestScore</p>
+}
+
+@if (Model.ACTTestScore >= 1 && Model.ACTTestScore <= 36)
+{
+    <p>Date of ACT: @Convert.ToDateTime(Model.ACTTestDate).ToString("MM/dd/yyyy")</p>
+    <p>ACT Score: @Model.ACTTestScore</p>
+}
 @if (@Model.PrepClassRequired)
 {
     <div>
@@ -194,17 +297,37 @@ else
         <p>I need assistance filling out my FAFSA/Financial aid forms: No</p>
     </div>
 }
-<p>Support they need: @Model.SupportNeeded</p>
+@if (Model.SupportNeeded != null)
+{
+    <p>Support they need: @Model.SupportNeeded</p>
+}
+
 <h3>Signatures</h3>
-<p>Student Signature: @Model.StudentSignature</p>
-<p>Date Signed: @Convert.ToDateTime(Model.StudentSignatureDate).ToString("MM/dd/yyyy")</p>
-<p>Parent Signature: @Model.ParentSignature</p>
-<p>Date Signed: @Convert.ToDateTime(Model.ParentSignatureDate).ToString("MM/dd/yyyy")</p>
+@if (Model.StudentSignature != null)
+{
+    <p>Student Signature: @Model.StudentSignature</p>
+    <p>Date Signed: @Convert.ToDateTime(Model.StudentSignatureDate).ToString("MM/dd/yyyy")</p>
+}
+else
+{
+    <p>Student Signature: Unsigned</p>
+}
+
+@if (Model.ParentSignature != null)
+{
+    <p>Parent Signature: @Model.ParentSignature</p>
+    <p>Date Signed: @Convert.ToDateTime(Model.ParentSignatureDate).ToString("MM/dd/yyyy")</p>
+}
+else
+{
+    <p>Parent Signature: Unsigned</p>
+}
+
 <p>Activity Status: @Model.Active</p>
 
 
 
-@*<p> @Model.</p>*@
+@*<p> @Model.</p>*@<p></p>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
