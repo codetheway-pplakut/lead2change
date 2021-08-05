@@ -43,12 +43,10 @@
     <div class="form-group">
         <input type="submit" value="Submit" class="btn btn-submit" />
     </div>
-    <div>
-        @Html.ActionLink("Back to Career Details", "Details", "CareerDeclaration", new { id = Model.Id })
-    </div>
 </form>
 <div align="center">
-    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students")'">Back To List</button>
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId = Model.StudentId })'">Back To Career Details</button>
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students",  new { id = Model.Id })'">Back To Student List</button>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
