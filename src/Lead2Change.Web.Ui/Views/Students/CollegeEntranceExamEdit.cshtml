@@ -5,9 +5,12 @@
 @{
 }
 <div class="container-fluid">
-    <div align="center">
-        <h1>College Entrance Exam Information</h1>
+    <div class="row blueHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>COLLEGE ENTRANCE EXAM INFORMATION</strong></h1>
+        </div>
     </div>
+
     <form asp-action="UpDate">
         <div class="calibri">
 
@@ -481,7 +484,7 @@
                 <input asp-for="OtherPlans" class="form-control" value=@Model.OtherPlans />
                 <span asp-validation-for="OtherPlans" class="text-danger"></span>
             </div>
-            
+
             <h3>Financial Aid Information</h3>
             <div class="form-group">
                 <input asp-for="FinancialAidProcessComplete" class="form-check-input me-1" type="checkbox" />
