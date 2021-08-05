@@ -5,10 +5,12 @@
 @{
 }
 <div class="container-fluid">
-    <div align="center">
-        <h1>Edit Student Information</h1>
-        <hr />
+    <div class="row blueHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>EDIT STUDENT INFORMATION</strong></h1>
+        </div>
     </div>
+   
     <div class="calibri">
         <form asp-action="UpDate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -17,14 +19,14 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label asp-for="StudentFirstName" class="control-label">First Name:</label>
-                        <input asp-for="StudentFirstName" class="form-control" value=@Model.StudentFirstName  />
+                        <input asp-for="StudentFirstName" class="form-control" value=@Model.StudentFirstName />
                         <span asp-validation-for="StudentFirstName" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label asp-for="StudentLastName" class="control-label">Last Name:</label>
-                        <input asp-for="StudentLastName" class="form-control" value=@Model.StudentLastName  />
+                        <input asp-for="StudentLastName" class="form-control" value=@Model.StudentLastName />
                         <span asp-validation-for="StudentLastName" class="text-danger"></span>
                     </div>
                 </div>
@@ -33,7 +35,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label asp-for="StudentDateOfBirth" class="control-label">Date of Birth:</label>
-                        <input asp-for="StudentDateOfBirth" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy"  />
+                        <input asp-for="StudentDateOfBirth" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                         <span asp-validation-for="StudentDateOfBirth" class="text-danger"></span>
                     </div>
                 </div>
@@ -42,7 +44,7 @@
                 <div class="col-sm-11">
                     <div class="form-group">
                         <label asp-for="StudentAddress" class="control-label">Address:</label>
-                        <input asp-for="StudentAddress" class="form-control" value=@Model.StudentAddress  />
+                        <input asp-for="StudentAddress" class="form-control" value=@Model.StudentAddress />
                         <span asp-validation-for="StudentAddress" class="text-danger"></span>
                     </div>
                 </div>
@@ -58,21 +60,21 @@
                 <div class="col-sm-8">
                     <div class="form-group">
                         <label asp-for="StudentCity" class="control-label">City:</label>
-                        <input asp-for="StudentCity" class="form-control" value=@Model.StudentCity  />
+                        <input asp-for="StudentCity" class="form-control" value=@Model.StudentCity />
                         <span asp-validation-for="StudentCity" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label asp-for="StudentZipCode" class="control-label">Zip Code:</label>
-                        <input asp-for="StudentZipCode" class="form-control" value=@Model.StudentZipCode  />
+                        <input asp-for="StudentZipCode" class="form-control" value=@Model.StudentZipCode />
                         <span asp-validation-for="StudentZipCode" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label asp-for="StudentState" class="control-label">State:</label>
-                        <select asp-for="StudentState" class="form-control" >
+                        <select asp-for="StudentState" class="form-control">
                             <option value="Alabama">AL</option>
                             <option value="Alaska">AK</option>
                             <option value="Arizona">AZ</option>
@@ -131,7 +133,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label asp-for="StudentHomePhone" class="control-label">Home Phone:</label>
-                        <input type="tel" pattern="^\d{3}-\d{3}-\d{4}$" asp-for="StudentHomePhone" class="form-control" value=@Model.StudentHomePhone  />
+                        <input type="tel" pattern="^\d{3}-\d{3}-\d{4}$" asp-for="StudentHomePhone" class="form-control" value=@Model.StudentHomePhone />
                         <span asp-validation-for="StudentHomePhone" class="text-danger"></span>
                     </div>
                 </div>
@@ -140,7 +142,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label asp-for="StudentCellPhone" class="control-label">Cell Phone:</label>
-                        <input asp-for="StudentCellPhone" class="form-control" value=@Model.StudentCellPhone  />
+                        <input asp-for="StudentCellPhone" class="form-control" value=@Model.StudentCellPhone />
                         <span asp-validation-for="StudentCellPhone" class="text-danger"></span>
                     </div>
                 </div>
@@ -149,7 +151,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label asp-for="StudentEmail" class="control-label">Email:</label>
-                        <input asp-for="StudentEmail" class="form-control" value=@Model.StudentEmail type="email"  />
+                        <input asp-for="StudentEmail" class="form-control" value=@Model.StudentEmail type="email" />
                         <span asp-validation-for="StudentEmail" class="text-danger"></span>
                     </div>
                 </div>
@@ -158,7 +160,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label asp-for="StudentCareerPath" class="control-label">Career Path:</label>
-                        <input asp-for="StudentCareerPath" class="form-control" value=@Model.StudentCareerPath  />
+                        <input asp-for="StudentCareerPath" class="form-control" value=@Model.StudentCareerPath />
                         <span asp-validation-for="StudentCareerPath" class="text-danger"></span>
                     </div>
                 </div>
@@ -167,7 +169,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label asp-for="StudentCareerInterest" class="control-label">Career Interest:</label>
-                        <input asp-for="StudentCareerInterest" class="form-control" value=@Model.StudentCareerInterest  />
+                        <input asp-for="StudentCareerInterest" class="form-control" value=@Model.StudentCareerInterest />
                         <span asp-validation-for="StudentCareerInterest" class="text-danger"></span>
                     </div>
                 </div>
@@ -180,14 +182,14 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label asp-for="ParentFirstName" class="control-label">First Name:</label>
-                            <input asp-for="ParentFirstName" class="form-control" value=@Model.ParentFirstName  />
+                            <input asp-for="ParentFirstName" class="form-control" value=@Model.ParentFirstName />
                             <span asp-validation-for="ParentFirstName" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label asp-for="ParentLastName" class="control-label">Last Name:</label>
-                            <input asp-for="ParentLastName" class="form-control" value=@Model.ParentLastName  />
+                            <input asp-for="ParentLastName" class="form-control" value=@Model.ParentLastName />
                             <span asp-validation-for="ParentLastName" class="text-danger"></span>
                         </div>
                     </div>
@@ -196,7 +198,7 @@
                     <div class="col-sm-11">
                         <div class="form-group">
                             <label asp-for="Address" class="control-label">Address:</label>
-                            <input asp-for="Address" class="form-control" value=@Model.Address  />
+                            <input asp-for="Address" class="form-control" value=@Model.Address />
                             <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
                     </div>
@@ -212,21 +214,21 @@
                     <div class="col-sm-8">
                         <div class="form-group">
                             <label asp-for="ParentCity" class="control-label">City:</label>
-                            <input asp-for="ParentCity" class="form-control" value=@Model.ParentCity  />
+                            <input asp-for="ParentCity" class="form-control" value=@Model.ParentCity />
                             <span asp-validation-for="ParentCity" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
                             <label asp-for="ParentZipCode" class="control-label">Zip Code:</label>
-                            <input asp-for="ParentZipCode" class="form-control" value=@Model.ParentZipCode  />
+                            <input asp-for="ParentZipCode" class="form-control" value=@Model.ParentZipCode />
                             <span asp-validation-for="ParentZipCode" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
                             <label asp-for="ParentState" class="control-label">State:</label>
-                            <select asp-for="ParentState" class="form-control" >
+                            <select asp-for="ParentState" class="form-control">
                                 <option value="Alabama">AL</option>
                                 <option value="Alaska">AK</option>
                                 <option value="rizona">AZ</option>
@@ -284,17 +286,17 @@
 
                 <div class="form-group">
                     <label asp-for="ParentHomePhone" class="control-label">Home Phone:</label>
-                    <input asp-for="ParentHomePhone" class="form-control" value=@Model.ParentHomePhone  />
+                    <input asp-for="ParentHomePhone" class="form-control" value=@Model.ParentHomePhone />
                     <span asp-validation-for="ParentHomePhone" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="ParentCellPhone" class="control-label">Cell Phone:</label>
-                    <input asp-for="ParentCellPhone" class="form-control" value=@Model.ParentCellPhone  />
+                    <input asp-for="ParentCellPhone" class="form-control" value=@Model.ParentCellPhone />
                     <span asp-validation-for="ParentCellPhone" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="ParentEmail" class="control-label">Email:</label>
-                    <input asp-for="ParentEmail" class="form-control" value=@Model.ParentEmail type="email"  />
+                    <input asp-for="ParentEmail" class="form-control" value=@Model.ParentEmail type="email" />
                     <span asp-validation-for="ParentEmail" class="text-danger"></span>
                 </div>
 
@@ -513,14 +515,14 @@
                     <div class="col-sm-9">
                         <div class="form-group">
                             <label asp-for="StudentSignature" class="control-label">Student Signature:</label>
-                            <input asp-for="StudentSignature" class="form-control" value=@Model.StudentSignature  />
+                            <input asp-for="StudentSignature" class="form-control" value=@Model.StudentSignature />
                             <span asp-validation-for="StudentSignature" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label asp-for="StudentSignatureDate" class="control-label">Date:</label>
-                            <input asp-for="StudentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy"  />
+                            <input asp-for="StudentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                             <span asp-validation-for="StudentSignatureDate" class="text-danger"></span>
                         </div>
                     </div>
@@ -529,14 +531,14 @@
                     <div class="col-sm-9">
                         <div class="form-group">
                             <label asp-for="ParentSignature" class="control-label">Parent Signature:</label>
-                            <input asp-for="ParentSignature" class="form-control" value=@Model.ParentSignature  />
+                            <input asp-for="ParentSignature" class="form-control" value=@Model.ParentSignature />
                             <span asp-validation-for="ParentSignature" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label asp-for="ParentSignatureDate" class="control-label">Date:</label>
-                            <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy"  />
+                            <input asp-for="ParentSignatureDate" class="form-control" data-date-format="MM-dd-yyyy" type="date" placeholder="MM-dd-yyyy" />
                             <span asp-validation-for="ParentSignatureDate" class="text-danger"></span>
                         </div>
                     </div>
