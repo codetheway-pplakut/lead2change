@@ -18,5 +18,6 @@ namespace Lead2Change.Domain.Models
         public String CoachEmail { get; set; }
         public String CoachPhoneNumber { get; set; }
         public List<Student> Students { get; set; }
+        public bool Active { get; set; }
     }
 }

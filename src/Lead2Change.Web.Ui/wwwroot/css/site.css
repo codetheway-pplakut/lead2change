@@ -5,6 +5,11 @@ a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
+    height: 10vh;
+}
+
+a.navbar-brand img {
+    height: inherit;
 }
 
 /* Provide sufficient contrast against white background */
@@ -150,6 +155,10 @@ thead.blueStyle {
     color: #fff;
     background-color: #ff7c00;
     border-color: #ff7c00;
+}
+
+.editPage {
+    padding: .5%;
 }
 
 #goalEdit {

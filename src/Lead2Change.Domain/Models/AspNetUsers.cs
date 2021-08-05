@@ -11,7 +11,7 @@ namespace Lead2Change.Domain.Models
 {
     public partial class AspNetUsers : IdentityUser
     {
-        public Guid StudentId { get; set; }
+        public Guid AssociatedId { get; set; }
 
         //public AspNetUsers()
         //{

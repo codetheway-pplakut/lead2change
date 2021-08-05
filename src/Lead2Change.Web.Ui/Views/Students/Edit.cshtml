@@ -11,10 +11,65 @@
 </div>
 <!--Registration Form for Students-->
 <div class="container-fluid">
+    <div align="center">
+        <h1>Edit Page</h1>
+        <hr />
+        <div class="row editPage">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <button class="btn btn-back">@Html.ActionLink("Student Information", "StudentInformationEdit", new { studentId = Model.Id })</button>
+            </div>
+        </div>
+        <div class="row editPage">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <button class="btn btn-back">@Html.ActionLink("Parent Information", "ParentInformationEdit", new { studentId = Model.Id })</button>
+            </div>
+        </div>
+        <div class="row editPage">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <button class="btn btn-back">@Html.ActionLink("Guidance Counselor Information", "GuidanceCounselorInformation", new { studentId = Model.Id })</button>
+            </div>
+        </div>
+        <div class="row editPage">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <button class="btn btn-back">@Html.ActionLink("Post Secondary Information", "PostSecondaryEdit", new { studentId = Model.Id })</button>
+            </div>
+        </div>
+        <div class="row editPage">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <button class="btn btn-back">@Html.ActionLink("College Entrance Exam Information", "CollegeEntranceExamEdit", new { studentId = Model.Id })</button>
 
-    <div class="calibri">
-        <form asp-action="UpDate">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            </div>
+        </div>
+        <div class="row editPage">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <button class="btn btn-back">@Html.ActionLink("Financial Aid Information", "FinancialAidEdit", new { studentId = Model.Id })</button>
+            </div>
+        </div>
+        <div class="row editPage">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <button class="btn btn-back">@Html.ActionLink("Signature Information", "SignatureEdit", new { studentId = Model.Id })</button>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <form asp-action="UpDate">
+        <div class="form-group row">
+            
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <h4 align="center"><label asp-for="Active" class="control-label">Is this student active? (Check if yes)</label></h4>
+                <input asp-for="Active" class="form-control" type="checkbox" />
+                <span asp-validation-for="Active" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group hidden">
             <h3>Student Information</h3>
             <div class="row">
                 <div class="col-sm-6">
@@ -521,8 +576,6 @@
                 <input asp-for="SupportNeeded" class="form-control" value=@Model.SupportNeeded />
                 <span asp-validation-for="SupportNeeded" class="text-danger"></span>
             </div>
-
-            <h3>Signatures</h3>
             <div class="row">
                 <div class="col-sm-9">
                     <div class="form-group">
@@ -555,32 +608,27 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Active" class="control-label">Is this student active?</label>
-                <input asp-for="Active" class="form-control" type="checkbox" />
-                <span asp-validation-for="Active" class="text-danger"></span>
-            </div>
+        </div>
 
-            <div class="form-group hidden" display="none">
-                <label asp-for="CoachId" class="control-label"></label>
-                <input asp-for="CoachId" class="form-control" value=@Model.CoachId />
-            </div>
-            <div class="form-group hidden" display="none">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" value=@Model.Id />
-            </div>
-            <div class="form-group" align="center">
-                <input type="submit" value="Submit" class="btn btn-submit" />
-            </div>
-        </form>
+        <div class="form-group hidden" display="none">
+            <label asp-for="CoachId" class="control-label"></label>
+            <input asp-for="CoachId" class="form-control" value=@Model.CoachId />
+        </div>
+        <div class="form-group hidden" display="none">
+            <label asp-for="Id" class="control-label"></label>
+            <input asp-for="Id" class="form-control" value=@Model.Id />
+        </div>
+        <div class="form-group" align="center">
+            <input type="submit" value="Update Active Status" class="btn btn-submit" />
+        </div>
+    </form>
+</div>
+
+    <div>
+        <button class="btn btn-back"><a asp-action="Index">Back to Student List</a></button>
     </div>
 
 
-   
-        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students")'">Back To Student List</button>
-   
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

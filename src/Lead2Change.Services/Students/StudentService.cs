@@ -66,5 +66,9 @@ namespace Lead2Change.Services.Students
         {
             return await this._studentRepo.GetCoachStudents(coachId);
         }
+        public async Task<List<Student>> GetApplyingStudents()
+        {
+            return await this._studentRepo.GetApplyingStudents();
+        }
     }
 }

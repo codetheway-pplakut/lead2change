@@ -15,6 +15,11 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Lead2Change.Domain.Models;
 using Lead2Change.Domain.Constants;
+using Lead2Change.Domain.ViewModels;
+using Lead2Change.Services.Identity;
+using Lead2Change.Services.Students;
+using Lead2Change.Web.Ui.Models;
+using Lead2Change.Services.Coaches;
 
 namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
 {
@@ -64,10 +69,17 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (_signInManager.IsSignedIn(User) && User.IsInRole(StringConstants.RoleNameAdmin) == true)
+            {
+                return Page();
+            }
+
+            return Redirect("AccessDenied");
+
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -82,7 +94,7 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _userManager.AddToRoleAsync(user, StringConstants.RoleNameStudent);
+                    await _userManager.AddToRoleAsync(user, StringConstants.RoleNameCoach);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

@@ -1,4 +1,8 @@
 ﻿@model Lead2Change.Domain.ViewModels.CoachViewModel
+@using Microsoft.AspNetCore.Identity
+@using Lead2Change.Domain.Models
+@inject SignInManager<AspNetUsers> SignInManager
+@inject UserManager<AspNetUsers> UserManager
 @*
     ViewData["Title"] = "Details";
 *@
@@ -11,8 +15,8 @@
     </div>
 
     <div class="card text-dark bg-light mb-3">
-        <div class="card-header">
             <div class="row px-sm-3">
+        <div class="card-header">
                 <h3>Coach Information</h3>
                 <button class="btn btn-primary ml-auto" type="button" data-toggle="collapse" data-target="#coachInfo" aria-expanded="false" aria-controls="coachInfo">
                     <img src="~/Images/UpDownIcon.png" class="smallIcon"/>
@@ -28,7 +32,12 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-           <h3>Assigned Students</h3>
+@if(SignInManager.IsSignedIn(User) && User.IsInRole("Coach"))
+ {
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="CoachesStudents">Assigned Students</a>
+    </li>    
+ } 
         </div>
     </div>
     <table class="table table-striped shadow-lg pt-2" id="myTable">

@@ -8,11 +8,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="container">
-    <div class="row blueHeader full-width mb-sm-3">
-        <div class="col-sm-12">
-            <h1 class="text-center"><strong>COACHES</strong></h1>
-        </div>
-    </div>
+    <h1>Active Coaches</h1>
     <div class="row">
         <div class="col-sm-3 searchbar ml-auto">
             <input type="text" id="myInput" onkeyup="searchFilter()" placeholder="Search for items.." class="tableInput searchbar__input" align="right">
@@ -36,6 +32,7 @@
             @foreach (var item in Model)
 
             {
+                @if (item.Active)
                 <tr>
                     <td>
                         @Html.DisplayFor(modeItem => item.CoachLastName), @Html.DisplayFor(modelItem => item.CoachFirstName)
@@ -57,13 +54,68 @@
 
                             </div>
                         </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+
+    <h1>Inactive Coaches</h1>
+
+    <table class="table table-striped pt-2" id="myTable">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Options</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+
+            {
+                @if (item.Active == false)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modeItem => item.CoachLastName), @Html.DisplayFor(modelItem => item.CoachFirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CoachEmail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CoachPhoneNumber)
+                        </td>
+                        <td>
+                            <div>
+                                <div>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                </div>
+                                <div>
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                                </div>
+                                <div>
+                                    @Html.ActionLink("View Coach's Students", "CoachesStudents", new { id = item.Id })
+                                </div>
+                                <div>
+                                    @Html.ActionLink("Activate Coach", "ActiveCoach", new { coachid = item.Id })
+                                </div>
+                                <div>
+                                    @Html.ActionLink("Delete", "Delete", new { Id = item.Id })
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
 
     <div>
-        <a asp-action="Create"><b>Add new coach.</b></a>
+        <a asp-area="Identity" asp-page="/Account/RegisterCoach"><b>Register Coach</b></a>
     </div>
 </div>

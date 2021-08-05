@@ -17,6 +17,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Lead2Change.Domain.Constants;
 
 using Lead2Change.Domain.Models;
 using Lead2Change.Services.Identity;
@@ -25,6 +27,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
+    [Authorize(Roles = StringConstants.RoleNameAdmin + "," + StringConstants.RoleNameCoach)]
     public class AnswerController : Controller
     {
 

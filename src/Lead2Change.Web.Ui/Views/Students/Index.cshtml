@@ -96,10 +96,9 @@
         </div>
     }
 
-
-    <div class="row">
-        <div class="col-sm-12 pb-sm-2 text-center">
-            <input type="button" class="btn btn-primary btn-lg" value="Add a New Student" onclick="location.href='@Url.Action("Register","Students")'" />
-        </div>
-    </div>
+    @if (User.IsInRole(StringConstants.RoleNameAdmin))
+    {
+        <div>
+            <a asp-action="InterestForm"><b>Register a new student</b></a>
+        </div>}
 </div>

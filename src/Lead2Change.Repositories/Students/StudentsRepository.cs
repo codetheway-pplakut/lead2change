@@ -24,7 +24,7 @@ namespace Lead2Change.Repositories.Students
         }
         public async Task<List<Student>> GetActiveStudents()
         {
-            var students = await AppDbContext.Students.Where(i => i.Active).ToListAsync();
+            var students = await AppDbContext.Students.Where(i => i.Active && i.Declined == false).ToListAsync();
             return students;
         }
         public async Task<List<Student>> GetActiveStudentsByPage(int pageNumber, int pageLength)
@@ -33,7 +33,7 @@ namespace Lead2Change.Repositories.Students
         }
         public async Task<List<Student>> GetInactiveStudents()
         {
-            var students = await AppDbContext.Students.Where(i => i.Active == false).ToListAsync();
+            var students = await AppDbContext.Students.Where(i => i.Active == false && i.Declined == false).ToListAsync();
             return students;
         }
 
@@ -68,12 +68,17 @@ namespace Lead2Change.Repositories.Students
         }
         public async Task<List<Student>> GetUnassignedStudents()
         {
-            var students = await AppDbContext.Students.Where(i => (i.CoachId.HasValue == false) && (i.Active == true)).ToListAsync();
+            var students = await AppDbContext.Students.Where(i => i.CoachId.HasValue == false).ToListAsync();
             return students;
         }
         public async Task<List<Student>> GetCoachStudents(Guid coachId)
         {
             var students = await AppDbContext.Students.Where(i => i.CoachId == coachId).ToListAsync();
+            return students;
+        }
+        public async Task<List<Student>> GetApplyingStudents()
+        {
+            var students = await AppDbContext.Students.Where(i => i.Accepted == false && i.Declined == false).ToListAsync();
             return students;
         }
     }
