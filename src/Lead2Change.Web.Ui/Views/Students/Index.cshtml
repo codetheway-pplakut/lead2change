@@ -1,4 +1,4 @@
-﻿@model List<Lead2Change.Domain.Models.Student>
+﻿@model Lead2Change.Domain.ViewModels.StudentIndexViewModel;
 @*
     ViewData["Title"] = "Index";
 *@
@@ -23,9 +23,9 @@
         </thead>
 
         <tbody>
-            @if (Model != null)
+            @if (Model.Students != null)
             {
-                @foreach (var item in Model)
+                @foreach (var item in Model.Students)
                 {
 
                     <tr>
@@ -70,11 +70,26 @@
                 }}
         </tbody>
     </table>
+    @if (Model.Students != null)
+    {
+            <div class="row">
+                <div class="col-sm-12 mb-sm-2">
+                    @if (Model.PageNumber > 0)
+                    {
+                        <button type="button" class="btn btn-primary float-left" onclick="location.href ='@Url.Action("Index", "Students", new { pageNumber = Model.PageNumber - 1, pageSize = Model.PageSize })'">Back</button>
+                    }
+                    @if (Model.Students.Count == Model.PageSize)
+                    {
+                        <button type="button" class="btn btn-primary float-right" onclick="location.href ='@Url.Action("Index", "Students", new { pageNumber = Model.PageNumber + 1, pageSize = Model.PageSize })'">Next</button>
+                    }
+                </div>
+            </div>
+    }
 
 
     <div class="row">
-        <div class="col-sm-12 pb-sm-2">
-            <input type="button" class="btn btn-primary" value="Add a New Student" onclick="location.href='@Url.Action("Register","Students")'" />
+        <div class="col-sm-12 pb-sm-2 text-center">
+            <input type="button" class="btn btn-primary btn-lg" value="Add a New Student" onclick="location.href='@Url.Action("Register","Students")'" />
         </div>
     </div>
 </div>
