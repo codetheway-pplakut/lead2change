@@ -5,7 +5,11 @@
 *@
 
 <div class="container">
-    <h1>Admins</h1>
+    <div class="row blueHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>ADMINISTRATORS</strong></h1>
+        </div>
+    </div>
 
     <table class="table table-striped pt-2" id="myTable">
         <thead>
@@ -40,13 +44,13 @@
                             </div>
                         </td>
                     </tr>
-                }            
+                }
             }
         </tbody>
     </table>
 
-   
-<div>
-    <a asp-area="Identity" asp-page="/Account/RegisterAdmin"><b>Register New Admin</b></a>
-</div>
+
+    <div>
+        <a asp-area="Identity" asp-page="/Account/RegisterAdmin"><b>Register New Admin</b></a>
+    </div>
 </div>
