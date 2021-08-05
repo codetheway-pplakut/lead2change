@@ -128,7 +128,7 @@ namespace Lead2Change.Web.Ui.Controllers
             return View("Edit", model);
         }
 
-        public async Task<IActionResult> Details(Guid id)
+        public async Task<IActionResult> Details(Guid id, Guid studentID)
         {
             var result = await _interviewsService.GetInterviewAndQuestions(id);
             InterviewViewModel interviewModel;
@@ -138,7 +138,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 var interview = await _interviewsService.GetInterview(id);
                 interviewModel = new InterviewViewModel {
                     Id = id,
-                    InterviewName = interview.InterviewName
+                    InterviewName = interview.InterviewName,
+                    StudentId = studentID
                 };
             }
             else
@@ -147,7 +148,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 {
                     Id = id,
                     QuestionInInterviews = result,
-                    InterviewName = result.FirstOrDefault().Interview.InterviewName
+                    InterviewName = result.FirstOrDefault().Interview.InterviewName,
+                    StudentId = studentID
                 };
             }
             return View(interviewModel);
