@@ -81,7 +81,6 @@ namespace Lead2Change.Web.Ui.Controllers
             {
                 return Error("403: Not authorized to view this student.");
             }
-
             GoalViewModel viewModel = new GoalViewModel()
             {
                 Id = id,
@@ -144,16 +143,18 @@ namespace Lead2Change.Web.Ui.Controllers
             List<GoalViewModel> result = new List<GoalViewModel>();
             List<Goal> goals = await GoalsService.GetGoals(studentID);
             var student1 = await StudentService.GetStudent(studentID);
-
+            
             foreach (Goal goal in goals)
             {
+                string example = goal.SEL;
+                string noSpace = String.Concat(example.Where(c => !Char.IsWhiteSpace(c)));
                 result.Add(new GoalViewModel()
                 {
                     GoalSet = goal.GoalSet,
                     Id = goal.Id,
                     StudentId = goal.StudentId,
                     DateGoalSet = goal.DateGoalSet,
-                    SEL = goal.SEL.Split(","),
+                    SEL = noSpace.Split(","),
                     GoalReviewDate = goal.GoalReviewDate,
                     WasItAccomplished = goal.WasItAccomplished,
                     Explanation = goal.Explanation

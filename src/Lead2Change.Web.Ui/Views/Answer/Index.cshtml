@@ -1,85 +1,66 @@
-﻿@model List<Lead2Change.Domain.ViewModels.AnswersViewModel>
+﻿@model Lead2Change.Domain.ViewModels.StudentInterviewAndIDViewModel;
 @*
     ViewData["Title"] = "Index";
 *@
 
 <div class="container-fluid">
-    @if (Model.Count > 0)
-    {
-        <div class="row">
-            <div class="col-sm-12">
-
-                <h2 class="GoalHeadingFont">Student Answers for @Model[0].InterviewName</h2>
-               
-            </div>
+    <div class="row blueHeader full-width mb-sm-3">
+        <div class="col-sm-12">
+            <h1 class="text-center"><strong>@Model.StudentName.ToUpper()'S ANSWERS FOR @Model.InterviewName.ToUpper() </strong></h1>
         </div>
-    }
-            else
-            {
-<div class="row">
-    <div class="col-sm-12">
+    </div>
+    <table class="table table-striped shadow-lg pt-2">
+        <thead class="thead blueStyle">
+            <tr>
+                <th class="col-sm-4">
+                    Question
+                </th>
+                <th class="col-sm-5">
+                    Answer
+                </th>
+                <th class="col-sm-3">
+                    Options
+                </th>
+            </tr>
+        </thead>
 
-        <h2 class="GoalHeadingFont">Student Answers</h2>
+        @foreach (var item in Model.AnswerModels)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionString)
 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnswerString)
+                </td>
+                <td>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit Answer" onclick="location.href='@Url.Action("Edit","Answer", new { id = item.Id })'" />
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="button" class="btn btn-block orangeBtn" value="Delete Answer" onclick="location.href='@Url.Action("Delete","Answer", new { id = item.Id })'" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="row">
+        <div class="col-sm-12 pb-sm-2">
+            <input type="button" class="btn btn-primary" value="Your Interviews" onclick="location.href='@Url.Action("Index","Interviews")'" />
+        </div>
+    </div>
+    <div align="center">
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("StudentsInInterview", "Interviews", new { Id = Model.InterviewID})'">Back To List</button>
     </div>
 </div>
-            }
-
-        <table class="table table-striped pt-2">
-            <thead class="thead blueStyle">
-                <tr>
-                    <th class="col-sm-4">
-                        Question
-                    </th>
-                    <th class="col-sm-5">
-                        Answer
-                    </th>
-                    <th class="col-sm-3">
-                        Options
-                    </th>
-                </tr>
-            </thead>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.QuestionString)
-
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AnswerString)
-                    </td>
-                    <td>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit Answer" onclick="location.href='@Url.Action("Edit","Answer", new { id = item.Id })'" />
-
-                            </div>
-                        </div>
-
-
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <input type="button" class="btn btn-block orangeBtn" value="Delete Answer" onclick="location.href='@Url.Action("Delete","Answer", new { id = item.Id })'" />
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            }
-
-        </table>
-
-        <div class="row">
-            <div class="col-sm-12 pb-sm-2">
-                <input type="button" class="btn btn-primary" value="Your Interviews" onclick="location.href='@Url.Action("Index","Interviews")'" />
-            </div>
-        </div>
-        @if (Model.Count != 0)
-        {
-            <div align="center">
-                <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("StudentsInInterview", "Interviews", new { Id = Model[0].InterviewId })'">Back To List</button>
-            </div>
-        }
-    </div>
