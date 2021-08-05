@@ -5,12 +5,13 @@ a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
-    height: 10vh;
+    height: 5rem;
 }
 
-a.navbar-brand img {
-    height: inherit;
-}
+    a.navbar-brand img {
+        display: inline-block;
+        height: inherit;
+    }
 
 /* Provide sufficient contrast against white background */
 a {
@@ -19,7 +20,7 @@ a {
 
 .btn-primary {
     color: #fff;
-    background-color: #004cbb;
+    background-color: #2656A5;
     border-color: #0043a6;
 }
 
@@ -130,7 +131,7 @@ body {
 
 /* Basic Styling for Goal Index Page */
 thead.blueStyle {
-    background-color: #004cbb;
+    background-color: #2656A5;
     color: white;
 }
 
@@ -150,13 +151,6 @@ thead.blueStyle {
         border-color: #ff7c00;
         color: white;
     }
-
-.btn-back {
-    color: #fff;
-    background-color: transparent;
-    border-color: #004cbb;
-    border-radius: 40px;
-}
 
 .btn-submit {
     color: #fff;
@@ -185,7 +179,7 @@ thead.blueStyle {
     word-wrap: break-word;
 }
 .blueHeader {
-    background-color: #004cbb;
+    background-color: #2656A5;
     color: white;
     padding-top: 2em;
     padding-bottom: 2em;
@@ -196,6 +190,9 @@ thead.blueStyle {
     padding-top: 2em;
     padding-bottom: 2em;
 }
+
+
+
 .full-width {
     width: 100vw;
     position: relative;
@@ -204,9 +201,62 @@ thead.blueStyle {
     margin-left: -50vw;
     margin-right: -50vw;
 }
-#navbarLogo{
-    width: 50%;
+.smallIcon{
+    width: 1.5rem;
     height: auto;
-    display:block;
+    display: block;
 }
 
+body {
+    background-color: #F5F5F5;
+}
+.offWhiteBackground {
+    background-color: #F5F5F5;
+}
+table{
+    background-color: white;
+}
+
+/*Searchbar Styling*/
+.searchbar {
+    width: 100%;
+    max-width: 300px;
+    display: inline-flex;
+}
+
+.searchbar__input {
+    flex-grow: 1;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #0071BB;
+    border-radius: 5px 0 0 5px;
+    background: #f4faf9;
+    transition: background 0.25s, box-shadow 0.25s;
+}
+
+    .searchbar__input:focus {
+        background: white;
+        box-shadow: 0 0 2px #004cbb;
+    }
+
+    .searchbar__input::placeholder {
+        color: #004cbb;
+    }
+
+.searchbar__button {
+    width: 40px;
+    background: #0071BB;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+    .searchbar__button:active {
+        box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.25);
+    }
