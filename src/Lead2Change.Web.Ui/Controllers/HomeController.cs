@@ -41,11 +41,14 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Configure()
         {
-            _logger = logger;
-        }
+            await CreateDefaultRoles();
+            await CreateNewUser("student@test.com", "Testtest@123", StringConstants.RoleNameStudent);
+            await CreateNewUser("coach@test.com", "Testtest@123", StringConstants.RoleNameCoach);
+            await CreateNewUser("admin@test.com", "Testtest@123", StringConstants.RoleNameAdmin);
 
             return RedirectToAction("Index");
-        }     
+        }
+
 
         protected async Task CreateQuestions(string QuestionString)
         {
