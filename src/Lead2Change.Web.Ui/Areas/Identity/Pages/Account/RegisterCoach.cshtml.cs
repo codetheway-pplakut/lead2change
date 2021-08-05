@@ -115,6 +115,7 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                     CoachLastName = Input.CoachLastName,
                     CoachEmail = Input.Email,
                     CoachPhoneNumber = Input.CoachPhoneNumber,
+                    Active = true,
                     Students = new List<Student>()
                 };
                 var result1 = await _coachService.Create(coach);
