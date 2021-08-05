@@ -26,7 +26,7 @@ namespace Lead2Change.Web.Ui.Controllers
             _coachService = coachService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 0, int pageSize = 10)
         {
             if (!SignInManager.IsSignedIn(User))
 
@@ -64,8 +64,12 @@ namespace Lead2Change.Web.Ui.Controllers
             else if (User.IsInRole(StringConstants.RoleNameAdmin))
 
             {
-
-                return View(await _studentService.GetActiveStudents());
+                return View(new StudentIndexViewModel
+                {
+                    Students = await _studentService.GetActiveStudentsByPage(pageNumber, pageSize),
+                    PageNumber = pageNumber,
+                    PageSize = pageSize
+            });
 
             }
 
@@ -306,6 +310,8 @@ namespace Lead2Change.Web.Ui.Controllers
             RegistrationViewModel viewModel = new RegistrationViewModel()
             {
                 Id = student.Id,
+                isAccepted =student.Accepted,
+                isDeclined = student.Declined,
                 StudentFirstName = student.StudentFirstName,
                 StudentLastName = student.StudentLastName,
                 StudentDateOfBirth = student.StudentDateOfBirth,

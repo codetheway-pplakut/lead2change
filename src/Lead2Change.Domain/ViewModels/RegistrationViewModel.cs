@@ -13,6 +13,8 @@ namespace Lead2Change.Domain.ViewModels
         public string StudentFirstName { get; set; }
         public string StudentLastName { get; set; }
         public DateTime StudentDateOfBirth { get; set; }
+        public bool isAccepted { get; set; }
+        public bool isDeclined { get; set; }
         public int Age { get; set; }
         public string StudentAddress { get; set; }
         public string StudentApartmentNumber { get; set; }

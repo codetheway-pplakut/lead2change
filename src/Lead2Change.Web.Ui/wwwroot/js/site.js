@@ -28,10 +28,42 @@ function checkerShowHide(id1) {
     }
 }
 
-function checkBoxCheck() {
-    if (checkBox.checked) {
-
+function hideClass(id1) {
+    var x = document.getElementsByClassName(id1);
+    for (let i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
     }
+}
+
+function showClass(id1) {
+    var x = document.getElementsByClassName(id1);
+    for (let i = 0; i < x.length; i++) {
+        x[i].style.display = "block";
+    }
+}
+
+function handleRegisterQuestions(plan) {
+    hideClass("collegeQuestions");
+    hideClass("tradeSchoolQuestions");
+    hideClass("armedForcesQuestions");
+    hideClass("workQuestions");
+    hideClass("otherQuestions");
+    if (plan == "College") {
+        showClass("collegeQuestions");
+    }
+    else if (plan == "Trade School") {
+        showClass("tradeSchoolQuestions");
+    }
+    else if (plan == "Armed Forces") {
+        showClass("armedForcesQuestions");
+    }
+    else if (plan == "Work") {
+        showClass("workQuestions");
+    }
+    else if(plan == "Other"){
+        showClass("otherQuestions");
+    }
+    
 }
 
 $(".hide").click(function () {

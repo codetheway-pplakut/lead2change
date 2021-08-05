@@ -47,7 +47,8 @@ namespace Lead2Change.Web.Ui.Controllers
             await CreateNewUser("admin@test.com", "Testtest@123", StringConstants.RoleNameAdmin);
 
             return RedirectToAction("Index");
-        }     
+        }
+
 
         protected async Task CreateQuestions(string QuestionString)
         {
