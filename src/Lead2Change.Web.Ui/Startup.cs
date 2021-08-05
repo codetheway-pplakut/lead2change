@@ -143,8 +143,6 @@ namespace Lead2Change.Web.Ui
                 var userManager = serviceScope.ServiceProvider.GetService<UserManager<AspNetUsers>>();
                 var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<AspNetRoles>>();
                 CreateDefaultRoles(roleManager).Wait();
-                CreateNewUser(userManager, "student@test.com", "Testtest@123", StringConstants.RoleNameStudent).Wait();
-                CreateNewUser(userManager, "coach@test.com", "Testtest@123", StringConstants.RoleNameCoach).Wait();
                 CreateNewUser(userManager, "admin@test.com", "Testtest@123", StringConstants.RoleNameAdmin).Wait();
             }
         }
