@@ -3,7 +3,7 @@
 @*
     ViewData["Title"] = "Edit";
 *@
-<div class="row orangeHeader full-width mb-sm-3">
+<div class="row blueHeader full-width mb-sm-3">
     <div class="col-sm-12">
         <h1 class="text-center"><strong>EDIT CAREER</strong></h1>
     </div>
@@ -47,9 +47,20 @@
         @Html.ActionLink("Back to Career Details", "Details", "CareerDeclaration", new { studentId = Model.StudentId })
     </div>
 </form>
+@if (Model.isStudentActive)
+{
 <div align="center">
-    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students")'">Back To List</button>
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId = Model.StudentId })'">Back To Career Details</button>
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students",  new { id = Model.Id })'">Back To Student List</button>
 </div>
+}
+else
+{
+<div align="center">
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex","Students")'">Back To Inactive Students</button>
+</div>
+}
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

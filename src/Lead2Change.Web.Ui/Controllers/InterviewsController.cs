@@ -32,6 +32,12 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Index(Guid studentID)
         {
+            string studentName = string.Empty;
+            if (studentID != Guid.Empty)
+            {
+                var student1 = await _studentService.GetStudent(studentID);
+                studentName = student1.StudentFirstName;
+            }
             List<InterviewViewModel> result = new List<InterviewViewModel>();
             List<Interview> interviews = await _interviewsService.GetInterviews();
             foreach (Interview interview in interviews)
@@ -42,9 +48,18 @@ namespace Lead2Change.Web.Ui.Controllers
                     Id = interview.Id,
                     QuestionInInterviews = interview.QuestionInInterviews,
                     StudentId = studentID,
+                   
+
+           
+                        
                 }) ;
             }
-            return View(result);
+            return View(new InterviewAndIDViewModel(studentID)
+            {
+                InterviewViewModels = result,
+                StudentId = studentID,
+                StudentName = studentName 
+            });
         }
 
         public async Task<IActionResult> Delete(Guid id)
@@ -128,7 +143,7 @@ namespace Lead2Change.Web.Ui.Controllers
             return View("Edit", model);
         }
 
-        public async Task<IActionResult> Details(Guid id)
+        public async Task<IActionResult> Details(Guid id, Guid studentID)
         {
             var result = await _interviewsService.GetInterviewAndQuestions(id);
             InterviewViewModel interviewModel;
@@ -138,7 +153,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 var interview = await _interviewsService.GetInterview(id);
                 interviewModel = new InterviewViewModel {
                     Id = id,
-                    InterviewName = interview.InterviewName
+                    InterviewName = interview.InterviewName,
+                    StudentId = studentID
                 };
             }
             else
@@ -147,7 +163,8 @@ namespace Lead2Change.Web.Ui.Controllers
                 {
                     Id = id,
                     QuestionInInterviews = result,
-                    InterviewName = result.FirstOrDefault().Interview.InterviewName
+                    InterviewName = result.FirstOrDefault().Interview.InterviewName,
+                    StudentId = studentID
                 };
             }
             return View(interviewModel);

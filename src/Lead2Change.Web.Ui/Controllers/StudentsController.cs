@@ -51,12 +51,7 @@ namespace Lead2Change.Web.Ui.Controllers
             }
             else if (User.IsInRole(StringConstants.RoleNameAdmin))
             {
-                return View(new StudentIndexViewModel
-                {
-                    Students = await _studentService.GetActiveStudentsByPage(pageNumber, pageSize),
-                    PageNumber = pageNumber,
-                    PageSize = pageSize
-            });
+                return View(await _studentService.GetActiveStudents());               
 
             }
 

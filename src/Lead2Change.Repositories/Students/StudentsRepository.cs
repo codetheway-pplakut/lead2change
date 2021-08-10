@@ -26,11 +26,7 @@ namespace Lead2Change.Repositories.Students
         {
             var students = await AppDbContext.Students.Where(i => i.Active && i.Declined == false).ToListAsync();
             return students;
-        }
-        public async Task<List<Student>> GetActiveStudentsByPage(int pageNumber, int pageLength)
-        {
-            return await AppDbContext.Students.Where(s => s.Active).Skip(pageNumber * pageLength).Take(pageLength).ToListAsync();
-        }
+        }       
         public async Task<List<Student>> GetInactiveStudents()
         {
             var students = await AppDbContext.Students.Where(i => i.Active == false && i.Declined == false).ToListAsync();
@@ -68,7 +64,7 @@ namespace Lead2Change.Repositories.Students
         }
         public async Task<List<Student>> GetUnassignedStudents()
         {
-            var students = await AppDbContext.Students.Where(i => i.CoachId.HasValue == false).ToListAsync();
+            var students = await AppDbContext.Students.Where(i => i.CoachId.HasValue == false && i.Active && i.Declined == false).ToListAsync();
             return students;
         }
         public async Task<List<Student>> GetCoachStudents(Guid coachId)

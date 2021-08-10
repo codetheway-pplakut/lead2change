@@ -19,14 +19,14 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label asp-for="StudentFirstName" class="control-label">First Name:</label>
-                        <input asp-for="StudentFirstName" class="form-control" value=@Model.StudentFirstName />
+                        <input asp-for="StudentFirstName" class="form-control" value=@Model.StudentFirstName required/>
                         <span asp-validation-for="StudentFirstName" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label asp-for="StudentLastName" class="control-label">Last Name:</label>
-                        <input asp-for="StudentLastName" class="form-control" value=@Model.StudentLastName />
+                        <input asp-for="StudentLastName" class="form-control" value=@Model.StudentLastName required/>
                         <span asp-validation-for="StudentLastName" class="text-danger"></span>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                 <div class="col-sm-11">
                     <div class="form-group">
                         <label asp-for="StudentAddress" class="control-label">Address:</label>
-                        <input asp-for="StudentAddress" class="form-control" value=@Model.StudentAddress />
+                        <input asp-for="StudentAddress" class="form-control" value=@Model.StudentAddress required/>
                         <span asp-validation-for="StudentAddress" class="text-danger"></span>
                     </div>
                 </div>
@@ -60,21 +60,21 @@
                 <div class="col-sm-8">
                     <div class="form-group">
                         <label asp-for="StudentCity" class="control-label">City:</label>
-                        <input asp-for="StudentCity" class="form-control" value=@Model.StudentCity />
+                        <input asp-for="StudentCity" class="form-control" value=@Model.StudentCity required/>
                         <span asp-validation-for="StudentCity" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label asp-for="StudentZipCode" class="control-label">Zip Code:</label>
-                        <input asp-for="StudentZipCode" class="form-control" value=@Model.StudentZipCode />
+                        <input asp-for="StudentZipCode" class="form-control" value=@Model.StudentZipCode required/>
                         <span asp-validation-for="StudentZipCode" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label asp-for="StudentState" class="control-label">State:</label>
-                        <select asp-for="StudentState" class="form-control">
+                        <select asp-for="StudentState" class="form-control" required>
                             <option value="Alabama">AL</option>
                             <option value="Alaska">AK</option>
                             <option value="Arizona">AZ</option>
@@ -142,7 +142,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label asp-for="StudentCellPhone" class="control-label">Cell Phone:</label>
-                        <input asp-for="StudentCellPhone" class="form-control" value=@Model.StudentCellPhone />
+                        <input asp-for="StudentCellPhone" class="form-control" value=@Model.StudentCellPhone/>
                         <span asp-validation-for="StudentCellPhone" class="text-danger"></span>
                     </div>
                 </div>
@@ -151,7 +151,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label asp-for="StudentEmail" class="control-label">Email:</label>
-                        <input asp-for="StudentEmail" class="form-control" value=@Model.StudentEmail type="email" />
+                        <input asp-for="StudentEmail" class="form-control" value=@Model.StudentEmail type="email" required/>
                         <span asp-validation-for="StudentEmail" class="text-danger"></span>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label asp-for="StudentCareerPath" class="control-label">Career Path:</label>
-                        <input asp-for="StudentCareerPath" class="form-control" value=@Model.StudentCareerPath />
+                        <input asp-for="StudentCareerPath" class="form-control" value=@Model.StudentCareerPath/>
                         <span asp-validation-for="StudentCareerPath" class="text-danger"></span>
                     </div>
                 </div>

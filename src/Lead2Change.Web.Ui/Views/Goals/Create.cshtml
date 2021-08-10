@@ -4,7 +4,7 @@
 <div align="center">
     <img src="~/Images/DreamExploreBuildLogo.png" />
 </div>
-<div class="row orangeHeader full-width mb-sm-3">
+<div class="row blueHeader full-width mb-sm-3">
     <div class="col-sm-12">
         <h1 class="text-center"><strong>GOAL SETTING</strong></h1>
     </div>
@@ -72,11 +72,11 @@
     </div>
     <br />
     <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-submit" />
+        <input type="submit" value="Create" class="btn btn-submit" onclick="var e = this; setTimeout(function () { e.disabled = true; e.innerHTML = 'Submitting…';},0);return true;"/>
     </div>
 </form>
 <div align="center">
-    <input type="button" class="btn btn-outline-dark " value="Back to Goals" onclick="location.href='@Url.Action("Index", "Goals", new { studentId = @Model.StudentId })'" />
+    <input type="button" class="btn btn-outline-dark " value="Back to Goals" onclick="location.href = '@Url.Action("Index", "Goals", new { studentId = @Model.StudentId })'; this.disabled = true;" />
 </div>
 
 

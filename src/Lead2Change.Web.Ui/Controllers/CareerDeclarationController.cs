@@ -52,6 +52,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 CareerDeclarationViewModel careerDeclarationViewModel = new CareerDeclarationViewModel()
                 {
                     StudentId = studentId,
+                    isStudentActive = student.Active
                 };
                 return View(careerDeclarationViewModel);
             }
@@ -140,6 +141,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 CareerCluster = (CareerCluster)careerDeclaration.CareerCluster,
                 SpecificCareer = careerDeclaration.SpecificCareer,
                 TechnicalCollegeBound = careerDeclaration.TechnicalCollegeBound,
+                isStudentActive = student.Active,
             };
 
             return View(careerDeclarationViewModel);
