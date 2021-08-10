@@ -52,7 +52,7 @@
 
                     <div class="row">
                         <div class=" col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Interviews", new { id = item.Id })'; this.disabled = true;" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Interviews", new { id = item.Id, studentID = item.StudentId })'; this.disabled = true;" />
 
                         </div>
 
