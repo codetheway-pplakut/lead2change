@@ -32,6 +32,12 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Index(Guid studentID)
         {
+            string studentName = string.Empty;
+            if (studentID != Guid.Empty)
+            {
+                var student1 = await _studentService.GetStudent(studentID);
+                studentName = student1.StudentFirstName;
+            }
             List<InterviewViewModel> result = new List<InterviewViewModel>();
             List<Interview> interviews = await _interviewsService.GetInterviews();
             foreach (Interview interview in interviews)
@@ -42,9 +48,18 @@ namespace Lead2Change.Web.Ui.Controllers
                     Id = interview.Id,
                     QuestionInInterviews = interview.QuestionInInterviews,
                     StudentId = studentID,
+                   
+
+           
+                        
                 }) ;
             }
-            return View(result);
+            return View(new InterviewAndIDViewModel(studentID)
+            {
+                InterviewViewModels = result,
+                StudentId = studentID,
+                StudentName = studentName 
+            });
         }
 
         public async Task<IActionResult> Delete(Guid id)
