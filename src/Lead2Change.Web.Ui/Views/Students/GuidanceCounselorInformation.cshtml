@@ -13,13 +13,7 @@
  
     <form asp-action="UpDate">
         <div class="calibri">
-            <div class="row">
-                <div class="form-group">
-                    <input asp-for="KnowGuidanceCounselor" class="form-check-input me-1" type="checkbox" id="checkboxTest" oninput="showHideClass('conditionalQuestion')" />
-                    <label asp-for="KnowGuidanceCounselor" class="control-label">I know my guidance counselor.</label>
-                    <span asp-validation-for="KnowGuidanceCounselor" class="text-danger"></span>
-                </div>
-            </div>
+            
             <div class="form-group conditionalQuestion">
                 <label asp-for="GuidanceCounselorName" class="control-label">Guidance Counselor Name:</label>
                 <input asp-for="GuidanceCounselorName" class="form-control" value=@Model.GuidanceCounselorName />

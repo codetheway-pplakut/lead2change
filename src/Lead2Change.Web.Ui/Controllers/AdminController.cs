@@ -20,8 +20,15 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var users = await UserManager.GetUsersInRoleAsync(StringConstants.RoleNameAdmin);
-            return View(users);
+            if (User.IsInRole(StringConstants.RoleNameAdmin))
+            {
+                var users = await UserManager.GetUsersInRoleAsync(StringConstants.RoleNameAdmin);
+                return View(users);
+            }
+            else
+            {
+                return Error("403: Forbidden");
+            }
         }
 
         public async Task<IActionResult> Delete(Guid id)
