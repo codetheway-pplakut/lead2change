@@ -87,7 +87,7 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                     returnUrl = returnUrl ?? 
                         ((await _userManager.GetRolesAsync(user)).Contains(StringConstants.RoleNameCoach) 
                         ? Url.Content("~/Coaches/CoachesStudents") 
-                        : Url.Content("~/"));
+                        : Url.Content("~/Students"));
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
