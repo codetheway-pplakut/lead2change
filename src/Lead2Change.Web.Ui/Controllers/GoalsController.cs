@@ -165,7 +165,8 @@ namespace Lead2Change.Web.Ui.Controllers
             return View(new GoalsAndIDViewModel(studentID)
             {
                 GoalModels = result,
-                Name = student1.StudentFirstName
+                Name = student1.StudentFirstName,
+                isStudentActive = student1.Active,
             }) ;
         
         }
