@@ -25,7 +25,15 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Redirect("/Identity/Account/Login?returnUrl=/Students");
+
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Privacy()

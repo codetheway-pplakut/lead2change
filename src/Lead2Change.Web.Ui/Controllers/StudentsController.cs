@@ -26,7 +26,7 @@ namespace Lead2Change.Web.Ui.Controllers
             _coachService = coachService;
         }
 
-        public async Task<IActionResult> Index(int pageNumber = 0, int pageSize = 10)
+        public async Task<IActionResult> Index()
         {
             if (!SignInManager.IsSignedIn(User))
             {
