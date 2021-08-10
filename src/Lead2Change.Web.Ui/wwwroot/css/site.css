@@ -260,3 +260,9 @@ table{
     .searchbar__button:active {
         box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.25);
     }
+
+.tableScroll {
+    overflow-y: auto;
+    max-height: 40vh;
+}
+

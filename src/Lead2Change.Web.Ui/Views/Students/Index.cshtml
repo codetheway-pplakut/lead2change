@@ -1,10 +1,16 @@
 ﻿@using Lead2Change.Domain.Constants
-@model Lead2Change.Domain.ViewModels.StudentIndexViewModel;
+@model List<Lead2Change.Domain.Models.Student>;
 @*
     ViewData["Title"] = "Index";
 *@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+    .tableMin {
+        min-height: 15vh;
+    }
+</style>
 
 <div class="container">
     <div class="row blueHeader full-width mb-sm-3">
@@ -21,81 +27,79 @@
         </div>
     </div>
 
-    <table class="table shadow-lg table-striped pt-2 sortable" id="myTable">
-        <thead class="blueStyle">
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Date Of Birth</th>
-                <th scope="col">Email</th>
-                <th scope="col">Parent Name</th>
-                <th scope="col">Parent Email</th>
-                <th scope="col">Options</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @if (Model.Students != null)
-            {
-                @foreach (var item in Model.Students)
-                {
-
+    <div class="col-sm-12">      
+        <table class="table table-striped table-hover table-responsive-sm fixedTable mt-sm-3 mb-0 shadow-lg">
+            <thead class="blueStyle">               
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Date Of Birth</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Parent Name</th>
+                    <th scope="col">Parent Email</th>
+                    <th scope="col">Options</th>
+                </tr>              
+            </thead>
+        </table>
+        <div class="tableScroll shadow-lg">
+            <table class="table table-striped table-hover table-responsive-sm fixedTable mb-0 tableMin" id="myTable">
+                <thead class="blueStyle d-none">
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
-                        </td>
-                        <td>
-                            @*@Html.DisplayFor(modelItem => item.StudentDateOfBirth.ToString("d"))*@
-                            @*@Model.modelItem => item.StudentDateOfBirth.ToString("d")*@
-                            @Convert.ToDateTime(item.StudentDateOfBirth).ToString("MM/dd/yyyy")
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StudentEmail)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ParentLastName), @Html.DisplayFor(modelItem => item.ParentFirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ParentEmail)
-                        </td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn  btn-block orangeBtn mb-sm-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
-                                <div class="dropdown-menu">
-                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Edit","Students", new { studentId= item.Id })'">Edit</button>
-                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","Students", new { studentId= item.Id })'">Details</button>
-                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index","Goals", new { studentId= item.Id })'">Student Goals</button>
-                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index","Interviews", new { studentId= item.Id })'">Interviews</button>
-                                    @if (item.CareerDeclarationId == Guid.Empty)
-                                    {
-                                        <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Create","CareerDeclaration", new { studentId= item.Id })'">Add Career</button>
-                                    }
-                                    else
-                                    {
-                                        <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId= item.Id })'">View Career</button>
-                                    }
-                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Delete","Students", new { id= item.Id })'">Delete</button>
-                                </div>
-                            </div>
-                        </td>
+                        
                     </tr>
-                }}
-        </tbody>
-    </table>
-    @if (Model.Students != null)
-    {
-        <div class="row">
-            <div class="col-sm-12 mb-sm-2">
-                @if (Model.PageNumber > 0)
-                {
-                    <button type="button" class="btn btn-primary float-left" onclick="location.href ='@Url.Action("Index", "Students", new { pageNumber = Model.PageNumber - 1, pageSize = Model.PageSize })'">Back</button>
-                }
-                @if (Model.Students.Count == Model.PageSize)
-                {
-                    <button type="button" class="btn btn-primary float-right" onclick="location.href ='@Url.Action("Index", "Students", new { pageNumber = Model.PageNumber + 1, pageSize = Model.PageSize })'">Next</button>
-                }
-            </div>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                                </td>
+                                <td>
+                                    @*@Html.DisplayFor(modelItem => item.StudentDateOfBirth.ToString("d"))*@
+                                    @*@Model.modelItem => item.StudentDateOfBirth.ToString("d")*@
+                                    @Convert.ToDateTime(item.StudentDateOfBirth).ToString("MM/dd/yyyy")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StudentEmail)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ParentLastName), @Html.DisplayFor(modelItem => item.ParentFirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ParentEmail)
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn  btn-block orangeBtn mb-sm-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Edit","Students", new { studentId= item.Id })'">Edit</button>
+                                            <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","Students", new { studentId= item.Id })'">Details</button>
+                                            <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index","Goals", new { studentId= item.Id })'">Student Goals</button>
+                                            <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index","Interviews", new { studentId= item.Id })'">Interviews</button>
+                                            @if (item.CareerDeclarationId == Guid.Empty)
+                                            {
+                                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Create","CareerDeclaration", new { studentId= item.Id })'">Add Career</button>
+                                            }
+                                            else
+                                            {
+                                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId= item.Id })'">View Career</button>
+                                            }
+                                            <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Delete","Students", new { id= item.Id })'">Delete</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }}
+                </tbody>
+            </table>
         </div>
-    }
+    </div>
+
+    
+    
 
     @if (User.IsInRole(StringConstants.RoleNameAdmin))
     {
