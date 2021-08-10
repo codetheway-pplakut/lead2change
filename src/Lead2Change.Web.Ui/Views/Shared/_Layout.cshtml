@@ -78,7 +78,12 @@
                                     <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="Index">Admins</a>
                                 </li>
                             }
-                        }
+                        } else
+                            {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Students" asp-action="InterestForm">Fill Out the Interest Form</a>
+                            </li>
+                            }
                     </ul>
                 </div>
             </div>
