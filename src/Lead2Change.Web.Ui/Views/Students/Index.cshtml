@@ -78,7 +78,7 @@
                                             <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Edit","Students", new { studentId= item.Id })'">Edit</button>
                                             <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","Students", new { studentId= item.Id })'">Details</button>
                                             <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index","Goals", new { studentId= item.Id })'">Student Goals</button>
-                                            <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index","Interviews", new { studentId= item.Id })'">Interviews</button>
+                                            <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index","Interviews", new { studentID= item.Id })'">Interviews</button>
                                             @if (item.CareerDeclarationId == Guid.Empty)
                                             {
                                                 <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Create","CareerDeclaration", new { studentId= item.Id })'">Add Career</button>
