@@ -2,7 +2,7 @@
 @*
     ViewData["Title"] = "Index";
 *@
-<div class="container-fluid pr-sm-4 pl-sm-4, calibri">
+<div class="container-fluid pr-sm-4 pl-sm-4">
     <div class="row blueHeader full-width mb-sm-3">
         <div class="col-sm-12">
             <h1 class="text-center"><strong>INTERVIEW QUESTIONS</strong></h1>
@@ -32,12 +32,12 @@
                 <td>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Questions", new { id = item.Id })'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href = '@Url.Action("Edit","Questions", new { id = item.Id })'; this.disabled = true;" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Archive" onclick="location.href='@Url.Action("Delete","Questions", new { id = item.Id })'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Archive" onclick="location.href = '@Url.Action("Delete","Questions", new { id = item.Id })'; this.disabled = true; this.value = 'Archiving…'" />
                         </div>
                     </div>
                 </td>
@@ -46,12 +46,12 @@
     </table>
     <div class="row">
         <div class="col-sm-12 pb-sm-2">
-            <input type="button" class="btn btn-primary" value="Create a Question" onclick="location.href='@Url.Action("Create","Questions")'" />
+            <input type="button" class="btn btn-primary" value="Create a Question" onclick="location.href='@Url.Action("Create","Questions")'; this.disabled = true;" />
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <input type="button" class="btn btn-primary" value="Visit Archive" onclick="location.href='@Url.Action("ArchivedQuestions","Questions")'" />
+            <input type="button" class="btn btn-primary" value="Visit Archive" onclick="location.href='@Url.Action("ArchivedQuestions","Questions")'; this.disabled = true;" />
         </div>
     </div>
 </div>
