@@ -27,10 +27,10 @@
                 <span asp-validation-for="InterviewName" class="text-danger"></span>
             </div>
             <div class="form-group col-sm-12">
-                <b><label asp-for="QuestionText" class="control-label" >Add a Question</label></b>
+                <b><label asp-for="QuestionText" class="control-label">Add a Question</label></b>
 
                 @Html.TextAreaFor(m => m.QuestionText, new { @class = "form-control" })
-                <span asp-validation-for="QuestionText" class="text-danger" ></span>
+                <span asp-validation-for="QuestionText" class="text-danger"></span>
             </div>
             <div class="form-group col-sm-12">
                 <div class="row">
@@ -88,5 +88,8 @@
                 </div>
             </div>
         
+    </div>
+    <div>
+        <button class="btn btn-outline-dark btn-lg" onclick="location.href='@Url.Action("Index", "Interviews")'">Back To Interviews</button>
     </div>
 </div>

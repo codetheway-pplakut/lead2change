@@ -1,14 +1,26 @@
-﻿@model List<Lead2Change.Domain.ViewModels.InterviewViewModel>
+﻿@model Lead2Change.Domain.ViewModels.InterviewAndIDViewModel
 @*
     ViewData["Title"] = "Index";
 *@
 
 <div class="container-fluid">
-    <div class="row blueHeader full-width mb-sm-3">
-        <div class="col-sm-12">
-            <h1 class="text-center"><strong>YOUR INTERVIEWS</strong></h1>
+    @if (Model.StudentId != Guid.Empty)
+    {
+        <div class="row orangeHeader full-width mb-sm-3">
+            <div class="col-sm-12">
+                <h1 class="text-center"><strong>@Model.StudentName.ToUpper()'S INTERVIEWS</strong></h1>
+            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="row blueHeader full-width mb-sm-3">
+            <div class="col-sm-12">
+                <h1 class="text-center"><strong>INTERVIEWS</strong></h1>
+            </div>
+        </div>
+    }
+
     <table class="table table-striped shadow-lg pt-2">
         <thead class="thead blueStyle">
             <tr>
@@ -20,20 +32,24 @@
                 </th>
             </tr>
         </thead>
-       
-        @foreach (var item in Model)
+
+        @foreach (var item in Model.InterviewViewModels)
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.InterviewName)
                 </td>
                 <td>
-                    <div class="row">
-                        <div class="col-sm-12">
+                    @if (item.StudentId == Guid.Empty)
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
                             <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Interviews", new { id = item.Id })' ; this.disabled = true;" />
 
+                            </div>
                         </div>
-                    </div>
+                    }
+
                     <div class="row">
                         <div class=" col-sm-12">
                             <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Interviews", new { id = item.Id })'; this.disabled = true;" />
@@ -41,12 +57,18 @@
                         </div>
 
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Delete" onclick="location.href = '@Url.Action("Delete","Interviews", new { id = item.Id })'; this.disabled=true; this.value='Deleting…'; " />
 
+
+                    @if (item.StudentId == Guid.Empty)
+
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Delete" onclick="location.href='@Url.Action("Delete", "Interviews", new { id = item.Id })'" />
+
+                            </div>
                         </div>
-                    </div>
+                    }
                     @if (item.QuestionInInterviews.Count > 0 && item.StudentId == Guid.Empty)
                     {
                         <div class="row">
@@ -70,9 +92,14 @@
 
     </table>
 
-    <div class="row">
-        <div class="col-sm-12 pb-sm-2">
+    @if (Model.StudentId == Guid.Empty)
+    {
+        <div class="row">
+            <div class="col-sm-12 pb-sm-2">
             <input type="button" class="btn btn-primary" value="Create a New Interview" onclick="location.href='@Url.Action("Create","Interviews")'; this.disabled = true;" />
+            </div>
         </div>
-    </div>
+
+    }
+
 </div>

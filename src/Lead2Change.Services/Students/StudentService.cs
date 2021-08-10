@@ -36,11 +36,7 @@ namespace Lead2Change.Services.Students
         public async Task<List<Student>> GetActiveStudents()
         {
             return await this._studentRepo.GetActiveStudents();
-        }
-        public async Task<List<Student>> GetActiveStudentsByPage(int pageNumber, int pageLength)
-        {
-            return await this._studentRepo.GetActiveStudentsByPage(pageNumber, pageLength);
-        }
+        }        
         public async Task<List<Student>> GetInactiveStudents()
         {
             return await this._studentRepo.GetInactiveStudents();
