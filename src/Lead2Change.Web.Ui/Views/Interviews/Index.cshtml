@@ -44,7 +44,7 @@
                     {
                         <div class="row">
                             <div class="col-sm-12">
-                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit", "Interviews", new { id = item.Id })'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Interviews", new { id = item.Id })' ; this.disabled = true;" />
 
                             </div>
                         </div>
@@ -52,7 +52,7 @@
 
                     <div class="row">
                         <div class=" col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details", "Interviews", new { id = item.Id, studentID = item.StudentId})'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Interviews", new { id = item.Id })'; this.disabled = true;" />
 
                         </div>
 
@@ -73,7 +73,7 @@
                     {
                         <div class="row">
                             <div class="col-sm-12">
-                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Student Interview" onclick="location.href='@Url.Action("StudentsInInterview", "Interviews", new { Id = item.Id })'" />
+                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Student Interview" onclick="location.href = '@Url.Action("StudentsInInterview", "Interviews", new { Id = item.Id })'; this.disabled = true;" />
                             </div>
                         </div>
                     }
@@ -82,7 +82,7 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer This Interview" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=item.QuestionInInterviews.FirstOrDefault().InterviewId, studentID=item.StudentId})'" />
+                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer Interview" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=item.QuestionInInterviews.FirstOrDefault().InterviewId, studentID=item.StudentId})'; this.disabled = true;" />
                             </div>
                         </div>
                     }
@@ -96,7 +96,7 @@
     {
         <div class="row">
             <div class="col-sm-12 pb-sm-2">
-                <input type="button" class="btn btn-primary" value="Create a New Interview" onclick="location.href='@Url.Action("Create", "Interviews")'" />
+            <input type="button" class="btn btn-primary" value="Create a New Interview" onclick="location.href='@Url.Action("Create","Interviews")'; this.disabled = true;" />
             </div>
         </div>
 
