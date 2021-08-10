@@ -13,5 +13,6 @@ namespace Lead2Change.Domain.ViewModels
         public CareerCluster CareerCluster { get; set; }
         public string SpecificCareer { get; set; }
         public bool TechnicalCollegeBound { get; set; }
+        public bool isStudentActive { get; set; }
     }
 }

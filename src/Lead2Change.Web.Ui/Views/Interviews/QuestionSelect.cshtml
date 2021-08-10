@@ -32,7 +32,7 @@
                     <tr>
                         <td>@question.QuestionString</td>
                         <td>
-                            <button class="btn btn-lg btn-block orangeBtn" onclick="location.href='@Url.Action("SelectQuestion", "Interviews", new { questionId = question.Id, interviewId = Model.Id })'">Add Question</button>
+                            <button class="btn btn-lg btn-block orangeBtn" onclick="location.href = '@Url.Action("SelectQuestion", "Interviews", new { questionId = question.Id, interviewId = Model.Id })'; this.disabled=true; this.innerHTML='Adding...'">Add Question</button>
                         </td>
                     </tr>
                         }
@@ -42,7 +42,7 @@
     </table>
     <div class="row">
         <div class="col-sm-12">
-            <button class="btn btn-outline-dark btn-lg" onclick="location.href='@Url.Action("Edit","Interviews", new { id = Model.Id })'">Back</button>
+            <button class="btn btn-outline-dark btn-lg" onclick="location.href='@Url.Action("Edit","Interviews", new { id = Model.Id })'; this.disabled=true;">Back</button>
         </div>
     </div>
 </div>

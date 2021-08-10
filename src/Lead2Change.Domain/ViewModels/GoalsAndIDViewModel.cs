@@ -18,5 +18,6 @@ namespace Lead2Change.Domain.ViewModels
         public List<GoalViewModel> GoalModels { get; set; }
         public Guid StudentID { get; set; }
         public string Name { get; set; }
+        public bool isStudentActive { get; set; }
     }
 }

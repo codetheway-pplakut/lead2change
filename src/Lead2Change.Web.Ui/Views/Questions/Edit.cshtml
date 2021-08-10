@@ -2,7 +2,7 @@
 @*
     ViewData["Title"] = "Edit";
 *@
-<div class="row blueHeader full-width mb-sm-3">
+<div class="row orangeHeader full-width mb-sm-3">
     <div class="col-sm-12">
         <h1 class="text-center"><strong>EDIT QUESTION</strong></h1>
     </div>
@@ -20,11 +20,11 @@
     </div>
     <br />
     <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-submit" />
+        <input type="submit" value="Submit" class="btn btn-submit" onclick="var e = this; setTimeout(function () { e.disabled = true; e.innerHTML = 'Submitting…';},0);return true;" />
     </div>
 </form>
 <div align="center">
-    <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("Index","Questions")'">Back to List</button>
+    <button class="btn btn-outline-dark" onclick="location.href='@Url.Action("Index","Questions")' ; this.disabled = true;">Back to List</button>
 </div>
 
 @section Scripts {

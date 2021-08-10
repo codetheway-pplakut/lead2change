@@ -2,7 +2,7 @@
 @*
     ViewData["Title"] = "CoachesStudents";
 *@
-<div class="row blueHeader full-width mb-sm-3">
+<div class="row orangeHeader full-width mb-sm-3">
     <div class="col-sm-12">
         <h1 class="text-center"><strong>YOUR STUDENTS</strong></h1>
     </div>
@@ -25,50 +25,40 @@
 
 
             @if (item.Accepted && item.Active == true) { 
- 
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StudentEmail)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StudentCellPhone)
-                        </td>
-                        <td>
-                            <div>
-                                <div>
-                                    @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
-                                </div>
-                                <div>
-                                    @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
-                                </div>
-                                <div>
-                                    @Html.ActionLink("Student Goals", "Index", "Goals", new { studentID = item.Id })
-                                </div>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modeItem => item.StudentLastName), @Html.DisplayFor(modelItem => item.StudentFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentCellPhone)
+                    </td>
+                    <td>                       
+                        <div class="dropdown">
+                            <button class="btn  btn-block orangeBtn mb-sm-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("UnassignStudent","Coaches", new { studentId= item.Id })'">Unassign Student</button>
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","Students", new { studentId= item.Id })'">Student Details</button>
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index","Goals", new { studentID= item.Id })'">Student Goals</button>
                                 @if (item.CareerDeclarationId == Guid.Empty)
                                 {
-                                    <div>
-                                        @Html.ActionLink("Add Student Career", "Create", "CareerDeclaration", new { studentId = item.Id })
-                                    </div>
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Create","CareerDeclaration", new { studentId= item.Id })'">Add Student Career</button>
                                 }
                                 else
                                 {
-                                    <div>
-                                        @Html.ActionLink("View Student Career", "Details", "CareerDeclaration", new { studentId = item.Id })
-                                    </div>
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId= item.Id })'">View Student Career</button>
                                 }
                             </div>
-                        </td>
+                        </div>
+                    </td>
 
                     </tr>
                 }
             }
         </tbody>
 </table>
-
-<hr />
 
 <h1>Students Applying</h1>
 <table class="table table-striped shadow-lg pt-2" id="myTable">
@@ -101,22 +91,17 @@
                         @Html.DisplayFor(modelItem => item.StudentCellPhone)
                     </td>
                     <td>
-                        <div>
-                            <div>
-                                @Html.ActionLink("Unassign Student", "UnassignStudent", new { studentId = item.Id })
+                        <button class="btn  btn-block orangeBtn mb-sm-2" type="button" onclick="location.href='@Url.Action("AcceptStudent","Students", new { studentID= item.Id })'">Eligible</button>
+                        <button class="btn  btn-block orangeBtn  mb-sm-2" type="button" onclick="location.href='@Url.Action("DeclineStudent","Students", new { studentID= item.Id })'">Ineligible</button>
+                        <div class="dropdown">
+                            <button class="btn  btn-block orangeBtn mb-sm-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More Options</button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("UnassignStudent","Coaches", new { studentId= item.Id })'">Unassign Student</button>
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","Students", new { studentId= item.Id })'">Student Details</button>
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index", "Interviews", new { studentId = item.Id })'">Conduct an Interview</button>
                             </div>
-                            <div>
-                                @Html.ActionLink("Student Details", "Details", "Students", new { studentId = item.Id })
-                            </div>
-                            <div>
-                                @Html.ActionLink("Conduct an Interview", "Index", "Interviews", new { studentId = item.Id })
-                            </div>
-                            <div>
-                                @Html.ActionLink("Eligible", "AcceptStudent", "Students", new { studentID = item.Id })
-                            </div>
-                            <div>
-                                @Html.ActionLink("Ineligible", "DeclineStudent", "Students", new { studentID = item.Id })
-                            </div>
+                      
+                            
                         </div>
                     </td>
 
@@ -127,5 +112,5 @@
 </table>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <button class="btn btn-outline-dark btn-lg" type="button" onclick="location.href='@Url.Action("Index","Coaches")'">Back To List</button>
 </div>
