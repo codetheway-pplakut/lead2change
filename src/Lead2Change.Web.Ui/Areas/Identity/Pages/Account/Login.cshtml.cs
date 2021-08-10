@@ -56,11 +56,21 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
+            }
+
+            if (User != null)
+            {
+                if (User.IsInRole(StringConstants.RoleNameAdmin))
+                {
+                    return LocalRedirect("~/Admin/Index");
+                } else if (User.IsInRole(StringConstants.RoleNameCoach)) {
+                    return LocalRedirect("~/Coaches/CoachesStudents");
+                }
             }
 
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -71,6 +81,8 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
+
+            return Page();
         }
         
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -84,10 +96,23 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
                     var user = await _userManager.FindByEmailAsync(Input.Email);
-                    returnUrl = returnUrl ?? 
-                        ((await _userManager.GetRolesAsync(user)).Contains(StringConstants.RoleNameCoach) 
-                        ? Url.Content("~/Coaches/CoachesStudents") 
+                    if (await _userManager.IsInRoleAsync(user, StringConstants.RoleNameAdmin))
+                    {
+                        returnUrl = returnUrl ??
+                        ((await _userManager.GetRolesAsync(user)).Contains(StringConstants.RoleNameAdmin)
+                        ? Url.Content("~/Admin/Index")
                         : Url.Content("~/"));
+                    } else if (await _userManager.IsInRoleAsync(user, StringConstants.RoleNameCoach))
+                    {
+                        returnUrl = returnUrl ??
+                        ((await _userManager.GetRolesAsync(user)).Contains(StringConstants.RoleNameCoach)
+                        ? Url.Content("~/Coaches/CoachesStudents")
+                        : Url.Content("~/"));
+                    } else
+                    {
+                        returnUrl = Url.Content("~/");
+                    }
+                        
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
