@@ -12,8 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Lead2Change.Domain.Models;
-using Lead2Change.Domain.Constants;
-
+using Lead2Change.Domain.Constants;
+
 namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -63,14 +63,14 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            if (User != null)
-            {
-                if (User.IsInRole(StringConstants.RoleNameAdmin))
-                {
-                    return LocalRedirect("~/Admin/Index");
-                } else if (User.IsInRole(StringConstants.RoleNameCoach)) {
-                    return LocalRedirect("~/Coaches/CoachesStudents");
-                }
+            if (User != null)
+            {
+                if (User.IsInRole(StringConstants.RoleNameAdmin))
+                {
+                    return LocalRedirect("~/Admin/Index");
+                } else if (User.IsInRole(StringConstants.RoleNameCoach)) {
+                    return LocalRedirect("~/Coaches/CoachesStudents");
+                }
             }
 
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -94,23 +94,23 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("User logged in.");
                     var user = await _userManager.FindByEmailAsync(Input.Email);
-                    if (await _userManager.IsInRoleAsync(user, StringConstants.RoleNameAdmin))
-                    {
-                        returnUrl = returnUrl ??
-                        ((await _userManager.GetRolesAsync(user)).Contains(StringConstants.RoleNameAdmin)
-                        ? Url.Content("~/Admin/Index")
-                        : Url.Content("~/"));
-                    } else if (await _userManager.IsInRoleAsync(user, StringConstants.RoleNameCoach))
-                    {
-                        returnUrl = returnUrl ??
-                        ((await _userManager.GetRolesAsync(user)).Contains(StringConstants.RoleNameCoach)
-                        ? Url.Content("~/Coaches/CoachesStudents")
-                        : Url.Content("~/"));
-                    } else
-                    {
-                        returnUrl = Url.Content("~/");
+                    if (await _userManager.IsInRoleAsync(user, StringConstants.RoleNameAdmin))
+                    {
+                        returnUrl = returnUrl ??
+                        ((await _userManager.GetRolesAsync(user)).Contains(StringConstants.RoleNameAdmin)
+                        ? Url.Content("~/Admin/Index")
+                        : Url.Content("~/"));
+                    } else if (await _userManager.IsInRoleAsync(user, StringConstants.RoleNameCoach))
+                    {
+                        returnUrl = returnUrl ??
+                        ((await _userManager.GetRolesAsync(user)).Contains(StringConstants.RoleNameCoach)
+                        ? Url.Content("~/Coaches/CoachesStudents")
+                        : Url.Content("~/"));
+                    } else
+                    {
+                        returnUrl = Url.Content("~/");
                     }
                         
                     return LocalRedirect(returnUrl);

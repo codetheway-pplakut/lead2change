@@ -241,6 +241,11 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             var coach = await _coachService.GetCoach(coachId);
             coach.Active = false;
+            var tempList = await _studentService.GetCoachStudents(coachId);
+            foreach (Student s in tempList)
+            {
+                await UnassignStudent(s.Id);
+            }
             var coach1 = await _coachService.Update(coach);
             return RedirectToAction("Index");
         }

@@ -758,15 +758,7 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> RegisterInterest(StudentInterestFormViewModel viewModel)
         {
 
-            // Check SignedIn
-
-            if (!SignInManager.IsSignedIn(User))
-
-            {
-
-                return Error("401: Unauthorized");
-
-            }
+            
 
 
 
@@ -798,31 +790,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
 
 
-            if (
-
-                // Check if the user is null
-
-                user == null ||
-
-                // Check if user already has a student assosiation
-
-                user.AssociatedId != Guid.Empty ||
-
-                // Check for bad viewModel
-
-                !ModelState.IsValid ||
-
-                // Check the length of the first name
-
-                viewModel.StudentFirstName.Length <= 0
-
-                )
-
-            {
-
-                return Error("400: Bad Request");
-
-            }
+            
 
             // Create model
             Student model = new Student()
