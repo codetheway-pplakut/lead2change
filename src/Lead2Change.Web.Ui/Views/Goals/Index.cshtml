@@ -4,7 +4,7 @@
 *@
 <div class="container-fluid">
     @*@Lead2Change.Web.Ui.Controllers.StudentsController.GetStudent(@Model.StudentID).StudentFirstName*@
-    <div class="row blueHeader full-width mb-sm-3">
+    <div class="row orangeHeader full-width mb-sm-3">
         <div class="col-sm-12">
             <h1 class="text-center" style="text-transform: uppercase"><strong>@Model.Name's Goals</strong></h1>
         </div>
@@ -42,20 +42,20 @@
                 <td>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Goals", new { id = item.Id, studentID = item.StudentId })'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href = '@Url.Action("Edit","Goals", new { id = item.Id, studentID = item.StudentId })'; this.disabled = true;" />
 
                         </div>
                     </div>
                     <div class="row">
                         <div class=" col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Goals", new { id = item.Id, studentID = item.StudentId })'" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Goals", new { id = item.Id, studentID = item.StudentId })'; this.disabled = true;" />
 
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href='@Url.Action("Delete","Goals", new { id = item.Id, studentID = item.StudentId })'" />
+                            <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href = '@Url.Action("Delete","Goals", new { id = item.Id, studentID = item.StudentId })'; this.disabled = true; this.value = 'Deleting…';" />
 
                         </div>
                     </div>
@@ -67,13 +67,17 @@
 
     <div class="row">
         <div class="col-sm-12 pb-sm-2">
-            <input type="button" class="btn btn-primary" value="Create a Goal" onclick="location.href='@Url.Action("Create","Goals", new {studentID = Model.StudentID })'" />
+            <input type="button" class="btn btn-primary" value="Create a Goal" onclick="location.href='@Url.Action("Create","Goals", new {studentID = Model.StudentID })'; this.disabled = true;" />
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            @Html.ActionLink("Back To Students", "Index", "Students")
+    <br />
+    @if (Model.isStudentActive)
+    {
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index", "Students")'">Back To Students</button>
+    }
+    else
+    {
 
-        </div>
-    </div>
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex", "Students")'">Back To Inactive Students</button>
+    }
 </div>

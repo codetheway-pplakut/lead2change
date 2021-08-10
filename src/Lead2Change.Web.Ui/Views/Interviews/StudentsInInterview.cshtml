@@ -4,8 +4,14 @@
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<style>
+    .tableMin {
+        min-height: 15vh;
+    }
+</style>
+
 <div class="container-fluid">
-    <div class="row blueHeader full-width mb-sm-3">
+    <div class="row orangeHeader full-width mb-sm-3">
         <div class="col-sm-12">
             <h1 class="text-center"><strong>STUDENT INTERVIEW FOR @Model.StudentAnswer[0].InterviewName.ToUpper()</strong></h1>
         </div>
@@ -18,42 +24,58 @@
             </button>
         </div>
     </div>
-    <table class="table table-striped pt-2 shadow-lg" id="myTable">
-        <thead class="thead blueStyle">
-            <tr>
-                <th>
-                    Student
-                </th>
-                <th>
-                    Interview Form
-                </th>
-            </tr>
-        </thead>
-        @for (int i = 0; i < Model.Students.Count; i++)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.Students[i].StudentLastName), @Html.DisplayFor(modelItem => Model.Students[i].StudentFirstName)
-                </td>
-                <td>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Interview" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=Model.StudentAnswer[i].InterviewId, studentID=Model.StudentAnswer[i].StudentId})'" />
-
-                        </div>
-                    </div>
-                    @if (Model.StudentAnswer[i].QuestionInInterviews.Count > 0)
+    <div class="col-sm-12">      
+        <table class="table table-striped table-hover table-responsive-sm fixedTable mt-sm-3 mb-0 shadow-lg">          
+            <thead class="thead blueStyle">
+                <tr>
+                    <th>
+                        Student
+                    </th>
+                    <th>
+                        Interview Form
+                    </th>
+                </tr>
+                </thead>
+            </table>
+        <div class="tableScroll shadow-lg">
+            <table class="table table-striped table-hover table-responsive-sm fixedTable mb-0 tableMin" id="myTable">
+                <thead class="blueStyle d-none">
+                    <tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Students != null)
                     {
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { interviewID = Model.StudentAnswer[i].InterviewId, studentId = Model.StudentAnswer[i].StudentId })'" />
+                        @for (int i = 0; i < Model.Students.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model.Students[i].StudentLastName), @Html.DisplayFor(modelItem => Model.Students[i].StudentFirstName)
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Interview" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=Model.StudentAnswer[i].InterviewId, studentID=Model.StudentAnswer[i].StudentId})'" />
 
-                            </div>
-                        </div>
+                                        </div>
+                                    </div>
+                                    @if (Model.StudentAnswer[i].QuestionInInterviews.Count > 0)
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <input type="button" class="btn btn-block orangeBtn" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { interviewID = Model.StudentAnswer[i].InterviewId, studentId = Model.StudentAnswer[i].StudentId })'" />
+
+                                            </div>
+                                        </div>
+                                    }
+                                </td>
+                            </tr>
+                        }
                     }
-                </td>
-            </tr>
-        }
-    </table>
-    <button class="btn btn-outline-dark btn-lg" onclick="location.href='@Url.Action("Index","Interviews")'">Back To List</button>
+                </tbody>
+            </table>
+        </div>
+    </div>  
+<div align="center">
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Interviews")'">Back To List</button>
 </div>

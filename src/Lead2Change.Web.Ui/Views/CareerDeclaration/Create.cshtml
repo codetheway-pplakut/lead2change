@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 *@
 <div class="container">
-    <div class="row orangeHeader full-width mb-sm-3">
+    <div class="row blueHeader full-width mb-sm-3">
         <div class="col-sm-12">
             <h1 class="text-center"><strong>CAREER DECLARATION INTAKE FORM</strong></h1>
         </div>
@@ -20,7 +20,7 @@
         </div>
         <div class="form-group row">
             <label asp-for="CollegeBound" class="control-label col-sm-3"><b>Are you College Bound?</b></label>
-            <input asp-for="CollegeBound" class="form-control col-sm-1"/>
+            <input asp-for="CollegeBound" class="form-control col-sm-1" />
             <span asp-validation-for="CollegeBound" class="text-danger"></span>
         </div>
         <div class="form-group row">
@@ -44,9 +44,18 @@
     </form>
 </div>
 
-<div align="center">
-    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students")'">Back To List</button>
-</div>
+@if (Model.isStudentActive)
+{
+    <div align="center">
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index", "Students")'">Back To Students</button>
+        </div>
+}
+else
+{
+    <div align ="center">
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex", "Students")'">Back To Inactive Students</button>
+        </div>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
