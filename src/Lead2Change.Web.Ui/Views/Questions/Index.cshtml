@@ -24,31 +24,38 @@
         </thead>
         @foreach (var item in Model)
         {
-            <tr>
-                <th scope="row">@(Model.IndexOf(item) + 1)</th>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuestionString)
-                </td>
-                <td>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Questions", new { id = item.Id })'" />
-                        </div>
+    <tr>
+        <th scope="row">@(Model.IndexOf(item) + 1)</th>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuestionString)
+        </td>
+
+        @if (User.IsInRole("admin"))
+        {
+            <td>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit", "Questions", new { id = item.Id })'" />
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Archive" onclick="location.href='@Url.Action("Delete","Questions", new { id = item.Id })'" />
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Archive" onclick="location.href='@Url.Action("Delete", "Questions", new { id = item.Id })'" />
                     </div>
-                </td>
-            </tr>
+                </div>
+            </td>
+        }
+        </tr>
         }
     </table>
     <div class="row">
-        <div class="col-sm-12 pb-sm-2">
-            <input type="button" class="btn btn-primary" value="Create a Question" onclick="location.href='@Url.Action("Create","Questions")'" />
+        @if (User.IsInRole("admin"))
+        {
+            <div class="col-sm-12 pb-sm-2">
+                <input type="button" class="btn btn-primary" value="Create a Question" onclick="location.href='@Url.Action("Create", "Questions")'" />
+            </div>
+        }
         </div>
-    </div>
     <div class="row">
         <div class="col-sm-12">
             <input type="button" class="btn btn-primary" value="Visit Archive" onclick="location.href='@Url.Action("ArchivedQuestions","Questions")'" />

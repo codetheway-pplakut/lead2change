@@ -618,7 +618,10 @@ namespace Lead2Change.Web.Ui.Controllers
             {
                 return Error("400: Bad Request");
             }
-
+            if (student.StudentDateOfBirth.CompareTo(DateTime.Today) < 0)
+            {
+                return Error("406: Not Acceptable (Student birthdate cannot be in the future).");
+            }
             //General Student Info
             student.StudentFirstName = viewModel.StudentFirstName;
             student.StudentLastName = viewModel.StudentLastName;
