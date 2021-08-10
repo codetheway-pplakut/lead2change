@@ -52,5 +52,5 @@
     </tbody>
 </table>
 <div>
-    <input type="button" class="btn btn-outline-dark " value="Back to Goals" onclick="location.href='@Url.Action("Index", "Goals", new { studentId = @Model.StudentId })'" />
+    <input type="button" class="btn btn-outline-dark " value="Back to Goals" onclick="location.href = '@Url.Action("Index", "Goals", new { studentId = @Model.StudentId })'; this.disabled = true;" />
 </div>
