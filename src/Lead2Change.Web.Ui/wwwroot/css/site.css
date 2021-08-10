@@ -264,3 +264,7 @@ table{
         overflow-y: auto;
         max-height: 40vh;
     }
+.tableMin {
+    min-height: 32vh;
+}
+
