@@ -44,12 +44,13 @@
                                 <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index","Goals", new { studentID= item.Id })'">Student Goals</button>
                                 @if (item.CareerDeclarationId == Guid.Empty)
                                 {
-                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Create","CareerDeclaration", new { studentId= item.Id })'">Add Student Career</button>
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Create","CareerDeclaration", new { studentId= item.Id })'">Add Student Career</button>
                                 }
                                 else
                                 {
-                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId= item.Id })'">View Student Career</button>
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId= item.Id })'">View Student Career</button>
                                 }
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index", "Interviews", new { studentId = item.Id })'">Conduct/View an Interview</button>
                             </div>
                         </div>
                     </td>
