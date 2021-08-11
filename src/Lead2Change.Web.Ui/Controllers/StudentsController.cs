@@ -786,40 +786,19 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> RegisterInterest(StudentInterestFormViewModel viewModel)
         {
-
-            
-
-
-
             // Check Permissions
-
             /*
-
              *  Students: Allowed
-
              *  Coach: Not Allowed
-
              *  Admin: Allowed
-
              */
-
             if (User.IsInRole(StringConstants.RoleNameCoach))
-
             {
-
                 return Error("403: Forbidden");
-
             }
 
-
-
             // Find User
-
             var user = await UserManager.GetUserAsync(User);
-
-
-
-            
 
             // Create model
             Student model = new Student()
@@ -838,11 +817,8 @@ namespace Lead2Change.Web.Ui.Controllers
 
             // Registers a relation in user to the student if their role is student
             if (User.IsInRole(StringConstants.RoleNameStudent))
-
             {
-
                 user.AssociatedId = student.Id;
-
                 await UserManager.UpdateAsync(user);
             }
 
