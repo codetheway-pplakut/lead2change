@@ -130,8 +130,6 @@ namespace Lead2Change.Web.Ui.Controllers
 
             if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
                     Coach coach = new Coach()
                     {
                         CoachFirstName = model.CoachFirstName,
@@ -147,7 +145,6 @@ namespace Lead2Change.Web.Ui.Controllers
                         user.AssociatedId = result.Id;
                         await _coachService.Update(result);
                         return RedirectToAction("Index", "Students");
-                    }
                 }
 
                 return RedirectToAction("Index");

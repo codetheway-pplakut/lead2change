@@ -110,7 +110,8 @@
         }
     </tbody>
 </table>
-
-<div>
+@if (User.IsInRole("admin"))
+{ <div>
     <button class="btn btn-outline-dark btn-lg" type="button" onclick="location.href='@Url.Action("Index","Coaches")'">Back To List</button>
 </div>
+}

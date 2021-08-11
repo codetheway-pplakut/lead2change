@@ -53,6 +53,27 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
+        public class PasswordLowercaseCharRequired : RegularExpressionAttribute
+        {
+            public PasswordLowercaseCharRequired(string pattern) : base(pattern) { }
+        }
+
+
+        public class PasswordUppercaseCharRequired : RegularExpressionAttribute
+        {
+            public PasswordUppercaseCharRequired(string pattern) : base(pattern) { }
+        }
+
+        public class PasswordNumberCharRequired : RegularExpressionAttribute
+        {
+            public PasswordNumberCharRequired(string pattern) : base(pattern) { }
+        }
+
+        public class PasswordSpecialCharRequired : RegularExpressionAttribute
+        {
+            public PasswordSpecialCharRequired(string pattern) : base(pattern) { }
+        }
+
         public class InputModel
         {
             [Required]
@@ -62,6 +83,7 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$", ErrorMessage = "Password must have at least one lowercase letter, at least one uppercase letter, at least one number, and at least one special character, and be at least 6 characters long")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -104,7 +126,8 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                 if (userWithEmail == null)
                 {
 
-                } else
+                }
+                else
                 {
                     ModelState.AddModelError(string.Empty, "There is already a user registered with this email");
                     return Page();
@@ -153,7 +176,7 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
                     }
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-//                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        //                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
                     else
                     {

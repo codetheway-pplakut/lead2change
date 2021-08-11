@@ -26,19 +26,23 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.QuestionString)
                 </td>
-                <td>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href = '@Url.Action("ArchiveEdit","Questions", new { id = item.Id })'; this.disabled = true;" />
+                @if (User.IsInRole("admin"))
+                {
+                    <td>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("ArchiveEdit", "Questions", new { id = item.Id })'" />
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class=" col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Permanently Delete" onclick="location.href = '@Url.Action("PermanentDelete","Questions", new { id = item.Id })'; this.disabled = true; this.value='Deleting…'" />
+
+                        <div class="row">
+                            <div class=" col-sm-12">
+                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Permanently Delete" onclick="location.href='@Url.Action("PermanentDelete", "Questions", new { id = item.Id })'" />
+                            </div>
                         </div>
-                    </div>
-                </td>
+                    </td>
+                }
             </tr>
         }
     </table>

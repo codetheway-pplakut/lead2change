@@ -25,7 +25,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return Redirect("/Identity/Account/Login");
         }
 
         public IActionResult Privacy()
@@ -42,8 +42,8 @@ namespace Lead2Change.Web.Ui.Controllers
         public async Task<IActionResult> Configure()
         {
             await CreateDefaultRoles();
-            await CreateNewUser("student@test.com", "Testtest@123", StringConstants.RoleNameStudent);
-            await CreateNewUser("coach@test.com", "Testtest@123", StringConstants.RoleNameCoach);
+            /* await CreateNewUser("student@test.com", "Testtest@123", StringConstants.RoleNameStudent);
+            await CreateNewUser("coach@test.com", "Testtest@123", StringConstants.RoleNameCoach); */
             await CreateNewUser("admin@test.com", "Testtest@123", StringConstants.RoleNameAdmin);
 
             return RedirectToAction("Index");
