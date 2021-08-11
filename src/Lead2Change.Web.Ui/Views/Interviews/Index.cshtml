@@ -35,6 +35,7 @@
 
         @foreach (var item in Model.InterviewViewModels)
         {
+           
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.InterviewName)
@@ -44,7 +45,7 @@
                     {
                         <div class="row">
                             <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Interviews", new { id = item.Id })' ; this.disabled = true;" />
+                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit", "Interviews", new { id = item.Id })' ; this.disabled = true;" />
 
                             </div>
                         </div>
@@ -52,12 +53,21 @@
 
                     <div class="row">
                         <div class=" col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Interviews", new { id = item.Id, studentID = item.StudentId })'; this.disabled = true;" />
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details", "Interviews", new { id = item.Id, studentID = item.StudentId })'; this.disabled = true;" />
 
                         </div>
 
                     </div>
+                    @if (Model.StudentId != Guid.Empty && item.QuestionInInterviews.Count > 0)
+                    {
+                    <div class="row">
+                        <div class=" col-sm-12">
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { id = item.Id, studentId = item.StudentId, interviewID = item.Id })'; this.disabled = true;" />
 
+                        </div>
+
+                    </div>
+                    }
 
                     @if (item.StudentId == Guid.Empty)
 
@@ -82,16 +92,16 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer Interview" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new {id=item.QuestionInInterviews.FirstOrDefault().InterviewId, studentID=item.StudentId})'; this.disabled = true;" />
+                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Answer Interview" onclick="location.href='@Url.Action("AnswerQuestion", "Answer", new { id = item.QuestionInInterviews.FirstOrDefault().InterviewId, studentID = item.StudentId })'; this.disabled = true;" />
                             </div>
                         </div>
                     }
                 </td>
             </tr>
+            
         }
-
     </table>
-
+        
     @if (Model.StudentId == Guid.Empty)
     {
         <div class="row">
