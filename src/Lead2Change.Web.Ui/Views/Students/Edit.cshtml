@@ -16,43 +16,43 @@
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button class="btn btn-submit " onclick="location.href='@Url.Action("StudentInformationEdit", "Students", new { studentId = Model.Id })'">Student Information</button>
+                <button class="btn  btn-block orangeBtn" onclick="location.href='@Url.Action("StudentInformationEdit", "Students", new { studentId = Model.Id })'">Student Information</button>
             </div>
         </div>
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button class="btn btn-submit " onclick="location.href='@Url.Action("ParentInformationEdit", "Students", new { studentId = Model.Id })'">Parent Information</button>
+                <button class="btn  btn-block orangeBtn " onclick="location.href='@Url.Action("ParentInformationEdit", "Students", new { studentId = Model.Id })'">Parent Information</button>
             </div>
         </div>
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button class="btn btn-submit " onclick="location.href='@Url.Action("GuidanceCounselorInformation", "Students", new { studentId = Model.Id })'">Guidance Counselor Information</button>
+                <button class="btn  btn-block orangeBtn" onclick="location.href='@Url.Action("GuidanceCounselorInformation", "Students", new { studentId = Model.Id })'">Guidance Counselor Information</button>
             </div>
         </div>
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button class="btn btn-submit " onclick="location.href='@Url.Action("PostSecondaryEdit", "Students", new { studentId = Model.Id })'">Post Secondary Information</button>
+                <button class="btn  btn-block orangeBtn" onclick="location.href='@Url.Action("PostSecondaryEdit", "Students", new { studentId = Model.Id })'">Post Secondary Information</button>
             </div>
         </div>
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button class="btn btn-submit " onclick="location.href='@Url.Action("CollegeEntranceExamEdit", "Students", new { studentId = Model.Id })'">College Entrance Exam Information</button>
+                <button class="btn  btn-block orangeBtn" onclick="location.href='@Url.Action("CollegeEntranceExamEdit", "Students", new { studentId = Model.Id })'">College Entrance Exam Information</button>
             </div>
         </div>
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">            
-                <button class="btn btn-submit " onclick="location.href='@Url.Action("FinancialAidEdit", "Students", new { studentId = Model.Id })'">Financial Aid Information</button>
+                <button class="btn  btn-block orangeBtn" onclick="location.href='@Url.Action("FinancialAidEdit", "Students", new { studentId = Model.Id })'">Financial Aid Information</button>
             </div>
         </div>
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button class="btn btn-submit " onclick="location.href='@Url.Action("SignatureEdit", "Students", new { studentId = Model.Id })'">Signature Information</button>
+                <button class="btn  btn-block orangeBtn" onclick="location.href='@Url.Action("SignatureEdit", "Students", new { studentId = Model.Id })'">Signature Information</button>
             </div>
         </div>
     </div>
@@ -616,8 +616,10 @@
             <label asp-for="Id" class="control-label"></label>
             <input asp-for="Id" class="form-control" value=@Model.Id />
         </div>
-        <div class="form-group" align="center">
-            <input type="submit" value="Update Active Status" class="btn btn-submit" />
+        <div class="col-sm-4 offset-sm-4">
+            <div class="form-group" align="center">
+                <input type="submit" value="Update Active Status" class="btn  btn-block orangeBtn" />
+            </div>
         </div>
     </form>
 </div>
