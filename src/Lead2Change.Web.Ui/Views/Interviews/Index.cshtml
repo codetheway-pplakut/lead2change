@@ -44,7 +44,7 @@
                     {
                         <div class="row">
                             <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Interviews", new { id = item.Id })' ; this.disabled = true;" />
+                                <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href='@Url.Action("Edit","Interviews", new { id = item.Id })' ; this.disabled = true;" />
 
                             </div>
                         </div>
@@ -57,7 +57,16 @@
                         </div>
 
                     </div>
+                    @if (Model.StudentId != Guid.Empty && item.QuestionInInterviews.Count > 0)
+                    {
+                    <div class="row">
+                        <div class=" col-sm-12">
+                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="View Answers" onclick="location.href='@Url.Action("Index", "Answer", new { id = item.Id, studentId = item.StudentId, interviewID = item.Id })'; this.disabled = true;" />
 
+                        </div>
+
+                    </div>
+                    }
 
                     @if (item.StudentId == Guid.Empty)
 
