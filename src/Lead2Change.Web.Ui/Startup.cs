@@ -65,7 +65,8 @@ namespace Lead2Change.Web.Ui
             }
 
             services.AddIdentity<AspNetUsers, AspNetRoles>(options => {
-                options.SignIn.RequireConfirmedAccount = true;
+                //options.SignIn.RequireConfirmedAccount = true;
+                options.SignIn.RequireConfirmedAccount = false;
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>

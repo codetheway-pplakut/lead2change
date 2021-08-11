@@ -71,6 +71,40 @@ namespace Lead2Change.Web.Ui.Controllers
             return Error("403: You are not authorized to view this page.");
         }
 
+        public async Task<IActionResult> Archive(Guid studentId, bool state = false)
+        {
+            // Check SignedIn
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            // Check Permissions
+            /*
+             *  Students: Not Allowed
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (!User.IsInRole(StringConstants.RoleNameAdmin))
+            {
+                return Error("403: Forbidden");
+            }
+
+            // Find Student
+            var student = await _studentService.GetStudent(studentId);
+
+            // Check for bad id or student
+            if (studentId == Guid.Empty || student == null)
+            {
+                return Error("400: Bad Request");
+            }
+
+            // Delete Student
+            student.Active = state;
+            await _studentService.Update(student);
+            return RedirectToAction(state ? "InactiveIndex" : "Index");
+        }
+
         public async Task<IActionResult> Delete(Guid id)
         {
             // Check SignedIn

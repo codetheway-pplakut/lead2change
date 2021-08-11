@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Lead2Change.Services.Identity
@@ -27,6 +29,11 @@ namespace Lead2Change.Services.Identity
 
         public static async Task<Response> Email(string sender, string receiver, string xSubject, string xPlainTextContent, string xHtmlContent, string senderTitle, string receiverTitle)
         {
+            if(string.IsNullOrEmpty(_apiKey))
+            {
+                return new Response(HttpStatusCode.InternalServerError, null, null);
+            }
+
             var client = new SendGridClient(_apiKey);
             var from = new EmailAddress(sender, senderTitle);
             var subject = xSubject;
