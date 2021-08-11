@@ -16,44 +16,43 @@
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button class="btn btn-submit">@Html.ActionLink("Student Information", "StudentInformationEdit", new { studentId = Model.Id })</button>              
+                <button class="btn btn-submit " onclick="location.href='@Url.Action("StudentInformationEdit", "Students", new { studentId = Model.Id })'">Student Information</button>
             </div>
         </div>
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button class="btn btn-submit">@Html.ActionLink("Parent Information", "ParentInformationEdit", new { studentId = Model.Id })</button>
+                <button class="btn btn-submit " onclick="location.href='@Url.Action("ParentInformationEdit", "Students", new { studentId = Model.Id })'">Parent Information</button>
             </div>
         </div>
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button class="btn btn-submit">@Html.ActionLink("Guidance Counselor Information", "GuidanceCounselorInformation", new { studentId = Model.Id })</button>
+                <button class="btn btn-submit " onclick="location.href='@Url.Action("GuidanceCounselorInformation", "Students", new { studentId = Model.Id })'">Guidance Counselor Information</button>
             </div>
         </div>
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button class="btn btn-submit">@Html.ActionLink("Post Secondary Information", "PostSecondaryEdit", new { studentId = Model.Id })</button>
+                <button class="btn btn-submit " onclick="location.href='@Url.Action("PostSecondaryEdit", "Students", new { studentId = Model.Id })'">Post Secondary Information</button>
             </div>
         </div>
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button class="btn btn-submit">@Html.ActionLink("College Entrance Exam Information", "CollegeEntranceExamEdit", new { studentId = Model.Id })</button>
-
+                <button class="btn btn-submit " onclick="location.href='@Url.Action("CollegeEntranceExamEdit", "Students", new { studentId = Model.Id })'">College Entrance Exam Information</button>
+            </div>
+        </div>
+        <div class="row editPage">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">            
+                <button class="btn btn-submit " onclick="location.href='@Url.Action("FinancialAidEdit", "Students", new { studentId = Model.Id })'">Financial Aid Information</button>
             </div>
         </div>
         <div class="row editPage">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button class="btn btn-submit">@Html.ActionLink("Financial Aid Information", "FinancialAidEdit", new { studentId = Model.Id })</button>
-            </div>
-        </div>
-        <div class="row editPage">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-submit">@Html.ActionLink("Signature Information", "SignatureEdit", new { studentId = Model.Id })</button>
+                <button class="btn btn-submit " onclick="location.href='@Url.Action("SignatureEdit", "Students", new { studentId = Model.Id })'">Signature Information</button>
             </div>
         </div>
     </div>
