@@ -4,7 +4,7 @@
 *@
 
 <div class="container-fluid">
-  
+
     <div class="row orangeHeader full-width mb-sm-3">
         <div class="col-sm-12">
             <h1 class="text-center"><strong>@Model.StudentName.ToUpper()'S ANSWERS FOR @Model.InterviewName.ToUpper() </strong></h1>
@@ -58,10 +58,12 @@
 
     <div class="row">
         <div class="col-sm-12 pb-sm-2">
-            <input type="button" class="btn btn-primary" value="Your Interviews" onclick="location.href='@Url.Action("Index","Interviews")'" />
+            <input type="button" class="btn btn-primary" value="Student Interviews" onclick="location.href='@Url.Action("Index","Interviews")'" />
         </div>
     </div>
+ 
     <div align="center">
-        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("StudentsInInterview", "Interviews", new { Id = Model.InterviewID})'">Back To List</button>
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index", "Interviews", new { studentId = Model.StudentID })'">Back To Your Interviews</button>
     </div>
+ 
 </div>

@@ -7,11 +7,9 @@ namespace Lead2Change.Services.Identity
 {
     public class EmailSender : IEmailSender
     {
-        public const string DefaultSender = "test@example.com";
-        public const string DefaultSenderTitle = "Lead2Change Student Registration";
-
-        private const string _apiKey = "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";
-
+        public static string DefaultSender = "";
+        public static string DefaultSenderTitle = "";
+        private static string _apiKey = "";
         public async Task<Response> SendEmailAsync(string email, string subject, string htmlMessage, string sender, string senderTitle)
         {
             return await Email(sender,
@@ -41,6 +39,18 @@ namespace Lead2Change.Services.Identity
         public static async Task DefaultEmail(string receiverEmail,string subject,string content,string receiverName)
         {
             await Email(DefaultSender,receiverEmail,subject,content,content,DefaultSenderTitle,receiverName);
+        }
+        public static void setApiKey(string apiKey)
+        {
+            _apiKey = apiKey;
+        }
+        public static void setDefaultSenderEmail(string email)
+        {
+            DefaultSender = email;
+        }
+        public static void setDefaultSenderName(string name)
+        {
+            DefaultSenderTitle = name;
         }
     }
 }

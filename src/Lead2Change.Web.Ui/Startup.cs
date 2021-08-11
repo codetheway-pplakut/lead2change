@@ -30,6 +30,7 @@ namespace Lead2Change.Web.Ui
         {
             Configuration = configuration;
             Environment = env;
+            configuration.GetSection("SendGrid:SenderName");
         }
 
         public IConfiguration Configuration { get; }
@@ -38,6 +39,9 @@ namespace Lead2Change.Web.Ui
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            EmailSender.setApiKey(Configuration.GetValue<string>("SendGrid:apiKey"));
+            EmailSender.setDefaultSenderName(Configuration.GetValue<string>("SendGrid:SenderName"));
+            EmailSender.setDefaultSenderEmail(Configuration.GetValue<string>("SendGrid:SenderEmail"));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<ICareerDeclarationService, CareerDeclarationService>();
@@ -47,7 +51,6 @@ namespace Lead2Change.Web.Ui
             services.AddScoped<IQuestionsService, QuestionsService>();
             services.AddScoped<IAnswersService, AnswersService>();
             services.AddScoped<IQuestionInInterviewService, QuestionInInterviewService>();
-
             if (Environment.IsDevelopment())
             {
                 services.AddDbContext<AppDbContext>(options =>
