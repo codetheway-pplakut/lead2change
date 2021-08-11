@@ -46,6 +46,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 {
                     InterviewName = interview.InterviewName,
                     Id = interview.Id,
+                    
                     QuestionInInterviews = interview.QuestionInInterviews,
                     StudentId = studentID,
                    
@@ -58,7 +59,8 @@ namespace Lead2Change.Web.Ui.Controllers
             {
                 InterviewViewModels = result,
                 StudentId = studentID,
-                StudentName = studentName 
+                StudentName = studentName,
+               
             });
         }
 
