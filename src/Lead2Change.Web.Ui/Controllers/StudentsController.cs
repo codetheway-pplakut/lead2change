@@ -408,10 +408,9 @@ namespace Lead2Change.Web.Ui.Controllers
                 await UserManager.UpdateAsync(user);
             }
 
-            await EmailSender.Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
-            await EmailSender.Email("1joel.kuriakose@gmail.com", "joeljk2003@gmail.com", "Lead2Change Student Registration Confirmation: A new student has been registered", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", "Lead2Change Student Registration", "Lead2Change");
-            await EmailSender.Email("1joel.kuriakose@gmail.com", model.StudentEmail, "Lead2Change Registration Confirmation: You are registered", "Congrats, you have sucessfully registered for Lead2Change!", "Congrats, you have sucessfully registered for Lead2Change!", "Lead2Change Student Registration", model.StudentFirstName + " " + model.StudentLastName);
-
+            //await EmailSender.DefaultEmail(model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ","Lead2Change Registration Confirmation: Your student is registered ", model.ParentFirstName + " " + model.ParentLastName);
+            // TODO: Delete this on full webpage await EmailSender.DefaultEmail("admin@lead2changeinc.org", "Lead2Change Student Registration Confirmation: A new student has been registered", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", "Lead2Change Administration");
+            await EmailSender.DefaultEmail(model.StudentEmail, "Lead2Change Interest Form Confirmation", "Thank you for applying to Lead2Change. We have received your application. <br>Lead2Change is a career - readiness organization and we are excited to engage you in leadership opportunities to equip you with the essential tools to be successful in college, your career, and your community! A member of our team will be reaching out to you soon.In the meantime, if you have any questions, please contact us at info @lead2changeinc.org or 414 - 226 - 2410.", model.StudentFirstName + " " + model.StudentLastName);
             return RedirectToAction("Details", new { studentId = student.Id });
         }
 
@@ -816,12 +815,10 @@ namespace Lead2Change.Web.Ui.Controllers
 
                 await UserManager.UpdateAsync(user);
             }
-            
-            /* commented out until email function works
-            await Email("1joel.kuriakose@gmail.com", model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Your student " + model.StudentFirstName + " " + model.StudentLastName + " has registered for Lead2Change!", "Lead2Change Student Registration", model.ParentFirstName + " " + model.ParentLastName);
-            await Email("1joel.kuriakose@gmail.com", "joeljk2003@gmail.com", "Lead2Change Student Registration Confirmation: A new student has been registered", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", "Lead2Change Student Registration", "Lead2Change");
-            await Email("1joel.kuriakose@gmail.com", model.StudentEmail, "Lead2Change Registration Confirmation: You are registered", "Congrats, you have sucessfully registered for Lead2Change!", "Congrats, you have sucessfully registered for Lead2Change!", "Lead2Change Student Registration", model.StudentFirstName + " " + model.StudentLastName);
-            */
+
+            //await EmailSender.DefaultEmail(model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ","Lead2Change Registration Confirmation: Your student is registered ", model.ParentFirstName + " " + model.ParentLastName);
+            // TODO: Delete this on full webpage await EmailSender.DefaultEmail("admin@lead2changeinc.org", "Lead2Change Student Registration Confirmation: A new student has been registered", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", "Lead2Change Administration");
+            await EmailSender.DefaultEmail(model.StudentEmail, "Lead2Change Interest Form Confirmation", "Thank you for applying to Lead2Change. We have received your application. <br>Lead2Change is a career - readiness organization and we are excited to engage you in leadership opportunities to equip you with the essential tools to be successful in college, your career, and your community! A member of our team will be reaching out to you soon.In the meantime, if you have any questions, please contact us at info @lead2changeinc.org or 414 - 226 - 2410.", model.StudentFirstName + " " + model.StudentLastName);
             return RedirectToAction("ThankYou");
         }
         public async Task<IActionResult> ThankYou()

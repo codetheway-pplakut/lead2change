@@ -38,5 +38,9 @@ namespace Lead2Change.Services.Identity
             var result = await client.SendEmailAsync(msg);
             return result;
         }
+        public static async Task DefaultEmail(string receiverEmail,string subject,string content,string receiverName)
+        {
+            await Email(DefaultSender,receiverEmail,subject,content,content,DefaultSenderTitle,receiverName);
+        }
     }
 }
