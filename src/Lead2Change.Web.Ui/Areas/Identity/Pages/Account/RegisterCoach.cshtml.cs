@@ -83,10 +83,6 @@ namespace Lead2Change.Web.Ui.Areas.Identity.Pages.Account
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [PasswordLowercaseCharRequired(@"^[a-z]", ErrorMessage = "Password must have at least one lowercase letter")]
-            [PasswordUppercaseCharRequired(@"^[A-Z]", ErrorMessage = "Password must have at least one uppercase letter")]
-            [PasswordNumberCharRequired(@"^[0-9]", ErrorMessage = "Password must have at least one number")]
-            [PasswordSpecialCharRequired(@"^[\s]*$", ErrorMessage = "Password must have at leaset one special character")]
             [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$", ErrorMessage = "Password must have at least one lowercase letter, at least one uppercase letter, at least one number, and at least one special character, and be at least 6 characters long")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
