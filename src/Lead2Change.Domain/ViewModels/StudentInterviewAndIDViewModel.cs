@@ -14,6 +14,6 @@ namespace Lead2Change.Domain.ViewModels
         public Guid InterviewID { get; set; }
         public string InterviewName { get; set; }
         public string StudentName { get; set; }
-        public Guid StudentId { get; set; }
+        public Guid StudentID { get; set; }
     }
 }

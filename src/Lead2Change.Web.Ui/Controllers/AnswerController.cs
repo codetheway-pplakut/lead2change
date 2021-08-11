@@ -73,6 +73,7 @@ namespace Lead2Change.Web.Ui.Controllers
                 AnswerModels = result,
                 InterviewName = interview1.InterviewName,
                 StudentName = student1.StudentFirstName,
+                StudentID = studentId,
             }) ;
 
         }
