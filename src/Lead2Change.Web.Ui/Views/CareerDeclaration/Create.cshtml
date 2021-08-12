@@ -43,19 +43,28 @@
         </div>
     </form>
 </div>
-
-@if (Model.isStudentActive)
+@if (User.IsInRole("admin"))
 {
-    <div align="center">
-    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index", "Students")'">Back To Students</button>
+    if (Model.isStudentActive)
+    {
+        <div align="center">
+            <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index", "Students")'">Back To Students</button>
         </div>
+    }
+    else
+    {
+        <div align="center">
+            <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex", "Students")'">Back To Inactive Students</button>
+        </div>
+    }
 }
 else
 {
-    <div align ="center">
-    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex", "Students")'">Back To Inactive Students</button>
-        </div>
+    <div align="center">
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("CoachesStudents", "Coaches")'">Back To Students</button>
+    </div>
 }
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
