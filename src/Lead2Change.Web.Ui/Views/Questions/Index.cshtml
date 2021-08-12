@@ -29,9 +29,6 @@
         <td>
             @Html.DisplayFor(modelItem => item.QuestionString)
         </td>
-
-        @if (User.IsInRole("admin"))
-        {
             <td>
                 <div class="row">
                     <div class="col-sm-12">
@@ -44,17 +41,13 @@
                     </div>
                 </div>
             </td>
-        }
         </tr>
         }
     </table>
     <div class="row">
-        @if (User.IsInRole("admin"))
-        {
             <div class="col-sm-12 pb-sm-2">
                 <input type="button" class="btn btn-primary" value="Create a Question" onclick="location.href='@Url.Action("Create", "Questions")'" />
             </div>
-        }
         </div>
     <div class="row">
         <div class="col-sm-12">

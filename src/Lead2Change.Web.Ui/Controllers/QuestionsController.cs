@@ -35,10 +35,6 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Create()
         {
-            if (User.IsInRole(StringConstants.RoleNameCoach)) {
-                return Error("403: Forbidden");
-            }
-
             return View(new QuestionsViewModel());
         }
         public async Task<IActionResult> ArchivedQuestions()
@@ -67,11 +63,6 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Edit(Guid id)
         {
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
-
             var result = await QuestionsService.GetQuestion(id);
             QuestionsViewModel question = new QuestionsViewModel()
             {
@@ -83,10 +74,6 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> ArchiveEdit(Guid id)
         {
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
             var result = await QuestionsService.GetQuestion(id);
             QuestionsViewModel question = new QuestionsViewModel()
             {
@@ -119,20 +106,12 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> Delete(Guid id)
         {
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
             var question = await QuestionsService.GetQuestion(id);
             await QuestionsService.Delete(question);
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> PermanentDelete(Guid id)
         {
-            if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
-            }
             var question = await QuestionsService.GetQuestion(id);
             await QuestionsService.PermanentDelete(question);
             return RedirectToAction("ArchivedQuestions", new { questionID = question.Id });
