@@ -72,6 +72,40 @@ namespace Lead2Change.Web.Ui.Controllers
             return Error("403: You are not authorized to view this page.");
         }
 
+        public async Task<IActionResult> Archive(Guid studentId, bool state = false)
+        {
+            // Check SignedIn
+            if (!SignInManager.IsSignedIn(User))
+            {
+                return Error("401: Unauthorized");
+            }
+
+            // Check Permissions
+            /*
+             *  Students: Not Allowed
+             *  Coach: Not Allowed
+             *  Admin: Allowed
+             */
+            if (!User.IsInRole(StringConstants.RoleNameAdmin))
+            {
+                return Error("403: Forbidden");
+            }
+
+            // Find Student
+            var student = await _studentService.GetStudent(studentId);
+
+            // Check for bad id or student
+            if (studentId == Guid.Empty || student == null)
+            {
+                return Error("400: Bad Request");
+            }
+
+            // Delete Student
+            student.Active = state;
+            await _studentService.Update(student);
+            return RedirectToAction(state ? "InactiveIndex" : "Index");
+        }
+
         public async Task<IActionResult> Delete(Guid id)
         {
             // Check SignedIn
@@ -411,7 +445,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
             //await EmailSender.DefaultEmail(model.ParentEmail, "Lead2Change Registration Confirmation: Your student is registered ","Lead2Change Registration Confirmation: Your student is registered ", model.ParentFirstName + " " + model.ParentLastName);
             // TODO: Delete this on full webpage await EmailSender.DefaultEmail("admin@lead2changeinc.org", "Lead2Change Student Registration Confirmation: A new student has been registered", model.StudentFirstName + " " + model.StudentLastName + " is a new registered student in Lead2Change!", "Lead2Change Administration");
-            await EmailSender.DefaultEmail(model.StudentEmail, "Lead2Change Interest Form Confirmation", "Thank you for applying to Lead2Change. We have received your application. <br><br>Lead2Change is a career - readiness organization and we are excited to engage you in leadership opportunities to equip you with the essential tools to be successful in college, your career, and your community! A member of our team will be reaching out to you soon.In the meantime, if you have any questions, please contact us at info @lead2changeinc.org or 414 - 226 - 2410.", model.StudentFirstName + " " + model.StudentLastName);
+            await EmailSender.DefaultEmail(model.StudentEmail, "Lead2Change Interest Form Confirmation", model.StudentFirstName+" "+model.StudentLastName+",<br><br>Thank you for applying to Lead2Change. We have received your application. <br><br>Lead2Change is a career-readiness organization and we are excited to engage you in leadership opportunities to equip you with the essential tools to be successful in college, your career, and your community! A member of our team will be reaching out to you soon. In the meantime, if you have any questions please contact us at info@lead2changeinc.org or 414-226-2410.", model.StudentFirstName + " " + model.StudentLastName);
             return RedirectToAction("Details", new { studentId = student.Id });
         }
 
@@ -613,10 +647,6 @@ namespace Lead2Change.Web.Ui.Controllers
             {
                 return Error("400: Bad Request");
             }
-            if (student.StudentDateOfBirth.CompareTo(DateTime.Today) < 0)
-            {
-                return Error("406: Not Acceptable (Student birthdate cannot be in the future).");
-            }
             //General Student Info
             student.StudentFirstName = viewModel.StudentFirstName;
             student.StudentLastName = viewModel.StudentLastName;
@@ -757,40 +787,19 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> RegisterInterest(StudentInterestFormViewModel viewModel)
         {
-
-            
-
-
-
             // Check Permissions
-
             /*
-
              *  Students: Allowed
-
              *  Coach: Not Allowed
-
              *  Admin: Allowed
-
              */
-
             if (User.IsInRole(StringConstants.RoleNameCoach))
-
             {
-
                 return Error("403: Forbidden");
-
             }
 
-
-
             // Find User
-
             var user = await UserManager.GetUserAsync(User);
-
-
-
-            
 
             // Create model
             Student model = new Student()
@@ -809,11 +818,8 @@ namespace Lead2Change.Web.Ui.Controllers
 
             // Registers a relation in user to the student if their role is student
             if (User.IsInRole(StringConstants.RoleNameStudent))
-
             {
-
                 user.AssociatedId = student.Id;
-
                 await UserManager.UpdateAsync(user);
             }
 

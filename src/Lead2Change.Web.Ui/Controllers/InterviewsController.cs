@@ -9,27 +9,29 @@ using Lead2Change.Domain.Models;
 using Lead2Change.Services.Questions;
 using Lead2Change.Services.QuestionInInterviews;
 using Lead2Change.Services.Students;
-using Lead2Change.Services.Answers;
 using Microsoft.AspNetCore.Authorization;
 using Lead2Change.Domain.Constants;
+using Microsoft.AspNetCore.Identity;
+using Lead2Change.Services.Identity;
 
 namespace Lead2Change.Web.Ui.Controllers
 {
     [Authorize(Roles = StringConstants.RoleNameAdmin + "," + StringConstants.RoleNameCoach)]
-    public class InterviewsController : Controller
+    public class InterviewsController : _BaseController
     {
         private IInterviewService _interviewsService;
         private IQuestionsService _questionService;
         private IQuestionInInterviewService _questionInInterviewService;
         private IStudentService _studentService;
 
-        public InterviewsController(IInterviewService interviewsService, IQuestionsService questionService, IQuestionInInterviewService questionInInterviewService, IStudentService studentService)
+        public InterviewsController(IUserService userService, IInterviewService interviewsService, IQuestionsService questionService, IQuestionInInterviewService questionInInterviewService, IStudentService studentService, RoleManager<AspNetRoles> roleManager, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager) : base(userService, roleManager, userManager, signInManager)
         {
-            this._interviewsService = interviewsService;
-            this._questionService = questionService;
-            this._questionInInterviewService = questionInInterviewService;
-            this._studentService = studentService;
+            _interviewsService = interviewsService;
+            _questionService = questionService;
+            _questionInInterviewService = questionInInterviewService;
+            _studentService = studentService;
         }
+
         public async Task<IActionResult> Index(Guid studentID)
         {
             string studentName = string.Empty;
@@ -46,21 +48,15 @@ namespace Lead2Change.Web.Ui.Controllers
                 {
                     InterviewName = interview.InterviewName,
                     Id = interview.Id,
-                    
                     QuestionInInterviews = interview.QuestionInInterviews,
                     StudentId = studentID,
-                   
-
-           
-                        
                 }) ;
             }
             return View(new InterviewAndIDViewModel(studentID)
             {
                 InterviewViewModels = result,
                 StudentId = studentID,
-                StudentName = studentName,
-               
+                StudentName = studentName 
             });
         }
 
@@ -215,7 +211,23 @@ namespace Lead2Change.Web.Ui.Controllers
         }
         public async Task<IActionResult> StudentsInInterview(Guid Id)
         {
-            List<Student> students = await _studentService.GetActiveStudents();
+            List<Student> students = null;
+            if(User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                var user = await UserManager.GetUserAsync(User);
+                if(user != null && user.AssociatedId != Guid.Empty)
+                {
+                    students = await _studentService.GetCoachStudents(user.AssociatedId);
+                }
+                else
+                {
+                    return Error("400: Bad Request");
+                }
+            }
+            else
+            {
+                students = await _studentService.GetActiveStudents();
+            }
             List<AnswerQuestionViewModel> answerQuestion = new List<AnswerQuestionViewModel>();
             var result = await _interviewsService.GetInterviewAndQuestions(Id);
             foreach (Student studenti in students)
