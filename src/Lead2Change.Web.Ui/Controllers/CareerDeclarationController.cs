@@ -80,6 +80,10 @@ namespace Lead2Change.Web.Ui.Controllers
                     await _studentService.Update(student);
                 }
             }
+            if (User.IsInRole(StringConstants.RoleNameCoach))
+            {
+                return RedirectToAction("CoachesStudents", "Coaches");
+            }
             return RedirectToAction("Index", "Students");
         }
 
