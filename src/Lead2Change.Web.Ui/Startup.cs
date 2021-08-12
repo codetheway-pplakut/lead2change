@@ -21,6 +21,7 @@ using Lead2Change.Services.Coaches;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Lead2Change.Domain.Constants;
+using Lead2Change.Web.Ui.Controllers;
 
 namespace Lead2Change.Web.Ui
 {
@@ -39,6 +40,7 @@ namespace Lead2Change.Web.Ui
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            StudentsController.SetAdminInfo(Configuration.GetValue<string>("SendGrid:AdminEmailToSendTo"),Configuration.GetValue<bool>("SendGrid:SendEmailsToAdmin"));
             EmailSender.setApiKey(Configuration.GetValue<string>("SendGrid:apiKey"));
             EmailSender.setDefaultSenderName(Configuration.GetValue<string>("SendGrid:SenderName"));
             EmailSender.setDefaultSenderEmail(Configuration.GetValue<string>("SendGrid:SenderEmail"));
