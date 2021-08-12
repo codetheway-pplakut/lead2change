@@ -16,7 +16,7 @@
                     Goal
                 </th>
                 <th>
-                    Date Set
+                    Explanation
                 </th>
                 <th>
                     Accomplishment State
@@ -29,38 +29,50 @@
 
         @foreach (var item in Model.GoalModels)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GoalSet)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateGoalSet)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WasItAccomplished)
-                </td>
-                <td>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href = '@Url.Action("Edit","Goals", new { id = item.Id, studentID = item.StudentId })'; this.disabled = true;" />
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GoalSet)
+        </td>
 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class=" col-sm-12">
-                            <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Goals", new { id = item.Id, studentID = item.StudentId })'; this.disabled = true;" />
+        @if (item.Explanation.Length > 75)
+        {
+            string expla = item.Explanation.Substring(0, 74) + "...";
+            <td>
+                @Html.DisplayFor(modelItem => expla)
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Explanation)
+            </td>
+        }
 
-                        </div>
+        <td>
+            @Html.DisplayFor(modelItem => item.WasItAccomplished)
+        </td>
+        <td>
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Edit" onclick="location.href = '@Url.Action("Edit","Goals", new { id = item.Id, studentID = item.StudentId })'; this.disabled = true;" />
 
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href = '@Url.Action("Delete","Goals", new { id = item.Id, studentID = item.StudentId })'; this.disabled = true; this.value = 'Deleting…';" />
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-sm-12">
+                    <input type="button" class="btn orangeBtn btn-block mb-sm-2" value="Details" onclick="location.href='@Url.Action("Details","Goals", new { id = item.Id, studentID = item.StudentId })'; this.disabled = true;" />
 
-                        </div>
-                    </div>
-                </td>
-            </tr>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="button" class="btn btn-block orangeBtn" value="Delete" onclick="location.href = '@Url.Action("Delete","Goals", new { id = item.Id, studentID = item.StudentId })'; this.disabled = true; this.value = 'Deleting…';" />
+
+                </div>
+            </div>
+        </td>
+    </tr>
         }
 
     </table>
