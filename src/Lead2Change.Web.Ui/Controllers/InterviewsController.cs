@@ -114,8 +114,8 @@ namespace Lead2Change.Web.Ui.Controllers
                     await _interviewsService.Update(new Interview
                     {
                         Id = model.Id,
-                        InterviewName = model.InterviewName
-                    });
+                        InterviewName = (String.IsNullOrEmpty(model.InterviewName)) ? "Untitled" : model.InterviewName,
+                    }) ;
                 }
                 
             
