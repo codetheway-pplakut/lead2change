@@ -471,7 +471,7 @@ namespace Lead2Change.Web.Ui.Controllers
 
              *  Students: Allowed if owned by user
 
-             *  Coach: Not Allowed
+             *  Coach: Allowed
 
              *  Admin: Allowed
 
@@ -501,13 +501,6 @@ namespace Lead2Change.Web.Ui.Controllers
 
             }
 
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-
-            {
-
-                return Error("403: Forbidden");
-
-            }
 
 
 
@@ -613,7 +606,7 @@ namespace Lead2Change.Web.Ui.Controllers
             // Check Permissions
             /*
              *  Students: Allowed if owned by user
-             *  Coach: Not Allowed
+             *  Coach: Allowed
              *  Admin: Allowed
              */
             if (User.IsInRole(StringConstants.RoleNameStudent))
@@ -626,10 +619,6 @@ namespace Lead2Change.Web.Ui.Controllers
                 {
                     return Error("403: Forbidden");
                 }
-            }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-            {
-                return Error("403: Forbidden");
             }
 
             if (
@@ -849,7 +838,7 @@ namespace Lead2Change.Web.Ui.Controllers
             // Check Permissions
             /*
              *  Students: Allowed if owned by user
-             *  Coach: Not Allowed
+             *  Coach: Allowed
              *  Admin: Allowed
              */
             if (User.IsInRole(StringConstants.RoleNameStudent))
@@ -864,11 +853,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     return Error("403: Forbidden");
                 }
             }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-
-            {
-                return Error("403: Forbidden");
-            }
+            
             // Find student
             var student = await _studentService.GetStudent(studentId);
             // Check for bad student
@@ -960,7 +945,7 @@ namespace Lead2Change.Web.Ui.Controllers
             // Check Permissions
             /*
              *  Students: Allowed if owned by user
-             *  Coach: Not Allowed
+             *  Coach: Allowed
              *  Admin: Allowed
              */
             if (User.IsInRole(StringConstants.RoleNameStudent))
@@ -975,11 +960,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     return Error("403: Forbidden");
                 }
             }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-
-            {
-                return Error("403: Forbidden");
-            }
+            
             // Find student
             var student = await _studentService.GetStudent(studentId);
             // Check for bad student
@@ -1071,7 +1052,7 @@ namespace Lead2Change.Web.Ui.Controllers
             // Check Permissions
             /*
              *  Students: Allowed if owned by user
-             *  Coach: Not Allowed
+             *  Coach: Allowed
              *  Admin: Allowed
              */
             if (User.IsInRole(StringConstants.RoleNameStudent))
@@ -1086,11 +1067,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     return Error("403: Forbidden");
                 }
             }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-
-            {
-                return Error("403: Forbidden");
-            }
+            
             // Find student
             var student = await _studentService.GetStudent(studentId);
             // Check for bad student
@@ -1182,7 +1159,7 @@ namespace Lead2Change.Web.Ui.Controllers
             // Check Permissions
             /*
              *  Students: Allowed if owned by user
-             *  Coach: Not Allowed
+             *  Coach: Allowed
              *  Admin: Allowed
              */
             if (User.IsInRole(StringConstants.RoleNameStudent))
@@ -1197,11 +1174,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     return Error("403: Forbidden");
                 }
             }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-
-            {
-                return Error("403: Forbidden");
-            }
+            
             // Find student
             var student = await _studentService.GetStudent(studentId);
             // Check for bad student
@@ -1293,7 +1266,7 @@ namespace Lead2Change.Web.Ui.Controllers
             // Check Permissions
             /*
              *  Students: Allowed if owned by user
-             *  Coach: Not Allowed
+             *  Coach:  Allowed
              *  Admin: Allowed
              */
             if (User.IsInRole(StringConstants.RoleNameStudent))
@@ -1308,11 +1281,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     return Error("403: Forbidden");
                 }
             }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-
-            {
-                return Error("403: Forbidden");
-            }
+            
             // Find student
             var student = await _studentService.GetStudent(studentId);
             // Check for bad student
@@ -1405,7 +1374,7 @@ namespace Lead2Change.Web.Ui.Controllers
             // Check Permissions
             /*
              *  Students: Allowed if owned by user
-             *  Coach: Not Allowed
+             *  Coach: Allowed
              *  Admin: Allowed
              */
             if (User.IsInRole(StringConstants.RoleNameStudent))
@@ -1420,11 +1389,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     return Error("403: Forbidden");
                 }
             }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-
-            {
-                return Error("403: Forbidden");
-            }
+            
             // Find student
             var student = await _studentService.GetStudent(studentId);
             // Check for bad student
@@ -1516,7 +1481,7 @@ namespace Lead2Change.Web.Ui.Controllers
             // Check Permissions
             /*
              *  Students: Allowed if owned by user
-             *  Coach: Not Allowed
+             *  Coach: Allowed
              *  Admin: Allowed
              */
             if (User.IsInRole(StringConstants.RoleNameStudent))
@@ -1531,11 +1496,7 @@ namespace Lead2Change.Web.Ui.Controllers
                     return Error("403: Forbidden");
                 }
             }
-            else if (User.IsInRole(StringConstants.RoleNameCoach))
-
-            {
-                return Error("403: Forbidden");
-            }
+            
             // Find student
             var student = await _studentService.GetStudent(studentId);
             // Check for bad student
