@@ -26,8 +26,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.QuestionString)
                 </td>
-                @if (User.IsInRole("admin"))
-                {
                     <td>
                         <div class="row">
                             <div class="col-sm-12">
@@ -42,7 +40,6 @@
                             </div>
                         </div>
                     </td>
-                }
             </tr>
         }
     </table>
