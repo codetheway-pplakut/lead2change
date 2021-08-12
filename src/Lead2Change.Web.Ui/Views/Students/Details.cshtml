@@ -38,12 +38,12 @@
         </div>
     </div>
     <ul class="list-group list-group-flush collapse" id="otherInformation">
-        <li class="list-group-item">Address: @Model.StudentAddress</li>
-        <li class="list-group-item">Apartment Number: @Model.StudentApartmentNumber</li>
-        <li class="list-group-item">City: @Model.StudentCity</li>
-        <li class="list-group-item">State: @Model.StudentState</li>
-        <li class="list-group-item">Zip Code: @Model.StudentZipCode</li>
-        <li class="list-group-item">Career Interest: @Model.StudentCareerInterest</li>
+        <li class="list-group-item"><b>Address:</b> @Model.StudentAddress</li>
+        <li class="list-group-item"><b>Apartment Number:</b> @Model.StudentApartmentNumber</li>
+        <li class="list-group-item"><b>City: </b>@Model.StudentCity</li>
+        <li class="list-group-item"><b>State: </b>@Model.StudentState</li>
+        <li class="list-group-item"><b>Zip Code:</b> @Model.StudentZipCode</li>
+        <li class="list-group-item"><b>Career Interest:</b> @Model.StudentCareerInterest</li>
     </ul>
 </div>
 
@@ -57,16 +57,16 @@
         </div>
     </div>
     <ul class="list-group list-group-flush collapse" id="parentInfo">
-        <li class="list-group-item">First Name:  @Model.ParentFirstName</li>
-        <li class="list-group-item">Last Name: @Model.ParentLastName</li>
-        <li class="list-group-item">Address: @Model.Address</li>
-        <li class="list-group-item">Parent Apartment Number: @Model.ParentApartmentNumber</li>
-        <li class="list-group-item">City: @Model.ParentCity</li>
-        <li class="list-group-item">State: @Model.ParentState</li>
-        <li class="list-group-item">Zip Code: @Model.ParentZipCode</li>
-        <li class="list-group-item">Home Phone: @Model.ParentHomePhone</li>
-        <li class="list-group-item">Cell Phone: @Model.ParentCellPhone</li>
-        <li class="list-group-item">Parent Email: @Model.ParentEmail</li>
+        <li class="list-group-item"><b>First Name:</b>  @Model.ParentFirstName</li>
+        <li class="list-group-item"><b>Last Name:</b> @Model.ParentLastName</li>
+        <li class="list-group-item"><b>Address:</b> @Model.Address</li>
+        <li class="list-group-item"><b>Parent Apartment Number:</b> @Model.ParentApartmentNumber</li>
+        <li class="list-group-item"><b>City:</b> @Model.ParentCity</li>
+        <li class="list-group-item"><b>State:</b> @Model.ParentState</li>
+        <li class="list-group-item"><b>Zip Code:</b> @Model.ParentZipCode</li>
+        <li class="list-group-item"><b>Home Phone:</b> @Model.ParentHomePhone</li>
+        <li class="list-group-item"><b>Cell Phone:</b> @Model.ParentCellPhone</li>
+        <li class="list-group-item"><b>Parent Email:</b> @Model.ParentEmail</li>
 
     </ul>
 </div>
@@ -83,19 +83,19 @@
     <ul class="list-group list-group-flush collapse" id="counselorInfo">
         @if (Model.KnowGuidanceCounselor)
         {
-            <li class="list-group-item">I know my guidance counselor: Yes</li>
-            <li class="list-group-item">Guidance Counselor Name: @Model.GuidanceCounselorName</li>
-            <li class="list-group-item">I meet with my guidance counselor: @(Model.MeetWithGuidanceCounselor ? "Yes" : "No")</li>
+            <li class="list-group-item"><b>I know my guidance counselor:</b> Yes</li>
+            <li class="list-group-item"><b>Guidance Counselor Name:</b> @Model.GuidanceCounselorName</li>
+            <li class="list-group-item"><b>I meet with my guidance counselor:</b> @(Model.MeetWithGuidanceCounselor ? "Yes" : "No")</li>
             @if (Model.MeetWithGuidanceCounselor)
             {
-                <li class="list-group-item">How often they meet with their guidance counselor: @Model.HowOftenMeetWithGuidanceCounselor</li>
+                <li class="list-group-item"><b>How often they meet with their guidance counselor:</b> @Model.HowOftenMeetWithGuidanceCounselor</li>
             }
-            <li class="list-group-item">What they have discussed with their guidance counselor: @Model.DiscussWithGuidanceCounselor</li>
+            <li class="list-group-item"><b>What they have discussed with their guidance counselor:</b> @Model.DiscussWithGuidanceCounselor</li>
 
         }
         else
         {
-            <li class="list-group-item">I know my guidance counselor: No</li>
+            <li class="list-group-item"><b>I know my guidance counselor:</b> No</li>
         }
 
     </ul>
@@ -111,33 +111,33 @@
         </div>
     </div>
     <ul class="list-group list-group-flush collapse" id="postSecondaryPlan">
-        <li class="list-group-item">Their plan after high school: @Model.PlanAfterHighSchool</li>
+        <li class="list-group-item"><b>Their plan after high school:</b> @Model.PlanAfterHighSchool</li>
         @switch (Model.PlanAfterHighSchool)
         {
             case "College":
-                <li class="list-group-item">I have applied to college: @(Model.CollegeApplicationStatus ? "Yes" : "No")</li>
-                <li class="list-group-item">Colleges they have applied to/plan to apply to: @Model.CollegesList</li>
-                <li class="list-group-item">I have begun work on my college essay: @(Model.CollegeEssayStatus ? "Yes" : "No")</li>
-                <li class="list-group-item">I need help writing my college essay: @(Model.CollegeEssayHelp ? "Yes" : "No")</li>
-                <li class="list-group-item">First choice college(s): @Model.FirstChoiceCollege</li>
-                <li class="list-group-item">Second choice college(s) @Model.SecondChoiceCollege</li>
-                <li class="list-group-item">Third choice college(s): @Model.ThirdChoiceCollege</li>
+                <li class="list-group-item"><b>I have applied to college:</b> @(Model.CollegeApplicationStatus ? "Yes" : "No")</li>
+                <li class="list-group-item"><b>Colleges they have applied to/plan to apply to:</b> @Model.CollegesList</li>
+                <li class="list-group-item"><b>I have begun work on my college essay:</b> @(Model.CollegeEssayStatus ? "Yes" : "No")</li>
+                <li class="list-group-item"><b>I need help writing my college essay:</b> @(Model.CollegeEssayHelp ? "Yes" : "No")</li>
+                <li class="list-group-item"><b>First choice college(s):</b> @Model.FirstChoiceCollege</li>
+                <li class="list-group-item"><b>Second choice college(s):</b> @Model.SecondChoiceCollege</li>
+                <li class="list-group-item"><b>Third choice college(s):</b> @Model.ThirdChoiceCollege</li>
                 break;
             case "Trade School":
-                <li class="list-group-item">I have already applied to a trade school: @(Model.TradeSchoolStatus ? "Yes" : "No")</li>
-                <li class="list-group-item">Trade schools they have applied/plan to apply to: @Model.TradeSchoolsList</li>
+                <li class="list-group-item"><b>I have already applied to a trade school:</b> @(Model.TradeSchoolStatus ? "Yes" : "No")</li>
+                <li class="list-group-item"><b>Trade schools they have applied/plan to apply to:</b> @Model.TradeSchoolsList</li>
                 break;
             case "Armed Forces":
-                <li class="list-group-item">I have already applied to the armed forces: @(Model.ArmedForcesStatus ? "Yes" : "No")</li>
-                <li class="list-group-item">Branches they have applied to/plan to apply to: @Model.ArmedForcesBranch</li>
+                <li class="list-group-item"><b>I have already applied to the armed forces:</b> @(Model.ArmedForcesStatus ? "Yes" : "No")</li>
+                <li class="list-group-item"><b>Branches they have applied to/plan to apply to:</b> @Model.ArmedForcesBranch</li>
                 break;
             case "Work":
-                <li class="list-group-item">I plan to go directly into the workforce after high school: @(Model.WorkStatus ? "Yes" : "No")</li>
-                <li class="list-group-item">Career paths they are interested in pursuing: @Model.CareerPathList</li>
+                <li class="list-group-item"><b>I plan to go directly into the workforce after high school:</b> @(Model.WorkStatus ? "Yes" : "No")</li>
+                <li class="list-group-item"><b>Career paths they are interested in pursuing:</b> @Model.CareerPathList</li>
                 break;
             case "Other":
             default:
-                <li class="list-group-item">Plans for after high school: @Model.OtherPlans</li>
+                <li class="list-group-item"><b>Plans for after high school:</b> @Model.OtherPlans</li>
                 break;
         }
     </ul>
@@ -153,15 +153,15 @@
         </div>
     </div>
     <ul class="list-group list-group-flush collapse" id="examInfo">
-        <li class="list-group-item">Date of PACT: @Convert.ToDateTime(Model.PACTTestDate).ToString("MM/dd/yyyy")</li>
-        <li class="list-group-item">PACT Score: @Model.PACTTestScore</li>
-        <li class="list-group-item">Date of PSAT: @Convert.ToDateTime(Model.PSATTestDate).ToString("MM/dd/yyyy")</li>
-        <li class="list-group-item">PSAT Score: @Model.PSATTestScore</li>
-        <li class="list-group-item">Date of SAT: @Convert.ToDateTime(Model.SATTestDate).ToString("MM/dd/yyyy")</li>
-        <li class="list-group-item">SAT Score: @Model.SATTestScore</li>
-        <li class="list-group-item">Date of ACT: @Convert.ToDateTime(Model.ACTTestDate).ToString("MM/dd/yyyy")</li>
-        <li class="list-group-item">ACT Score: @Model.ACTTestScore</li>
-        <li class="list-group-item">I need a prep class: @(Model.PrepClassRequired ? "Yes" : "No")</li>
+        <li class="list-group-item"><b>Date of PACT:</b> @Convert.ToDateTime(Model.PACTTestDate).ToString("MM/dd/yyyy")</li>
+        <li class="list-group-item"><b>PACT Score:</b> @Model.PACTTestScore</li>
+        <li class="list-group-item"><b>Date of PSAT:</b> @Convert.ToDateTime(Model.PSATTestDate).ToString("MM/dd/yyyy")</li>
+        <li class="list-group-item"><b>PSAT Score:</b> @Model.PSATTestScore</li>
+        <li class="list-group-item"><b>Date of SAT:</b> @Convert.ToDateTime(Model.SATTestDate).ToString("MM/dd/yyyy")</li>
+        <li class="list-group-item"><b>SAT Score:</b> @Model.SATTestScore</li>
+        <li class="list-group-item"><b>Date of ACT:</b> @Convert.ToDateTime(Model.ACTTestDate).ToString("MM/dd/yyyy")</li>
+        <li class="list-group-item"><b>ACT Score:</b> @Model.ACTTestScore</li>
+        <li class="list-group-item"><b>I need a prep class:</b> @(Model.PrepClassRequired ? "Yes" : "No")</li>
     </ul>
 </div>
 
@@ -175,9 +175,9 @@
         </div>
     </div>
     <ul class="list-group list-group-flush collapse" id="financeInfo">
-        <li class="list-group-item">I have already completed the financial aid process: @(Model.FinancialAidProcessComplete ? "Yes" : "No")</li>
-        <li class="list-group-item">I need assistance filling out my FAFSA/Financial aid forms: @(Model.AssistanceForForms ? "Yes" : "No")</li>
-        <li class="list-group-item">Support they need: @Model.SupportNeeded</li>
+        <li class="list-group-item"><b>I have already completed the financial aid process:</b> @(Model.FinancialAidProcessComplete ? "Yes" : "No")</li>
+        <li class="list-group-item"><b>I need assistance filling out my FAFSA/Financial aid forms:</b> @(Model.AssistanceForForms ? "Yes" : "No")</li>
+        <li class="list-group-item"><b>Support they need:</b> @Model.SupportNeeded</li>
     </ul>
 </div>
 <div class="card text-dark bg-light mb-3">
@@ -190,8 +190,8 @@
         </div>
     </div>
     <ul class="list-group list-group-flush collapse" id="adminInfo">
-        <li class="list-group-item">Activity Status: @Model.Active</li>
-        <li class="list-group-item">Acceptance Status: @((Model.isAccepted) ? "Accepted" : (Model.isDeclined) ? "Declined" : "In Interest Phase")</li>
+        <li class="list-group-item"><b>Activity Status:</b> @Model.Active</li>
+        <li class="list-group-item"><b>Acceptance Status:</b> @((Model.isAccepted) ? "Accepted" : (Model.isDeclined) ? "Declined" : "In Interest Phase")</li>
     </ul>
 </div>
 <div class="card text-dark bg-light mb-3">
@@ -204,21 +204,25 @@
         </div>
     </div>
     <ul class="list-group list-group-flush collapse" id="signatureInfo">
-        <li class="list-group-item">Student Signature: @Model.StudentSignature</li>
-        <li class="list-group-item">Date Signed: @Convert.ToDateTime(Model.StudentSignatureDate).ToString("MM/dd/yyyy")</li>
-        <li class="list-group-item">Parent Signature: @Model.ParentSignature</li>
-        <li class="list-group-item">Date Signed: @Convert.ToDateTime(Model.ParentSignatureDate).ToString("MM/dd/yyyy")</li>
+        <li class="list-group-item"><b>Student Signature:</b> @Model.StudentSignature</li>
+        <li class="list-group-item"><b>Date Signed:</b> @Convert.ToDateTime(Model.StudentSignatureDate).ToString("MM/dd/yyyy")</li>
+        <li class="list-group-item"><b>Parent Signature:</b> @Model.ParentSignature</li>
+        <li class="list-group-item"><b>Date Signed:</b> @Convert.ToDateTime(Model.ParentSignatureDate).ToString("MM/dd/yyyy")</li>
 
     </ul>
 </div>
 
 @*<p> @Model.</p>*@
-@if (Model.Active)
+@if (User.IsInRole("admin"))
 {
-<button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index", "Students")'">Back To Students</button>
+    if (Model.Active)
+    {
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index", "Students")'">Back To Students</button>
+    }
+    else
+    {<button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex", "Students")'">Back To Inactive Students</button>}
 }
 else
 {
-
-<button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex", "Students")'">Back To Inactive Students</button>
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("CoachesStudents", "Coaches")'">Back To Students</button>
 }
