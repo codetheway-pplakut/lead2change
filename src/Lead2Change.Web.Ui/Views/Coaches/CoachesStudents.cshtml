@@ -39,8 +39,12 @@
                         <div class="dropdown">
                             <button class="btn  btn-block orangeBtn mb-sm-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
                             <div class="dropdown-menu">
-                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("UnassignStudent","Coaches", new { studentId= item.Id })'">Unassign Student</button>
+                                @if (User.IsInRole("admin"))
+                                {
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("UnassignStudent", "Coaches", new { studentId = item.Id })'">Unassign Student</button>
+                                }                                
                                 <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","Students", new { studentId= item.Id })'">Student Details</button>
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Edit","Students", new { studentID= item.Id })'">Edit Student</button>
                                 <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index","Goals", new { studentID= item.Id })'">Student Goals</button>
                                 @if (item.CareerDeclarationId == Guid.Empty)
                                 {
@@ -97,8 +101,12 @@
                         <div class="dropdown">
                             <button class="btn  btn-block orangeBtn mb-sm-2 dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More Options</button>
                             <div class="dropdown-menu">
-                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("UnassignStudent","Coaches", new { studentId= item.Id })'">Unassign Student</button>
+                                @if (User.IsInRole("admin")) { 
+                                    <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("UnassignStudent", "Coaches", new { studentId = item.Id })'">Unassign Student</button>
+                                }
                                 <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Details","Students", new { studentId= item.Id })'">Student Details</button>
+                                <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Edit","Students", new { studentID= item.Id })'">Edit Student</button>
+
                                 <button class="dropdown-item" type="button" onclick="location.href='@Url.Action("Index", "Interviews", new { studentId = item.Id })'">Conduct an Interview</button>
                             </div>
                       
