@@ -48,13 +48,17 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-                Question question = new Question()
+                if (!String.IsNullOrEmpty(model.QuestionString))
                 {
-                    QuestionString = model.QuestionString,
-                    Id = model.Id,
-                    QuestionInInterviews = model.QuestionInInterviews
-                };
-                var result = await QuestionsService.Create(question);
+                    Question question = new Question()
+                    {
+                        QuestionString = model.QuestionString,
+                        Id = model.Id,
+                        QuestionInInterviews = model.QuestionInInterviews
+                    };
+                    var result = await QuestionsService.Create(question);
+                }
+                
                 if (Request.Form["RedirectCreateView"].Equals("Create and New")) { return RedirectToAction("Create"); }
                 else {return RedirectToAction("Index");}
 
@@ -88,7 +92,12 @@ namespace Lead2Change.Web.Ui.Controllers
         {
             if (ModelState.IsValid)
             {
-                var Question = await QuestionsService.Update(model);
+                if (!String.IsNullOrEmpty(model.QuestionString))
+                {
+                    var Question = await QuestionsService.Update(model);
+
+                }
+
                 return RedirectToAction("Index");
             }
             return View(model);
