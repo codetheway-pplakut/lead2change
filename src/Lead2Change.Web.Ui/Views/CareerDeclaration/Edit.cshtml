@@ -3,7 +3,7 @@
 @*
     ViewData["Title"] = "Edit";
 *@
-<div class="row blueHeader full-width mb-sm-3">
+<div class="row orangeHeader full-width mb-sm-3">
     <div class="col-sm-12">
         <h1 class="text-center"><strong>EDIT CAREER</strong></h1>
     </div>
@@ -36,7 +36,7 @@
     </div>
     <div class="form-group row">
         <label asp-for="TechnicalCollegeBound" class="control-label col-sm-3">Student is Technical College Bound</label>
-        <input asp-for="TechnicalCollegeBound" class="form-control col-sm-1"/>
+        <input asp-for="TechnicalCollegeBound" class="form-control col-sm-1" />
         <span asp-validation-for="TechnicalCollegeBound" class="text-danger"> </span>
     </div>
 
@@ -47,18 +47,29 @@
         @Html.ActionLink("Back to Career Details", "Details", "CareerDeclaration", new { studentId = Model.StudentId })
     </div>
 </form>
-@if (Model.isStudentActive)
-{
 <div align="center">
     <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Details","CareerDeclaration", new { studentId = Model.StudentId })'">Back To Career Details</button>
-    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index","Students",  new { id = Model.Id })'">Back To Student List</button>
 </div>
+@if (User.IsInRole("admin"))
+{
+    if (Model.isStudentActive)
+    {
+        <div align="center">
+            <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index", "Students")'">Back To Students</button>
+        </div>
+    }
+    else
+    {
+        <div align="center">
+            <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex", "Students")'">Back To Inactive Students</button>
+        </div>
+    }
 }
 else
 {
-<div align="center">
-    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex","Students")'">Back To Inactive Students</button>
-</div>
+    <div align="center">
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("CoachesStudents", "Coaches")'">Back To Students</button>
+    </div>
 }
 
 @section Scripts {

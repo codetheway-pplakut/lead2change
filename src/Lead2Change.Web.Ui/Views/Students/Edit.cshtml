@@ -4,7 +4,7 @@
 *@
 @{
 }
-<div class="row blueHeader full-width mb-sm-3">
+<div class="row orangeHeader full-width mb-sm-3">
     <div class="col-sm-12">
         <h1 class="text-center"><strong>EDIT STUDENT INFORMATION</strong></h1>
     </div>
@@ -45,7 +45,7 @@
         </div>
         <div class="row editPage">
             <div class="col-sm-4"></div>
-            <div class="col-sm-4">            
+            <div class="col-sm-4">
                 <button class="btn  btn-block orangeBtn" onclick="location.href='@Url.Action("FinancialAidEdit", "Students", new { studentId = Model.Id })'">Financial Aid Information</button>
             </div>
         </div>
@@ -57,6 +57,8 @@
         </div>
     </div>
     <hr />
+    @if (User.IsInRole("admin"))
+    {
     <form asp-action="UpDate">
         <div class="form-group row">
 
@@ -616,25 +618,36 @@
             <label asp-for="Id" class="control-label"></label>
             <input asp-for="Id" class="form-control" value=@Model.Id />
         </div>
-        <div class="col-sm-4 offset-sm-4">
-            <div class="form-group" align="center">
-                <input type="submit" value="Update Active Status" class="btn  btn-block orangeBtn" />
+            <div class="col-sm-4 offset-sm-4">
+                <div class="form-group" align="center">
+                    <input type="submit" value="Update Active Status" class="btn  btn-block orangeBtn" />
+                </div>
             </div>
-        </div>
+        
+        
     </form>
+    }
 </div>
-@if (Model.Active)
+@if (User.IsInRole("admin"))
 {
-    
+    @if (Model.Active)
+    {
+
         <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("Index", "Students")'">Back To Students</button>
-    
+
+    }
+    else
+    {
+
+        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex", "Students")'">Back To Inactive Students</button>
+
+    }
 }
 else
 {
-    
-        <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("InactiveIndex", "Students")'">Back To Inactive Students</button>
- 
+    <button class="btn btn-outline-dark " onclick="location.href='@Url.Action("CoachesStudents", "Coaches")'">Back To Students</button>
 }
+
 
 
 @section Scripts {
