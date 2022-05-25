@@ -53,18 +53,10 @@ namespace Lead2Change.Web.Ui
             services.AddScoped<IQuestionsService, QuestionsService>();
             services.AddScoped<IAnswersService, AnswersService>();
             services.AddScoped<IQuestionInInterviewService, QuestionInInterviewService>();
-            if (Environment.IsDevelopment())
-            {
-                services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlite(
-                        Configuration.GetConnectionString("SqliteConnection")));
-            }
-            else
-            {
-                services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlServer(
-                        Configuration.GetConnectionString("DefaultConnection")));
-            }
+
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<AspNetUsers, AspNetRoles>(options => {
                 //options.SignIn.RequireConfirmedAccount = true;
@@ -101,6 +93,12 @@ namespace Lead2Change.Web.Ui
                 options.LoginPath = "/Identity/Account/Login";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
+            });
+
+            services.AddCors(options => {
+                options.AddPolicy(name: "AllowSpecificOrigins", builder => {
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
             });
 
             services.AddTransient<IEmailSender, EmailSender>();
@@ -149,7 +147,7 @@ namespace Lead2Change.Web.Ui
                 var userManager = serviceScope.ServiceProvider.GetService<UserManager<AspNetUsers>>();
                 var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<AspNetRoles>>();
                 CreateDefaultRoles(roleManager).Wait();
-                CreateNewUser(userManager, "admin@test.com", "Testtest@123", StringConstants.RoleNameAdmin).Wait();
+                CreateNewUser(userManager, "admin@lead2changeinc.org", "complex Shed reject lunch sodiUm thread faint glove execution context! add o4ligation", StringConstants.RoleNameAdmin).Wait();
             }
         }
 
